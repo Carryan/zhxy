@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>访客签离 - 金视野系统模板</title>
+    <meta name="keywords" content="金视野,教育,平台" />
+    <meta name="description" content="金视野开发部,模板,2017" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="static/vendor/datepicker/bootstrap-datepicker.min.css">
+    <!-- <link rel="stylesheet" href="static/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css"> -->
+    <!-- <link rel="stylesheet" href="static/vendor/datatables/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="static/vendor/datatables/fixedColumns.dataTables.min.css" /> -->
+
+    <!-- fonts -->
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+	<![endif]-->
+
+    <!-- inline styles related to this page -->
+    <link rel="stylesheet" href="static/css/visitor-styles.css">
+
+    <!-- ace settings handler -->
+
+    <script src="assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+	
+</head>
+
+<body>
+
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+
+
+            <div class="main-content" style="margin-left: 0px;">
+                
+                <!-- 面包屑导航 -->
+                <div class="breadcrumbs" id="breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home home-icon"></i>
+                            <a href="index.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="visitor-index.html">访客</a>
+                        </li>
+                        <li class="active">访客签离</li>
+                    </ul>
+                    <ul class="breadcrumb pull-right navright">
+                        <li>
+                            <i class="icon-share-alt icon-color"></i>
+                            <a href="jsywebindex.html">返回</a>
+                        </li>
+                    </ul>	
+                </div>
+
+                <div class="page-content" style="padding-top: 20px;">
+
+                    <!-- /.page-header -->
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="row margin-bottom-20">
+
+                                <div class="col-xs-9">
+                                    <form class="form-inquire form-inline">
+                                        <div class="form-group">
+                                            <label>被访人：</label>
+                                            <select>
+                                                <option value="AL">全部</option>
+                                                <option value="AK">学生</option>
+                                                <option value="AK">教职工</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>关键字：</label>
+                                            <input class="width-240" type="text" name="" placeholder="访客姓名、手机号、身份证">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>进入日期：</label>
+                                            <div class="picker-item">
+                                                <div class="input-group">
+                                                    <input class="form-control date-picker" type="text" >
+                                                    <span class="input-group-addon">
+                                                        <i class="icon-calendar bigger-110"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <label>至</label>
+                                            <div class="picker-item">
+                                                <div class="input-group">
+                                                    <input class="form-control date-picker" type="text" >
+                                                    <span class="input-group-addon">
+                                                        <i class="icon-calendar bigger-110"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-sm btn-bg">查询</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-xs-3 text-right">
+                                    <button type="button" class="btn btn-sm btn-primary btn-vsys margin-right-10" data-toggle="modal" data-target="#m-scan-code">
+                                        <i class="icon-img-scan margin-right-5"></i>扫码
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-primary btn-vsys" data-toggle="modal" data-target="#m-scan-ID">
+                                        <i class="icon-img-ID margin-right-5"></i>读卡
+                                    </button>
+                                </div>
+
+                            </div>
+
+
+                            <div class="table-container table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2">序号</th>
+                                            <th rowspan="2">访问单号</th>
+                                            <th rowspan="2">姓名</th>
+                                            <th rowspan="2">随行人数</th>
+                                            <th rowspan="2">访问事由</th>
+                                            <th colspan="2">被访教职工</th>
+                                            <th colspan="4">被访学生</th>
+                                            <th rowspan="2">进入时间</th>
+                                            <th rowspan="2">是否离开</th>
+                                            <th rowspan="2">离开时间</th>
+                                            <th rowspan="2">操作</th>
+                                        </tr>
+                                        <tr>
+                                            <th>部门</th>
+                                            <th>姓名</th>
+                                            <th>年级</th>
+                                            <th>班级</th>
+                                            <th>姓名</th>
+                                            <th>班主任</th>
+                                        </tr>
+                                    </thead>
+        
+                                    <tbody> 
+                                        <tr>
+                                            <td>1</td>
+                                            <td>XX</td>
+                                            <td>123456</td>
+                                            <td>XX</td>
+                                            <td>XX</td>
+                                            <td>3</td>
+                                            <td>XX</td>
+                                            <td>XX</td>
+                                            <td>XX</td>
+                                            <td>XX</td>
+                                            <td>XX</td>
+                                            <td>2017-1-1 12:11</td>
+                                            <td>XX</td>
+                                            <td>2017-1-1 12:13</td>
+                                            <td>
+                                                <a href="#" data-toggle="modal" data-target="#m-sign-confirm">签离</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="modal-footer no-margin-top yemabg" >
+                                <ul class="pagination pull-right no-margin">
+                                    <li class="prev disabled">
+                                        <a href="#">
+                                            <i class="icon-double-angle-left"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="active">
+                                        <a href="#">1</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">2</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#">3</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">4</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">5</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="#">...</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">30</a>
+                                    </li>
+
+                                    <li class="next">
+                                        <a href="#">
+                                            <i class="icon-double-angle-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <!-- PAGE CONTENT ENDS -->
+                        
+                        </div>
+                        
+                    </div>
+
+                    <!-- /.col -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+            <!-- /.main-content -->
+
+            <!-- /#ace-settings-container -->
+        </div>
+        <!-- /.main-container-inner -->
+    </div>
+    <!-- /.main-container -->
+
+    <div class="modal" id="m-scan-code" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header clearfix">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title text-primary">请扫描访客牌条形码</h4>
+                </div>
+                <form action=""></form>
+                <div class="modal-body">
+                    <input type="text" class="width-100" name="">
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="submit" class="btn btn-primary btn-modal">
+                        <i class="icon-ok"></i>确认
+                    </button>
+                    <a href="javascript:;" class="btn btn-modal" data-dismiss="modal">
+                        <i class="icon-remove"></i>取消
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="m-scan-ID" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header clearfix">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title text-primary">请扫描身份证</h4>
+                </div>
+                <form action=""></form>
+                <div class="modal-body">
+                    <input type="text" class="width-100" name="">
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="submit" class="btn btn-primary btn-modal">
+                        <i class="icon-ok"></i>确认
+                    </button>
+                    <a href="javascript:;" class="btn btn-modal" data-dismiss="modal">
+                        <i class="icon-remove"></i>取消
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="m-scan-fail" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header clearfix border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4 class="text-primary">签离失败</h4>
+                    <p>没有找到您需要的记录</p>
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-modal" data-dismiss="modal">
+                        <i class="icon-remove"></i>关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="m-scan-success" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header clearfix border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="visitor-box">
+                        <h4 class="text-center"><i class="icon-img-ok-lg"></i>签离成功！</h4>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <img class="img-photo" src="static/images/photo-default-small.png" alt="">
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="item">
+                                    <div class="col-xs-5 text-right">姓名：</div>
+                                    <div class="col-xs-7 padding-left-0">还关中</div>
+                                </div>
+                                <div class="item">
+                                    <div class="col-xs-5 text-right">性别：</div>
+                                    <div class="col-xs-7 padding-left-0">男</div>
+                                </div>
+                                <div class="item">
+                                    <div class="col-xs-5 text-right">证件类型：</div>
+                                    <div class="col-xs-7 padding-left-0">身份证</div>
+                                </div> 
+                                <div class="item">
+                                    <div class="col-xs-5 text-right">证件号码：</div>
+                                    <div class="col-xs-7 padding-left-0">12345678910</div>
+                                </div>                                    
+                            </div>
+                        </div>
+                        <div class="time-box">
+                            <div class="item">
+                                <div class="col-xs-3 text-right"><b>进入时间：</b></div>
+                                <div class="col-xs-9 padding-left-0">2017-1-1 15：31</div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-3 text-right"><b>离开时间：</b></div>
+                                <div class="col-xs-6 padding-left-0">2017-1-1 15：31</div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-3 text-right"><b>登记时间：</b></div>
+                                <div class="col-xs-9 padding-left-0">2017-1-1 15：31</div>
+                            </div>
+                        </div>
+                        <div class="visited-box">
+                            <div class="item">
+                                <div class="col-xs-3 text-right">被访人：</div>
+                                <div class="col-xs-9 padding-left-0">xxxxxx</div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-3 text-right">被访人部门：</div>
+                                <div class="col-xs-9 padding-left-0">xxxxxx</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-modal" data-dismiss="modal">
+                        <i class="icon-remove"></i>关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="m-sign-confirm" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header clearfix">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title text-primary">访客签离</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="visitor-box">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <img class="img-photo" src="static/images/photo-default-small.png" alt="">
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="item">
+                                    <div class="col-xs-5 text-right">姓名：</div>
+                                    <div class="col-xs-7 padding-left-0">还关中</div>
+                                </div>
+                                <div class="item">
+                                    <div class="col-xs-5 text-right">性别：</div>
+                                    <div class="col-xs-7 padding-left-0">男</div>
+                                </div>
+                                <div class="item">
+                                    <div class="col-xs-5 text-right">证件类型：</div>
+                                    <div class="col-xs-7 padding-left-0">身份证</div>
+                                </div> 
+                                <div class="item">
+                                    <div class="col-xs-5 text-right">证件号码：</div>
+                                    <div class="col-xs-7 padding-left-0">12345678910</div>
+                                </div>                                    
+                            </div>
+                        </div>
+                        <div class="time-box">
+                            <div class="item">
+                                <div class="col-xs-3 text-right"><b>进入时间：</b></div>
+                                <div class="col-xs-9 padding-left-0">2017-1-1 15：31</div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-3 text-right line-height-30"><b>离开时间：</b></div>
+                                <div class="col-xs-6 padding-left-0">
+                                    <div class="input-group">
+                                        <input class="form-control date-picker" type="text" >
+                                        <span class="input-group-addon">
+                                            <i class="icon-calendar bigger-110"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-3 text-right"><b>登记时间：</b></div>
+                                <div class="col-xs-9 padding-left-0">2017-1-1 15：31</div>
+                            </div>
+                        </div>
+                        <div class="visited-box">
+                            <div class="item">
+                                <div class="col-xs-3 text-right">被访人：</div>
+                                <div class="col-xs-9 padding-left-0">xxxxxx</div>
+                            </div>
+                            <div class="item">
+                                <div class="col-xs-3 text-right">被访人部门：</div>
+                                <div class="col-xs-9 padding-left-0">xxxxxx</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-modal btn-primary" data-dismiss="modal" onclick="showSuccess();">
+                        <i class="icon-ok"></i>确认签离
+                    </button>
+                    <button type="button" class="btn btn-modal" data-dismiss="modal">
+                        <i class="icon-remove"></i>取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+
+    <!---->
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+
+<![endif]-->
+
+    <!--[if !IE]> -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <script src="static/vendor/datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- <script src="static/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script> -->
+    <!-- <script src="static/js/JsBarcode.all.min.js"></script> -->
+    <!-- <script src="static/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="static/vendor/datatables/dataTables.fixedColumns.min.js"></script> -->
+
+    <!-- ace scripts -->
+
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+
+    <!-- inline scripts related to this page -->
+    <div style="display: none">
+        <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+    </div>
+
+    <script src="static/js/visitor-common.js"></script>
+
+    <script>
+    
+    // 签离流程
+    function showSuccess() {
+        $("#m-scan-success").modal('show');
+    }
+
+    $("#m-scan-code").on('hide.bs.modal', function(){
+        showSuccess();
+    });
+
+    $("#m-scan-ID").on('hide.bs.modal', function(){
+        $("#m-scan-fail").modal('show');
+    });
+
+    </script>
+
+</body>
+</html>
