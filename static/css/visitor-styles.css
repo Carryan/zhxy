@@ -27,11 +27,11 @@
 
 .line-height-30 { line-height: 30px; }
 
-/* @font-face {
+@font-face {
     font-family: 'Glyphicons Halflings';
     src: url('../fonts/glyphicons-halflings-regular.eot');
     src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('../fonts/glyphicons-halflings-regular.woff') format('woff'),url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg')
-} */
+}
 
 textarea {
     resize: none;
@@ -364,6 +364,7 @@ i[class^="icon-"] {
     background-color: #efefef;
     margin-top: 15px;
     margin-bottom: 8px;
+    padding: 12px 0;
 }
 
 #m-delete-visit .modal-body h6 i {
