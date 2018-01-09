@@ -1,0 +1,20 @@
+
+.margin-bottom-20 { margin-bottom: 20px; }
+
+.head-tab a.active {
+    color: #428bca;
+}
+
+.head-tab {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+}
+.head-tab a {
+    color: #333;
+    padding: 10px 12px;
+    text-decoration: none;
+    display: inline-block;
+}
+.head-tab a.active {
+    border-bottom: 2px solid #428bca;
+}
