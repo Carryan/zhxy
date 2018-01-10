@@ -99,7 +99,7 @@
                                 <a href="javascript:;" >自动排课</a>
                             </div>
 
-                            <div class="form-inline">
+                            <div class="form-inline task-menu">
                                 <div class="form-group">
                                     <label>任务名称：</label>
                                     <input type="text" name="" placeholder="请输入">
@@ -114,7 +114,196 @@
                                 </div>
                                 <div class="form-group">创建者：admin</div>
                                 <div class="form-group">创建时间：2018-3-1</div>
-                                <div class="text-muted">请检查任课老师是否正确。如不正确，请管理员修正</div>
+                                <div class="text-muted margin-top-8">请检查任课老师是否正确。如不正确，请管理员修正</div>
+                            </div>
+
+                            <div class="tabbable setting-tabs">
+                                <ul class="nav nav-tabs">
+                                    <li class="active" >
+                                        <a href="">教学计划</a>
+                                    </li>
+                                    <li class="" >
+                                        <a href="">科目优先及连排</a> 
+                                    </li>
+                                    <li class="" >
+                                        <a href="">无课设置</a> 
+                                    </li>
+                                    <li class="" >
+                                        <a href="">合班</a> 
+                                    </li>
+                                    <li class="" >
+                                        <a href="">个别教师设置</a> 
+                                    </li>
+                                </ul>
+
+                                <div class="content">
+                                    <div class="pane margin-bottom-30">
+                                        <h4><b>一、教学时间设置</b></h4>
+                                        <div class="row margin-bottom-20">
+                                            <div class="col-xs-2 text-right">每星期上课时间：</div>
+                                            <div class="col-xs-10 checkbox-inline">
+                                                <label>
+                                                    <input name="" type="checkbox" class="ace">
+                                                    <span class="lbl"> 星期一</span>
+                                                </label>
+                                                <label>
+                                                    <input name="" type="checkbox" class="ace">
+                                                    <span class="lbl"> 星期二</span>
+                                                </label>
+                                                <label>
+                                                    <input name="" type="checkbox" class="ace">
+                                                    <span class="lbl"> 星期三</span>
+                                                </label>
+                                                <label>
+                                                    <input name="" type="checkbox" class="ace">
+                                                    <span class="lbl"> 星期四</span>
+                                                </label>
+                                                <label>
+                                                    <input name="" type="checkbox" class="ace">
+                                                    <span class="lbl"> 星期五</span>
+                                                </label>
+                                                <label>
+                                                    <input name="" type="checkbox" class="ace">
+                                                    <span class="lbl"> 星期六</span>
+                                                </label>
+                                                <label>
+                                                    <input name="" type="checkbox" class="ace">
+                                                    <span class="lbl"> 星期日</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-2 text-right">每天上课节次：</div>
+                                            <div class="col-xs-10">
+                                                <div class="course-num-select">
+                                                    <label>上午：</label>
+                                                    <select name="">
+                                                        <option value="1">1节</option>
+                                                        <option value="2">2节</option>
+                                                        <option value="3">3节</option>
+                                                        <option value="4" selected>4节</option>
+                                                        <option value="5">5节</option>
+                                                    </select>
+                                                    <div class="course-list">
+                                                        <span>第一节</span>
+                                                        <span>第二节</span>
+                                                        <span>第三节</span>
+                                                        <span>第四节</span>
+                                                    </div>
+                                                </div>
+                                                <div class="course-num-select">
+                                                    <label>下午：</label>
+                                                    <select name="">
+                                                        <option value="1">1节</option>
+                                                        <option value="2">2节</option>
+                                                        <option value="3" selected>3节</option>
+                                                    </select>
+                                                    <div class="course-list">
+                                                        <span>第五节</span>
+                                                        <span>第六节</span>
+                                                        <span>第七节</span>
+                                                    </div>
+                                                </div>
+                                                <div class="course-num-select">
+                                                    <label>晚上：</label>
+                                                    <select name="">
+                                                        <option value="1">1节</option>
+                                                        <option value="2" selected>2节</option>
+                                                        <option value="3">3节</option>
+                                                    </select>
+                                                    <div class="course-list">
+                                                        <span>第八节</span>
+                                                        <span>第九节</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pane">
+                                        <h4><b>二、各科各年级每周课时</b></h4>
+                                        <div class="table-container table-responsive">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>科目</th>
+                                                        <th>初一</th>
+                                                        <th>初二</th>
+                                                        <th>初三</th>
+                                                    </tr>
+                                                </thead>
+                    
+                                                <tbody> 
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-primary">保存</button>
+
+                                </div>
+
                             </div>
                             
                             <!-- PAGE CONTENT ENDS -->
