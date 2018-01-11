@@ -1,0 +1,16 @@
+
+.margin-5 {
+    margin: 5px;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.line-height-30 {
+    line-height: 30px;
+}
+
+.head-search .form-group:not(:last-child) {
+    margin-right: 10px;
+}
