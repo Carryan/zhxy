@@ -103,22 +103,25 @@
                                         <div class="form-group">
                                             <label>应用类型：</label>
                                             <select name="">
-                                                <option>请选择</option>
-                                                <option value="">aaa</option>
+                                                <option>全部</option>
+                                                <option value="">业务系统</option>
+                                                <option value="">网站</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>部署环境：</label>
                                             <select name="">
-                                                <option>请选择</option>
-                                                <option value="">aaa</option>
+                                                <option>全部</option>
+                                                <option value="">内网</option>
+                                                <option value="">外网</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>接入状态：</label>
                                             <select name="">
-                                                <option>请选择</option>
-                                                <option value="">aaa</option>
+                                                <option>全部</option>
+                                                <option value="">已接入</option>
+                                                <option value="">未接入</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -135,7 +138,7 @@
                                 </div>
                             </div>
 
-                            <div>
+                            <div class="margin-bottom-20">
                                 <button type="button" class="btn btn-primary btn-sm">排序</button> 
                                 <button type="button" class="btn btn-primary btn-sm">接入</button>
                                 <button type="button" class="btn btn-primary btn-sm">不接入</button>
@@ -147,15 +150,77 @@
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>科目</th>
-                                            <th>初一</th>
-                                            <th>初二</th>
-                                            <th>初三</th>
+                                            <th>
+                                                <label>
+                                                    <input type="checkbox" class="ace">
+                                                    <span class="lbl"></span>
+                                                </label>
+                                                序号
+                                            </th>
+                                            <th>应用名称</th>
+                                            <th>应用类型</th>
+                                            <th>部署环境</th>
+                                            <th>接入状态</th>
+                                            <th>是否有用户接口</th>
+                                            <th>是否有登录接口</th>
+                                            <th>是否有登出接口</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
                                         </tr>
                                     </thead>
         
                                     <tbody> 
                                         <tr>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" class="ace">
+                                                    <span class="lbl"></span>
+                                                </label>
+                                                1
+                                            </td>
+                                            <td>访客管理系统</td>
+                                            <td>业务系统</td>
+                                            <td>内网</td>
+                                            <td>已接入</td>
+                                            <td>无</td>
+                                            <td>无</td>
+                                            <td>无</td>
+                                            <td>启用</td>
+                                            <td>
+                                                <a href="">显示</a>
+                                                <a href="">编辑</a>
+                                                <a href="">删除</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" class="ace">
+                                                    <span class="lbl"></span>
+                                                </label>
+                                               2
+                                            </td>
+                                            <td>访客管理系统</td>
+                                            <td>业务系统</td>
+                                            <td>内网</td>
+                                            <td>已接入</td>
+                                            <td>无</td>
+                                            <td>无</td>
+                                            <td>无</td>
+                                            <td>启用</td>
+                                            <td>
+                                                <a href="">隐藏</a>
+                                                <a href="">编辑</a>
+                                                <a href="">删除</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -166,14 +231,8 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                        </tr>
-                                        <tr>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -184,14 +243,8 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                        </tr>
-                                        <tr>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -202,14 +255,44 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -218,6 +301,45 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <ul class="pagination pull-right no-margin">
+                                <li class="prev disabled">
+                                    <a href="#">
+                                        <i class="icon-double-angle-left"></i>
+                                    </a>
+                                </li>
+
+                                <li class="active">
+                                    <a href="#">1</a>
+                                </li>
+
+                                <li>
+                                    <a href="#">2</a>
+                                </li>
+
+                                <li>
+                                    <a href="#">3</a>
+                                </li>
+                                <li>
+                                    <a href="#">4</a>
+                                </li>
+                                <li>
+                                    <a href="#">5</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="#">...</a>
+                                </li>
+                                <li>
+                                    <a href="#">30</a>
+                                </li>
+
+                                <li class="next">
+                                    <a href="#">
+                                        <i class="icon-double-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
                             
                             <!-- PAGE CONTENT ENDS -->
                         
@@ -284,7 +406,7 @@
         <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
     </div>
 
-    <script src="static/js/course-common.js"></script>
+    <script src="static/js/login-common.js"></script>
 
     <script>
 
