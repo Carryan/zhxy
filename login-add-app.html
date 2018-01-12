@@ -97,31 +97,35 @@
                             <h4>添加应用</h4>
                             <hr>
 
-                            <form class="" action="" method="">
+                            <form class="container" action="" method="">
                                 <div class="form-group">
-                                    <label>系统名称：</label>
-                                    <input type="text">
+                                    <label class="col-xs-5 text-right">系统名称：</label>
+                                    <input type="text" class="width-300">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>图标LOGO：</label>
-                                    <input name="" type="file" class="imgUpload" id="logoImg"/>
-                                    <div class="imgView"></div>
+                                    <label class="col-xs-5 text-right">上传LOGO：</label>
+                                    <label for="logoImg" class="imgView">
+                                        <i class="icon-plus icon-3x text-muted"></i>
+                                    </label>
+                                    <input name="" type="file" class="imgUpload" id="logoImg" style="display:none;"/>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>服务器IP/域名：</label>
-                                    <input type="text">
+                                    <label class="col-xs-5 text-right">服务器IP/域名：</label>
+                                    <input type="text" name="" class="width-300">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>服务器端口：</label>
-                                    <input type="text">
+                                    <label class="col-xs-5 text-right">服务器端口：</label>
+                                    <input type="text" name="" class="width-120">
+                                    <label class="text-right margin-left-10">排序：</label>
+                                    <input type="text" name="" class="width-120">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>部署位置：</label>
-                                    <label>
+                                    <label class="col-xs-5 text-right">部署位置：</label>
+                                    <label class="margin-right-10">
                                         <input name="name1" type="radio" class="ace">
                                         <span class="lbl"> 内网</span>
                                     </label>
@@ -132,8 +136,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>应用状态：</label>
-                                    <label>
+                                    <label class="col-xs-5 text-right">应用状态：</label>
+                                    <label class="margin-right-10">
                                         <input name="name2" type="radio" class="ace">
                                         <span class="lbl"> 禁用</span>
                                     </label>
@@ -144,8 +148,20 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>打开方式：</label>
+                                    <label class="col-xs-5 text-right">是否显示：</label>
+                                    <label class="margin-right-10">
+                                        <input name="name5" type="radio" class="ace">
+                                        <span class="lbl"> 显示</span>
+                                    </label>
                                     <label>
+                                        <input name="name5" type="radio" class="ace">
+                                        <span class="lbl"> 隐藏</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-xs-5 text-right">打开方式：</label>
+                                    <label class="margin-right-10">
                                         <input name="name3" type="radio" class="ace">
                                         <span class="lbl"> 打开新页签</span>
                                     </label>
@@ -156,8 +172,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>接入状态：</label>
-                                    <label>
+                                    <label class="col-xs-5 text-right">接入状态：</label>
+                                    <label class="margin-right-10">
                                         <input name="name4" type="radio" class="ace">
                                         <span class="lbl"> 已接入</span>
                                     </label>
@@ -167,71 +183,63 @@
                                     </label>
                                 </div>
 
+                                <hr>
+
                                 <div class="form-group">
-                                    <label>原始登陆页面URL：</label>
-                                    <input type="text" name="">
+                                    <label class="col-xs-5 text-right">登陆页面用户名输入框名：</label>
+                                    <input type="text" name="" class="width-300">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>排序：</label>
-                                    <input type="text" name="">
+                                    <label class="col-xs-5 text-right">登陆页面密码输入框名：</label>
+                                    <input type="text" name="" class="width-300">
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group">
+                                    <label class="col-xs-5 text-right">原始登陆页面URL：</label>
+                                    <input type="text" name="" class="width-300">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>登陆页面用户名输入框名：</label>
-                                    <input type="text" name="">
+                                    <label class="col-xs-5 text-right">用户登陆成功后跳转页面：</label>
+                                    <input type="text" name="" class="width-300">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>登陆页面密码输入框名：</label>
-                                    <input type="text" name="">
+                                    <label class="col-xs-5 text-right">用户登陆失败后跳转页面：</label>
+                                    <input type="text" name="" class="width-300">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>用户登陆成功后跳转页面：</label>
-                                    <input type="text" name="">
+                                    <label class="col-xs-5 text-right">登陆接口URL：</label>
+                                    <input type="text" name="" class="width-300">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>用户登陆失败后跳转页面：</label>
-                                    <input type="text" name="">
+                                    <label class="col-xs-5 text-right">获取用户信息接口URL：</label>
+                                    <input type="text" name="" class="width-300">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>登陆接口URL：</label>
-                                    <input type="text" name="">
+                                    <label class="col-xs-5 text-right">用户退出接口URL：</label>
+                                    <input type="text" name="" class="width-300">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>获取用户信息接口URL：</label>
-                                    <input type="text" name="">
+                                    <label class="col-xs-5 text-right">认证方式：</label>
+                                    <select name="" class="width-120">
+                                        <option>请选择</option>
+                                        <option value="">aaa</option>
+                                    </select>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>用户退出接口URL：</label>
-                                    <input type="text" name="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>认证方式：</label>
-                                    <input type="text" name="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>是否显示：</label>
-                                    <label>
-                                        <input name="name5" type="radio" class="ace">
-                                        <span class="lbl"> 显示</span>
-                                    </label>
-                                    <label>
-                                        <input name="name5" type="radio" class="ace">
-                                        <span class="lbl"> 隐藏</span>
-                                    </label>
-                                </div>
+                                <hr>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-sm">保存</button>
-                                    <button type="reset" class="btn btn-sm">取消</button>
+                                    <button type="submit" class="btn btn-primary btn-sm margin-right-10">保存</button>
+                                    <button type="reset" class="btn btn-primary btn-sm">取消</button>
                                 </div>
 
                             </form>

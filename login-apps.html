@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>用户配置 - 金视野系统模板</title>
+    <title>所有应用 - 金视野系统模板</title>
     <meta name="keywords" content="金视野,教育,平台" />
     <meta name="description" content="金视野开发部,模板,2017" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -76,7 +76,7 @@
                         <li>
                             <a href="#">模拟登陆</a>
                         </li>
-                        <li class="active">用户配置</li>
+                        <li class="active">所有应用</li>
                     </ul>
                     <ul class="breadcrumb pull-right navright">
                         <li>
@@ -94,59 +94,63 @@
 
                             <!-- PAGE CONTENT BEGINS -->
 
-                            <h4>用户映射表</h4>
+                            <h4>所有应用</h4>
                             <hr>
 
-                            <div class="margin-bottom-20">
-                                <button class="btn btn-xs btn-primary margin-right-10">配置应用用户</button>
-                                <button id="addUser" class="btn btn-xs btn-primary margin-right-10">添加用户</button>
-                                注：添加本系统新用户默认密码为：123456
+                            <div class="row">
+                                <div class="col-xs-12 text-right margin-bottom-20">
+                                    <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#m-add-app">添加</button>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="app-item">
+                                        <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                        <span>应用名称</span>
+                                        <a class="delete" href="#">移除</a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="app-item">
+                                        <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                        <span>应用名称</span>
+                                        <a class="delete" href="#">移除</a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="app-item">
+                                        <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                        <span>应用名称</span>
+                                        <a class="delete" href="#">移除</a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="app-item">
+                                        <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                        <span>应用名称</span>
+                                        <a class="delete" href="#">移除</a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="app-item">
+                                        <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                        <span>应用名称</span>
+                                        <a class="delete" href="#">移除</a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="app-item">
+                                        <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                        <span>应用名称</span>
+                                        <a class="delete" href="#">移除</a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="app-item">
+                                        <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                        <span>应用名称</span>
+                                        <a class="delete" href="#">移除</a>
+                                    </div>
+                                </div>
                             </div>
-
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>本系统用户</th>
-                                        <th>OA系统</th>
-                                        <th>财务系统</th>
-                                        <th>排课系统</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>张三</td>
-                                        <td>张三 / 123456</td>
-                                        <td>张三 / 123456</td>
-                                        <td>张三 / 123456</td>
-                                    </tr>
-                                    <tr>
-                                        <td>李四</td>
-                                        <td>李四 / 123456</td>
-                                        <td>李四 / 123456</td>
-                                        <td>李四 / 123456</td>
-                                    </tr>
-                                    <tr class="addTr">
-                                        <td>
-                                            <select name="">
-                                                <option>请选择</option>
-                                                <option value="">aaa</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input type="text" name="" placeholder="账号">
-                                            <input type="text" name="" placeholder="密码">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="" placeholder="账号">
-                                            <input type="text" name="" placeholder="密码">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="" placeholder="账号">
-                                            <input type="text" name="" placeholder="密码">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                             
                             <!-- PAGE CONTENT ENDS -->
                         
@@ -165,6 +169,25 @@
         <!-- /.main-container-inner -->
     </div>
     <!-- /.main-container -->
+
+
+    <div class="modal" id="m-add-app" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header clearfix">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4>编辑应用</h4>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer text-center margin-top-0">
+                    <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-xs" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- basic scripts -->

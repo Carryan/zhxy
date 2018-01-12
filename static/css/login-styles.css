@@ -1,15 +1,17 @@
 
-.margin-5 {
-    margin: 5px;
-}
+.width-300 { width: 300px; }
+.width-120 { width: 120px; }
 
-.margin-bottom-20 {
-    margin-bottom: 20px;
-}
+.margin-5 { margin: 5px; }
 
-.line-height-30 {
-    line-height: 30px;
-}
+.margin-left-10 { margin-left: 10px; }
+
+.margin-right-5 { margin-right: 5px; }
+.margin-right-10 { margin-right: 10px; }
+
+.margin-bottom-20 { margin-bottom: 20px; }
+
+.line-height-30 { line-height: 30px; }
 
 label {
     margin-top: -5px;
@@ -18,12 +20,72 @@ th, td {
     text-align: center;
     height: 38px;
 }
+.table td a + a {
+    margin-left: 5px;
+}
 
 .head-search .form-group:not(:last-child) {
     margin-right: 15px;
 }
 
+.modal-footer.text-center {
+    text-align: center;
+}
+
+label.imgView {
+    border: 1px dashed #9e9e9e;
+    width: 150px;
+    height: 150px;
+    padding: 6px;
+    border-radius: 4px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    cursor: pointer;
+}
 .imgView > img {
-    width: 60px;
+   width: 100%;
+   height: 100%;
+}
+
+.table label + span {
+    display: inline-block;
+    width: 40px;
+}
+.table label + span > input {
+    max-width: 100%;
+    text-align: center;
+}
+.addTr {
+    display: none;
+}
+
+.app-item {
+    height: 114px;
+    background-color: #f2f2f2;
+    cursor: pointer;
+    position: relative;
+    padding: 25px 35px;
+    margin-bottom: 30px;
+}
+.app-item .app-logo {
+    width: 62px;
     height: 60px;
+    margin-right: 10px;
+}
+.app-item .app-logo + span {
+    font-size: 18px;
+}
+.app-item .delete {
+    display: none;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: red;
+}
+.app-item:hover {
+    background-color: #c9c9c9;
+}
+.app-item:hover .delete {
+    display: block;
 }

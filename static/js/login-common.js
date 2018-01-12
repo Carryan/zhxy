@@ -41,3 +41,17 @@
     obj.imgUpload();
 
 }($(".imgUpload")));
+
+
+// 排序
+$("#orderTable").click(function(){
+    var input_box = $(".table tbody label + span");
+    input_box.each(function(){
+        $(this).html("<input type='text' value='"+$(this).text()+"'>");
+    });
+});
+
+
+$("#addUser").click(function(){
+    $(".addTr").show();
+});
