@@ -44,14 +44,44 @@
 
 
 // 排序
-$("#orderTable").click(function(){
-    var input_box = $(".table tbody label + span");
-    input_box.each(function(){
-        $(this).html("<input type='text' value='"+$(this).text()+"'>");
+// $("#orderTable").click(function(){
+//     var input_box = $(".table tbody label + span");
+//     input_box.each(function(){
+//         $(this).html("<input type='text' value='"+$(this).text()+"'>");
+//     });
+// });
+
+// 固定底部
+// function fixBottom(obj) {
+//     console.log(obj);
+//     var offsetTop = $(window).height()+$(window).scrollTop()-obj.outerHeight()+'px';
+//     obj.animate({ 
+//         "top": offsetTop,
+//          "left": $(window).width() / 2 - obj.width() / 2 
+//         }, { 
+//             duration: 300,
+//             queue: false 
+//         });
+// }
+// (function(obj){
+//     if(!obj.length) { return ; }
+    
+//     $(window).scroll(function(){
+//         fixBottom(obj);
+//     }).resize(function(){
+//         fixBottom(obj);
+//     });
+// })($('.fix-bottom'));
+
+// 固定表头
+(function(obj){
+    if(!obj.length) { return ; }
+    
+    obj.height(function(){
+        var h = window.screen.availHeight-$(this).offset().top-180;
+        $(this).css('max-height',h);
+    }).scroll(function(){
+        obj.find('table').first().css('top',$(this).scrollTop() );
     });
-});
+})($("#mappingTable"))
 
-
-$("#addUser").click(function(){
-    $(".addTr").show();
-});

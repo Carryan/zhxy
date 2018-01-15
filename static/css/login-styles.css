@@ -13,6 +13,7 @@
 
 .line-height-30 { line-height: 30px; }
 
+
 label {
     margin-top: -5px;
 }
@@ -23,13 +24,22 @@ th, td {
 .table td a + a {
     margin-left: 5px;
 }
+.table > thead > tr > th {
+    border-bottom-width: 1px; 
+}
+body.modal-open {
+    margin-right: 0;
+}
+.modal {
+    overflow: hidden;
+}
+.modal-footer.text-center {
+    text-align: center;
+}
+
 
 .head-search .form-group:not(:last-child) {
     margin-right: 15px;
-}
-
-.modal-footer.text-center {
-    text-align: center;
 }
 
 label.imgView {
@@ -56,9 +66,37 @@ label.imgView {
     max-width: 100%;
     text-align: center;
 }
-.addTr {
-    display: none;
+
+.fix_h_table {
+    overflow: auto;
+    max-width: 100%;
+    /* max-height: 500px; */
+    position: relative;
+    margin-bottom: 20px;
 }
+.fix_h_table th, .fix_h_table td {
+    width: 101px;
+    min-width: 101px;
+    vertical-align: middle!important;
+}
+.fix_h_table table:first-child {
+    margin-bottom: -1px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.fix_h_table table + table {
+    margin-top: 38px;
+    margin-bottom: 0;
+}
+.fix_h_table input {
+    max-width: 80px;
+    margin: 2px;
+}
+
+/* .fix-bottom {
+    position: fixed;
+} */
 
 .app-item {
     height: 114px;
@@ -76,16 +114,25 @@ label.imgView {
 .app-item .app-logo + span {
     font-size: 18px;
 }
-.app-item .delete {
+.app-item .delete, .app-item .add {
     display: none;
     position: absolute;
     right: 10px;
     bottom: 10px;
+}
+.app-item .delete {
     color: red;
+}
+.app-item .add {
+    color: green;
 }
 .app-item:hover {
     background-color: #c9c9c9;
 }
-.app-item:hover .delete {
+.app-item:hover .delete, .app-item:hover .add {
     display: block;
+}
+
+#m-add-app .modal-dialog {
+    width: 920px;
 }

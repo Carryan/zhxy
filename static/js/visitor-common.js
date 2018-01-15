@@ -14,7 +14,7 @@
         meridiem: ["上午", "下午"]
     };
 
-    obj.datepicker({
+    var dp = obj.datepicker({
         autoclose:true,
         zIndexOffset: 9999,
         format: "yyyy-mm-dd",

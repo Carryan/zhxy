@@ -97,56 +97,48 @@
                             <h4>用户映射表</h4>
                             <hr>
 
+                            <form action="" method="">
                             <div class="margin-bottom-20">
-                                <button class="btn btn-xs btn-primary margin-right-10">配置应用用户</button>
-                                <button id="addUser" class="btn btn-xs btn-primary margin-right-10">添加用户</button>
-                                注：添加本系统新用户默认密码为：123456
-                            </div>
+                                    <button class="btn btn-xs btn-primary margin-right-10" data-toggle="modal" data-target="#m-add-app">配置应用用户</button>
+                                    <button id="addUser" class="btn btn-xs btn-primary margin-right-10">添加用户</button>
+                                    注：添加本系统新用户默认密码为：123456
+                                </div>
+    
+                                <div id="mappingTable" class="fix_h_table">
+                                    <table class="table table-bordered table">
+                                        <thead>
+                                            <tr>
+                                                <th>本系统用户</th>
+                                                <th>OA系统</th>
+                                                <th>财务系统</th>
+                                                <th>排课系统</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td>张三</td>
+                                                <td>张三 / 123456</td>
+                                                <td>张三 / 123456</td>
+                                                <td>张三 / 123456</td>
+                                            </tr>
+                                            <tr>
+                                                <td>李四</td>
+                                                <td>李四 / 123456</td>
+                                                <td>李四 / 123456</td>
+                                                <td>李四 / 123456</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+    
+                                <div>
+                                    <button class="btn btn-sm btn-primary">保存</button>
+                                    <button class="btn btn-sm">取消</button>
+                                </div>
+                            </form>
 
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>本系统用户</th>
-                                        <th>OA系统</th>
-                                        <th>财务系统</th>
-                                        <th>排课系统</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>张三</td>
-                                        <td>张三 / 123456</td>
-                                        <td>张三 / 123456</td>
-                                        <td>张三 / 123456</td>
-                                    </tr>
-                                    <tr>
-                                        <td>李四</td>
-                                        <td>李四 / 123456</td>
-                                        <td>李四 / 123456</td>
-                                        <td>李四 / 123456</td>
-                                    </tr>
-                                    <tr class="addTr">
-                                        <td>
-                                            <select name="">
-                                                <option>请选择</option>
-                                                <option value="">aaa</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input type="text" name="" placeholder="账号">
-                                            <input type="text" name="" placeholder="密码">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="" placeholder="账号">
-                                            <input type="text" name="" placeholder="密码">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="" placeholder="账号">
-                                            <input type="text" name="" placeholder="密码">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                             
                             <!-- PAGE CONTENT ENDS -->
                         
@@ -166,6 +158,87 @@
     </div>
     <!-- /.main-container -->
 
+    <div class="modal" id="m-add-app" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header clearfix">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4>选择应用</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="app-item">
+                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <span>应用名称</span>
+                                <a class="add" href="#">添加</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="app-item">
+                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <span>应用名称</span>
+                                <a class="add" href="#">添加</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="app-item">
+                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <span>应用名称</span>
+                                <a class="add" href="#">添加</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="app-item">
+                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <span>应用名称</span>
+                                <a class="add" href="#">添加</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="app-item">
+                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <span>应用名称</span>
+                                <a class="add" href="#">添加</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="app-item">
+                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <span>应用名称</span>
+                                <a class="add" href="#">添加</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="app-item">
+                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <span>应用名称</span>
+                                <a class="add" href="#">添加</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="app-item">
+                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <span>应用名称</span>
+                                <a class="add" href="#">添加</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="app-item">
+                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <span>应用名称</span>
+                                <a class="add" href="#">添加</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-center margin-top-0">
+                    <button id="addApp" type="button" class="btn btn-primary btn-xs" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-xs" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- basic scripts -->
 
@@ -216,6 +289,38 @@
     <script src="static/js/login-common.js"></script>
 
     <script>
+
+        var appendCol = '<td>'+
+                            '<input type="text" name="account" placeholder="账号">'+
+                            '<input type="text" name="password" placeholder="密码">'+
+                        '</td>';
+        var mappingTable = $("#mappingTable");
+        
+        // 添加行
+        $("#addUser").on('click',function(){
+            var colLength = mappingTable.find('thead th').length;
+            var inputCols = '';
+            for(var i=1; i<colLength; i++){
+                inputCols = inputCols + appendCol;
+            }
+            var appendRow = '<tr class="addTr">'+
+                                '<td>'+
+                                    '<select name="">'+
+                                        '<option>请选择</option>'+
+                                        '<option value="">aaa</option>'+
+                                    '</select>'+
+                                '</td>'+
+                                inputCols+
+                            '</tr>';
+            mappingTable.find('tbody').append(appendRow);
+        });
+
+        // 添加列
+        $("#addApp").on('click',function(){
+            mappingTable.find('thead tr').append('<th>管理系统</>');
+            mappingTable.find('tbody tr').append(appendCol); 
+        });
+
 
     </script>
 
