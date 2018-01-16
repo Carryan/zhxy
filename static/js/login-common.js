@@ -85,3 +85,27 @@
     });
 })($("#mappingTable"))
 
+
+// 表格批量修改
+$(".action-btns .btn").click(function(){
+    var formE = $(this).parent().data('form'),
+        form = $(formE),
+        action = $(this).data('action');
+    form.attr('action', action);
+    var cl = form.find('[type=checkbox]:checked').length;
+    if(cl){
+        form.submit();
+    }else{
+        return false;
+    }
+});
+
+
+// 应用选择
+$(".modal .app-item").on("click", function(){
+    if($(this).hasClass('active')){
+        $(this).removeClass('active');
+    }else{
+        $(this).addClass('active');
+    }
+});

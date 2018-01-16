@@ -129,24 +129,24 @@
                                             <input type="text" placeholder="请输入应用名称">
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-sm">查询</button>
+                                            <button type="submit" class="btn btn-primary btn-xs">查询</button>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-xs-2">
-                                    <a href="login-add-app.html" class="btn btn-primary btn-sm">添加应用</a>
+                                <div class="col-xs-2 text-right">
+                                    <a href="login-add-app.html" class="btn btn-primary btn-xs">添加应用</a>
                                 </div>
                             </div>
 
-                            <div class="margin-bottom-20">
+                            <div class="action-btns" data-form="#appsTable">
                                 <!-- <button id="orderTable" type="button" class="btn btn-primary btn-sm margin-right-5">排序</button>  -->
                                 <!-- <button type="button" class="btn btn-primary btn-sm">接入</button>
                                 <button type="button" class="btn btn-primary btn-sm">不接入</button> -->
-                                <button type="button" class="btn btn-primary btn-sm margin-right-5">显示</button>
-                                <button type="button" class="btn btn-primary btn-sm">隐藏</button>
+                                <button type="button" class="btn btn-primary btn-xs" data-action="###">显示</button>
+                                <button type="button" class="btn btn-primary btn-xs" data-action="###">隐藏</button>
                             </div>
 
-                            <div class="table-container table-responsive">
+                            <form id="appsTable" action="" method="">
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -188,7 +188,7 @@
                                             <td>启用</td>
                                             <td>
                                                 <a href="">显示</a>
-                                                <a href="">编辑</a>
+                                                <a href="login-add-app.html">编辑</a>
                                                 <a href="">删除</a>
                                             </td>
                                         </tr>
@@ -210,7 +210,7 @@
                                             <td>启用</td>
                                             <td>
                                                 <a href="">隐藏</a>
-                                                <a href="">编辑</a>
+                                                <a href="login-add-app.html">编辑</a>
                                                 <a href="">删除</a>
                                             </td>
                                         </tr>
@@ -300,7 +300,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </form>
 
                             <ul class="pagination pull-right no-margin">
                                 <li class="prev disabled">
@@ -411,6 +411,7 @@
 
     <script>
 
+    // 全选
     $('table th input:checkbox').on('click' , function(){
         var that = this;
         $(this).closest('table').find('tr > td:first-child input:checkbox')

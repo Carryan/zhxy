@@ -97,12 +97,13 @@
                             <h4>用户映射表</h4>
                             <hr>
 
-                            <form action="" method="">
                             <div class="margin-bottom-20">
-                                    <button class="btn btn-xs btn-primary margin-right-10" data-toggle="modal" data-target="#m-add-app">配置应用用户</button>
-                                    <button id="addUser" class="btn btn-xs btn-primary margin-right-10">添加用户</button>
-                                    注：添加本系统新用户默认密码为：123456
-                                </div>
+                                <button class="btn btn-xs btn-primary margin-right-10" data-toggle="modal" data-target="#m-add-app">配置应用用户</button>
+                                <button id="addUser" class="btn btn-xs btn-primary margin-right-10">添加用户</button>
+                                注：添加本系统新用户默认密码为：123456
+                            </div>
+                            
+                            <form action="" method="">
     
                                 <div id="mappingTable" class="fix_h_table">
                                     <table class="table table-bordered table">
@@ -134,9 +135,10 @@
                                 </div>
     
                                 <div>
-                                    <button class="btn btn-sm btn-primary">保存</button>
-                                    <button class="btn btn-sm">取消</button>
+                                    <button type="submit" class="btn btn-xs btn-primary">保存</button>
+                                    <button id="resetF" type="button" class="btn btn-xs">取消</button>
                                 </div>
+
                             </form>
 
                             
@@ -161,80 +163,81 @@
     <div class="modal" id="m-add-app" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header clearfix">
+                <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4>选择应用</h4>
+                    <h4 class="modal-title">选择应用</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-xs-4">
+                        <div class="col-xs-12">
+                            <p class="title">业务系统</p> <hr>
+                        </div>
+                        <div class="col-xs-3">
                             <div class="app-item">
-                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
-                                <span>应用名称</span>
-                                <a class="add" href="#">添加</a>
+                                <img class="app-logo" src="static/images/app-logo.png" alt="LOGO">
+                                <span>应用名称应用名称应用名称</span>
                             </div>
                         </div>
-                        <div class="col-xs-4">
-                            <div class="app-item">
-                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
-                                <span>应用名称</span>
-                                <a class="add" href="#">添加</a>
+                        <div class="col-xs-3">
+                            <div class="app-item active">
+                                <img class="app-logo" src="static/images/app-logo.png" alt="LOGO">
+                                <span>OA系统</span>
                             </div>
                         </div>
-                        <div class="col-xs-4">
-                            <div class="app-item">
-                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
-                                <span>应用名称</span>
-                                <a class="add" href="#">添加</a>
+                        <div class="col-xs-3">
+                            <div class="app-item active">
+                                <img class="app-logo" src="static/images/app-logo.png" alt="LOGO">
+                                <span>财务系统</span>
                             </div>
                         </div>
-                        <div class="col-xs-4">
-                            <div class="app-item">
-                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
-                                <span>应用名称</span>
-                                <a class="add" href="#">添加</a>
+                        <div class="col-xs-3">
+                            <div class="app-item active">
+                                <img class="app-logo" src="static/images/app-logo.png" alt="LOGO">
+                                <span>排课系统</span>
                             </div>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-3">
                             <div class="app-item">
-                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <img class="app-logo" src="static/images/app-logo.png" alt="LOGO">
                                 <span>应用名称</span>
-                                <a class="add" href="#">添加</a>
                             </div>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-3">
                             <div class="app-item">
-                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <img class="app-logo" src="static/images/app-logo.png" alt="LOGO">
                                 <span>应用名称</span>
-                                <a class="add" href="#">添加</a>
                             </div>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-12">
+                            <p class="title">业务系统</p> <hr>
+                        </div>
+                        <div class="col-xs-3">
                             <div class="app-item">
-                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <img class="app-logo" src="static/images/app-logo.png" alt="LOGO">
                                 <span>应用名称</span>
-                                <a class="add" href="#">添加</a>
                             </div>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-3">
                             <div class="app-item">
-                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <img class="app-logo" src="static/images/app-logo.png" alt="LOGO">
                                 <span>应用名称</span>
-                                <a class="add" href="#">添加</a>
                             </div>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-3">
                             <div class="app-item">
-                                <img class="app-logo" src="static/images/logo-img.png" alt="LOGO">
+                                <img class="app-logo" src="static/images/app-logo.png" alt="LOGO">
                                 <span>应用名称</span>
-                                <a class="add" href="#">添加</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer text-center margin-top-0">
-                    <button id="addApp" type="button" class="btn btn-primary btn-xs" data-dismiss="modal">确定</button>
-                    <button type="button" class="btn btn-xs" data-dismiss="modal">取消</button>
+                    <button id="addApp" type="button" class="btn btn-primary btn-xs" data-dismiss="modal">
+                        <i class="icon-ok"></i>确定
+                    </button>
+                    <button type="button" class="btn btn-xs" data-dismiss="modal">
+                        <i class="icon-remove"></i>取消
+                    </button>
                 </div>
             </div>
         </div>
@@ -290,7 +293,7 @@
 
     <script>
 
-        var appendCol = '<td>'+
+        var appendCol = '<td class="new">'+
                             '<input type="text" name="account" placeholder="账号">'+
                             '<input type="text" name="password" placeholder="密码">'+
                         '</td>';
@@ -317,8 +320,15 @@
 
         // 添加列
         $("#addApp").on('click',function(){
-            mappingTable.find('thead tr').append('<th>管理系统</>');
+            mappingTable.find('thead tr').append('<th class="new">管理系统</th>');
             mappingTable.find('tbody tr').append(appendCol); 
+        });
+
+
+        // 取消
+        $("#resetF").click(function(){
+            var resetObs = $("#mappingTable .addTr").add("#mappingTable .new");
+            resetObs.remove();
         });
 
 
