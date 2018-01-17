@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>新建课表 - 金视野系统模板</title>
+    <meta name="keywords" content="金视野,教育,平台" />
+    <meta name="description" content="金视野开发部,模板,2017" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="assets/css/chosen.css" />
+
+    <!-- fonts -->
+
+    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" /> -->
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+	<![endif]-->
+
+    <!-- inline styles related to this page -->
+    <link rel="stylesheet" href="static/css/course-styles.css">
+
+    <!-- ace settings handler -->
+
+    <script src="assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+	
+</head>
+
+<body>
+
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+
+
+            <div class="main-content" style="margin-left: 0px;">
+
+                <!-- 面包屑导航 -->
+                <div class="breadcrumbs " id="breadcrumbs">
+                    <script type="text/javascript">
+                        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                    </script>
+                    <!--位置-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home home-icon"></i>
+                            <a href="index.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="#">排课系统</a>
+                        </li>
+                        <li class="active">新建课表</li>
+                    </ul>
+                    <ul class="breadcrumb pull-right navright">
+                        <li>
+                            <i class="icon-share-alt icon-color"></i>
+                            <a href="javascript:history.go(-1);">返回</a>
+                        </li>
+                    </ul>	
+                </div>
+
+                <div class="page-content" style="padding-top: 20px;">
+
+                    <!-- /.page-header -->
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="head-tab">
+                                <a href="javascript:;" class="active">任务设置</a>
+                                <a href="javascript:;" >自动排课</a>
+                            </div>
+
+                            <form action="" method="">
+
+                                <div class="form-inline task-menu">
+                                    <div class="form-group">
+                                        <label>任务名称：</label>
+                                        <input type="text" name="" placeholder="请输入">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>学期：</label>
+                                        <select name="">
+                                            <option value="">请选择</option>
+                                            <option value="">2017-2018下学期</option>
+                                            <option value="">2018-2019上学期</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">创建者：admin</div>
+                                    <div class="form-group">创建时间：2018-3-1</div>
+                                    <div class="text-muted margin-top-8">请检查任课老师是否正确。如不正确，请管理员修正</div>
+                                </div>
+
+                                <div class="tabbable setting-tabs">
+                                    <ul class="nav nav-tabs">
+                                        <li>
+                                            <a href="course-index.html">教学计划</a>
+                                        </li>
+                                        <li>
+                                            <a href="course-set-prior.html">科目优先及连排</a> 
+                                        </li>
+                                        <li>
+                                            <a href="course-set-no.html">无课设置</a> 
+                                        </li>
+                                        <li>
+                                            <a href="course-set-joint.html">合班</a> 
+                                        </li>
+                                        <li class="active">
+                                            <a href="course-set-teacher.html">个别教师设置</a> 
+                                        </li>
+                                    </ul>
+
+                                    <div class="content">
+
+                                        <div class="pane margin-bottom-30">
+                                            <div class="text-right margin-bottom-5">
+                                                <button type="button" class="btn btn-primary btn-xs table-add" data-table="#table-set-teacher">
+                                                    <i class="icon-plus margin-right-5"></i>添加
+                                                </button>
+                                            </div>
+                                            <table id="table-set-teacher" class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>教师姓名</th>
+                                                        <th>无课设置</th>
+                                                        <th>预排设置</th>
+                                                        <th>互斥设置</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <select name="">
+                                                                <option value="">请选择</option>
+                                                                <option value="">罗老师</option>
+                                                                <option value="">黄老师</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="td-edit">
+                                                            星期一第一节、星期二第三节
+                                                            <span class="edit">
+                                                                <a href="#" data-modal="#m-cus-select" data-title="设置罗老师无课时间">
+                                                                    <i class="icon-pencil green"></i>
+                                                                </a>
+                                                            </span>
+                                                        </td>
+                                                        <td class="td-edit">
+                                                            星期一第一节、星期二第三节
+                                                            <span class="edit">
+                                                                <a href="#" data-modal="#m-cus-select" data-title="设置罗老师预排课时间">
+                                                                    <i class="icon-pencil green"></i>
+                                                                </a>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <select multiple class="chosen-select width-250">
+                                                                <option value="" selected>163</option>
+                                                                <option value="">164</option>
+                                                                <option value="">1610</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <a href="#"><i class="icon-trash red font-18"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary btn-xs">保存</button>
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+                            
+                            <!-- PAGE CONTENT ENDS -->
+                        
+                        </div>
+                        
+                    </div>
+
+                    <!-- /.col -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+            <!-- /.main-content -->
+
+            <!-- /#ace-settings-container -->
+        </div>
+        <!-- /.main-container-inner -->
+    </div>
+    <!-- /.main-container -->
+
+
+    <div class="modal" id="m-cus-select" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="" method="" class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"> </h4>
+                </div>
+                <div class="modal-body">
+                    <table class="cus-select">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>一</th>
+                                <th>二</th>
+                                <th>三</th>
+                                <th>四</th>
+                                <th>五</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1</th>
+                                <td class="selected" data-val="1-1"></td>
+                                <td data-val="2-1"></td>
+                                <td data-val="3-1"></td>
+                                <td data-val="4-1"></td>
+                                <td data-val="5-1"></td>
+                            </tr>
+                            <tr>
+                                <th>2</th>
+                                <td data-val="1-2"></td>
+                                <td data-val="2-2"></td>
+                                <td data-val="3-2"></td>
+                                <td data-val="4-2"></td>
+                                <td data-val="5-2"></td>
+                            </tr>
+                            <tr>
+                                <th>3</th>
+                                <td class="disabled" data-val="1-3"></td>
+                                <td class="selected" data-val="2-3"></td>
+                                <td data-val="3-3"></td>
+                                <td data-val="4-3"></td>
+                                <td data-val="5-3"></td>
+                            </tr>
+                            <tr>
+                                <th>4</th>
+                                <td data-val="1-4"></td>
+                                <td data-val="2-4"></td>
+                                <td data-val="3-4"></td>
+                                <td data-val="4-4"></td>
+                                <td data-val="5-4"></td>
+                            </tr>
+                            <tr>
+                                <th>5</th>
+                                <td data-val="1-5"></td>
+                                <td data-val="2-5"></td>
+                                <td data-val="3-5"></td>
+                                <td data-val="4-5"></td>
+                                <td data-val="5-5"></td>
+                            </tr>
+                            <tr>
+                                <th>6</th>
+                                <td data-val="1-6"></td>
+                                <td data-val="2-6"></td>
+                                <td data-val="3-6"></td>
+                                <td data-val="4-6"></td>
+                                <td data-val="5-6"></td>
+                            </tr>
+                            <tr>
+                                <th>7</th>
+                                <td data-val="1-7"></td>
+                                <td data-val="2-7"></td>
+                                <td data-val="3-7"></td>
+                                <td data-val="4-7"></td>
+                                <td data-val="5-7"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer text-center margin-top-0">
+                    <button type="button" class="btn btn-primary btn-xs" onclick="getSelected()">确定</button>
+                    <button type="button" class="btn btn-xs" data-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+
+    <!---->
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+
+<![endif]-->
+
+    <!--[if !IE]> -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <script src="assets/js/chosen.jquery.min.js"></script>
+
+    <!-- ace scripts -->
+
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+
+    <!-- inline scripts related to this page -->
+    <div style="display: none">
+        <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+    </div>
+
+    <script src="static/js/course-common.js"></script>
+
+    <script>
+
+    $(".chosen-select").chosen(); 
+
+    var appendCol = '<tr>'+
+                        '<td>'+
+                            '<select name="">'+
+                                '<option value="">请选择</option>'+
+                                '<option value="">罗老师</option>'+
+                                '<option value="">黄老师</option>'+
+                            '</select>'+
+                        '</td>'+
+                        '<td class="td-edit">'+
+                            '星期一第一节、星期二第三节'+
+                            '<span class="edit">'+
+                                '<a href="#" data-modal="#m-cus-select" data-title="设置罗老师预排课时间">'+
+                                    '<i class="icon-pencil green"></i>'+
+                                '</a>'+
+                            '</span>'+
+                        '</td>'+
+                        '<td class="td-edit">'+
+                            '星期一第一节、星期二第三节'+
+                            '<span class="edit">'+
+                                '<a href="#" data-modal="#m-cus-select" data-title="设置罗老师预排课时间">'+
+                                    '<i class="icon-pencil green"></i>'+
+                                '</a>'+
+                            '</span>'+
+                        '</td>'+
+                        '<td>'+
+                            '<select multiple class="chosen-select width-250">'+
+                                '<option value="" selected>163</option>'+
+                                '<option value="">164</option>'+
+                                '<option value="">1610</option>'+
+                            '</select>'+
+                        '</td>'+
+                        '<td>'+
+                            '<a href="#"><i class="icon-trash red font-18"></i></a>'+
+                        '</td>'+
+                    '</tr>';
+
+    $(".table-add").click(function(){
+        var table = $(this).data('table');
+        $(table).find('tbody').append(appendCol);
+        $(table).find('tbody tr:last-child .chosen-select').chosen();
+    });
+
+    </script>
+
+</body>
+</html>

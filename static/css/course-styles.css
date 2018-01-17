@@ -1,11 +1,53 @@
 
 .width-150 { width: 150px; }
+.width-250 { width: 250px; }
 
+.margin-top-0 { margin-top: 0; }
 .margin-top-8 { margin-top: 8px; }
 
+.margin-bottom-5 { margin-bottom: 5px; }
 .margin-bottom-10 { margin-bottom: 10px; }
 .margin-bottom-20 { margin-bottom: 20px; }
 .margin-bottom-30 { margin-bottom: 30px; }
+
+.margin-right-5 { margin-right: 5px!important; }
+
+.font-18 { font-size: 18px; }
+
+input {
+    height: 30px;
+}
+.pane table {
+    margin-bottom: 0;
+}
+i[class^="icon-"] {
+    text-decoration: none;
+}
+
+th, td {
+    text-align: center;
+    height: 35px;
+}
+.table td a + a {
+    margin-left: 5px;
+}
+.table > thead > tr > th {
+    border-bottom-width: 1px; 
+}
+.table thead>tr>th, .table tbody>tr>th, .table tfoot>tr>th, .table thead>tr>td, .table tbody>tr>td,.table tfoot>tr>td {
+    vertical-align: middle;
+ }
+
+body.modal-open {
+    margin-right: 0;
+}
+.modal {
+    overflow: hidden;
+}
+.modal-footer.text-center {
+    text-align: center;
+}
+
 
 .head-tab a.active {
     color: #428bca;
@@ -15,7 +57,6 @@
     margin-right: 25px;
 }
 
-
 .head-tab {
     border-bottom: 1px solid #e5e5e5;
     margin-bottom: 20px;
@@ -23,7 +64,6 @@
 .head-tab a {
     color: #333;
     padding: 10px 12px;
-    text-decoration: none;
     display: inline-block;
 }
 .head-tab a.active {
@@ -32,13 +72,14 @@
 
 .task-menu {
     margin-right: -35px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 .task-menu > div {
     margin-right: 35px;
 }
 .setting-tabs .nav-tabs {
     display: inline-block;
+    margin-bottom: 10px;
 }
 .setting-tabs .nav-tabs > li + li {
     margin-left: 5px;
@@ -57,3 +98,41 @@
 .course-num-select .course-list span {
     padding: 0 20px;
 }
+
+.classHourTb select {
+    min-width: 100px;
+}
+
+.td-edit {
+    position: relative;
+    padding-right: 50px!important;
+}
+.td-edit .edit {
+    font-size: 16px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -10px;
+}
+
+table.cus-select {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: separate;
+    border-spacing: 1px;
+}
+table.cus-select thead th {
+    background-color: #333;
+    color: #fff;
+}
+table.cus-select tbody th, table.cus-select tbody td {
+    background-color: #e5e5e5;
+}
+table.cus-select td.selected {
+    background-color: red;
+}
+table.cus-select td.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
