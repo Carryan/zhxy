@@ -61,6 +61,74 @@ $.fn.selectTable = function(ops){
     return this;
 }
 
+// 可拖拽表 插件
+$.fn.dragTableCell = function (options) {
+    var defaults = {
+        cell: "td", //有效元素的选择器
+          disabled: ".disabled", //无法拖拽元素的选择器 
+          cloneStyle: {"background-color":"rgba(94, 158, 214, 0.5)"}, //克隆元素样式
+
+          //监听拖拽前的函数，可配置（参数:当前ele、所有有效cell）
+          startDrag: function(ele,validCells){ },
+          //监听拖拽后的函数，可配置（参数:置换及置换后的ele）
+          stopDrag: function(dragFrom,dragTo){ }
+       };
+    
+    var settings = $.extend({}, defaults, options);
+    var _this = this;
+
+    function init() {
+        var dragCells = _this.find(settings.cell).not(settings.disabled);
+
+        dragCells.draggable({
+            revert: "invalid",
+            containment: _this.selector,//拖拽范围容器
+            helper: function(){
+                var ele = $(this).clone(),
+                    w = $(this).width(),
+                    h = $(this).height();
+                ele.width(w).height(h).css(settings.cloneStyle);
+                return ele;
+            },
+            start: function( event, ui ) {
+                var curEle = $(this),
+                    validCells = dragCells;
+                settings.startDrag(curEle,validCells);
+            }
+        });
+        
+        dragCells.droppable({
+            drop: function( event, ui ) {
+                // console.log(event.type); //ondrop 在一个拖动过程中，释放鼠标键时触发此事件
+                var dragObj = ui.draggable,
+                    dropObj = $(this);
+                var obj = dragObj.data("obj"),
+                      html = dragObj.html();
+                  dragObj.data("obj", dropObj.data("obj")).html(dropObj.html());
+                  dropObj.data("obj", obj).html(html);
+
+                  settings.stopDrag(dragObj,dropObj);
+            }
+        });
+    };
+
+    //所有值
+    this.getValues = function() {
+        var cells = {};
+        _this.find(settings.cell).each(function(index, element){
+          var key = $(element).data("key"),
+              val = $(element).data("obj");
+          cells[key] = val;
+        });
+        return cells;
+    };
+
+    init();
+      return this;
+};
+
+$(".dragTable").dragTableCell();
+
 
 // 打开modal
 $("[data-modal]").click(function(){
