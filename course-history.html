@@ -94,28 +94,160 @@
 
                             <!-- PAGE CONTENT BEGINS -->
 
-                            <form class="form-inline">
-                                <div class="form-group">
-                                    <label>任务名称：</label>
-                                    <input type="text" name="" placeholder="请输入">
+                            <form class="form-inline margin-bottom-30">
+                                <div class="form-group margin-right-20">
+                                    <label>课表名称：</label>
+                                    <input class="width-110" type="text" name="" placeholder="请输入">
                                 </div>
-                                <div class="form-group">
-                                    <label>学期：</label>
-                                    <select name="">
-                                        <option value="">请选择</option>
-                                        <option value="">2017-2018下学期</option>
-                                        <option value="">2018-2019上学期</option>
+                                <div class="form-group margin-right-20">
+                                    <label>创建时间：</label>
+                                    <input class="width-110" type="text" name="" placeholder="请输入">
+                                </div>
+                                <div class="form-group margin-right-20">
+                                    <label>学年：</label>
+                                    <select class="width-110" name="">
+                                        <option value=""></option>
+                                        <option value="">1</option>
+                                        <option value="">2</option>
                                     </select>
                                 </div>
-                                <button class="btn btn-primary btn-xs">查询</button>
+                                <div class="form-group margin-right-20">
+                                    <label>学期：</label>
+                                    <select class="width-110" name="">
+                                        <option value=""></option>
+                                        <option value="">1</option>
+                                        <option value="">2</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-xs">查询</button>
                             </form>
 
-                            <table>
+                            <table class="table table-bordered table-hover">
                                 <thead>
-                                    <tr></tr>
+                                    <tr>
+                                        <th>课表名称</th>
+                                        <th>创建者</th>
+                                        <th>创建时间</th>
+                                        <th>学年</th>
+                                        <th>学期</th>
+                                        <th>操作</th>
+                                    </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>XXXXXX</td>
+                                        <td>admin</td>
+                                        <td>2017-1-1</td>
+                                        <td>2017-2018</td>
+                                        <td>春季</td>
+                                        <td>
+                                            <a href="course-table-school.html">查看课表</a>
+                                            <a href="course-index.html">查看排课规则</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>XXXXXX</td>
+                                        <td>admin</td>
+                                        <td>2017-1-1</td>
+                                        <td>2017-2018</td>
+                                        <td>春季</td>
+                                        <td>
+                                            <a href="course-table-school.html">查看课表</a>
+                                            <a href="course-index.html">查看排课规则</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>XXXXXX</td>
+                                        <td>admin</td>
+                                        <td>2017-1-1</td>
+                                        <td>2017-2018</td>
+                                        <td>春季</td>
+                                        <td>
+                                            <a href="course-table-school.html">查看课表</a>
+                                            <a href="course-index.html">查看排课规则</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
                             </table>
+
+                            <ul class="pagination pull-right no-margin">
+                                <li class="prev disabled">
+                                    <a href="#">
+                                        <i class="icon-double-angle-left"></i>
+                                    </a>
+                                </li>
+
+                                <li class="active">
+                                    <a href="#">1</a>
+                                </li>
+
+                                <li>
+                                    <a href="#">2</a>
+                                </li>
+
+                                <li>
+                                    <a href="#">3</a>
+                                </li>
+                                <li>
+                                    <a href="#">4</a>
+                                </li>
+                                <li>
+                                    <a href="#">5</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="#">...</a>
+                                </li>
+                                <li>
+                                    <a href="#">30</a>
+                                </li>
+
+                                <li class="next">
+                                    <a href="#">
+                                        <i class="icon-double-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
                             
                             <!-- PAGE CONTENT ENDS -->
                         

@@ -137,7 +137,7 @@
                                             <option value="">初三</option>
                                         </select>
                                         <label>
-                                            <input name="" type="checkbox" class="ace">
+                                            <input id="showTeacher" name="" type="checkbox" class="ace" data-table="#school-table">
                                             <span class="lbl"> 显示教师</span>
                                         </label>
                                     </div>
@@ -146,9 +146,9 @@
                                     </div>
                                 </div>
 
-                                <div class="fix-table-box">
+                                <div class="fix-table-box dragTable clearfix">
                                     <div class="cus-table-box">
-                                        <table id="cus-table" class="cus-table table-school dragTable table-striped">
+                                        <table id="school-table" class="cus-table table-school table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>星期</th>
@@ -194,216 +194,432 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>初一(1)班</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <th>初一(1)班</th>
+                                                    <td class="disabled" data-key="1-1">
+                                                        <div class="val" data-val="{s:'语',t:'李白'}">语
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="1-2">
+                                                        <div class="val" data-val="{s:'语',t:'李白'}">数
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="1-3">
+                                                        <div class="val" data-val="">英
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="1-4">
+                                                        <div class="val" data-val="">物
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="1-5">
+                                                        <div class="val" data-val="">化
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="1-6">
+                                                        <div class="val" data-val="">生
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="1-7">
+                                                        <div class="val" data-val="">语
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="1-8">
+                                                        <div class="val" data-val="">语
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="1-9">
+                                                        <div class="val" data-val="">语
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>初一(1)班</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <th>初一(1)班</th>
+                                                    <td data-key="2">
+                                                        <div class="val" data-val="">语
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>初一(1)班</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <th>初一(1)班</th>
+                                                    <td data-key="2">
+                                                        <div class="val" data-val="">语
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>初一(1)班</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <th>初一(1)班</th>
+                                                    <td data-key="2">
+                                                        <div class="val" data-val="">语
+                                                            <div class="hideMsg">李晓光</div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>初一(1)班</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <th>初一(1)班</th>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>初一(1)班</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <th>初一(1)班</th>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>初一(1)班</th>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>初一(1)班</th>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>初一(1)班</th>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>初一(1)班</th>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2"><div class="val"></div></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="fix-list">
-                                        <ul>
-                                            <li>缓冲区</li>
-                                            <li></li>
-                                            <li></li>
-                                            <li></li>
-                                            <li></li>
-                                            <li></li>
-                                            <li></li>
-                                        </ul>
+                                        <table class="cus-table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>缓冲区</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 

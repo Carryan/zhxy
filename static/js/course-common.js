@@ -12,6 +12,7 @@ $.fn.selectTable = function(ops){
     _this._status = { disable: false }
 
     function init() {
+
         _this.find(settings.cell).click(function(){
 
             if(_this._status.disable) return ;
@@ -61,73 +62,84 @@ $.fn.selectTable = function(ops){
     return this;
 }
 
-// 可拖拽表 插件
-$.fn.dragTableCell = function (options) {
-    var defaults = {
-        cell: "td", //有效元素的选择器
-          disabled: ".disabled", //无法拖拽元素的选择器 
-          cloneStyle: {"background-color":"rgba(94, 158, 214, 0.5)"}, //克隆元素样式
 
-          //监听拖拽前的函数，可配置（参数:当前ele、所有有效cell）
-          startDrag: function(ele,validCells){ },
-          //监听拖拽后的函数，可配置（参数:置换及置换后的ele）
-          stopDrag: function(dragFrom,dragTo){ }
-       };
-    
-    var settings = $.extend({}, defaults, options);
-    var _this = this;
+// 可拖拽表
+;(function(obj){
+    if(!obj.length) return false;
 
-    function init() {
-        var dragCells = _this.find(settings.cell).not(settings.disabled);
-
-        dragCells.draggable({
-            revert: "invalid",
-            containment: _this.selector,//拖拽范围容器
-            helper: function(){
-                var ele = $(this).clone(),
-                    w = $(this).width(),
-                    h = $(this).height();
-                ele.width(w).height(h).css(settings.cloneStyle);
-                return ele;
-            },
-            start: function( event, ui ) {
-                var curEle = $(this),
-                    validCells = dragCells;
-                settings.startDrag(curEle,validCells);
-            }
-        });
+    $.fn.dragTableCell = function (options) {
+        var defaults = {
+            cell: "td", //有效元素的选择器
+            drop: "", //可放置元素
+            val: ".val",
+            disabled: ".disabled", //无法拖拽元素的选择器 
+            container: this.selector,
+            //监听拖拽前的函数，可配置（参数:当前ele、所有有效cell）
+            startDrag: function(ele,validCells){ },
+            //监听拖拽后的函数，可配置（参数:置换及置换后的ele）
+            stopDrag: function(dragFrom,dragTo){ }
+           };
         
-        dragCells.droppable({
-            drop: function( event, ui ) {
-                // console.log(event.type); //ondrop 在一个拖动过程中，释放鼠标键时触发此事件
-                var dragObj = ui.draggable,
-                    dropObj = $(this);
-                var obj = dragObj.data("obj"),
-                      html = dragObj.html();
-                  dragObj.data("obj", dropObj.data("obj")).html(dropObj.html());
-                  dropObj.data("obj", obj).html(html);
-
-                  settings.stopDrag(dragObj,dropObj);
+        var settings = $.extend({}, defaults, options);
+        var _this = this;
+    
+        function init() {
+            var dragCells = _this.find(settings.cell);
+            // console.log(settings.container);
+            dragCells.draggable({
+                revert: "invalid",
+                scroll: false,
+                cancel: settings.disabled,
+                // containment: settings.container,//拖拽范围容器
+                scrollSensitivity: 50,
+                helper: "clone",
+                start: function( event, ui ) {
+                    var curEle = $(this),
+                        validCells = dragCells;
+                    settings.startDrag(curEle,validCells);
+                }
+            });
+            
+            if(settings.drop){
+                var $drop = $(settings.drop);
+            }else{
+                var $drop = dragCells;
             }
-        });
-    };
+            $drop.droppable({
+                drop: function( event, ui ) {
+                    // console.log(event.type); //ondrop 在一个拖动过程中，释放鼠标键时触发此事件
+                    if($(this).is(settings.disabled)) return ;
+                    var dragObj = ui.draggable,
+                        dropHtml = $(this).html();
+                    
+                    $(this).html(dragObj.html());
+                    dragObj.html(dropHtml);
+    
+                    settings.stopDrag(dragObj,$(this));
+                }
+            });
+        };
+    
+        //所有值
+        this.getValues = function() {
+            var cells = {};
+            _this.find(settings.cell).each(function(index, element){
+              var key = $(element).data("key"),
+                  val = $(element).find(settings.val).data("val");
+              cells[key] = val;
+            });
+            return cells;
+        };
+    
+        init();
+        return this;
+    }
+    
+    $(".dragTable").dragTableCell();
 
-    //所有值
-    this.getValues = function() {
-        var cells = {};
-        _this.find(settings.cell).each(function(index, element){
-          var key = $(element).data("key"),
-              val = $(element).data("obj");
-          cells[key] = val;
-        });
-        return cells;
-    };
+})($(".dragTable"));
 
-    init();
-      return this;
-};
-
-$(".dragTable").dragTableCell();
+// $(".dragTable").dragTableCell();
 
 
 // 打开modal
@@ -140,3 +152,18 @@ $("[data-modal]").click(function(){
     $modal.find('.modal-title').text(title);   
     $modal.modal('show');
 });
+
+
+// 显示教师
+(function(obj){
+    if(!obj.length) return false;
+
+    obj.change(function(){
+        var table = $(this).data('table');
+        if($(this).is(":checked")){
+            $(table).addClass('show-msg');
+        }else{
+            $(table).removeClass('show-msg')
+        }
+    });
+})($("#showTeacher"));

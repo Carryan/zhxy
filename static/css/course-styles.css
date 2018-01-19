@@ -2,6 +2,7 @@
 .width-110 { width: 110px; }
 .width-150 { width: 150px; }
 .width-250 { width: 250px; }
+.width-500 { width: 500px; }
 
 .margin-top-0 { margin-top: 0; }
 .margin-top-8 { margin-top: 8px; }
@@ -12,6 +13,7 @@
 .margin-bottom-30 { margin-bottom: 30px; }
 
 .margin-right-5 { margin-right: 5px!important; }
+.margin-right-20 { margin-right: 20px; }
 .margin-right-30 { margin-right: 30px; }
 
 .font-18 { font-size: 18px; }
@@ -133,15 +135,15 @@ table.cus-select tbody th, table.cus-select tbody td {
 table.cus-select td.selected {
     background-color: red;
 }
-table.cus-select td.disabled {
-    background-color: #ccc;
+table td.disabled {
+    background-color: #ccc !important;
     cursor: not-allowed;
 }
 
 .cus-table-box {
     border: 1px solid #666;
     max-width: 100%;
-    min-height: 400px;
+    /* min-height: 400px; */
     background-color: #f2f2f2;
     overflow-x: auto;
 }
@@ -152,20 +154,30 @@ table.cus-select td.disabled {
 }
 table.cus-table {
     min-width: 100%;
-    border-collapse: separate;
-    border-spacing: 1px;
+    /* border-collapse: separate;
+    border-spacing: 1px; */
 }
 table.cus-table td, table.cus-table th {
     min-width: 80px;
     padding: 5px;
     background-color: #dfdfdf;
+    border: 1px solid #fff;
+    white-space: nowrap;
 }
 .table-striped.cus-table > tbody > tr:nth-child(odd) > td {
     background-color: #e7e7e7;
 }
 .cus-table.table-school td, .cus-table.table-school th {
     min-width: auto;
-    padding: 2px;
+    padding: 4px;
+}
+.cus-table td .hideMsg {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+.cus-table.show-msg td .hideMsg {
+    display: block;
 }
 
 .alert.table-alert {
@@ -173,31 +185,36 @@ table.cus-table td, table.cus-table th {
     min-width: 40%;
 }
 
+.dragTable td {
+    cursor: pointer;
+    user-select: none;
+}
+.dragTable .val {
+    min-width: 30px;
+    min-height: 1em;
+    display: inline-block;
+}
+
+.ui-draggable-dragging {
+    width: auto;
+    height: auto;
+}
+
 .fix-table-box {
-    position: relative;
+   
 }
 .fix-table-box .cus-table-box {
-    margin-right: 120px;
+    width: 92%;
+    float: left;
 }
+
 .fix-table-box .fix-list {
-    width: 120px;
-    position: absolute;
-    right: 0;
-    top: 0;
+    width: 8%;
+    float: right;
 }
-.fix-table-box .fix-list ul {
-    margin: 0;
-    list-style: none;
-    border: 1px solid #666;
-    border-left: none;
+.fix-table-box .fix-list table thead tr th{
+    min-width: 50px;
 }
-.fix-table-box .fix-list ul li {
-    text-align: center;
-    height: 36px;
-}
-.fix-table-box .fix-list ul li + li {
-    border-top: 1px solid #666;
-}
-.fix-table-box .fix-list table td {
-    height: 36px;
-}
+/* .fix-table-box .fix-list table thead tr, .fix-table-box .fix-list table thead tr th{
+    min-width: 100%;
+} */
