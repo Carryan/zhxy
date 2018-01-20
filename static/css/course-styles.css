@@ -1,4 +1,5 @@
 
+.width-101 { width: 100px; }
 .width-110 { width: 110px; }
 .width-150 { width: 150px; }
 .width-250 { width: 250px; }
@@ -118,6 +119,9 @@ body.modal-open {
     top: 50%;
     margin-top: -10px;
 }
+.td-edit .edit a:hover {
+    text-decoration: none;
+}
 
 table.cus-select {
     width: 100%;
@@ -164,7 +168,7 @@ table.cus-table td, table.cus-table th {
     border: 1px solid #fff;
     white-space: nowrap;
 }
-.table-striped.cus-table > tbody > tr:nth-child(odd) > td {
+.cus-table.table-striped > tbody > tr:nth-child(odd) > td, .cus-table.table-striped > tbody > tr:nth-child(odd) > th {
     background-color: #e7e7e7;
 }
 .cus-table.table-school td, .cus-table.table-school th {
@@ -200,9 +204,6 @@ table.cus-table td, table.cus-table th {
     height: auto;
 }
 
-.fix-table-box {
-   
-}
 .fix-table-box .cus-table-box {
     width: 92%;
     float: left;
@@ -215,6 +216,18 @@ table.cus-table td, table.cus-table th {
 .fix-table-box .fix-list table thead tr th{
     min-width: 50px;
 }
-/* .fix-table-box .fix-list table thead tr, .fix-table-box .fix-list table thead tr th{
-    min-width: 100%;
-} */
+
+.class-table {
+    padding: 0 8px 5px;
+}
+.class-table table.cus-table td, .class-table table.cus-table th {
+    padding: 8px;
+}
+.class-table table.cus-table td {
+    color: blue;
+    height: 65px;
+}
+.class-table td .tip {
+    color: green;
+    margin-top: 10px;
+}

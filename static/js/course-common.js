@@ -143,20 +143,24 @@ $.fn.selectTable = function(ops){
 
 
 // 打开modal
-$("[data-modal]").click(function(){
-    var _this = $(this),
-        title = _this.data('title'),
-        modal = _this.data('modal'),
-        $modal = $(modal);
+selectModel();
 
-    $modal.find('.modal-title').text(title);   
-    $modal.modal('show');
-});
+function selectModel() {
+    $("[data-modal]").click(function(){
+        var _this = $(this),
+            title = _this.data('title'),
+            modal = _this.data('modal'),
+            $modal = $(modal);
+    
+        $modal.find('.modal-title').text(title);   
+        $modal.modal('show');
+    });
+}
 
 
 // 显示教师
 (function(obj){
-    if(!obj.length) return false;
+    if(!obj.length) return ;
 
     obj.change(function(){
         var table = $(this).data('table');
@@ -167,3 +171,47 @@ $("[data-modal]").click(function(){
         }
     });
 })($("#showTeacher"));
+
+// 显示年级
+(function(obj){
+    if(!obj.length) return ;
+
+    obj.change(function(){
+        var table = $(this).data('table'),
+            val = $(this).val();
+        if(val){
+            $(table).find('tbody tr').each(function(){
+                $(this).data('row')==val?$(this).show():$(this).hide();
+            });
+        }else{
+            $(table).find('tbody tr').show();
+        }
+    });
+})($("#showRow"));
+
+
+// 选择节次
+(function(obj){
+    if(!obj.length) return ;
+
+    obj.find('select').change(function(){
+        var cm = ['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四'],
+            i = 0;
+        obj.find('select').each(function(){
+            var list = '', j = 0;
+            while(j<$(this).val()){
+                list = list + '<span>第'+cm[i]+'节</span>';
+                j++;
+                i++;
+            }
+            $(this).next().html(list);
+        });
+    });
+})($(".course-num-select"));
+
+
+// 删除表格行
+(function(obj){
+    if(!obj.length) return ;
+
+})($(""));

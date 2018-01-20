@@ -102,7 +102,7 @@
                             <div class="margin-bottom-20">
                                 <button id="build-auto-table" class="btn btn-primary btn-sm">一键排课</button>
                                 <a href="course-build-table.html" class="btn btn-primary btn-sm">手工调整</a>
-                                <a href="#" class="btn btn-primary btn-sm">生成本学期最终课表</a>
+                                <a href="course-table-school.html" class="btn btn-primary btn-sm">生成本学期最终课表</a>
                             </div>
 
                             <div class="table-alert alert alert-warning">
@@ -130,11 +130,11 @@
                                 <div class="clearfix margin-bottom-10">
                                     <div class="pull-left">
                                         <label>年级</label>
-                                        <select class="width-110 margin-right-30" name="">
+                                        <select id="showRow" class="width-110 margin-right-30" name="" data-table="#school-table">
                                             <option value="">全部</option>
-                                            <option value="">初一</option>
-                                            <option value="">初二</option>
-                                            <option value="">初三</option>
+                                            <option value="1">初一</option>
+                                            <option value="2">初二</option>
+                                            <option value="3">初三</option>
                                         </select>
                                         <label>
                                             <input id="showTeacher" name="" type="checkbox" class="ace" data-table="#school-table">
@@ -193,7 +193,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <tr data-row="1">
                                                     <th>初一(1)班</th>
                                                     <td class="disabled" data-key="1-1">
                                                         <div class="val" data-val="{s:'语',t:'李白'}">语
@@ -262,7 +262,7 @@
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                 </tr>
-                                                <tr>
+                                                <tr data-row="1">
                                                     <th>初一(1)班</th>
                                                     <td data-key="2">
                                                         <div class="val" data-val="">语
@@ -299,7 +299,7 @@
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                 </tr>
-                                                <tr>
+                                                <tr data-row="1">
                                                     <th>初一(1)班</th>
                                                     <td data-key="2">
                                                         <div class="val" data-val="">语
@@ -336,8 +336,8 @@
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                 </tr>
-                                                <tr>
-                                                    <th>初一(1)班</th>
+                                                <tr data-row="2">
+                                                    <th>初二(1)班</th>
                                                     <td data-key="2">
                                                         <div class="val" data-val="">语
                                                             <div class="hideMsg">李晓光</div>
@@ -373,8 +373,8 @@
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                 </tr>
-                                                <tr>
-                                                    <th>初一(1)班</th>
+                                                <tr data-row="2">
+                                                    <th>初二(1)班</th>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
@@ -406,8 +406,8 @@
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                 </tr>
-                                                <tr>
-                                                    <th>初一(1)班</th>
+                                                <tr data-row="2">
+                                                    <th>初二(1)班</th>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
@@ -439,8 +439,8 @@
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                 </tr>
-                                                <tr>
-                                                    <th>初一(1)班</th>
+                                                <tr data-row="3">
+                                                    <th>初三(1)班</th>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
@@ -472,8 +472,8 @@
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                 </tr>
-                                                <tr>
-                                                    <th>初一(1)班</th>
+                                                <tr data-row="3">
+                                                    <th>初三(1)班</th>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
@@ -505,8 +505,8 @@
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                 </tr>
-                                                <tr>
-                                                    <th>初一(1)班</th>
+                                                <tr data-row="3">
+                                                    <th>初三(1)班</th>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
@@ -538,8 +538,8 @@
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                 </tr>
-                                                <tr>
-                                                    <th>初一(1)班</th>
+                                                <tr data-row="3">
+                                                    <th>初三(1)班</th>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>

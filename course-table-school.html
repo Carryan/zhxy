@@ -98,13 +98,13 @@
                                 <div class="clearfix">
                                     <ul class="nav nav-tabs pull-left width-500">
                                         <li class="active" >
-                                            <a href="#cus-table" data-toggle="tab">全校课表</a>
+                                            <a href="course-table-school.html">全校课表</a>
                                         </li>
                                         <li>
-                                            <a href="#cus-table" data-toggle="tab">年级课表</a> 
+                                            <a href="course-table-class.html">班级课表</a> 
                                         </li>
                                         <li>
-                                            <a href="#cus-table" data-toggle="tab">教师课表</a> 
+                                            <a href="course-table-teacher.html">教师课表</a> 
                                         </li>
                                     </ul>
                                     <div class="pull-right">
@@ -116,12 +116,12 @@
 
                                 <div class="clearfix margin-bottom-10">
                                     <div class="pull-left">
-                                        <label>年级</label>
-                                        <select class="width-110 margin-right-30" name="">
+                                        <label>年级：</label>
+                                        <select id="showRow" class="width-110 margin-right-30" name="" data-table="#cus-table">
                                             <option value="">全部</option>
-                                            <option value="">初一</option>
-                                            <option value="">初二</option>
-                                            <option value="">初三</option>
+                                            <option value="1">初一</option>
+                                            <option value="2">初二</option>
+                                            <option value="3">初三</option>
                                         </select>
                                         <label>
                                             <input id="showTeacher" name="" type="checkbox" class="ace" data-table="#cus-table">
@@ -180,7 +180,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr data-row="1">
                                                 <td>初一(1)班</td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
@@ -213,7 +213,7 @@
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                             </tr>
-                                            <tr>
+                                            <tr data-row="1">
                                                 <td>初一(1)班</td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
@@ -246,8 +246,8 @@
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                             </tr>
-                                            <tr>
-                                                <td>初一(1)班</td>
+                                            <tr data-row="2">
+                                                <td>初二(1)班</td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
@@ -279,8 +279,8 @@
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                             </tr>
-                                            <tr>
-                                                <td>初一(1)班</td>
+                                            <tr data-row="2">
+                                                <td>初二(1)班</td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
@@ -312,8 +312,8 @@
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                             </tr>
-                                            <tr>
-                                                <td>初一(1)班</td>
+                                            <tr data-row="3">
+                                                <td>初三(1)班</td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
@@ -345,8 +345,8 @@
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                             </tr>
-                                            <tr>
-                                                <td>初一(1)班</td>
+                                            <tr data-row="3">
+                                                <td>初三(1)班</td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
                                                 <td>语文<div class="hideMsg">李晓光</div></td>
