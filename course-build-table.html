@@ -137,7 +137,7 @@
                                             <option value="3">初三</option>
                                         </select>
                                         <label>
-                                            <input id="showTeacher" name="" type="checkbox" class="ace" data-table="#school-table">
+                                            <input id="showTeacher" name="" type="checkbox" checked class="ace" data-table="#school-table">
                                             <span class="lbl"> 显示教师</span>
                                         </label>
                                     </div>
@@ -146,9 +146,54 @@
                                     </div>
                                 </div>
 
-                                <div class="fix-table-box dragTable clearfix">
-                                    <div class="cus-table-box">
-                                        <table id="school-table" class="cus-table table-school table-striped">
+                                <!-- <div class="fix-table-box dragTable clearfix"> -->
+                                    <div class="fix-table-box dragTable cus-table-box">
+                                            <table class="fix-list cus-table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>区</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                        <table id="school-table" class="cus-table table-school table-striped show-msg">
                                             <thead>
                                                 <tr>
                                                     <th>星期</th>
@@ -573,55 +618,12 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        
                                     </div>
-                                    <div class="fix-list">
-                                        <table class="cus-table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>缓冲区</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                    <!-- <div class="fix-list">
+                                        
+                                    </div> -->
+                                <!-- </div> -->
 
                             </div>
                             
@@ -694,13 +696,11 @@
 
     <script>
     
-    // 模拟一键排课
-    // $(".table-alert, .cus-table").hide();
-    // $("#build-auto-table").click(function(){
-    //     $(this).siblings().removeClass('disabled');
-    //     $(".table-alert, .cus-table").show();
-    //     $(".cus-table-box .msg").hide();
-    // });
+    $(".fix-table-box").scroll(function(){
+        var f = $(this).find(".fix-list"),
+            $this = $(this);
+        f.css('left',$this.width()+$this.scrollLeft()-f.width());
+    });
 
     </script>
 

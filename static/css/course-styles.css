@@ -53,6 +53,13 @@ body.modal-open {
     text-align: center;
 }
 
+.cw-250 + .chosen-container {
+    min-width: 250px;
+}
+.cw-170 + .chosen-container {
+    min-width: 170px;
+}
+
 
 .head-tab a.active {
     color: #428bca;
@@ -110,17 +117,20 @@ body.modal-open {
 
 .td-edit {
     position: relative;
-    padding-right: 50px!important;
+    padding-right: 40px!important;
 }
 .td-edit .edit {
     font-size: 16px;
     position: absolute;
-    right: 10px;
+    right: 15px;
     top: 50%;
     margin-top: -10px;
 }
 .td-edit .edit a:hover {
     text-decoration: none;
+}
+td .delete {
+    font-size: 16px;
 }
 
 table.cus-select {
@@ -145,17 +155,17 @@ table td.disabled {
 }
 
 .cus-table-box {
-    border: 1px solid #666;
+    /* border: 1px solid #666; */
     max-width: 100%;
     /* min-height: 400px; */
     background-color: #f2f2f2;
     overflow-x: auto;
 }
-.cus-table-box .msg {
+/* .cus-table-box .msg {
     height: 100%;
     line-height: 400px;
     text-align: center;
-}
+} */
 table.cus-table {
     min-width: 100%;
     /* border-collapse: separate;
@@ -204,17 +214,21 @@ table.cus-table td, table.cus-table th {
     height: auto;
 }
 
-.fix-table-box .cus-table-box {
-    width: 92%;
-    float: left;
+.fix-table-box {
+    position: relative;
 }
-
+.fix-table-box .table-school {
+    margin-right: 100px;
+}
 .fix-table-box .fix-list {
-    width: 8%;
-    float: right;
+    position: absolute;
+    top: 0;
+    min-width: 80px;
 }
-.fix-table-box .fix-list table thead tr th{
-    min-width: 50px;
+.fix-table-box .fix-list thead tr th, .fix-table-box .fix-list tbody tr td {
+    min-width: 40px;
+    /* width: 40px;
+    max-width: 40px; */
 }
 
 .class-table {

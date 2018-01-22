@@ -88,15 +88,24 @@ $.fn.selectTable = function(ops){
             // console.log(settings.container);
             dragCells.draggable({
                 revert: "invalid",
-                scroll: false,
+                addClasses: false,
+                scroll: true,
+                appendTo: this.selector,
+                zIndex: 100,
+                // refreshPositions: true,
                 cancel: settings.disabled,
-                // containment: settings.container,//拖拽范围容器
+                containment: settings.container,//拖拽范围容器
                 scrollSensitivity: 50,
                 helper: "clone",
                 start: function( event, ui ) {
                     var curEle = $(this),
                         validCells = dragCells;
                     settings.startDrag(curEle,validCells);
+                },
+                drag: function( event, ui ) {
+                    // console.log("offset-left: "+ui.offset.left);
+                    // console.log("width:"+_this.find('.cus-table-box').width());
+                    // console.log(_this.find('.cus-table-box').scrollLeft())
                 }
             });
             
@@ -106,6 +115,8 @@ $.fn.selectTable = function(ops){
                 var $drop = dragCells;
             }
             $drop.droppable({
+                addClasses: false,
+                greedy: true,
                 drop: function( event, ui ) {
                     // console.log(event.type); //ondrop 在一个拖动过程中，释放鼠标键时触发此事件
                     if($(this).is(settings.disabled)) return ;
@@ -210,8 +221,15 @@ function selectModel() {
 })($(".course-num-select"));
 
 
-// 删除表格行
+// 删除表格新增行
+function deleteNewRow(t){
+    var tr = $(t).parents('tr');
+    tr.remove();
+}
+
+
+// 选择框
 (function(obj){
     if(!obj.length) return ;
-
-})($(""));
+    obj.chosen({width: 'auto'});
+})($(".chosen-select"));

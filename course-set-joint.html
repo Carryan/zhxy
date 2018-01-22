@@ -107,6 +107,15 @@
                                         <input type="text" name="" placeholder="请输入">
                                     </div>
                                     <div class="form-group">
+                                        <label>学年：</label>
+                                        <select name="" class="width-101">
+                                            <option value="">请选择</option>
+                                            <option value="">2016</option>
+                                            <option value="">2017</option>
+                                            <option value="">2018</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label>学期：</label>
                                         <select name="">
                                             <option value="">请选择</option>
@@ -134,7 +143,7 @@
                                             <a href="course-set-joint.html">合班</a> 
                                         </li>
                                         <li>
-                                            <a href="course-set-teacher.html">个别教师设置</a> 
+                                            <a href="course-set-teacher.html">特殊教师设置</a> 
                                         </li>
                                     </ul>
 
@@ -158,14 +167,15 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <select name="">
-                                                                <option value="">请选择</option>
-                                                                <option value="">罗老师</option>
-                                                                <option value="">黄老师</option>
+                                                            <select class="chosen-select cw-170" name="" data-placeholder="请选择">
+                                                                <option value=""></option>
+                                                                <option value="a">刘老师</option>
+                                                                <option value="b">罗老师</option>
+                                                                <option value="c">黄老师</option>
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <select name="">
+                                                            <select name="" class="width-101">
                                                                 <option value="">请选择</option>
                                                                 <option value="">语文</option>
                                                                 <option value="">数学</option>
@@ -173,13 +183,13 @@
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <select multiple class="chosen-select width-250">
-                                                                <option value="" selected>163</option>
-                                                                <option value="">164</option>
-                                                                <option value="">1610</option>
+                                                            <select multiple class="chosen-select cw-170">
+                                                                <option value="a" selected>163</option>
+                                                                <option value="b">164</option>
+                                                                <option value="c">1610</option>
                                                             </select>
                                                         </td>
-                                                        <td>
+                                                        <td class="action-buttons">
                                                             <a href="#"><i class="icon-trash red font-18"></i></a>
                                                         </td>
                                                     </tr>
@@ -267,16 +277,19 @@
 
     $(".chosen-select").chosen(); 
 
+
+    // 新添行
     var appendCol = '<tr>'+
                         '<td>'+
-                            '<select name="">'+
-                                '<option value="">请选择</option>'+
+                            '<select class="chosen-select cw-170" name="" data-placeholder="请选择">'+
+                                '<option value=""></option>'+
+                                '<option value="">王老师</option>'+
                                 '<option value="">罗老师</option>'+
                                 '<option value="">黄老师</option>'+
                             '</select>'+
                         '</td>'+
                         '<td>'+
-                            '<select name="">'+
+                            '<select name="" class="width-101">'+
                                 '<option value="">请选择</option>'+
                                 '<option value="">语文</option>'+
                                 '<option value="">数学</option>'+
@@ -284,14 +297,14 @@
                             '</select>'+
                         '</td>'+
                         '<td>'+
-                            '<select multiple class="chosen-select width-250">'+
+                            '<select multiple class="chosen-select cw-170">'+
                                 '<option value="" selected>163</option>'+
                                 '<option value="">164</option>'+
                                 '<option value="">1610</option>'+
                             '</select>'+
                         '</td>'+
-                        '<td>'+
-                            '<a href="#"><i class="icon-trash red font-18"></i></a>'+
+                        '<td class="action-buttons">'+
+                            '<a href="javascript:;" onclick="deleteNewRow(this);"><i class="icon-trash red font-18"></i></a>'+
                         '</td>'+
                     '</tr>';
 

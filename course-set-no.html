@@ -107,6 +107,15 @@
                                         <input type="text" name="" placeholder="请输入">
                                     </div>
                                     <div class="form-group">
+                                        <label>学年：</label>
+                                        <select name="" class="width-101">
+                                            <option value="">请选择</option>
+                                            <option value="">2016</option>
+                                            <option value="">2017</option>
+                                            <option value="">2018</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label>学期：</label>
                                         <select name="">
                                             <option value="">请选择</option>
@@ -134,7 +143,7 @@
                                             <a href="course-set-joint.html">合班</a> 
                                         </li>
                                         <li>
-                                            <a href="course-set-teacher.html">个别教师设置</a> 
+                                            <a href="course-set-teacher.html">特殊教师设置</a> 
                                         </li>
                                     </ul>
 
@@ -146,7 +155,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>-</th>
-                                                        <th>不排课节次</th>
+                                                        <th>无课节次</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -154,11 +163,11 @@
                                                         <td>全校</td>
                                                         <td class="td-edit">
                                                             星期一第一节、星期二第三节
-                                                            <span class="edit">
+                                                            <span class="edit action-buttons">
                                                                 <a href="#" data-modal="#m-cus-select" data-title="设置全校无课时间">
                                                                     <i class="icon-pencil green"></i>
                                                                 </a>
-                                                                <a href="#"><i class="icon-trash red"></i></a>
+                                                                <!-- <a href="#"><i class="icon-trash red"></i></a> -->
                                                             </span>
                                                         </td>
                                                     </tr>
@@ -173,33 +182,40 @@
                                                     <tr>
                                                         <th>教研组</th>
                                                         <th>成员</th>
-                                                        <th>不排课节次</th>
+                                                        <th>无课节次</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <td>语文</td>
                                                         <td>
-                                                            <select multiple class="chosen-select width-250">
+                                                            <select multiple class="chosen-select cw-250">
                                                                 <option value="" selected>黄老师</option>
+                                                                <option value="">罗老师</option>
+                                                                <option value="">王老师</option>
+                                                                <option value="">罗老师</option>
+                                                                <option value="">王老师</option>
+                                                                <option value="">罗老师</option>
+                                                                <option value="">王老师</option>
+                                                                <option value="">罗老师</option>
+                                                                <option value="">王老师</option>
                                                                 <option value="">罗老师</option>
                                                                 <option value="">王老师</option>
                                                             </select>
                                                         </td>
                                                         <td class="td-edit">
                                                             星期一第一节、星期二第三节
-                                                            <span class="edit">
+                                                            <span class="edit action-buttons">
                                                                 <a href="#" data-modal="#m-cus-select" data-title="设置教研组-语文无课时间">
                                                                     <i class="icon-pencil green"></i>
                                                                 </a>
-                                                                <a href="#"><i class="icon-trash red"></i></a>
                                                             </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>数学</td>
                                                         <td>
-                                                            <select multiple class="chosen-select width-250">
+                                                            <select multiple class="chosen-select cw-250">
                                                                 <option value="" selected>黄老师</option>
                                                                 <option value="">罗老师</option>
                                                                 <option value="">王老师</option>
@@ -207,18 +223,17 @@
                                                         </td>
                                                         <td class="td-edit">
                                                             星期一第一节、星期二第三节
-                                                            <span class="edit">
+                                                            <span class="edit action-buttons">
                                                                 <a href="#" data-modal="#m-cus-select" data-title="设置教研组-数学无课时间">
                                                                     <i class="icon-pencil green"></i>
                                                                 </a>
-                                                                <a href="#"><i class="icon-trash red"></i></a>
                                                             </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>英语</td>
                                                         <td>
-                                                            <select multiple class="chosen-select width-250">
+                                                            <select multiple class="chosen-select cw-250">
                                                                 <option value="" selected>黄老师</option>
                                                                 <option value="">罗老师</option>
                                                                 <option value="">王老师</option>
@@ -226,18 +241,17 @@
                                                         </td>
                                                         <td class="td-edit">
                                                             星期一第一节、星期二第三节
-                                                            <span class="edit">
+                                                            <span class="edit action-buttons">
                                                                 <a href="#" data-modal="#m-cus-select" data-title="设置教研组-英语无课时间">
                                                                     <i class="icon-pencil green"></i>
                                                                 </a>
-                                                                <a href="#"><i class="icon-trash red"></i></a>
                                                             </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>物理</td>
                                                         <td>
-                                                            <select multiple class="chosen-select width-250">
+                                                            <select multiple class="chosen-select cw-250">
                                                                 <option value="" selected>黄老师</option>
                                                                 <option value="">罗老师</option>
                                                                 <option value="">王老师</option>
@@ -245,18 +259,17 @@
                                                         </td>
                                                         <td class="td-edit">
                                                             星期一第一节、星期二第三节
-                                                            <span class="edit">
+                                                            <span class="edit action-buttons">
                                                                 <a href="#" data-modal="#m-cus-select" data-title="设置教研组-物理无课时间">
                                                                     <i class="icon-pencil green"></i>
                                                                 </a>
-                                                                <a href="#"><i class="icon-trash red"></i></a>
                                                             </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>化学</td>
                                                         <td>
-                                                            <select multiple class="chosen-select width-250">
+                                                            <select multiple class="chosen-select cw-250">
                                                                 <option value="" selected>黄老师</option>
                                                                 <option value="">罗老师</option>
                                                                 <option value="">王老师</option>
@@ -264,37 +277,35 @@
                                                         </td>
                                                         <td class="td-edit">
                                                             星期一第一节、星期二第三节
-                                                            <span class="edit">
+                                                            <span class="edit action-buttons">
                                                                 <a href="#" data-modal="#m-cus-select" data-title="设置教研组-化学无课时间">
                                                                     <i class="icon-pencil green"></i>
                                                                 </a>
-                                                                <a href="#"><i class="icon-trash red"></i></a>
                                                             </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>历史</td>
                                                         <td>
-                                                            <select multiple class="chosen-select width-250">
+                                                            <select multiple class="chosen-select cw-250">
                                                                 <option value="" selected>黄老师</option>
                                                                 <option value="">罗老师</option>
                                                                 <option value="">王老师</option>
                                                             </select>
                                                         </td>
-                                                        <td class="td-edit">
+                                                        <td class="td-edit action-buttons">
                                                             星期一第一节、星期二第三节
                                                             <span class="edit">
                                                                 <a href="#" data-modal="#m-cus-select" data-title="设置教研组-历史无课时间">
                                                                     <i class="icon-pencil green"></i>
                                                                 </a>
-                                                                <a href="#"><i class="icon-trash red"></i></a>
                                                             </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>地理</td>
                                                         <td>
-                                                            <select multiple class="chosen-select width-250">
+                                                            <select multiple class="chosen-select cw-250">
                                                                 <option value="" selected>黄老师</option>
                                                                 <option value="">罗老师</option>
                                                                 <option value="">王老师</option>
@@ -302,11 +313,10 @@
                                                         </td>
                                                         <td class="td-edit">
                                                             星期一第一节、星期二第三节
-                                                            <span class="edit">
+                                                            <span class="edit action-buttons">
                                                                 <a href="#" data-modal="#m-cus-select" data-title="设置教研组-地理无课时间">
                                                                     <i class="icon-pencil green"></i>
                                                                 </a>
-                                                                <a href="#"><i class="icon-trash red"></i></a>
                                                             </span>
                                                         </td>
                                                     </tr>
@@ -315,27 +325,47 @@
                                         </div>
 
                                         <div class="pane margin-bottom-30">
-                                            <h4><b>三、班级无课节次</b></h4>
-                                            <table class="table table-bordered table-hover">
+                                            <div class="clearfix">
+                                                <h4 class="pull-left"><b>三、班级无课节次</b></h4>
+                                                <button type="button" class="btn btn-primary btn-xs table-add pull-right" data-table="#tb-class-no">
+                                                    <i class="icon-plus margin-right-5"></i>添加
+                                                </button>
+                                            </div>
+                                            <table id="tb-class-no" class="table table-bordered table-hover">
                                                 <thead>
                                                     <tr>
                                                         <th>年级</th>
                                                         <th>班级</th>
-                                                        <th>不排课节次</th>
+                                                        <th>无课节次</th>
+                                                        <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>七年级</td>
-                                                        <td>1022班</td>
+                                                        <td>
+                                                            <select name="">
+                                                                <option value="">七年级</option>
+                                                                <option value="">八年级</option>
+                                                                <option value="">九年级</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select name="">
+                                                                <option value="">1班</option>
+                                                                <option value="">2班</option>
+                                                                <option value="">3班</option>
+                                                            </select>
+                                                        </td>
                                                         <td class="td-edit">
                                                             星期一第一节、星期二第三节
-                                                            <span class="edit">
+                                                            <span class="edit action-buttons">
                                                                 <a href="#" data-modal="#m-cus-select" data-title="设置1001班级无课时间">
                                                                     <i class="icon-pencil green"></i>
                                                                 </a>
-                                                                <a href="#"><i class="icon-trash red"></i></a>
                                                             </span>
+                                                        </td>
+                                                        <td class="action-buttons">
+                                                            <a href="#" class="delete"><i class="icon-trash red"></i></a>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -517,6 +547,44 @@
 
     // 多选
     $(".chosen-select").chosen(); 
+
+
+    // 新添行
+    var appendCol = '<tr>'+
+                        '<td>'+
+                            '<select name="">'+
+                                '<option value="">七年级</option>'+
+                                '<option value="">八年级</option>'+
+                                '<option value="">九年级</option>'+
+                            '</select>'+
+                        '</td>'+
+                        '<td>'+
+                            '<select name="">'+
+                                '<option value="">1班</option>'+
+                                '<option value="">2班</option>'+
+                                '<option value="">3班</option>'+
+                            '</select>'+
+                        '</td>'+
+                        '<td class="td-edit">'+
+                            '星期一第一节、星期二第三节'+
+                            '<span class="edit action-buttons">'+
+                                '<a href="javascript:;" data-modal="#m-cus-select" data-title="设置1001班级无课时间">'+
+                                    '<i class="icon-pencil green"></i>'+
+                                '</a>'+
+                            '</span>'+
+                        '</td>'+
+                        '<td class="action-buttons">'+
+                            '<a href="javascript:;" class="delete" onclick="deleteNewRow(this);"><i class="icon-trash red"></i></a>'+
+                        '</td>'+
+                    '</tr>';
+
+    $(".table-add").click(function(){
+        var table = $(this).data('table');
+        $(table).find('tbody').append(appendCol);
+
+        $(table).find('tbody tr:last-child .chosen-select').chosen();
+        selectModel();
+    });
 
     </script>
 
