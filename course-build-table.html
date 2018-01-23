@@ -116,14 +116,14 @@
 
                             <div class="tabbable setting-tabs">
                                 <ul class="nav nav-tabs">
-                                    <li class="active" >
-                                        <a href="#cus-table" data-toggle="tab">全校课表</a>
+                                    <li class="active">
+                                        <a href="course-build-table.html">全校课表</a>
                                     </li>
                                     <li>
-                                        <a href="#cus-table" data-toggle="tab">年级课表</a> 
+                                        <a href="course-build-table-class.html">年级课表</a> 
                                     </li>
                                     <li>
-                                        <a href="#cus-table" data-toggle="tab">教师课表</a> 
+                                        <a href="course-build-table-teacher.html">教师课表</a> 
                                     </li>
                                 </ul>
 
@@ -137,63 +137,60 @@
                                             <option value="3">初三</option>
                                         </select>
                                         <label>
-                                            <input id="showTeacher" name="" type="checkbox" checked class="ace" data-table="#school-table">
+                                            <input id="showTeacher" name="" type="checkbox" checked class="ace" data-table=".dragTable">
                                             <span class="lbl"> 显示教师</span>
                                         </label>
                                     </div>
                                     <div class="pull-right">
-                                        <button class="btn btn-primary btn-sm">保存</button>
+                                        <button class="btn btn-primary btn-sm" onclick="getTableValues()">保存</button>
                                     </div>
                                 </div>
 
-                                <!-- <div class="fix-table-box dragTable clearfix"> -->
-                                    <div class="fix-table-box dragTable cus-table-box">
-                                            <table class="fix-list cus-table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>区</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                        <table id="school-table" class="cus-table table-school table-striped show-msg">
+                                <div class="fix-table-box dragTable cus-table-box clearfix show-msg table-school">
+                                    <table class="fix-list cus-table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>缓冲区</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><div class="val"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td><div class="val"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td><div class="val"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td><div class="val"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td><div class="val"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td><div class="val"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td><div class="val"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td><div class="val"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td><div class="val"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td><div class="val"></div></td>
+                                            </tr>
+                                            <tr>
+                                                <td><div class="val"></div></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-box">
+                                        <table class="cus-table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>星期</th>
@@ -251,13 +248,13 @@
                                                         </div>
                                                     </td>
                                                     <td data-key="1-3">
-                                                        <div class="val" data-val="">英
+                                                        <div class="val" data-val="{s:'数',t:'李太白'}">英
                                                             <div class="hideMsg">李晓光</div>
                                                         </div>
                                                     </td>
                                                     <td data-key="1-4">
                                                         <div class="val" data-val="">物
-                                                            <div class="hideMsg">李晓光</div>
+                                                            <div class="hideMsg">李晓光一</div>
                                                         </div>
                                                     </td>
                                                     <td data-key="1-5">
@@ -314,16 +311,16 @@
                                                             <div class="hideMsg">李晓光</div>
                                                         </div>
                                                     </td>
-                                                    <td data-key="2"><div class="val"></div></td>
-                                                    <td data-key="2"><div class="val"></div></td>
-                                                    <td data-key="2"><div class="val"></div></td>
-                                                    <td data-key="2"><div class="val"></div></td>
-                                                    <td data-key="2"><div class="val"></div></td>
-                                                    <td data-key="2"><div class="val"></div></td>
-                                                    <td data-key="2"><div class="val"></div></td>
-                                                    <td data-key="2"><div class="val"></div></td>
-                                                    <td data-key="2"><div class="val"></div></td>
-                                                    <td data-key="2"><div class="val"></div></td>
+                                                    <td data-key="2-1"><div class="val"></div></td>
+                                                    <td data-key="2-2"><div class="val"></div></td>
+                                                    <td data-key="2-3"><div class="val"></div></td>
+                                                    <td data-key="2-4"><div class="val"></div></td>
+                                                    <td data-key="2-5"><div class="val"></div></td>
+                                                    <td data-key="2-6"><div class="val"></div></td>
+                                                    <td data-key="2-7"><div class="val"></div></td>
+                                                    <td data-key="2-8"><div class="val"></div></td>
+                                                    <td data-key="2-9"><div class="val"></div></td>
+                                                    <td data-key="2-10"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
                                                     <td data-key="2"><div class="val"></div></td>
@@ -618,12 +615,8 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        
                                     </div>
-                                    <!-- <div class="fix-list">
-                                        
-                                    </div> -->
-                                <!-- </div> -->
+                                </div>
 
                             </div>
                             
@@ -695,12 +688,13 @@
     <script src="static/js/course-common.js"></script>
 
     <script>
-    
-    $(".fix-table-box").scroll(function(){
-        var f = $(this).find(".fix-list"),
-            $this = $(this);
-        f.css('left',$this.width()+$this.scrollLeft()-f.width());
-    });
+
+    var dtable = $(".dragTable").dragTableCell();
+
+    function getTableValues() {
+        var values = dtable.getValues();
+        console.log(values);
+    }
 
     </script>
 

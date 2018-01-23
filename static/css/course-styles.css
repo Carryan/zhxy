@@ -96,6 +96,10 @@ body.modal-open {
 .setting-tabs .nav-tabs > li + li {
     margin-left: 5px;
 }
+.setting-tabs .tab-content {
+    padding: 0;
+    border: none;
+}
 
 .course-num-select {
     margin-bottom: 20px;
@@ -181,7 +185,7 @@ table.cus-table td, table.cus-table th {
 .cus-table.table-striped > tbody > tr:nth-child(odd) > td, .cus-table.table-striped > tbody > tr:nth-child(odd) > th {
     background-color: #e7e7e7;
 }
-.cus-table.table-school td, .cus-table.table-school th {
+.table-school .cus-table td, .table-school .cus-table th {
     min-width: auto;
     padding: 4px;
 }
@@ -190,7 +194,7 @@ table.cus-table td, table.cus-table th {
     font-size: 12px;
     display: none;
 }
-.cus-table.show-msg td .hideMsg {
+.show-msg td .hideMsg {
     display: block;
 }
 
@@ -205,34 +209,56 @@ table.cus-table td, table.cus-table th {
 }
 .dragTable .val {
     min-width: 30px;
-    min-height: 1em;
     display: inline-block;
+}
+.dragTable.show-msg .val {
+    min-width: 50px;
+    height: 37px;
+}
+.dragTable.class-table .val {
+    min-width: auto;
 }
 
 .ui-draggable-dragging {
-    width: auto;
+    min-width: auto!important;
     height: auto;
+}
+.class-table .ui-draggable-dragging {
+    width: 120px;
 }
 
 .fix-table-box {
     position: relative;
+    overflow-y: hidden;
 }
-.fix-table-box .table-school {
-    margin-right: 100px;
+.fix-table-box .table-box {
+    padding-right: 80px;
+    float: left;
+    min-width: 100%;
+}
+.fix-table-box.class-table .table-box {
+    padding-right: 120px;
 }
 .fix-table-box .fix-list {
     position: absolute;
     top: 0;
+    right: 0;
     min-width: 80px;
 }
+.fix-table-box.class-table .fix-list {
+    min-width: 120px;
+}
 .fix-table-box .fix-list thead tr th, .fix-table-box .fix-list tbody tr td {
-    min-width: 40px;
+    /* min-width: 40px; */
     /* width: 40px;
     max-width: 40px; */
 }
 
 .class-table {
     padding: 0 8px 5px;
+}
+.fix-table-box.class-table {
+    padding: 0;
 }
 .class-table table.cus-table td, .class-table table.cus-table th {
     padding: 8px;

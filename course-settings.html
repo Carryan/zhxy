@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>排课规则 - 金视野系统模板</title>
+    <meta name="keywords" content="金视野,教育,平台" />
+    <meta name="description" content="金视野开发部,模板,2017" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+
+    <!-- page specific plugin styles -->
+    
+
+    <!-- fonts -->
+
+    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" /> -->
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+	<![endif]-->
+
+    <!-- inline styles related to this page -->
+    <link rel="stylesheet" href="static/css/course-styles.css">
+
+    <!-- ace settings handler -->
+
+    <script src="assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+	
+</head>
+
+<body>
+
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+
+
+            <div class="main-content" style="margin-left: 0px;">
+
+                <!-- 面包屑导航 -->
+                <div class="breadcrumbs " id="breadcrumbs">
+                    <script type="text/javascript">
+                        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                    </script>
+                    <!--位置-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home home-icon"></i>
+                            <a href="index.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="#">排课系统</a>
+                        </li>
+                        <li class="active">排课规则</li>
+                    </ul>
+                    <ul class="breadcrumb pull-right navright">
+                        <li>
+                            <i class="icon-share-alt icon-color"></i>
+                            <a href="javascript:history.go(-1);">返回</a>
+                        </li>
+                    </ul>	
+                </div>
+
+                <div class="page-content" style="padding-top: 20px;">
+
+                    <!-- /.page-header -->
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <h3 class="text-center">排课名称</h3>
+
+                            <p class="text-center">
+                                <span class="margin-right-20">创建者：admin</span>
+                                <span class="margin-right-20">创建时间：2018-3-1</span>
+                                <span class="margin-right-20">学年：2017-2018</span>
+                                <span class="margin-right-20">学期：春季</span>
+                            </p>
+
+                            <div class="tabbable setting-tabs">
+                                <ul class="nav nav-tabs">
+                                    <li class="active" >
+                                        <a href="#course-index" data-toggle="tab">教学计划</a>
+                                    </li>
+                                    <li>
+                                        <a href="#course-set-prior" data-toggle="tab">科目优先及连排</a> 
+                                    </li>
+                                    <li>
+                                        <a href="#course-set-no" data-toggle="tab">无课设置</a> 
+                                    </li>
+                                    <li>
+                                        <a href="#course-set-joint" data-toggle="tab">合班</a> 
+                                    </li>
+                                    <li>
+                                        <a href="#course-set-teacher" data-toggle="tab">特殊教师设置</a> 
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+
+                                    <div id="course-index" class="tab-pane active">
+                                        <div class="pane margin-bottom-30">
+                                            <h4><b>一、教学时间设置</b></h4>
+                                            <p>每星期上课时间</p>
+                                            <p>
+                                                <span class="margin-right-20">星期一</span>
+                                                <span class="margin-right-20">星期二</span>
+                                                <span class="margin-right-20">星期三</span>
+                                                <span class="margin-right-20">星期四</span>
+                                                <span class="margin-right-20">星期五</span>
+                                            </p>
+                                            <p>每天上课节次</p>
+                                            <p>
+                                                <span class="margin-right-20">上午：4节</span>
+                                                <span class="margin-right-20">下午：4节</span>
+                                                <span class="margin-right-20">晚上：4节</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="pane margin-bottom-30">
+                                            <h4><b>二、各科各年级每周课时</b></h4>
+                                            <table class="classHourTb table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>科目</th>
+                                                        <th>初一</th>
+                                                        <th>初二</th>
+                                                        <th>初三</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody> 
+                                                    <tr>
+                                                        <th>语文</th>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>数学</th>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>英语</th>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>物理</th>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>化学</th>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>生物</th>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>政治</th>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>地理</th>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>历史</th>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>体育</th>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                        <td>7</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div id="course-set-prior" class="tab-pane">
+                                        <div class="pane margin-bottom-30">
+                                            <table class="classHourTb table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>科目</th>
+                                                        <th>科目优先级</th>
+                                                        <th>同班一周连排节数</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody> 
+                                                    <tr>
+                                                        <th>语文</th>
+                                                        <td>高</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>数学</th>
+                                                        <td>高</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>英语</th>
+                                                        <td>高</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>物理</th>
+                                                        <td>高</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>化学</th>
+                                                        <td>高</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>生物</th>
+                                                        <td>高</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>政治</th>
+                                                        <td>高</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>地理</th>
+                                                        <td>高</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>历史</th>
+                                                        <td>高</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>体育</th>
+                                                        <td>高</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div id="course-set-no" class="tab-pane">
+                                        <div class="pane margin-bottom-30">
+                                            <h4><b>一、全校无课节次</b></h4>
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>-</th>
+                                                        <th>无课节次</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>全校</td>
+                                                        <td>
+                                                            星期一第一节、星期二第三节
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="pane margin-bottom-30">
+                                            <h4><b>二、教研组无课节次</b></h4>
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>教研组</th>
+                                                        <th>成员</th>
+                                                        <th>无课节次</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>语文</td>
+                                                        <td>黄老师、罗老师、王老师</td>
+                                                        <td>星期一第一节、星期二第三节</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>数学</td>
+                                                        <td>黄老师、罗老师、王老师</td>
+                                                        <td>星期一第一节、星期二第三节</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>英语</td>
+                                                        <td>黄老师、罗老师、王老师</td>
+                                                        <td>星期一第一节、星期二第三节</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>物理</td>
+                                                        <td>黄老师、罗老师、王老师</td>
+                                                        <td>星期一第一节、星期二第三节</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>化学</td>
+                                                        <td>黄老师、罗老师、王老师</td>
+                                                        <td>星期一第一节、星期二第三节</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>历史</td>
+                                                        <td>黄老师、罗老师、王老师</td>
+                                                        <td>星期一第一节、星期二第三节</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>地理</td>
+                                                        <td>黄老师、罗老师、王老师</td>
+                                                        <td>星期一第一节、星期二第三节</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="pane margin-bottom-30">
+                                            <div class="clearfix">
+                                                <h4 class="pull-left"><b>三、班级无课节次</b></h4>
+                                            </div>
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>年级</th>
+                                                        <th>班级</th>
+                                                        <th>无课节次</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>七年级</td>
+                                                        <td>1班</td>
+                                                        <td>星期一第一节、星期二第三节</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div id="course-set-joint" class="tab-pane">
+                                        <div class="pane margin-bottom-30">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>教师姓名</th>
+                                                        <th>科目</th>
+                                                        <th>班次</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>刘老师</td>
+                                                        <td>语文</td>
+                                                        <td>163、164、165</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div id="course-set-teacher" class="tab-pane">
+                                        <div class="pane margin-bottom-30">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>教师姓名</th>
+                                                        <th>无课设置</th>
+                                                        <th>预排设置</th>
+                                                        <th>互斥设置</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>刘老师</td>
+                                                        <td>星期一第一节、星期二第三节</td>
+                                                        <td>星期一第一节、星期二第三节</td>
+                                                        <td>163、164</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            
+                            <!-- PAGE CONTENT ENDS -->
+                        
+                        </div>
+                        
+                    </div>
+
+                    <!-- /.col -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+            <!-- /.main-content -->
+
+            <!-- /#ace-settings-container -->
+        </div>
+        <!-- /.main-container-inner -->
+    </div>
+    <!-- /.main-container -->
+
+
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+
+    <!---->
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+
+<![endif]-->
+
+    <!--[if !IE]> -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    
+
+    <!-- ace scripts -->
+
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+
+    <!-- inline scripts related to this page -->
+    <div style="display: none">
+        <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+    </div>
+
+    <script src="static/js/course-common.js"></script>
+
+    <script>
+
+    
+
+    </script>
+
+</body>
+</html>

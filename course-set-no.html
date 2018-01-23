@@ -421,11 +421,11 @@
                         <tbody>
                             <tr>
                                 <th>1</th>
-                                <td class="selected" data-val="1-1"></td>
-                                <td data-val="2-1"></td>
-                                <td data-val="3-1"></td>
-                                <td data-val="4-1"></td>
-                                <td data-val="5-1"></td>
+                                <td class="selected" data-val="1-1" data-text="星期一第一节"></td>
+                                <td data-val="2-1" data-text="星期一第一节"></td>
+                                <td data-val="3-1" data-text="星期一第一节"></td>
+                                <td data-val="4-1" data-text="星期一第一节"></td>
+                                <td data-val="5-1" data-text="星期一第一节"></td>
                             </tr>
                             <tr>
                                 <th>2</th>
@@ -479,7 +479,7 @@
                     </table>
                 </div>
                 <div class="modal-footer text-center margin-top-0">
-                    <button type="button" class="btn btn-primary btn-xs" onclick="getSelected()">确定</button>
+                    <button type="button" class="btn btn-primary btn-xs" >确定</button>
                     <button type="button" class="btn btn-xs" data-dismiss="modal">取消</button>
                 </div>
             </form>
@@ -538,12 +538,17 @@
     <script>
 
     // 可选课表
-    var select_table = $("table.cus-select").selectTable();
+    // var select_table = $("table.cus-select").selectTable();
 
-    function getSelected() {
-        console.log(select_table.getSelected());
-        console.log(select_table.getValues());
-    }
+    // function getSelected() {
+    //     // console.log(select_table.getSelected());
+    //     var selected = select_table.getSelected();
+    //     var texts, vals;
+    //     // console.log(select_table.getValues());
+    //     selected.each(function(){
+
+    //     });
+    // }
 
     // 多选
     $(".chosen-select").chosen(); 

@@ -85,14 +85,11 @@ $.fn.selectTable = function(ops){
     
         function init() {
             var dragCells = _this.find(settings.cell);
-            // console.log(settings.container);
+
             dragCells.draggable({
                 revert: "invalid",
                 addClasses: false,
-                scroll: true,
-                appendTo: this.selector,
-                zIndex: 100,
-                // refreshPositions: true,
+                appendTo: _this.find('.fix-list'),
                 cancel: settings.disabled,
                 containment: settings.container,//拖拽范围容器
                 scrollSensitivity: 50,
@@ -103,10 +100,12 @@ $.fn.selectTable = function(ops){
                     settings.startDrag(curEle,validCells);
                 },
                 drag: function( event, ui ) {
-                    // console.log("offset-left: "+ui.offset.left);
-                    // console.log("width:"+_this.find('.cus-table-box').width());
-                    // console.log(_this.find('.cus-table-box').scrollLeft())
+                    var w = _this.width(),
+                        in_w = _this.find('.table-box').outerWidth(),
+                        m_s = in_w - w;
+                    if(_this.scrollLeft()>=m_s) _this.scrollLeft(m_s);
                 }
+
             });
             
             if(settings.drop){
@@ -135,9 +134,11 @@ $.fn.selectTable = function(ops){
         this.getValues = function() {
             var cells = {};
             _this.find(settings.cell).each(function(index, element){
-              var key = $(element).data("key"),
-                  val = $(element).find(settings.val).data("val");
-              cells[key] = val;
+                var key = $(element).data("key"),
+                    val = $(element).find(settings.val).data("val");
+                if(key){
+                    cells[key] = val;
+                }
             });
             return cells;
         };
@@ -145,12 +146,8 @@ $.fn.selectTable = function(ops){
         init();
         return this;
     }
-    
-    $(".dragTable").dragTableCell();
 
 })($(".dragTable"));
-
-// $(".dragTable").dragTableCell();
 
 
 // 打开modal
@@ -165,6 +162,18 @@ function selectModel() {
     
         $modal.find('.modal-title').text(title);   
         $modal.modal('show');
+
+        var select = $modal.find('.cus-select');
+        if(select.length){
+            var select_table = select.selectTable(),
+                selected = select_table.getSelected();
+            var texts="", vals=[];
+            selected.each(function(){
+                texts = texts + $(this).data('text');
+                vals.push($(this).data('val'));
+            });
+        }
+
     });
 }
 
@@ -173,12 +182,16 @@ function selectModel() {
 (function(obj){
     if(!obj.length) return ;
 
+    var table = obj.data('table');
+    // if(obj.is(":checked")) {
+    //     $(table).addClass('show-msg');
+    // }
     obj.change(function(){
-        var table = $(this).data('table');
         if($(this).is(":checked")){
             $(table).addClass('show-msg');
         }else{
-            $(table).removeClass('show-msg')
+            $(table).removeClass('show-msg');
+            $(".fix-table-box").scrollLeft(0);
         }
     });
 })($("#showTeacher"));
@@ -221,7 +234,7 @@ function selectModel() {
 })($(".course-num-select"));
 
 
-// 删除表格新增行
+// 删除表格新增的行
 function deleteNewRow(t){
     var tr = $(t).parents('tr');
     tr.remove();
@@ -233,3 +246,20 @@ function deleteNewRow(t){
     if(!obj.length) return ;
     obj.chosen({width: 'auto'});
 })($(".chosen-select"));
+
+
+// 右侧固定
+$(".fix-table-box").scroll(function(){
+    var f = $(this).find(".fix-list"),
+        $this = $(this);
+    f.css('right', -$this.scrollLeft());
+    // console.log($this.scrollLeft());
+});
+// $(window).resize(function(){
+//     var ob = $(".fix-table-box");
+//         f = ob.find(".fix-list");
+//         console.log(ob.width(), ob.scrollLeft());
+//     if(ob.width()<ob.scrollLeft()){
+//         f.css('right', -ob.width());
+//     }
+// });
