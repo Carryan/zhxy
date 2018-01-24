@@ -74,8 +74,10 @@ $.fn.selectTable = function(ops){
             val: ".val",
             disabled: ".disabled", //无法拖拽元素的选择器 
             container: this.selector,
-            //监听拖拽前的函数，可配置（参数:当前ele、所有有效cell）
-            startDrag: function(ele,validCells){ },
+            //监听拖拽前的函数
+            startDrag: function(ele){ 
+                // console.log(getVal(ele));
+            },
             //监听拖拽后的函数，可配置（参数:置换及置换后的ele）
             stopDrag: function(dragFrom,dragTo){ }
            };
@@ -85,6 +87,11 @@ $.fn.selectTable = function(ops){
     
         function init() {
             var dragCells = _this.find(settings.cell);
+            if(settings.drop){
+                var $drop = $(settings.drop);
+            }else{
+                var $drop = dragCells;
+            }
 
             dragCells.draggable({
                 revert: "invalid",
@@ -95,9 +102,8 @@ $.fn.selectTable = function(ops){
                 scrollSensitivity: 50,
                 helper: "clone",
                 start: function( event, ui ) {
-                    var curEle = $(this),
-                        validCells = dragCells;
-                    settings.startDrag(curEle,validCells);
+                    var curEle = $(this);
+                    settings.startDrag(curEle);
                 },
                 drag: function( event, ui ) {
                     var w = _this.width(),
@@ -108,14 +114,10 @@ $.fn.selectTable = function(ops){
 
             });
             
-            if(settings.drop){
-                var $drop = $(settings.drop);
-            }else{
-                var $drop = dragCells;
-            }
             $drop.droppable({
                 addClasses: false,
                 greedy: true,
+                activeClass: "acceptable",
                 drop: function( event, ui ) {
                     // console.log(event.type); //ondrop 在一个拖动过程中，释放鼠标键时触发此事件
                     if($(this).is(settings.disabled)) return ;
@@ -128,6 +130,7 @@ $.fn.selectTable = function(ops){
                     settings.stopDrag(dragObj,$(this));
                 }
             });
+
         };
     
         //所有值
@@ -142,6 +145,16 @@ $.fn.selectTable = function(ops){
             });
             return cells;
         };
+
+        function getVal(obj) {
+            var cell = {};
+            var key = obj.data("key"),
+                val = obj.find(settings.val).data("val");
+            if(key){
+                cell[key] = val;
+            }
+            return cell;
+        }
     
         init();
         return this;
@@ -194,6 +207,7 @@ function selectModel() {
         $modal.find('#submitSelect').data(_this);
         $modal.find('.modal-title').text(title);
         
+        // 被选单元
         var vals = $(this).parents('td').find('input').val();
         if(vals){
             var m_td = $modal.find('td');
@@ -205,6 +219,7 @@ function selectModel() {
             });
         }
 
+        // 添加类（蓝色单元格）
         if(_class){
             $modal.addClass(_class);
             $modal.on('hide.bs.modal', function(){

@@ -204,7 +204,7 @@ table.cus-table td, table.cus-table th {
 }
 .dragTable .val {
     min-width: 30px;
-    display: inline-block;
+    /* display: inline-block; */
 }
 .dragTable.show-msg .val {
     min-width: 50px;
@@ -227,7 +227,7 @@ table.cus-table td, table.cus-table th {
     overflow-y: hidden;
 }
 .fix-table-box .table-box {
-    padding-right: 80px;
+    padding-right: 79px;
     float: left;
     min-width: 100%;
 }
@@ -243,10 +243,11 @@ table.cus-table td, table.cus-table th {
 .fix-table-box.class-table .fix-list {
     min-width: 120px;
 }
-.fix-table-box .fix-list thead tr th, .fix-table-box .fix-list tbody tr td {
-    /* min-width: 40px; */
-    /* width: 40px;
-    max-width: 40px; */
+.fix-table-box.show-msg .fix-list thead tr th{
+   height: 70px;
+}
+.fix-table-box.show-msg .fix-list tbody tr:last-child td {
+    display: none;
 }
 
 .class-table {
@@ -265,4 +266,8 @@ table.cus-table td, table.cus-table th {
 .class-table td .tip {
     color: green;
     margin-top: 10px;
+}
+
+.cus-table td.acceptable {
+    background-color: #FD9EFD !important;
 }
