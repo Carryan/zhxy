@@ -48,6 +48,7 @@ body.modal-open {
 }
 .modal {
     overflow: hidden;
+    outline: none;
 }
 .modal-footer.text-center {
     text-align: center;
@@ -153,27 +154,21 @@ table.cus-select tbody th, table.cus-select tbody td {
 table.cus-select td.selected {
     background-color: red;
 }
+.cell-blue table.cus-select td.selected {
+    background-color: #6fb3e0;
+}
 table td.disabled {
     background-color: #ccc !important;
     cursor: not-allowed;
 }
 
 .cus-table-box {
-    /* border: 1px solid #666; */
     max-width: 100%;
-    /* min-height: 400px; */
     background-color: #f2f2f2;
     overflow-x: auto;
 }
-/* .cus-table-box .msg {
-    height: 100%;
-    line-height: 400px;
-    text-align: center;
-} */
 table.cus-table {
     min-width: 100%;
-    /* border-collapse: separate;
-    border-spacing: 1px; */
 }
 table.cus-table td, table.cus-table th {
     min-width: 80px;

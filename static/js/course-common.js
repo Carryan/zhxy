@@ -57,7 +57,7 @@ $.fn.selectTable = function(ops){
     this.enable = function() {
         this._status.disable = false;
     }
-
+    
     init();
     return this;
 }
@@ -150,6 +150,36 @@ $.fn.selectTable = function(ops){
 })($(".dragTable"));
 
 
+// select table
+(function(obj){
+    if(!obj.length) return ;
+    var select_table = obj.selectTable();
+
+    $("#submitSelect").click(function(){
+        var s_texts="", s_vals="";
+        var selected = select_table.getSelected();
+        for(var i=0; i<selected.length; i++){
+            if(i>0){
+                s_texts = s_texts + "、";
+                s_vals = s_vals + ",";
+            }
+            s_texts = s_texts + $(selected[i]).data('text');
+            s_vals = s_vals + $(selected[i]).data('val');
+        }
+
+        $(this).parents(".modal").modal('hide');
+
+        var td = $(this).data().parents('td');
+        td.find('.text').text(s_texts);
+        td.find('input').val(s_vals);
+    });
+
+    $("#m-cus-select").on('hide.bs.modal', function(){
+        select_table.clearAll();
+    });
+
+})($('.cus-select'));
+
 // 打开modal
 selectModel();
 
@@ -158,22 +188,32 @@ function selectModel() {
         var _this = $(this),
             title = _this.data('title'),
             modal = _this.data('modal'),
+            _class = _this.data('class'),
             $modal = $(modal);
-    
-        $modal.find('.modal-title').text(title);   
-        $modal.modal('show');
-
-        var select = $modal.find('.cus-select');
-        if(select.length){
-            var select_table = select.selectTable(),
-                selected = select_table.getSelected();
-            var texts="", vals=[];
-            selected.each(function(){
-                texts = texts + $(this).data('text');
-                vals.push($(this).data('val'));
+        
+        $modal.find('#submitSelect').data(_this);
+        $modal.find('.modal-title').text(title);
+        
+        var vals = $(this).parents('td').find('input').val();
+        if(vals){
+            var m_td = $modal.find('td');
+            m_td.each(function(){
+                var v = $(this).attr("data-val");
+                if(vals.indexOf(v)!=-1){
+                    $(this).addClass('selected');
+                }
             });
         }
 
+        if(_class){
+            $modal.addClass(_class);
+            $modal.on('hide.bs.modal', function(){
+                $modal.removeClass(_class);
+            });
+        }
+        
+        $modal.css("top", _this.offset().top - 600 > 0 ? _this.offset().top - 600 : 0);
+        $modal.modal('show');
     });
 }
 
@@ -263,3 +303,4 @@ $(".fix-table-box").scroll(function(){
 //         f.css('right', -ob.width());
 //     }
 // });
+
