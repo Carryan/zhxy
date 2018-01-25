@@ -214,14 +214,6 @@ table.cus-table td, table.cus-table th {
     min-width: auto;
 }
 
-.ui-draggable-dragging {
-    min-width: auto!important;
-    height: auto;
-}
-.class-table .ui-draggable-dragging {
-    width: 120px;
-}
-
 .fix-table-box {
     position: relative;
     overflow-y: hidden;
@@ -270,4 +262,10 @@ table.cus-table td, table.cus-table th {
 
 .cus-table td.acceptable {
     background-color: #FD9EFD !important;
+}
+.cus-table td.cell-dragging, .cus-table td.cell-dragging div {
+    color: #bdbdbd !important;
+}
+.ui-draggable-dragging {
+
 }

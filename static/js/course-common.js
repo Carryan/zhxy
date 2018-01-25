@@ -72,27 +72,29 @@ $.fn.selectTable = function(ops){
             cell: "td", //有效元素的选择器
             drop: "", //可放置元素
             val: ".val",
+            cache: ".cache",
             disabled: ".disabled", //无法拖拽元素的选择器 
             container: this.selector,
-            //监听拖拽前的函数
-            startDrag: function(ele){ 
-                // console.log(getVal(ele));
-            },
+            //监听拖拽前的函数, 参数：当前元素，所有有效元素
+            startDrag: function(curCell, allCells){ },
             //监听拖拽后的函数，可配置（参数:置换及置换后的ele）
-            stopDrag: function(dragFrom,dragTo){ }
-           };
+            // stopDrag: function(dragFrom,dragTo){ }
+        };
         
         var settings = $.extend({}, defaults, options);
         var _this = this;
+
+        var dragCells = _this.find(settings.cell);
+        if(settings.drop){
+            var $drop = $(settings.drop);
+        }else{
+            var $drop = dragCells;
+        }
+        var cache = $drop.filter(settings.cache); //缓存区
+        var notCache = $drop.not(settings.cache); //非缓存区
     
         function init() {
-            var dragCells = _this.find(settings.cell);
-            if(settings.drop){
-                var $drop = $(settings.drop);
-            }else{
-                var $drop = dragCells;
-            }
-
+            
             dragCells.draggable({
                 revert: "invalid",
                 addClasses: false,
@@ -100,10 +102,21 @@ $.fn.selectTable = function(ops){
                 cancel: settings.disabled,
                 containment: settings.container,//拖拽范围容器
                 scrollSensitivity: 50,
-                helper: "clone",
+                // helper: "clone",
+                helper: function(){
+                    var ele = $(this).clone(),
+                        w = $(this).width(),
+                        h = $(this).height();
+                    ele.find(settings.val).width(w).height(h);
+                    return ele;
+                },
                 start: function( event, ui ) {
-                    var curEle = $(this);
-                    settings.startDrag(curEle);
+                    var cur = $(this), all = $drop;
+                    settings.startDrag(cur, all);
+                    // console.log(this);
+                    // setTimeout(function(){
+                    //     debugger;
+                    // }, 1000);
                 },
                 drag: function( event, ui ) {
                     var w = _this.width(),
@@ -116,29 +129,71 @@ $.fn.selectTable = function(ops){
             
             $drop.droppable({
                 addClasses: false,
-                greedy: true,
-                activeClass: "acceptable",
+                disabled: true,
+                // greedy: true,
+                // activeClass: "acceptable",
                 drop: function( event, ui ) {
                     // console.log(event.type); //ondrop 在一个拖动过程中，释放鼠标键时触发此事件
-                    if($(this).is(settings.disabled)) return ;
+                    // if($(this).is(settings.disabled)) return ;
                     var dragObj = ui.draggable,
                         dropHtml = $(this).html();
-                    
-                    $(this).html(dragObj.html());
-                    dragObj.html(dropHtml);
+                    exchange(dragObj, $(this), dropHtml);
+                    // $(this).html(dragObj.html());
+                    // dragObj.html(dropHtml);
     
-                    settings.stopDrag(dragObj,$(this));
+                    // settings.stopDrag(dragObj,$(this));
                 }
             });
+            
+            cache.droppable( "enable"); //缓冲区长久可放置
 
         };
+
+        function exchange(from, to, html) {
+            to.html(from.html());
+            from.html(html);
+        }
+
+        // 开始拖拽事件
+        dragCells.on("dragstart click", function(event, ui) {
+            var cur = $(this), all = $drop;
+            _this.trigger("startDragging", [cur, all]);
+
+            if(event.type === "click") {
+                var selected = dragCells.filter('.cell-dragging');
+                if(selected.length){
+                    if($(this).hasClass('acceptable')||$(this).hasClass(settings.cache)) {
+                        var dropHtml = $(this).html();
+                        exchange(selected, $(this), dropHtml);
+                        // $(this).html(selected.html());
+                        // selected.html(dropHtml);
+                    }else{
+                        return false;
+                    }
+                }else{
+                    $(this).addClass('cell-dragging');
+                }
+            }else{
+                $(this).addClass('cell-dragging');
+            }
+
+        } );
+
+        // 停止拖拽事件
+        dragCells.on("dragstop", function(event, ui){
+            _this.trigger("stop", $drop);
+            $(this).removeClass('cell-dragging');
+        });
+
+        // this.dropCells = $drop;
     
         //所有值
-        this.getValues = function() {
+        this.getValues = function(o) {
+            var obj = arguments[0] ? arguments[0] : dragCells;
             var cells = {};
-            _this.find(settings.cell).each(function(index, element){
-                var key = $(element).data("key"),
-                    val = $(element).find(settings.val).data("val");
+            obj.each(function(){
+                var key = $(this).data("key"),
+                    val = $(this).find(".val").data("val");
                 if(key){
                     cells[key] = val;
                 }
@@ -146,16 +201,30 @@ $.fn.selectTable = function(ops){
             return cells;
         };
 
-        function getVal(obj) {
-            var cell = {};
-            var key = obj.data("key"),
-                val = obj.find(settings.val).data("val");
-            if(key){
-                cell[key] = val;
-            }
-            return cell;
+        // 激活放置
+        this.activeDrop = function(obj) {
+            obj.droppable( "enable" );
+            obj.addClass('acceptable');
+        };
+
+        // 禁止放置
+        this.disableDrop = function() {
+            notCache.droppable( "disable" );
+            notCache.removeClass('acceptable');
+        };
+
+        // 禁止拖拽
+        this.disableDrag = function(o) {
+            var obj = arguments[0] ? arguments[0] : dragCells;
+            obj.draggable( "disable" );
         }
-    
+
+        // 允许拖拽
+        this.enableDrag = function(o) {
+            var obj = arguments[0] ? arguments[0] : dragCells;
+            obj.draggable( "enable" );
+        }
+
         init();
         return this;
     }
