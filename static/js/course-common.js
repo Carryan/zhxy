@@ -69,11 +69,11 @@ $.fn.selectTable = function(ops){
 
     $.fn.dragTableCell = function (options) {
         var defaults = {
-            cell: "td", //有效元素的选择器
+            cell: "td", //有效元素
             drop: "", //可放置元素
             val: ".val",
             cache: ".cache",
-            disabled: ".disabled", //无法拖拽元素的选择器 
+            disabled: ".disabled", //无效元素 
             container: this.selector,
             //监听拖拽前的函数, 参数：当前元素，所有有效元素
             startDrag: function(curCell, allCells){ },
@@ -84,11 +84,12 @@ $.fn.selectTable = function(ops){
         var settings = $.extend({}, defaults, options);
         var _this = this;
 
-        var dragCells = _this.find(settings.cell);
+        var cells = _this.find(settings.cell).not(settings.disabled); //有效元素
+        var dragCells = cells; // 可拖拽元素
         if(settings.drop){
-            var $drop = $(settings.drop);
+            var $drop = $(settings.drop); // 可放置元素
         }else{
-            var $drop = dragCells;
+            var $drop = cells;
         }
         var cache = $drop.filter(settings.cache); //缓存区
         var notCache = $drop.not(settings.cache); //非缓存区
@@ -99,10 +100,9 @@ $.fn.selectTable = function(ops){
                 revert: "invalid",
                 addClasses: false,
                 appendTo: _this.find('.fix-list'),
-                cancel: settings.disabled,
+                // cancel: settings.disabled,
                 containment: settings.container,//拖拽范围容器
                 scrollSensitivity: 50,
-                // helper: "clone",
                 helper: function(){
                     var ele = $(this).clone(),
                         w = $(this).width(),
@@ -113,10 +113,6 @@ $.fn.selectTable = function(ops){
                 start: function( event, ui ) {
                     var cur = $(this), all = $drop;
                     settings.startDrag(cur, all);
-                    // console.log(this);
-                    // setTimeout(function(){
-                    //     debugger;
-                    // }, 1000);
                 },
                 drag: function( event, ui ) {
                     var w = _this.width(),
@@ -134,12 +130,9 @@ $.fn.selectTable = function(ops){
                 // activeClass: "acceptable",
                 drop: function( event, ui ) {
                     // console.log(event.type); //ondrop 在一个拖动过程中，释放鼠标键时触发此事件
-                    // if($(this).is(settings.disabled)) return ;
                     var dragObj = ui.draggable,
                         dropHtml = $(this).html();
                     exchange(dragObj, $(this), dropHtml);
-                    // $(this).html(dragObj.html());
-                    // dragObj.html(dropHtml);
     
                     // settings.stopDrag(dragObj,$(this));
                 }
@@ -149,56 +142,139 @@ $.fn.selectTable = function(ops){
 
         };
 
+        function hasValue(obj) {
+            var val = obj.find(settings.val);
+            if(!val.is('[data-val]') || val.hasClass('cell-muted')) {
+                return false;
+            }else{
+                return true;
+            }
+        }
+        
         function exchange(from, to, html) {
-            to.html(from.html());
-            from.html(html);
+            if(from.is(cache))
+            {
+                if(to.is(cache)){
+                    to.html(from.html());
+                    from.html(html);
+                }else{
+                    if(hasValue(to)){
+                        to.html(from.html());
+                        from.html(html);
+                    }else{
+                        to.html(from.html());
+                        from.html('<div class="val"></div>');
+                    }
+                }
+            }
+            else
+            {
+                if(hasValue(to)){
+                    to.html(from.html());
+                    from.html(html);
+                }else{
+                    to.html(from.html());
+                    from.find('.val').addClass('cell-muted'); //添加痕迹
+                }
+            }
         }
 
-        // 开始拖拽事件
-        dragCells.on("dragstart click", function(event, ui) {
-            var cur = $(this), all = $drop;
-            _this.trigger("startDragging", [cur, all]);
+        // 选择、取消选择元素
+        function selecting(isSlt, clas, curCell) {
+            if(isSlt) { //选
+                _this.slcting.isSelected = true;
+                if(!curCell.is(_this.slcting.curCell)) {
+                    _this.slcting.curCell = curCell;
+                    _this.slcting.isChange = true;
+                }
+                curCell.addClass(clas);
+            }else{ //取消选择
+                _this.slcting.curCell.removeClass(clas);
+                _this.slcting.isSelected = false;
+                _this.disableDrop();
+            }
+        }
 
-            if(event.type === "click") {
-                var selected = dragCells.filter('.cell-dragging');
-                if(selected.length){
-                    if($(this).hasClass('acceptable')||$(this).hasClass(settings.cache)) {
-                        var dropHtml = $(this).html();
-                        exchange(selected, $(this), dropHtml);
-                        // $(this).html(selected.html());
-                        // selected.html(dropHtml);
-                    }else{
-                        return false;
-                    }
+        // 开始拖拽
+        dragCells.on("dragstart", function(event, ui) {
+            var cur = $(this), all = $drop;
+
+            if(!hasValue(cur)) return false;
+
+            if(_this.slcting.isSelected) { 
+                cur.removeClass('cell-selected').addClass('cell-dragging');
+                if(cur.is(_this.slcting.curCell)){ //当前元素是被选元素时
+                    _this.trigger("startDragging", [cur, all]);
                 }else{
-                    $(this).addClass('cell-dragging');
+                    return ;
                 }
             }else{
-                $(this).addClass('cell-dragging');
+                selecting(true, "cell-dragging",cur);
+                _this.trigger("startDragging", [cur, all]);
             }
+
+            // if(_this.slcting.isFirst) _this.slcting.isFirst = false;
 
         } );
 
         // 停止拖拽事件
         dragCells.on("dragstop", function(event, ui){
+            selecting(false, "cell-dragging");
             _this.trigger("stop", $drop);
-            $(this).removeClass('cell-dragging');
         });
 
-        // this.dropCells = $drop;
+        // 点击事件
+        cells.on("click", function(event){
+            var cur = $(this), all = cells;
+            
+            if(_this.slcting.isSelected)
+            {
+                if(cur.is(_this.slcting.curCell))
+                {
+                    selecting(false, "cell-selected");
+                }
+                else if(cur.hasClass('acceptable')||cur.is(settings.cache))
+                {
+                    var dropHtml = cur.html();
+                    exchange(_this.slcting.curCell, cur, dropHtml);
+                    selecting(false, "cell-selected");
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if(!hasValue(cur)) return ;
+                selecting(true, "cell-selected", cur);
+                _this.trigger("startDragging", [cur, all]);
+            }
+
+            // if(_this.slcting.isFirst) _this.slcting.isFirst = false;
+        });
+
+        // 是否有元素被选
+        this.slcting = {
+            isSelected: false,
+            curCell: {},
+            isChange: false,
+            isFirst: true
+        };
     
         //所有值
         this.getValues = function(o) {
-            var obj = arguments[0] ? arguments[0] : dragCells;
-            var cells = {};
+            var obj = arguments[0] ? arguments[0] : cells;
+            var cels = {};
             obj.each(function(){
                 var key = $(this).data("key"),
-                    val = $(this).find(".val").data("val");
+                    v = $(this).find(".val"),
+                    val = v.hasClass('cell-muted') ? " " : v.data("val"); //是否为痕迹
                 if(key){
-                    cells[key] = val;
+                    cels[key] = val;
                 }
             });
-            return cells;
+            return cels;
         };
 
         // 激活放置
@@ -209,7 +285,9 @@ $.fn.selectTable = function(ops){
 
         // 禁止放置
         this.disableDrop = function() {
-            notCache.droppable( "disable" );
+            // console.log(_this.slcting.isChange);
+            // console.log(!_this.slcting.isFirst);
+            if(_this.slcting.isChange) notCache.droppable( "disable" );
             notCache.removeClass('acceptable');
         };
 

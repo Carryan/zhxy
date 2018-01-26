@@ -263,9 +263,9 @@ table.cus-table td, table.cus-table th {
 .cus-table td.acceptable {
     background-color: #FD9EFD !important;
 }
-.cus-table td.cell-dragging, .cus-table td.cell-dragging div {
-    color: #bdbdbd !important;
+.cus-table td.cell-selected, .ui-draggable-dragging {
+    background-color: #EFD753 !important;
 }
-.ui-draggable-dragging {
-
+.cus-table td .cell-muted, .cus-table td .cell-muted div, .cus-table td.cell-dragging div {
+    color: #bdbdbd !important;
 }

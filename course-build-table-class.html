@@ -200,22 +200,22 @@
                                                         </div>
                                                     </td>
                                                     <td data-key="2-1">
-                                                        <div class="val" data-val="{s:'语',t:'李白'}">数学
+                                                        <div class="val" data-val="{s:'语',t:'1'}">数学
                                                             <div class="tip">李晓光</div>
                                                         </div>
                                                     </td>
                                                     <td data-key="3-1">
-                                                        <div class="val" data-val="{s:'语',t:'李白'}">数学
+                                                        <div class="val" data-val="{s:'语',t:'2'}">数学
                                                             <div class="tip">李晓光</div>
                                                         </div>
                                                     </td>
                                                     <td data-key="4-1">
-                                                        <div class="val" data-val="{s:'语',t:'李白'}">数学
+                                                        <div class="val" data-val="{s:'语',t:'3'}">数学
                                                             <div class="tip">李晓光</div>
                                                         </div>
                                                     </td>
                                                     <td data-key="5-1">
-                                                        <div class="val" data-val="{s:'语',t:'李白'}">数学
+                                                        <div class="val" data-val="{s:'语',t:'4'}">数学
                                                             <div class="tip">李晓光</div>
                                                         </div>
                                                     </td>
@@ -223,27 +223,27 @@
                                                 <tr>
                                                     <th>2</th>
                                                     <td data-key="1-2">
-                                                        <div class="val" data-val="{s:'语',t:'李白'}">语文
+                                                        <div class="val" data-val="{s:'语',t:'5'}">语文
                                                             <div class="tip">李晓光</div>
                                                         </div>
                                                     </td>
                                                     <td data-key="2-2">
-                                                        <div class="val" data-val="{s:'语',t:'李白'}">语文
+                                                        <div class="val" data-val="{s:'语',t:'6'}">语文
                                                             <div class="tip">李晓光</div>
                                                         </div>
                                                     </td>
                                                     <td data-key="3-2">
-                                                        <div class="val" data-val="{s:'语',t:'李白'}">语文
+                                                        <div class="val" data-val="{s:'语',t:'7'}">语文
                                                             <div class="tip">李晓光</div>
                                                         </div>
                                                     </td>
                                                     <td data-key="4-2">
-                                                        <div class="val" data-val="{s:'语',t:'李白'}">语文
+                                                        <div class="val" data-val="{s:'语',t:'8'}">语文
                                                             <div class="tip">李晓光</div>
                                                         </div>
                                                     </td>
                                                     <td data-key="5-2">
-                                                        <div class="val" data-val="{s:'语',t:'李白'}">语文
+                                                        <div class="val" data-val="{s:'语',t:'9'}">语文
                                                             <div class="tip">李晓光</div>
                                                         </div>
                                                     </td>
@@ -251,7 +251,7 @@
                                                 <tr>
                                                     <th>3</th>
                                                     <td data-key="1-3">
-                                                        <div class="val" data-val="{s:'语',t:'李白'}">英语
+                                                        <div class="val" data-val="{s:'语',t:'10'}">英语
                                                             <div class="tip">李晓光</div>
                                                         </div>
                                                     </td>
@@ -471,28 +471,28 @@
         // curCell被拖拽元素，allCells所有元素
         var curVal = dtable.getValues(curCell),
             allVals = dtable.getValues(allCells);
-        $.ajax({
-            url: "static/data/course-accept.json",
-            type: "GET",
-            data: {cur: curVal, all: allVals},
-            success: function(result){
-                var ks = result.enableKey;
-                allCells.each(function(){
-                    var k= $(this).data('key');
-                    if(ks.indexOf(k)!=-1) {
-                        dtable.activeDrop($(this));
-                    }
-                });
-            },
-            error: function(xhr,status,error){
-                console.log(xhr,status,error);
-            }
-        });
+        if(dtable.slcting.isChange){
+            console.log("change");
+            $.ajax({
+                url: "static/data/course-accept.json",
+                type: "GET",
+                data: {cur: curVal, all: allVals},
+                success: function(result){
+                    var ks = result.enableKey;
+                    allCells.each(function(){
+                        var k= $(this).data('key');
+                        if(ks.indexOf(k)!=-1) {
+                            dtable.activeDrop($(this));
+                        }
+                    });
+                },
+                error: function(xhr,status,error){
+                    console.log(xhr,status,error);
+                }
+            });
+        }
     });
 
-    dtable.on('stop',function(event, allCells){
-        dtable.disableDrop();
-    });
 
     // 获取最终值
     function getTableValues() {
