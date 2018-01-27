@@ -467,30 +467,33 @@
     // 可拖拽表
     var dtable = $(".dragTable").dragTableCell();
     
+    var lastData = {};
     dtable.on("startDragging", function(event, curCell, allCells){
         // curCell被拖拽元素，allCells所有元素
-        var curVal = dtable.getValues(curCell),
-            allVals = dtable.getValues(allCells);
-        if(dtable.slcting.isChange){
-            console.log("change");
+        //完成上一个移动或交换
+        if(dtable.lastDone){ 
+            console.log("send ajax");
+            var curVal = dtable.getValues(curCell),
+                allVals = dtable.getValues(allCells);
             $.ajax({
                 url: "static/data/course-accept.json",
                 type: "GET",
                 data: {cur: curVal, all: allVals},
                 success: function(result){
-                    var ks = result.enableKey;
-                    allCells.each(function(){
-                        var k= $(this).data('key');
-                        if(ks.indexOf(k)!=-1) {
-                            dtable.activeDrop($(this));
-                        }
-                    });
+                    lastData = result;
+                    var ek = result.enableKey, dr = result.disableReason;
+                    dtable.render(ek, dr);
                 },
                 error: function(xhr,status,error){
                     console.log(xhr,status,error);
                 }
             });
+        }else{ //未完成上一个移动或交换
+            console.log("no ajax");
+            var ek = lastData.enableKey, dr = lastData.disableReason;
+            dtable.render(ek, dr);
         }
+        
     });
 
 

@@ -127,15 +127,7 @@ $.fn.selectTable = function(ops){
                 addClasses: false,
                 disabled: true,
                 // greedy: true,
-                // activeClass: "acceptable",
-                drop: function( event, ui ) {
-                    // console.log(event.type); //ondrop 在一个拖动过程中，释放鼠标键时触发此事件
-                    var dragObj = ui.draggable,
-                        dropHtml = $(this).html();
-                    exchange(dragObj, $(this), dropHtml);
-    
-                    // settings.stopDrag(dragObj,$(this));
-                }
+                // activeClass: "acceptable"
             });
             
             cache.droppable( "enable"); //缓冲区长久可放置
@@ -144,7 +136,7 @@ $.fn.selectTable = function(ops){
 
         function hasValue(obj) {
             var val = obj.find(settings.val);
-            if(!val.is('[data-val]') || val.hasClass('cell-muted')) {
+            if(!val.is('[data-val]') || val.hasClass('cell-muted') || !val.data('val')) {
                 return false;
             }else{
                 return true;
@@ -183,15 +175,12 @@ $.fn.selectTable = function(ops){
         function selecting(isSlt, clas, curCell) {
             if(isSlt) { //选
                 _this.slcting.isSelected = true;
-                if(!curCell.is(_this.slcting.curCell)) {
-                    _this.slcting.curCell = curCell;
-                    _this.slcting.isChange = true;
-                }
+                _this.slcting.curCell = curCell;
                 curCell.addClass(clas);
             }else{ //取消选择
                 _this.slcting.curCell.removeClass(clas);
                 _this.slcting.isSelected = false;
-                _this.disableDrop();
+                _this.render();
             }
         }
 
@@ -201,20 +190,18 @@ $.fn.selectTable = function(ops){
 
             if(!hasValue(cur)) return false;
 
-            if(_this.slcting.isSelected) { 
+            if(_this.slcting.isSelected) { //有被选元素时
                 cur.removeClass('cell-selected').addClass('cell-dragging');
                 if(cur.is(_this.slcting.curCell)){ //当前元素是被选元素时
                     _this.trigger("startDragging", [cur, all]);
                 }else{
-                    return ;
+                    return false;
                 }
             }else{
                 selecting(true, "cell-dragging",cur);
                 _this.trigger("startDragging", [cur, all]);
             }
-
-            // if(_this.slcting.isFirst) _this.slcting.isFirst = false;
-
+            _this.lastDone = false;
         } );
 
         // 停止拖拽事件
@@ -222,6 +209,17 @@ $.fn.selectTable = function(ops){
             selecting(false, "cell-dragging");
             _this.trigger("stop", $drop);
         });
+
+        // 放置事件
+        $drop.on( "drop", function( event, ui ) {
+            var dragObj = ui.draggable,
+                dropHtml = $(this).html();
+            
+            exchange(dragObj, $(this), dropHtml);
+
+            _this.trigger("drop", $drop);
+            _this.lastDone = true;
+        } );
 
         // 点击事件
         cells.on("click", function(event){
@@ -232,12 +230,14 @@ $.fn.selectTable = function(ops){
                 if(cur.is(_this.slcting.curCell))
                 {
                     selecting(false, "cell-selected");
+                    _this.lastDone = false;
                 }
                 else if(cur.hasClass('acceptable')||cur.is(settings.cache))
                 {
                     var dropHtml = cur.html();
                     exchange(_this.slcting.curCell, cur, dropHtml);
                     selecting(false, "cell-selected");
+                    _this.lastDone = true;
                 }
                 else
                 {
@@ -249,17 +249,18 @@ $.fn.selectTable = function(ops){
                 if(!hasValue(cur)) return ;
                 selecting(true, "cell-selected", cur);
                 _this.trigger("startDragging", [cur, all]);
+                _this.lastDone = false;
             }
 
-            // if(_this.slcting.isFirst) _this.slcting.isFirst = false;
         });
+
+        // 是否完成上一个移动或交换
+        this.lastDone = true;
 
         // 是否有元素被选
         this.slcting = {
             isSelected: false,
-            curCell: {},
-            isChange: false,
-            isFirst: true
+            curCell: {}
         };
     
         //所有值
@@ -277,30 +278,41 @@ $.fn.selectTable = function(ops){
             return cels;
         };
 
+        this.render = function(enableKey,disableReason) {
+            if(arguments.length==2){
+                notCache.each(function(){
+                    var k= $(this).data('key');
+                    if(enableKey.indexOf(k)!=-1) {
+                        $(this).droppable( "enable" );
+                        $(this).addClass('acceptable');
+                    }else{
+                        $(this).attr("title", disableReason[k]);
+                    }
+                });
+            }else{
+                notCache.droppable( "disable" );
+                notCache.removeClass('acceptable').removeAttr('title'); //通过acceptable判断是否可移
+            }
+        }
+
         // 激活放置
         this.activeDrop = function(obj) {
             obj.droppable( "enable" );
-            obj.addClass('acceptable');
         };
-
         // 禁止放置
-        this.disableDrop = function() {
-            // console.log(_this.slcting.isChange);
-            // console.log(!_this.slcting.isFirst);
-            if(_this.slcting.isChange) notCache.droppable( "disable" );
-            notCache.removeClass('acceptable');
+        this.disableDrop = function(o) {
+            var obj = arguments[0] ? arguments[0] : notCache;
+            obj.droppable( "disable" );
         };
-
         // 禁止拖拽
         this.disableDrag = function(o) {
             var obj = arguments[0] ? arguments[0] : dragCells;
             obj.draggable( "disable" );
         }
-
         // 允许拖拽
         this.enableDrag = function(o) {
             var obj = arguments[0] ? arguments[0] : dragCells;
-            obj.draggable( "enable" );
+            obj.draggable( "enable");
         }
 
         init();

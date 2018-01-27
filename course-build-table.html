@@ -155,37 +155,37 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><div class="val"></div></td>
+                                                <td class="cache"><div class="val"></div></td>
                                             </tr>
                                             <tr>
-                                                <td><div class="val"></div></td>
+                                                <td class="cache"><div class="val"></div></td>
                                             </tr>
                                             <tr>
-                                                <td><div class="val"></div></td>
+                                                <td class="cache"><div class="val"></div></td>
                                             </tr>
                                             <tr>
-                                                <td><div class="val"></div></td>
+                                                <td class="cache"><div class="val"></div></td>
                                             </tr>
                                             <tr>
-                                                <td><div class="val"></div></td>
+                                                <td class="cache"><div class="val"></div></td>
                                             </tr>
                                             <tr>
-                                                <td><div class="val"></div></td>
+                                                <td class="cache"><div class="val"></div></td>
                                             </tr>
                                             <tr>
-                                                <td><div class="val"></div></td>
+                                                <td class="cache"><div class="val"></div></td>
                                             </tr>
                                             <tr>
-                                                <td><div class="val"></div></td>
+                                                <td class="cache"><div class="val"></div></td>
                                             </tr>
                                             <tr>
-                                                <td><div class="val"></div></td>
+                                                <td class="cache"><div class="val"></div></td>
                                             </tr>
                                             <tr>
-                                                <td><div class="val"></div></td>
+                                                <td class="cache"><div class="val"></div></td>
                                             </tr>
                                             <tr>
-                                                <td><div class="val"></div></td>
+                                                <td class="cache"><div class="val"></div></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -708,13 +708,43 @@
 
     <script>
 
+    // 可拖拽表
     var dtable = $(".dragTable").dragTableCell();
+    
+    var lastData = {};
+    dtable.on("startDragging", function(event, curCell, allCells){
+        // curCell被拖拽元素，allCells所有元素
+        //完成上一个移动或交换
+        if(dtable.lastDone){ 
+            var curVal = dtable.getValues(curCell),
+                allVals = dtable.getValues(allCells);
+            $.ajax({
+                url: "static/data/course-accept.json",
+                type: "GET",
+                data: {cur: curVal, all: allVals},
+                success: function(result){
+                    lastData = result;
+                    var ek = result.enableKey, dr = result.disableReason;
+                    dtable.render(ek, dr);
+                },
+                error: function(xhr,status,error){
+                    console.log(xhr,status,error);
+                }
+            });
+        }else{ //未完成上一个移动或交换
+            var ek = lastData.enableKey, dr = lastData.disableReason;
+            dtable.render(ek, dr);
+        }
+        
+    });
 
+
+    // 获取最终值
     function getTableValues() {
         var values = dtable.getValues();
         console.log(values);
     }
-
+    
     </script>
 
 </body>

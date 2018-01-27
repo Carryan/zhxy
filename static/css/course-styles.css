@@ -184,6 +184,9 @@ table.cus-table td, table.cus-table th {
     min-width: auto;
     padding: 4px;
 }
+.table-school td {
+    color: #333;
+}
 .cus-table td .hideMsg {
     color: red;
     font-size: 12px;
@@ -268,4 +271,7 @@ table.cus-table td, table.cus-table th {
 }
 .cus-table td .cell-muted, .cus-table td .cell-muted div, .cus-table td.cell-dragging div {
     color: #bdbdbd !important;
+}
+td.ui-draggable-dragging {
+    height: auto;
 }
