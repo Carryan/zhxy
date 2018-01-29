@@ -215,3 +215,18 @@ label.imgView {
     margin-right: 5px;
 }
 
+.table-others input[type='text'] {
+    width: 90%;
+}
+.table thead>tr>th, .table tbody>tr>th, .table tfoot>tr>th, .table thead>tr>td, .table tbody>tr>td,.table tfoot>tr>td {
+    vertical-align: middle;
+ }
+.width-40 { 
+    width: 40px!important;
+}
+.table-others a.disabled {
+    transform: none;
+ }
+.table-others a.disabled i {
+    opacity: 0.65;
+ }

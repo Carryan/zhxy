@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>第三方系统 - 金视野系统模板</title>
+    <meta name="keywords" content="金视野,教育,平台" />
+    <meta name="description" content="金视野开发部,模板,2017" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+
+    <!-- page specific plugin styles -->
+    
+
+    <!-- fonts -->
+
+    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" /> -->
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+	<![endif]-->
+
+    <!-- inline styles related to this page -->
+    <link rel="stylesheet" href="static/css/login-styles.css">
+
+    <!-- ace settings handler -->
+
+    <script src="assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+	
+</head>
+
+<body>
+
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+
+
+            <div class="main-content" style="margin-left: 0px;">
+
+                <!-- 面包屑导航 -->
+                <div class="breadcrumbs " id="breadcrumbs">
+                    <script type="text/javascript">
+                        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                    </script>
+                    <!--位置-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home home-icon"></i>
+                            <a href="index.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="login-index.html">模拟登陆</a>
+                        </li>
+                        <li class="active">第三方系统</li>
+                    </ul>
+                    <ul class="breadcrumb pull-right navright">
+                        <li>
+                            <i class="icon-share-alt icon-color"></i>
+                            <a href="javascript:history.go(-1);">返回</a>
+                        </li>
+                    </ul>	
+                </div>
+
+                <div class="page-content" style="padding-top: 20px;">
+
+                    <!-- /.page-header -->
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <!-- PAGE CONTENT BEGINS -->
+
+                                
+                            <form action="" method="" class="form-inline head-search">
+                                <div class="form-group">
+                                    <label>省：</label>
+                                    <select name="">
+                                        <option>全部</option>
+                                        <option value="">山东</option>
+                                        <option value="">广西</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>市：</label>
+                                    <select name="">
+                                        <option>全部</option>
+                                        <option value="">济南</option>
+                                        <option value="">南宁</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>区：</label>
+                                    <select name="">
+                                        <option>全部</option>
+                                        <option value="">青秀区</option>
+                                        <option value="">江南区</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>学校名称：</label>
+                                    <select id="select-school" name="">
+                                        <option>全部</option>
+                                        <option value="">一中</option>
+                                        <option value="">二中</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>第三方系统名称：</label>
+                                    <input type="text" name="">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-xs">查询</button>
+                                </div>
+                            </form>
+                                
+                            <div class="text-right margin-bottom-10">
+                                <button id="addOthers" class="btn btn-primary btn-xs disabled">添加第三方系统</button>
+                            </div>
+                           
+                            <table class="table table-bordered table-hover table-others">
+                                <thead>
+                                    <tr>
+                                        <th class="width-5">学校代码</th>
+                                        <th>学校名称</th>
+                                        <th>序号</th>
+                                        <th>第三方系统名称</th>
+                                        <th>域名或IP地址</th>
+                                        <th>端口</th>
+                                        <th>用户名框标识</th>
+                                        <th>密码框标识</th>
+                                        <th>原始登录页面URL</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <colgroup>
+                                    <col style="width: 10%;" />
+                                    <col style="width: 10%;" />
+                                    <col style="width: 5%;" />
+                                    <col style="width: 10%;" />
+                                    <col style="width: 15%;" />
+                                    <col style="width: 5%;" />
+                                    <col style="width: 10%;" />
+                                    <col style="width: 10%;" />
+                                    <col style="width: 15%;" />
+                                    <col  />
+                                </colgroup>
+                                <tbody> 
+                                    <tr>
+                                        <td>001</td>
+                                        <td>济南一中</td>
+                                        <td></td>
+                                        <td>名称</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="action-buttons">
+                                            <a href="javascript:;" class="disabled edit">
+                                                <i class="icon-pencil blue bigger-130"></i>
+                                            </a>
+                                            <a href="#" class="disabled delete">
+                                                <i class="icon-trash red bigger-130"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>001</td>
+                                        <td>济南一中</td>
+                                        <td></td>
+                                        <td>名称1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="action-buttons">
+                                            <a href="javascript:;" class="disabled edit">
+                                                <i class="icon-pencil blue bigger-130"></i>
+                                            </a>
+                                            <a href="#" class="disabled delete">
+                                                <i class="icon-trash red bigger-130"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>001</td>
+                                        <td>济南一中</td>
+                                        <td></td>
+                                        <td>名称2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="action-buttons">
+                                            <a href="javascript:;" class="disabled edit">
+                                                <i class="icon-pencil blue bigger-130"></i>
+                                            </a>
+                                            <a href="#" class="disabled delete">
+                                                <i class="icon-trash red bigger-130"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>001</td>
+                                        <td>济南一中</td>
+                                        <td></td>
+                                        <td>名称3</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="action-buttons">
+                                            <a href="javascript:;" class="disabled edit">
+                                                <i class="icon-pencil blue bigger-130"></i>
+                                            </a>
+                                            <a href="#" class="disabled delete">
+                                                <i class="icon-trash red bigger-130"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            
+                            <!-- PAGE CONTENT ENDS -->
+                        
+                        </div>
+                        
+                    </div>
+
+                    <!-- /.col -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+            <!-- /.main-content -->
+
+            <!-- /#ace-settings-container -->
+        </div>
+        <!-- /.main-container-inner -->
+    </div>
+    <!-- /.main-container -->
+
+
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+
+    <!---->
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+
+<![endif]-->
+
+    <!--[if !IE]> -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    
+
+    <!-- ace scripts -->
+
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+
+    <!-- inline scripts related to this page -->
+    <div style="display: none">
+        <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+    </div>
+
+    <script src="static/js/login-common.js"></script>
+
+    <script>
+
+    var rowHtml = '<tr>'+
+                    '<td>004</td>'+
+                    '<td>济南一中</td>'+
+                    '<td><input type="text" class="width-40"></td>'+
+                    '<td><input type="text"></td>'+
+                    '<td><input type="text"></td>'+
+                    '<td><input type="text" class="width-40"></td>'+
+                    '<td><input type="text"></td>'+
+                    '<td><input type="text"></td>'+
+                    '<td><input type="text"></td>'+
+                    '<td class="action-buttons">'+
+                        '<a href="javascript:;">'+
+                            '<i class="icon-ok green bigger-130"></i>'+
+                        '</a>'+
+                        '<a href="javascript:;" class="remove">'+
+                            '<i class="icon-remove red bigger-130"></i>'+
+                        '</a>'+
+                    '</td>'+
+                '</tr>';
+
+    // 添加第三方系统
+    $('#addOthers').click(function(){
+            $('.table-others').append(rowHtml);
+            // 取消按钮
+            $('.table-others tbody tr:last-child .remove').on('click', function(){
+                $(this).parents('tr').first().remove();
+            });
+    });
+
+   //编辑
+    $('.table-others .edit').click(function(){
+        if($(this).hasClass('disabled')) return false;
+        var this_tr = $(this).parents('tr').first();
+        this_tr.hide();
+        this_tr.after(rowHtml);
+        // 取消按钮
+        this_tr.next().find('.remove').on('click', function(){
+            $(this).parents('tr').first().remove();
+            this_tr.show();
+        });
+    });
+
+    // 删除
+    $('.table-others .delete').click(function(){
+        if($(this).hasClass('disabled')) return false;
+    });
+
+    // 选择学校，按钮激活
+    $('#select-school').on('change', function(){
+        $('.table-others .delete, .table-others .edit, #addOthers').removeClass('disabled');
+    });
+
+    </script>
+
+</body>
+</html>

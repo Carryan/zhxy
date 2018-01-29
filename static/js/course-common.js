@@ -361,6 +361,7 @@ function selectModel() {
             title = _this.data('title'),
             modal = _this.data('modal'),
             _class = _this.data('class'),
+            rs = _this.data('reason'),
             $modal = $(modal);
         
         $modal.find('#submitSelect').data(_this);
@@ -369,11 +370,35 @@ function selectModel() {
         // 被选单元
         var vals = $(this).parents('td').find('input').val();
         if(vals){
+            if(rs) {
+                var reason = $(this).parents('td').find('.text input'),
+                    r_num = 0;
+            }
             var m_td = $modal.find('td');
-            m_td.each(function(){
+            m_td.each(function(index){
                 var v = $(this).attr("data-val");
                 if(vals.indexOf(v)!=-1){
                     $(this).addClass('selected');
+
+                    // 有无课原因
+                    if(rs) {
+                        var cur_td = $(this);
+                        cur_td.append('<span class="reason">'+reason.eq(r_num).val()+'</span> <i class="icon-edit edit"></i>');
+                        r_num++;
+                        cur_td.find('.edit').click(function(event){
+                            event.stopPropagation();
+                            cur_td.find('.reason, .edit').addClass('hidden');
+                            cur_td.append('<input type="text"> <i class="icon-ok ok"></i> <i class="icon-remove delete"></i>');
+                            cur_td.find('input').click(function(e){
+                                e.stopPropagation();
+                            });
+                            cur_td.find('.ok').click(function(e){
+                                e.stopPropagation();
+                                cur_td.find('input, .ok, .delete').remove();
+                                cur_td.find('.reason, .edit').removeClass('hidden');
+                            });
+                        });
+                    }
                 }
             });
         }
@@ -389,6 +414,11 @@ function selectModel() {
         $modal.css("top", _this.offset().top - 600 > 0 ? _this.offset().top - 600 : 0);
         $modal.modal('show');
     });
+}
+
+function noClassReason() {
+    var r_num = 0;
+    console.log(r_num);
 }
 
 

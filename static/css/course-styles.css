@@ -19,6 +19,8 @@
 
 .font-18 { font-size: 18px; }
 
+.color-333 { color: #333; }
+
 input {
     height: 30px;
 }
@@ -73,6 +75,7 @@ body.modal-open {
 .head-tab {
     border-bottom: 1px solid #e5e5e5;
     margin-bottom: 20px;
+    position: relative;
 }
 .head-tab a {
     color: #333;
@@ -151,6 +154,9 @@ table.cus-select thead th, table.cus-table thead th {
 table.cus-select tbody th, table.cus-select tbody td {
     background-color: #e5e5e5;
 }
+table.cus-select tbody td {
+    width: 96px;
+}
 table.cus-select td.selected {
     background-color: red;
 }
@@ -161,6 +167,14 @@ table td.disabled {
     background-color: #ccc !important;
     cursor: not-allowed;
 }
+table.cus-select td.selected i {
+    cursor: pointer;
+}
+table.cus-select td.selected input {
+    width: 60px;
+    height: 28px;
+}
+
 
 .cus-table-box {
     max-width: 100%;
@@ -274,4 +288,11 @@ table.cus-table td, table.cus-table th {
 }
 td.ui-draggable-dragging {
     height: auto;
+}
+
+.modal-alert {
+    border: 1px solid rgba(250, 196, 80, 1);
+    border-radius: 4px;
+    background-color: #fcf8e3;
+    padding: 15px;
 }
