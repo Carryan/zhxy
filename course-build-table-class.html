@@ -142,13 +142,17 @@
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
+                                        <label>
+                                            <input id="showTeacher" name="" type="checkbox" checked class="ace" data-table=".dragTable">
+                                            <span class="lbl"> 显示教师</span>
+                                        </label>
                                     </div>
                                     <div class="pull-right">
                                         <button class="btn btn-primary btn-sm" onclick="getTableValues()">保存</button>
                                     </div>
                                 </div>
 
-                                <div class="fix-table-box dragTable cus-table-box clearfix class-table">
+                                <div class="fix-table-box dragTable cus-table-box show-msg clearfix class-table">
                                     <table class="fix-list cus-table table-striped">
                                         <thead>
                                             <tr>
@@ -390,6 +394,10 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+
+                                    <div class="table-alert alert alert-warning">
+                                        <span class="text">提示信息</span>
                                     </div>
                                 </div>
 

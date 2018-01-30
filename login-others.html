@@ -142,9 +142,21 @@
                             </div>
                            
                             <table class="table table-bordered table-hover table-others">
+                                <colgroup>
+                                    <col style="width: 7%;" />
+                                    <col style="width: 10%;" />
+                                    <col style="width: 5%;" />
+                                    <col style="width: 10%;" />
+                                    <col style="width: 15%;" />
+                                    <col style="width: 5%;" />
+                                    <col style="width: 10%;" />
+                                    <col style="width: 10%;" />
+                                    <col style="width: 18%;" />
+                                    <col />
+                                </colgroup>
                                 <thead>
                                     <tr>
-                                        <th class="width-5">学校代码</th>
+                                        <th>学校代码</th>
                                         <th>学校名称</th>
                                         <th>序号</th>
                                         <th>第三方系统名称</th>
@@ -156,21 +168,10 @@
                                         <th>操作</th>
                                     </tr>
                                 </thead>
-                                <colgroup>
-                                    <col style="width: 10%;" />
-                                    <col style="width: 10%;" />
-                                    <col style="width: 5%;" />
-                                    <col style="width: 10%;" />
-                                    <col style="width: 15%;" />
-                                    <col style="width: 5%;" />
-                                    <col style="width: 10%;" />
-                                    <col style="width: 10%;" />
-                                    <col style="width: 15%;" />
-                                    <col  />
-                                </colgroup>
+                                
                                 <tbody> 
                                     <tr>
-                                        <td>001</td>
+                                        <td>000001</td>
                                         <td>济南一中</td>
                                         <td></td>
                                         <td>名称</td>
@@ -189,7 +190,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>001</td>
+                                        <td>000001</td>
                                         <td>济南一中</td>
                                         <td></td>
                                         <td>名称1</td>
@@ -208,7 +209,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>001</td>
+                                        <td>000001</td>
                                         <td>济南一中</td>
                                         <td></td>
                                         <td>名称2</td>
@@ -227,15 +228,15 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>001</td>
+                                        <td>000001</td>
                                         <td>济南一中</td>
-                                        <td></td>
+                                        <td>a</td>
                                         <td>名称3</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>b</td>
+                                        <td>c</td>
+                                        <td>d</td>
+                                        <td>f</td>
+                                        <td>f</td>
                                         <td class="action-buttons">
                                             <a href="javascript:;" class="disabled edit">
                                                 <i class="icon-pencil blue bigger-130"></i>
@@ -321,10 +322,10 @@
     var rowHtml = '<tr>'+
                     '<td>004</td>'+
                     '<td>济南一中</td>'+
-                    '<td><input type="text" class="width-40"></td>'+
                     '<td><input type="text"></td>'+
                     '<td><input type="text"></td>'+
-                    '<td><input type="text" class="width-40"></td>'+
+                    '<td><input type="text"></td>'+
+                    '<td><input type="text"></td>'+
                     '<td><input type="text"></td>'+
                     '<td><input type="text"></td>'+
                     '<td><input type="text"></td>'+
@@ -353,6 +354,15 @@
         var this_tr = $(this).parents('tr').first();
         this_tr.hide();
         this_tr.after(rowHtml);
+
+        var this_vs=[];
+        this_tr.find('td').each(function(){
+            this_vs.push($(this).text()); 
+        });
+        this_tr.next().find('td').each(function(index){
+            $(this).find('input').val(this_vs[index]);
+        });
+        
         // 取消按钮
         this_tr.next().find('.remove').on('click', function(){
             $(this).parents('tr').first().remove();

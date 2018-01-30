@@ -1,67 +1,3 @@
-// 选择表 插件
-$.fn.selectTable = function(ops){
-    var defaults = {
-        cell: "td", //有效元素
-        disabled: ".disabled", //无法选中元素
-        selectedClass: "selected", //被选中元素的类名
-    }
-
-    var settings = $.extend({}, defaults, ops);
-    var _this = this;
-
-    _this._status = { disable: false }
-
-    function init() {
-
-        _this.find(settings.cell).click(function(){
-
-            if(_this._status.disable) return ;
-
-            var this_cell = $(this),
-                selectedClass = settings.selectedClass;
-
-            if(this_cell.is(settings.disabled)) return ;
-
-            if(this_cell.hasClass(selectedClass)){
-                this_cell.removeClass(selectedClass);
-            }else{
-                this_cell.addClass(selectedClass);
-            }
-        });
-    }
-
-    this.getSelected = function() { 
-        return _this.find('.'+settings.selectedClass);
-    }
-    this.getValues = function() {
-        var vals = [];
-        this.getSelected().each(function(){
-            vals.push($(this).data('val'));
-        });
-        return vals;
-    }
-    this.clearAll = function() { //清空
-        _this.find('.'+settings.selectedClass).each(function(){
-            $(this).removeClass(settings.selectedClass);
-        });
-    }
-    this.selectAll = function() { //全选
-        var enable_cells = _this.find(settings.cell).not(settings.disabled);
-        enable_cells.each(function(){
-            $(this).addClass(settings.selectedClass);
-        });
-    }
-    this.disable = function() { //禁止
-        this._status.disable = true;
-    }
-    this.enable = function() {
-        this._status.disable = false;
-    }
-    
-    init();
-    return this;
-}
-
 
 // 可拖拽表
 ;(function(obj){
@@ -93,6 +29,9 @@ $.fn.selectTable = function(ops){
         }
         var cache = $drop.filter(settings.cache); //缓存区
         var notCache = $drop.not(settings.cache); //非缓存区
+
+        var alert = _this.find('.table-alert'), //提示框
+            alert_text = alert.find('.text'); 
     
         function init() {
             
@@ -191,8 +130,8 @@ $.fn.selectTable = function(ops){
             if(!hasValue(cur)) return false;
 
             if(_this.slcting.isSelected) { //有被选元素时
-                cur.removeClass('cell-selected').addClass('cell-dragging');
                 if(cur.is(_this.slcting.curCell)){ //当前元素是被选元素时
+                    cur.removeClass('cell-selected').addClass('cell-dragging');
                     _this.trigger("startDragging", [cur, all]);
                 }else{
                     return false;
@@ -240,7 +179,12 @@ $.fn.selectTable = function(ops){
                     _this.lastDone = true;
                 }
                 else
-                {
+                {   
+                    alert_text.text(cur.attr('title'));
+                    alert.stop().fadeIn();
+                    setTimeout(function(){
+                        alert.stop().fadeOut();
+                    },3000);
                     return false;
                 }
             }
@@ -325,29 +269,144 @@ $.fn.selectTable = function(ops){
 // select table
 (function(obj){
     if(!obj.length) return ;
+
+    // 选择表 插件
+    $.fn.selectTable = function(ops){
+        var defaults = {
+            cell: "td", //有效元素
+            disabled: ".disabled", //无法选中元素
+            selectedClass: "selected", //被选中元素的类名
+            pause: function(cur) {
+                var input = cur.find('input');
+                if(input.length){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+
+        var settings = $.extend({}, defaults, ops);
+        var _this = this;
+
+        _this._status = { disable: false }
+
+        function init() {
+
+            _this.find(settings.cell).click(function(){
+
+                if (_this._status.disable || settings.pause($(this))) return ;
+
+                var this_cell = $(this),
+                    selectedClass = settings.selectedClass;
+
+                if(this_cell.is(settings.disabled)) return ;
+
+                if(this_cell.hasClass(selectedClass)){
+                    this_cell.removeClass(selectedClass);
+                }else{
+                    this_cell.addClass(selectedClass);
+                }
+            });
+        }
+
+        this.allCells = _this.find(settings.cell);
+
+        this.getSelected = function() { 
+            return _this.find('.'+settings.selectedClass);
+        }
+        this.getValues = function() {
+            var vals = [];
+            this.getSelected().each(function(){
+                vals.push($(this).data('val'));
+            });
+            return vals;
+        }
+        this.clearAll = function() { //清空
+            _this.find('.'+settings.selectedClass).each(function(){
+                $(this).removeClass(settings.selectedClass);
+            });
+        }
+        this.selectAll = function() { //全选
+            var enable_cells = _this.find(settings.cell).not(settings.disabled);
+            enable_cells.each(function(){
+                $(this).addClass(settings.selectedClass);
+            });
+        }
+        this.disable = function() { //禁止
+            this._status.disable = true;
+        }
+        this.enable = function() {
+            this._status.disable = false;
+        }
+        
+        init();
+        return this;
+    }
+
     var select_table = obj.selectTable();
 
+    // 确定选择
     $("#submitSelect").click(function(){
-        var s_texts="", s_vals="";
+        var modal = $(this).parents(".modal"),
+            noRsn = modal.hasClass('no-reason');
+        var s_texts="", s_vals="" , reason_input = '';
+
         var selected = select_table.getSelected();
+        var origin_btn = $(this).data('btn'), //打开modal的按钮
+            td = origin_btn.parents('td');
+
         for(var i=0; i<selected.length; i++){
             if(i>0){
                 s_texts = s_texts + "、";
                 s_vals = s_vals + ",";
             }
-            s_texts = s_texts + $(selected[i]).data('text');
-            s_vals = s_vals + $(selected[i]).data('val');
+            if (!noRsn){
+                var t = $(selected[i]).find('.reason').text();
+                s_texts = s_texts + $(selected[i]).data('text') + (t ? '（' + t + '）' : '');
+                s_vals = s_vals + $(selected[i]).data('val');
+                reason_input = reason_input + '<input type="hidden" name="' + origin_btn.data('reason').replace("_?_", i)+'" value="'+t+'">';
+            }else{
+                s_texts = s_texts + $(selected[i]).data('text');
+                s_vals = s_vals + $(selected[i]).data('val');
+            }
         }
 
-        $(this).parents(".modal").modal('hide');
+        modal.modal('hide');
 
-        var td = $(this).data().parents('td');
-        td.find('.text').text(s_texts);
-        td.find('input').val(s_vals);
+        td.find('.text').text(s_texts).append(reason_input);
+        td.children('input').val(s_vals);
     });
 
+    // 关模态框 还原选择表
     $("#m-cus-select").on('hide.bs.modal', function(){
         select_table.clearAll();
+        if (!$(this).hasClass('no-reason')){
+            select_table.allCells.find('.reason').text('').siblings('input, .ok, .delete').remove();
+            select_table.allCells.find('.reason, .edit').removeClass('hidden');
+        }
+    });
+
+    // 编辑原因
+    $('.cus-select td .edit').click(function(event){
+        event.stopPropagation();
+        var cur_td = $(this).parent(),
+            rson = $(this).siblings('.reason');
+        cur_td.find('.reason, .edit').addClass('hidden');
+        cur_td.append('<input type="text" value="'+cur_td.find('.reason').text()+'" maxlength="4"> <i class="icon-ok ok"></i> <i class="icon-remove delete"></i>');
+        cur_td.find('input').click(function(e){
+            e.stopPropagation();
+        });
+        cur_td.find('.ok, .delete').click(function(e){
+            e.stopPropagation();
+            if($(this).is('.ok')) {
+                rson.text(cur_td.find('input').val());
+            }else{
+                rson.text('');
+            }
+            cur_td.find('input, .ok, .delete').remove();
+            cur_td.find('.reason, .edit').removeClass('hidden');
+        });
     });
 
 })($('.cus-select'));
@@ -364,7 +423,7 @@ function selectModel() {
             rs = _this.data('reason'),
             $modal = $(modal);
         
-        $modal.find('#submitSelect').data(_this);
+        $modal.find('#submitSelect').data('btn', _this); //绑定当前按钮给modal
         $modal.find('.modal-title').text(title);
         
         // 被选单元
@@ -380,24 +439,11 @@ function selectModel() {
                 if(vals.indexOf(v)!=-1){
                     $(this).addClass('selected');
 
-                    // 有无课原因
+                    // 添加无课原因
                     if(rs) {
-                        var cur_td = $(this);
-                        cur_td.append('<span class="reason">'+reason.eq(r_num).val()+'</span> <i class="icon-edit edit"></i>');
+                        var rson = $(this).find('.reason');
+                        rson.text(reason.eq(r_num).val());
                         r_num++;
-                        cur_td.find('.edit').click(function(event){
-                            event.stopPropagation();
-                            cur_td.find('.reason, .edit').addClass('hidden');
-                            cur_td.append('<input type="text"> <i class="icon-ok ok"></i> <i class="icon-remove delete"></i>');
-                            cur_td.find('input').click(function(e){
-                                e.stopPropagation();
-                            });
-                            cur_td.find('.ok').click(function(e){
-                                e.stopPropagation();
-                                cur_td.find('input, .ok, .delete').remove();
-                                cur_td.find('.reason, .edit').removeClass('hidden');
-                            });
-                        });
                     }
                 }
             });
@@ -410,15 +456,19 @@ function selectModel() {
                 $modal.removeClass(_class);
             });
         }
+
+        // 不需要 原因 时
+        if (!rs) {
+            $modal.addClass('no-reason');
+            $modal.on('hide.bs.modal', function () {
+                $modal.removeClass('no-reason');
+            });
+        }
         
+        //模态框位置
         $modal.css("top", _this.offset().top - 600 > 0 ? _this.offset().top - 600 : 0);
         $modal.modal('show');
     });
-}
-
-function noClassReason() {
-    var r_num = 0;
-    console.log(r_num);
 }
 
 
@@ -427,9 +477,7 @@ function noClassReason() {
     if(!obj.length) return ;
 
     var table = obj.data('table');
-    // if(obj.is(":checked")) {
-    //     $(table).addClass('show-msg');
-    // }
+
     obj.change(function(){
         if($(this).is(":checked")){
             $(table).addClass('show-msg');

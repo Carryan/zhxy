@@ -27,6 +27,9 @@ input {
 .pane table {
     margin-bottom: 0;
 }
+.pane > p {
+    margin-bottom: 10px;
+}
 i[class^="icon-"] {
     text-decoration: none;
 }
@@ -78,6 +81,7 @@ body.modal-open {
     position: relative;
 }
 .head-tab a {
+    font-size: 16px;
     color: #333;
     padding: 10px 12px;
     display: inline-block;
@@ -167,12 +171,28 @@ table td.disabled {
     background-color: #ccc !important;
     cursor: not-allowed;
 }
+
 table.cus-select td.selected i {
     cursor: pointer;
+    color: #666;
 }
 table.cus-select td.selected input {
     width: 60px;
     height: 28px;
+    font-size: 12px;
+    color: #999;
+}
+table.cus-select td .reason {
+    font-size: 12px;
+}
+table.cus-select td .edit, table.cus-select td .reason {
+    display: none;
+}
+table.cus-select td.selected:hover .edit, table.cus-select td.selected .reason {
+    display: inline-block;
+}
+.no-reason table.cus-select td .edit, .no-reason table.cus-select td .reason {
+    display: none !important;
 }
 
 
@@ -252,10 +272,10 @@ table.cus-table td, table.cus-table th {
 .fix-table-box.class-table .fix-list {
     min-width: 120px;
 }
-.fix-table-box.show-msg .fix-list thead tr th{
+.fix-table-box.table-school.show-msg .fix-list thead tr th{
    height: 70px;
 }
-.fix-table-box.show-msg .fix-list tbody tr:last-child td {
+.fix-table-box.table-school.show-msg .fix-list tbody tr:last-child td {
     display: none;
 }
 
@@ -273,8 +293,12 @@ table.cus-table td, table.cus-table th {
     height: 65px;
 }
 .class-table td .tip {
+    display: none;
     color: green;
     margin-top: 10px;
+}
+.class-table.show-msg td .tip {
+    display: block;
 }
 
 .cus-table td.acceptable {
@@ -295,4 +319,15 @@ td.ui-draggable-dragging {
     border-radius: 4px;
     background-color: #fcf8e3;
     padding: 15px;
+}
+
+.cus-table-box .table-alert {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 480px;
+    min-height: 52px;
+    margin-top: -26px;
+    margin-left: -240px;
+    display: none;
 }
