@@ -8,6 +8,7 @@
 .margin-top-0 { margin-top: 0; }
 .margin-top-8 { margin-top: 8px; }
 
+.margin-bottom-0 { margin-bottom: 0; }
 .margin-bottom-5 { margin-bottom: 5px; }
 .margin-bottom-10 { margin-bottom: 10px; }
 .margin-bottom-20 { margin-bottom: 20px; }
@@ -20,6 +21,16 @@
 .font-18 { font-size: 18px; }
 
 .color-333 { color: #333; }
+
+.inline-block { display: inline-block!important;}
+
+.relative-box { position: relative; }
+
+.absolute-right {
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+}
 
 input {
     height: 30px;
@@ -40,6 +51,9 @@ th, td {
 }
 .table td a + a {
     margin-left: 5px;
+}
+.table thead tr {
+    background-image: none;
 }
 .table > thead > tr > th {
     border-bottom-width: 1px; 
@@ -89,6 +103,10 @@ body.modal-open {
 }
 .head-tab a.active {
     border-bottom: 2px solid #428bca;
+}
+.head-tab h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
 .task-menu {
@@ -228,6 +246,7 @@ table.cus-table td, table.cus-table th {
 }
 .show-msg td .hideMsg {
     display: block;
+    animation: fadeIn .3s;
 }
 
 .alert.table-alert {
@@ -238,6 +257,7 @@ table.cus-table td, table.cus-table th {
 .dragTable td {
     cursor: pointer;
     user-select: none;
+    transition: background 0.3s;
 }
 .dragTable .val {
     min-width: 30px;
@@ -245,10 +265,11 @@ table.cus-table td, table.cus-table th {
 }
 .dragTable.show-msg .val {
     min-width: 50px;
-    height: 37px;
+    height: 42px;
 }
 .dragTable.class-table .val {
     min-width: auto;
+    font-size: 14px;
 }
 
 .fix-table-box {
@@ -295,10 +316,20 @@ table.cus-table td, table.cus-table th {
 .class-table td .tip {
     display: none;
     color: green;
-    margin-top: 10px;
+    margin-top: 5px;
+    font-size: 12px;
 }
-.class-table.show-msg td .tip {
+.class-table.show-msg td .tip, .class-table .show-msg td .tip  {
     display: block;
+    animation: fadeIn .3s;
+}
+@keyframes fadeIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 100%;
+    }
 }
 
 .cus-table td.acceptable {
@@ -330,4 +361,8 @@ td.ui-draggable-dragging {
     margin-top: -26px;
     margin-left: -240px;
     display: none;
+}
+
+.cus-table td.cell-bug {
+    background-color: #fcc!important;
 }

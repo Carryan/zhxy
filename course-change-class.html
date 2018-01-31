@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>班级调课 - 金视野系统模板</title>
+    <meta name="keywords" content="金视野,教育,平台" />
+    <meta name="description" content="金视野开发部,模板,2017" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.custom.min.css">
+
+    <!-- fonts -->
+
+    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" /> -->
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+	<![endif]-->
+
+    <!-- inline styles related to this page -->
+    <link rel="stylesheet" href="static/css/course-styles.css">
+
+    <!-- ace settings handler -->
+
+    <script src="assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+
+
+            <div class="main-content" style="margin-left: 0px;">
+
+                <!-- 面包屑导航 -->
+                <div class="breadcrumbs " id="breadcrumbs">
+                    <script type="text/javascript">
+                        try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                    </script>
+                    <!--位置-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home home-icon"></i>
+                            <a href="index.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="#">排课系统</a>
+                        </li>
+                        <li class="active">班级调课</li>
+                    </ul>
+                    <ul class="breadcrumb pull-right navright">
+                        <li>
+                            <i class="icon-share-alt icon-color"></i>
+                            <a href="javascript:history.go(-1);">返回</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="page-content" style="padding-top: 20px;">
+
+                    <!-- /.page-header -->
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            
+                            <div class="head-tab clearfix">
+                                <div class="pull-left">
+                                    <h3>班级调课</h3>
+                                </div>
+                                <div class="pull-right">
+                                    <button class="btn btn-primary btn-sm" onclick="getTableValues()">保存</button>
+                                </div>
+                            </div>
+
+                            <div class="margin-bottom-10">
+                                <label>年级</label>
+                                <select id="showRow" class="width-110 margin-right-30" name="" data-table="#school-table">
+                                    <option value="">全部</option>
+                                    <option value="1">初一</option>
+                                    <option value="2">初二</option>
+                                    <option value="3">初三</option>
+                                </select>
+                                <label>班级：</label>
+                                <select class="width-110 margin-right-30" name="">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                                <label>教师：</label>
+                                <select class="width-110 margin-right-30" name="">
+                                    <option value="1">刘小天</option>
+                                    <option value="2">李晓光</option>
+                                    <option value="3">黄小燕</option>
+                                </select>
+                            </div>
+
+                            <h3 class="text-center margin-bottom-0">初一（1）班 的课表</h3>
+                            <p class="text-right">班主任：刘小天</p>
+                            <div class="fix-table-box dragTable cus-table-box show-msg clearfix class-table">
+                                <table class="fix-list cus-table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>缓冲区</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="cache">
+                                                <div class="val"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cache">
+                                                <div class="val"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cache">
+                                                <div class="val"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cache">
+                                                <div class="val"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cache">
+                                                <div class="val"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cache">
+                                                <div class="val"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cache">
+                                                <div class="val"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="table-box">
+                                    <table id="cus-table" class="cus-table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>星期一</th>
+                                                <th>星期二</th>
+                                                <th>星期三</th>
+                                                <th>星期四</th>
+                                                <th>星期五</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>1</th>
+                                                <td data-key="1-1">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">数学
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="2-1">
+                                                    <div class="val" data-val="{s:'语',t:'1'}">数学
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="3-1">
+                                                    <div class="val" data-val="{s:'语',t:'2'}">数学
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="4-1">
+                                                    <div class="val" data-val="{s:'语',t:'3'}">数学
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="5-1">
+                                                    <div class="val" data-val="{s:'语',t:'4'}">数学
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>2</th>
+                                                <td data-key="1-2">
+                                                    <div class="val" data-val="{s:'语',t:'5'}">语文
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="2-2">
+                                                    <div class="val" data-val="{s:'语',t:'6'}">语文
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="3-2">
+                                                    <div class="val" data-val="{s:'语',t:'7'}">语文
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="4-2">
+                                                    <div class="val" data-val="{s:'语',t:'8'}">语文
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="5-2">
+                                                    <div class="val" data-val="{s:'语',t:'9'}">语文
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>3</th>
+                                                <td data-key="1-3">
+                                                    <div class="val" data-val="{s:'语',t:'10'}">英语
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="2-3">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">英语
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="3-3">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">英语
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="4-3">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">英语
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="5-3">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">英语
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>4</th>
+                                                <td data-key="1-4">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">数
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="2-4">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">数
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="3-4">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">数
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="4-4">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">数
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="5-4">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">数
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>5</th>
+                                                <td data-key="1-5">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">物理
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="2-5">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">物理
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="3-5">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">物理
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="4-5">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">物理
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="5-5">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">物理
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>6</th>
+                                                <td data-key="1-6">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">物理
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="2-6">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">历史
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="3-6">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">历史
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="4-6">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">历史
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="5-6">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">历史
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>7</th>
+                                                <td data-key="1-7">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">历史
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="2-7">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">历史
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="3-7">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">体育
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="4-7">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">思想品德
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                                <td data-key="5-7">
+                                                    <div class="val" data-val="{s:'语',t:'李白'}">思想品德
+                                                        <div class="tip">李晓光</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="table-alert alert alert-warning">
+                                    <span class="text">提示信息</span>
+                                </div>
+                            </div>
+                         
+
+                            <!-- PAGE CONTENT ENDS -->
+
+                        </div>
+
+                    </div>
+
+                    <!-- /.col -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+            <!-- /.main-content -->
+
+            <!-- /#ace-settings-container -->
+        </div>
+        <!-- /.main-container-inner -->
+    </div>
+    <!-- /.main-container -->
+
+
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+
+    <!---->
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+
+<![endif]-->
+
+    <!--[if !IE]> -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+
+    <!-- ace scripts -->
+
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+
+    <!-- inline scripts related to this page -->
+    <!-- <div style="display: none">
+        <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+    </div> -->
+
+    <script src="static/js/course-common.js"></script>
+
+    <script>
+
+        // 可拖拽表
+        var dtable = $(".dragTable").dragTableCell();
+
+        var lastData = {};
+        dtable.on("startDragging", function (event, curCell, allCells) {
+            // curCell被拖拽元素，allCells所有元素
+            //完成上一个移动或交换
+            if (dtable.lastDone) {
+                console.log("send ajax");
+                var curVal = dtable.getValues(curCell),
+                    allVals = dtable.getValues(allCells);
+                $.ajax({
+                    url: "static/data/course-accept.json",
+                    type: "GET",
+                    data: { cur: curVal, all: allVals },
+                    success: function (result) {
+                        lastData = result;
+                        var ek = result.enableKey, dr = result.disableReason;
+                        dtable.render(ek, dr);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr, status, error);
+                    }
+                });
+            } else { //未完成上一个移动或交换
+                console.log("no ajax");
+                var ek = lastData.enableKey, dr = lastData.disableReason;
+                dtable.render(ek, dr);
+            }
+
+        });
+
+
+        // 获取最终值
+        function getTableValues() {
+            var values = dtable.getValues();
+            console.log(values);
+        }
+
+    </script>
+
+</body>
+
+</html>
