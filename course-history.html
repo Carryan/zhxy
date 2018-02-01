@@ -17,7 +17,7 @@
 	<![endif]-->
 
     <!-- page specific plugin styles -->
-    
+    <link rel="stylesheet" href="static/vendor/datepicker/bootstrap-datepicker.min.css">
 
     <!-- fonts -->
 
@@ -101,14 +101,14 @@
                                 </div>
                                 <div class="form-group margin-right-20">
                                     <label>创建时间：</label>
-                                    <input class="width-110" type="text" name="" placeholder="请输入">
+                                    <input class="width-110 date-picker" type="text" name="" placeholder="请输入">
                                 </div>
                                 <div class="form-group margin-right-20">
-                                    <label>学年：</label>
+                                    <label>年份：</label>
                                     <select class="width-110" name="">
                                         <option value=""></option>
-                                        <option value="">1</option>
-                                        <option value="">2</option>
+                                        <option value="">2016</option>
+                                        <option value="">2017</option>
                                     </select>
                                 </div>
                                 <div class="form-group margin-right-20">
@@ -128,7 +128,7 @@
                                         <th>课表名称</th>
                                         <th>创建者</th>
                                         <th>创建时间</th>
-                                        <th>学年</th>
+                                        <th>年份</th>
                                         <th>学期</th>
                                         <th>操作</th>
                                     </tr>
@@ -138,7 +138,7 @@
                                         <td>XXXXXX</td>
                                         <td>admin</td>
                                         <td>2017-1-1</td>
-                                        <td>2017-2018</td>
+                                        <td>2015</td>
                                         <td>春季</td>
                                         <td>
                                             <a href="course-table-school.html">查看课表</a>
@@ -149,7 +149,7 @@
                                         <td>XXXXXX</td>
                                         <td>admin</td>
                                         <td>2017-1-1</td>
-                                        <td>2017-2018</td>
+                                        <td>2016</td>
                                         <td>春季</td>
                                         <td>
                                             <a href="course-table-school.html">查看课表</a>
@@ -160,7 +160,7 @@
                                         <td>XXXXXX</td>
                                         <td>admin</td>
                                         <td>2017-1-1</td>
-                                        <td>2017-2018</td>
+                                        <td>2017</td>
                                         <td>春季</td>
                                         <td>
                                             <a href="course-table-school.html">查看课表</a>
@@ -248,6 +248,8 @@
                                     </a>
                                 </li>
                             </ul>
+
+                            <!-- <div id="pageBox" urlparas="##?p=&" p="2" t="9"></div> -->
                             
                             <!-- PAGE CONTENT ENDS -->
                         
@@ -301,7 +303,7 @@
     <script src="assets/js/typeahead-bs2.min.js"></script>
 
     <!-- page specific plugin scripts -->
-    
+    <script src="static/vendor/datepicker/bootstrap-datepicker.min.js"></script>
 
     <!-- ace scripts -->
 
@@ -314,6 +316,7 @@
         <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
     </div> -->
 
+    <script src="static/js/common.js"></script>
     <script src="static/js/course-common.js"></script>
 
     <script>

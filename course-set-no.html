@@ -111,7 +111,7 @@
                                 <div class="form-inline task-menu">
                                     <div class="form-group">
                                         <label>课表名称：</label>
-                                        <input type="text" name="" placeholder="请输入">
+                                        <input type="text" name="" class="width-250" placeholder="请输入">
                                     </div>
                                     <div class="form-group">
                                         <label>年份：</label>
@@ -157,32 +157,20 @@
 
                                         <div class="pane margin-bottom-30">
                                             <p><b>一、全校无课节次（活动安排）</b></p>
-                                            <table class="table table-bordered table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>-</th>
-                                                        <th>无课节次</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>全校</td>
-                                                        <td class="td-edit">
-                                                            <input type="hidden" name="" value="1-1,2-3">
-                                                            <span class="text">星期一第一节（会议1）、星期二第三节（会议2）
-                                                                <input type="hidden" name="" value="会议1" >
-                                                                <input type="hidden" name="" value="会议2" >
-                                                            </span>
-                                                            <span class="edit action-buttons">
-                                                                <a href="#" data-modal="#m-cus-select" data-title="设置全校无课时间" data-reason="reason-name[_?_]">
-                                                                    <i class="icon-pencil green"></i>
-                                                                </a>
-                                                                <!-- <a href="#"><i class="icon-trash red"></i></a> -->
-                                                            </span>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+
+                                            <div class="td-edit">
+                                                <input type="hidden" name="" value="">
+                                                <span class="text">暂无设置
+                                                    <!-- <input type="hidden" name="" value="会议1">
+                                                    <input type="hidden" name="" value="会议2"> -->
+                                                </span>
+                                                <span class="edit action-buttons">
+                                                    <a href="#" data-modal="#m-cus-select" data-title="设置全校无课时间" data-reason="reason-name[_?_]">
+                                                        <i class="icon-pencil green"></i>
+                                                    </a>
+                                                </span>
+                                            </div>
+
                                         </div>
 
                                         <div class="pane margin-bottom-30">
@@ -418,7 +406,7 @@
     <!-- /.main-container -->
 
 
-    <div class="modal" id="m-cus-select" tabindex="-1" aria-hidden="true">
+    <div class="modal modal-select" id="m-cus-select" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <form action="" method="" class="modal-content">
                 <div class="modal-header">
@@ -556,6 +544,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <p class="tip">提示：点击 <i class="icon-edit edit"></i> 编辑按钮，可以添加活动安排</p>
                 </div>
                 <div class="modal-footer text-center margin-top-0">
                     <button id="submitSelect" type="button" class="btn btn-primary btn-xs" >确定</button>

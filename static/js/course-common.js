@@ -353,7 +353,7 @@
 
         var selected = select_table.getSelected();
         var origin_btn = $(this).data('btn'), //打开modal的按钮
-            td = origin_btn.parents('td');
+            td = origin_btn.parents('.td-edit');
 
         for(var i=0; i<selected.length; i++){
             if(i>0){
@@ -392,7 +392,7 @@
         var cur_td = $(this).parent(),
             rson = $(this).siblings('.reason');
         cur_td.find('.reason, .edit').addClass('hidden');
-        cur_td.append('<input type="text" value="'+cur_td.find('.reason').text()+'" maxlength="4"> <i class="icon-ok ok"></i> <i class="icon-remove delete"></i>');
+        cur_td.append('<input type="text" value="'+cur_td.find('.reason').text()+'" maxlength="6"> <i class="icon-ok ok"></i> <i class="icon-remove delete"></i>');
         cur_td.find('input').click(function(e){
             e.stopPropagation();
         });
@@ -426,10 +426,10 @@ function selectModel() {
         $modal.find('.modal-title').text(title);
         
         // 被选单元
-        var vals = $(this).parents('td').find('input').val();
+        var vals = $(this).parents('.td-edit').children('input').val();
         if(vals){
             if(rs) {
-                var reason = $(this).parents('td').find('.text input'),
+                var reason = $(this).parents('.td-edit').find('.text input'),
                     r_num = 0;
             }
             var m_td = $modal.find('td');
@@ -538,6 +538,34 @@ function deleteNewRow(t){
 })($(".chosen-select"));
 
 
+// 日期选择
+(function (obj) {
+    if (!obj.length) { return; }
+
+    $.fn.datepicker.dates['zh-CN'] = {
+        days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
+        daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+        daysMin: ["日", "一", "二", "三", "四", "五", "六", "日"],
+        months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一", "十二"],
+        today: "今天",
+        suffix: [],
+        meridiem: ["上午", "下午"]
+    };
+
+    var dp = obj.datepicker({
+        autoclose: true,
+        zIndexOffset: 9999,
+        format: "yyyy-mm-dd",
+        language: "zh-CN",
+        todayHighlight: true
+    }).next().on("click", function () {
+        $(this).prev().focus();
+    });
+
+})($('.date-picker'));
+
+
 // 右侧固定
 $(".fix-table-box").scroll(function(){
     var f = $(this).find(".fix-list"),
@@ -545,12 +573,5 @@ $(".fix-table-box").scroll(function(){
     f.css('right', -$this.scrollLeft());
     // console.log($this.scrollLeft());
 });
-// $(window).resize(function(){
-//     var ob = $(".fix-table-box");
-//         f = ob.find(".fix-list");
-//         console.log(ob.width(), ob.scrollLeft());
-//     if(ob.width()<ob.scrollLeft()){
-//         f.css('right', -ob.width());
-//     }
-// });
+
 

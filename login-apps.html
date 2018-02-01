@@ -102,7 +102,7 @@
                                     <img class="app-logo" src="static/images/app-logo.png" alt="LOGO">
                                     <span>应用名称应用名称应用名称</span>
                                 </a>
-                                <a href="#" class="app-item">
+                                <a href="#" class="app-item" data-toggle="modal" data-target=".bootbox">
                                     <img class="app-logo" src="static/images/app-logo.png" alt="LOGO">
                                     <span>应用名称</span>
                                 </a>
@@ -285,6 +285,25 @@
                     <button type="button" class="btn btn-xs" data-dismiss="modal">
                         <i class="icon-remove"></i>取消
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bootbox modal fade in" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" style="margin-top: -10px;">×</button>
+                    <div class="bootbox-body">
+                        <i class="icon-info-sign bigger-125 orange margin-right-5"></i>
+                        打开应用失败，应用名称 的第三方系统未设置  
+                        <a href="login-add-app.html" class="margin-left-10">立即设置</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="button" class="btn btn-primary">好的</button>
                 </div>
             </div>
         </div>
