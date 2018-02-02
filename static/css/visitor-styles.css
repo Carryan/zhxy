@@ -156,6 +156,8 @@ i[class^="icon-"] {
     top: 100%;
     margin-top: -1px;
     animation: dropshow .3s;
+    overflow-y: auto;
+    max-height: 250px;
 }
 @keyframes dropshow {
     0% {

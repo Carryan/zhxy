@@ -38,7 +38,7 @@
             dragCells.draggable({
                 revert: "invalid",
                 addClasses: false,
-                appendTo: _this.find('.fix-list'),
+                appendTo: _this.find('.fix-list').first(),
                 // cancel: settings.disabled,
                 containment: settings.container,//拖拽范围容器
                 scrollSensitivity: 50,
@@ -164,9 +164,9 @@
         cells.on("click", function(event){
             var cur = $(this), all = cells;
             
-            if(_this.slcting.isSelected)
+            if(_this.slcting.isSelected) //已有被选
             {
-                if(cur.is(_this.slcting.curCell))
+                if(cur.is(_this.slcting.curCell)) //当前元素 是 被选元素
                 {
                     selecting(false, "cell-selected");
                     _this.lastDone = false;
@@ -181,7 +181,7 @@
                 else
                 {   
                     alert_text.text(cur.attr('title'));
-                    alert.stop().fadeIn(function(){
+                    alert.stop().css('left', _this.width() / 2 + _this.scrollLeft()).fadeIn(function(){
                         $(this).delay(2000).fadeOut();
                     });
                     return false;
@@ -221,6 +221,7 @@
             return cels;
         };
 
+        // 设置 可放区 和 不可放原因
         this.render = function(enableKey,disableReason) {
             if(arguments.length==2){
                 notCache.each(function(){
@@ -261,6 +262,11 @@
         init();
         return this;
     }
+
+    // 提示框 关闭
+    $('.table-alert .close').click(function () {
+        $(this).parents('.table-alert').stop().fadeOut();
+    });
 
 })($(".dragTable"));
 
@@ -566,12 +572,15 @@ function deleteNewRow(t){
 })($('.date-picker'));
 
 
-// 右侧固定
+// 固定列
 $(".fix-table-box").scroll(function(){
-    var f = $(this).find(".fix-list"),
-        $this = $(this);
-    f.css('right', -$this.scrollLeft());
+    var $this = $(this),
+        fr = $this.find(".fix-right"),
+        fl = $this.find(".fix-left");
+    fr.css('right', -$this.scrollLeft());
+    fl.css('left', $this.scrollLeft());
     // console.log($this.scrollLeft());
 });
+
 
 

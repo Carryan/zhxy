@@ -321,11 +321,17 @@ table.cus-table td, table.cus-table th {
 .fix-table-box.class-table .fix-list {
     min-width: 120px;
 }
-.fix-table-box.table-school.show-msg .fix-list thead tr th{
+.fix-table-box.table-school.show-msg .fix-right thead tr th{
    height: 70px;
 }
-.fix-table-box.table-school.show-msg .fix-list tbody tr:last-child td {
+.fix-table-box.table-school.show-msg .fix-right tbody tr:last-child td {
     display: none;
+}
+.fix-table-box .fix-right {
+    right: 0;
+}
+.fix-table-box .fix-left {
+    left: 0;
 }
 
 .class-table {
