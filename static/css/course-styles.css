@@ -46,6 +46,9 @@ input {
 i[class^="icon-"] {
     text-decoration: none;
 }
+.btn, .btn:focus, a, a:focus {
+    outline: none;
+}
 
 th, td {
     text-align: center;
