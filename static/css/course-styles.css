@@ -244,7 +244,7 @@ table.cus-select + .tip {
 .cus-table-box {
     max-width: 100%;
     background-color: #f2f2f2;
-    overflow-x: auto;
+    /* overflow-x: auto; */
 }
 table.cus-table {
     min-width: 100%;
@@ -285,7 +285,7 @@ table.cus-table td, table.cus-table th {
 .dragTable td {
     cursor: pointer;
     user-select: none;
-    transition: background 0.3s;
+    transition: background .2s;
 }
 .dragTable .val {
     min-width: 30px;
@@ -431,3 +431,15 @@ td.ui-draggable-dragging {
 .tip-square + .tip-square {
     margin-left: 60px;
 }
+
+
+.fix-table-box.show-msg.table-school .fix-left tbody th {
+    height: 51px;
+}
+.fix-table-box.show-msg .fix-left tbody th {
+    height: 50px;
+}
+.fix-table-box {
+    padding-left: 79px;
+}
+

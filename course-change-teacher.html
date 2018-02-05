@@ -888,7 +888,7 @@
         dtable1.on("startDragging", function (event, curCell, allCells) {
             // curCell被拖拽元素，allCells所有元素
             //完成上一个移动或交换
-            if (dtable1.lastDone) {
+            if (dtable1.lastDone || !dtable1.slcting.curCell.is(dtable1.slcting.lastCell)) {
                 console.log("send ajax");
                 var curVal = dtable1.getValues(curCell),
                     allVals = dtable1.getValues(allCells);
@@ -919,7 +919,7 @@
         dtable2.on("startDragging", function (event, curCell, allCells) {
             // curCell被拖拽元素，allCells所有元素
             //完成上一个移动或交换
-            if (dtable2.lastDone) {
+            if (dtable2.lastDone || !dtable2.slcting.curCell.is(dtable2.slcting.lastCell)) {
                 console.log("send ajax");
                 var curVal = dtable2.getValues(curCell),
                     allVals = dtable2.getValues(allCells);

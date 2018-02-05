@@ -502,7 +502,7 @@
     dtable.on("startDragging", function(event, curCell, allCells){
         // curCell被拖拽元素，allCells所有元素
         //完成上一个移动或交换
-        if(dtable.lastDone){ 
+        if(dtable.lastDone || !dtable.slcting.curCell.is(dtable.slcting.lastCell)){ 
             console.log("send ajax");
             var curVal = dtable.getValues(curCell),
                 allVals = dtable.getValues(allCells);
