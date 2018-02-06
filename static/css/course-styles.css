@@ -247,7 +247,7 @@ table.cus-select + .tip {
 .cus-table-box {
     max-width: 100%;
     background-color: #f2f2f2;
-    /* overflow-x: auto; */
+    overflow-x: auto;
 }
 table.cus-table {
     min-width: 100%;

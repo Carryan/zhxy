@@ -466,8 +466,10 @@ if (!Array.prototype.indexOf) {
 // 打开modal
 selectModel();
 
-function selectModel() {
-    $("[data-modal]").click(function () {
+function selectModel(o) {
+
+    $("[data-modal]").off("click").on("click", function () {
+        
         var _this = $(this),
             title = _this.data('title'),
             modal = _this.data('modal'),
