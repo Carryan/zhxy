@@ -46,9 +46,6 @@ input {
 i[class^="icon-"] {
     text-decoration: none;
 }
-.btn, .btn:focus, a, a:focus {
-    outline: none;
-}
 
 th, td {
     text-align: center;
@@ -247,12 +244,13 @@ table.cus-select + .tip {
 .cus-table-box {
     max-width: 100%;
     background-color: #f2f2f2;
-    overflow-x: auto;
+    /* overflow-x: auto; */
+    position: relative;
 }
-table.cus-table {
+.cus-table {
     min-width: 100%;
 }
-table.cus-table td, table.cus-table th {
+.cus-table td, .cus-table th {
     min-width: 80px;
     padding: 5px;
     background-color: #dfdfdf;
@@ -263,21 +261,21 @@ table.cus-table td, table.cus-table th {
 .cus-table.table-striped > tbody > tr:nth-child(odd) > td, .cus-table.table-striped > tbody > tr:nth-child(odd) > th {
     background-color: #e7e7e7;
 }
-.table-school .cus-table td, .table-school .cus-table th {
+.table-school td, .table-school th {
     min-width: auto;
     padding: 4px;
 }
 .table-school td {
     color: #333;
 }
-.cus-table td .hideMsg {
+td .hideMsg {
     color: red;
     font-size: 12px;
     display: none;
 }
 .show-msg td .hideMsg {
     display: block;
-    animation: fadeIn .3s;
+    /* animation: fadeIn .3s; */
 }
 
 .alert.table-alert {
@@ -308,12 +306,14 @@ table.cus-table td, table.cus-table th {
     overflow-y: hidden;
 }
 .fix-table-box .table-box {
-    padding-right: 79px;
     float: left;
     min-width: 100%;
 }
+.fix-table-box.dragTable .table-box {
+    padding-right: 79px;
+}
 .fix-table-box.class-table .table-box {
-    padding-right: 120px;
+    padding-right: 119px;
 }
 .fix-table-box .fix-list {
     position: absolute;
@@ -343,10 +343,10 @@ table.cus-table td, table.cus-table th {
 .fix-table-box.class-table {
     padding: 0;
 }
-.class-table table.cus-table td, .class-table table.cus-table th {
+.class-table td, .class-table th {
     padding: 8px;
 }
-.class-table table.cus-table td {
+.class-table td {
     color: blue;
     height: 65px;
 }
@@ -369,13 +369,13 @@ table.cus-table td, table.cus-table th {
     }
 }
 
-.cus-table td.acceptable {
+.dragTable td.acceptable {
     background-color: #FD9EFD !important;
 }
-.cus-table td.cell-selected, .ui-draggable-dragging {
+.dragTable td.cell-selected, .ui-draggable-dragging {
     background-color: #EFD753 !important;
 }
-.cus-table td .cell-muted, .cus-table td .cell-muted div, .cus-table td.cell-dragging div {
+.dragTable td .cell-muted, .dragTable td .cell-muted div, .dragTable td.cell-dragging div {
     color: #bdbdbd !important;
 }
 td.ui-draggable-dragging {
@@ -400,7 +400,7 @@ td.ui-draggable-dragging {
     display: none;
 }
 
-.cus-table.table-striped > tbody > tr td.cell-bug {
+.dragTable .table-striped > tbody > tr td.cell-bug {
     background-color: #fcc;
 }
 
@@ -435,14 +435,22 @@ td.ui-draggable-dragging {
     margin-left: 60px;
 }
 
-
-.fix-table-box.show-msg.table-school .fix-left tbody th {
-    height: 51px;
-}
-.fix-table-box.show-msg .fix-left tbody th {
+/* 1 */
+.show-school.show-msg .fix-left tbody th {
     height: 50px;
 }
-.fix-table-box {
-    padding-left: 79px;
+.table-school.show-msg .fix-left tbody th {
+    height: 51px;
 }
 
+/* fix */
+.fix-table-box.table-school, .fix-table-box.show-school {
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+}
+.fix-table-box.table-school .fix-inner, .fix-table-box.show-school .fix-inner {
+    padding-left: 79px;
+    overflow-x: auto;
+    max-width: 100%;
+}

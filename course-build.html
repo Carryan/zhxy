@@ -114,8 +114,8 @@
                                 <br>
                             </div>
 
-                            <div class="cus-table-box">
-                                <div class="fix-table-box">
+                            <div class="cus-table-wrapper">
+                                <div id="empty-table" class="fix-table-box cus-table-box show-school">
                                     <table class="fix-list fix-left cus-table table-striped">
                                         <thead>
                                             <tr>
@@ -146,98 +146,102 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <table class="empty-table cus-table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <!-- <th>星期</th> -->
-                                                <th colspan="6">星期一</th>
-                                                <th colspan="6">星期二</th>
-                                                <th colspan="6">星期三</th>
-                                                <th colspan="6">星期四</th>
-                                                <th colspan="6">星期五</th>
-                                            </tr>
-                                            <tr>
-                                                <!-- <th>节次</th> -->
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
-                                                <th>4</th>
-                                                <th>5</th>
-                                                <th>6</th>
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
-                                                <th>4</th>
-                                                <th>5</th>
-                                                <th>6</th>
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
-                                                <th>4</th>
-                                                <th>5</th>
-                                                <th>6</th>
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
-                                                <th>4</th>
-                                                <th>5</th>
-                                                <th>6</th>
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
-                                                <th>4</th>
-                                                <th>5</th>
-                                                <th>6</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td>  -->
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td>  -->
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td>  -->
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td>  -->
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td>  -->
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td>  -->
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                                <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="fix-inner clearfix">
+                                        <div class="table-box">
+                                            <table class="cus-table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <!-- <th>星期</th> -->
+                                                        <th colspan="6">星期一</th>
+                                                        <th colspan="6">星期二</th>
+                                                        <th colspan="6">星期三</th>
+                                                        <th colspan="6">星期四</th>
+                                                        <th colspan="6">星期五</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <th>节次</th> -->
+                                                        <th>1</th>
+                                                        <th>2</th>
+                                                        <th>3</th>
+                                                        <th>4</th>
+                                                        <th>5</th>
+                                                        <th>6</th>
+                                                        <th>1</th>
+                                                        <th>2</th>
+                                                        <th>3</th>
+                                                        <th>4</th>
+                                                        <th>5</th>
+                                                        <th>6</th>
+                                                        <th>1</th>
+                                                        <th>2</th>
+                                                        <th>3</th>
+                                                        <th>4</th>
+                                                        <th>5</th>
+                                                        <th>6</th>
+                                                        <th>1</th>
+                                                        <th>2</th>
+                                                        <th>3</th>
+                                                        <th>4</th>
+                                                        <th>5</th>
+                                                        <th>6</th>
+                                                        <th>1</th>
+                                                        <th>2</th>
+                                                        <th>3</th>
+                                                        <th>4</th>
+                                                        <th>5</th>
+                                                        <th>6</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td>  -->
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td>  -->
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td>  -->
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td>  -->
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td>  -->
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td>  -->
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="fix-table-box show-msg" style="display:none;">
+                                <div class="fix-table-box cus-table-box show-msg show-school" style="display:none;">
                                     <table class="fix-list fix-left cus-table table-striped">
                                         <thead>
                                             <tr>
@@ -268,251 +272,255 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <table class="cus-table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <!-- <th>星期</th> -->
-                                                <th colspan="6">星期一</th>
-                                                <th colspan="6">星期二</th>
-                                                <th colspan="6">星期三</th>
-                                                <th colspan="6">星期四</th>
-                                                <th colspan="6">星期五</th>
-                                            </tr>
-                                            <tr>
-                                                <!-- <th>节次</th> -->
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
-                                                <th>4</th>
-                                                <th>5</th>
-                                                <th>6</th>
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
-                                                <th>4</th>
-                                                <th>5</th>
-                                                <th>6</th>
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
-                                                <th>4</th>
-                                                <th>5</th>
-                                                <th>6</th>
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
-                                                <th>4</th>
-                                                <th>5</th>
-                                                <th>6</th>
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
-                                                <th>4</th>
-                                                <th>5</th>
-                                                <th>6</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td> -->
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td> -->
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td> -->
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td> -->
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td> -->
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <td>初一(1)班</td> -->
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                                <td>语文<div class="hideMsg">李晓光</div></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="fix-inner clearfix">
+                                        <div class="table-box">
+                                            <table class="cus-table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <!-- <th>星期</th> -->
+                                                        <th colspan="6">星期一</th>
+                                                        <th colspan="6">星期二</th>
+                                                        <th colspan="6">星期三</th>
+                                                        <th colspan="6">星期四</th>
+                                                        <th colspan="6">星期五</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <th>节次</th> -->
+                                                        <th>1</th>
+                                                        <th>2</th>
+                                                        <th>3</th>
+                                                        <th>4</th>
+                                                        <th>5</th>
+                                                        <th>6</th>
+                                                        <th>1</th>
+                                                        <th>2</th>
+                                                        <th>3</th>
+                                                        <th>4</th>
+                                                        <th>5</th>
+                                                        <th>6</th>
+                                                        <th>1</th>
+                                                        <th>2</th>
+                                                        <th>3</th>
+                                                        <th>4</th>
+                                                        <th>5</th>
+                                                        <th>6</th>
+                                                        <th>1</th>
+                                                        <th>2</th>
+                                                        <th>3</th>
+                                                        <th>4</th>
+                                                        <th>5</th>
+                                                        <th>6</th>
+                                                        <th>1</th>
+                                                        <th>2</th>
+                                                        <th>3</th>
+                                                        <th>4</th>
+                                                        <th>5</th>
+                                                        <th>6</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td> -->
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td> -->
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td> -->
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td> -->
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td> -->
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <td>初一(1)班</td> -->
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                        <td>语文<div class="hideMsg">李晓光</div></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -627,7 +635,7 @@
     function buildTableM() {
         $(".btns-build .btn").removeClass('disabled');
         $(".table-alert").show();
-        $(".cus-table-box .empty-table").hide().parent().next().show();
+        $(".cus-table-wrapper #empty-table").hide().next().show();
     }
 
 

@@ -18,23 +18,27 @@ if (!Array.prototype.indexOf) {
     };
 }
 
+//禁止enter提交表单
+$('form').on('keydown', function(){
+    if (event.keyCode == 13) return false;
+});
+
 
 // 可拖拽表
-; (function (obj) {
+;(function (obj) {
     if (!obj.length) return false;
 
     $.fn.dragTableCell = function (options) {
         var defaults = {
             cell: "td", //有效元素
             drop: "", //可放置元素
-            val: ".val",
-            cache: ".cache",
+            val: ".val", //存值元素
+            cache: ".cache", //缓冲区
             disabled: ".disabled", //无效元素 
             container: this.selector,
-            //监听拖拽前的函数, 参数：当前元素，所有有效元素
-            // startDrag: function(curCell, allCells){ },
-            //监听拖拽后的函数，可配置（参数:置换及置换后的ele）
-            // stopDrag: function(dragFrom,dragTo){ }
+            scroll_left: 100, //左侧滚动触发距离
+            scroll_right: 90,
+            isDblclick: false //是否触发单击事件
         };
 
         var settings = $.extend({}, defaults, options);
@@ -58,14 +62,14 @@ if (!Array.prototype.indexOf) {
             dragCells.draggable({
                 revert: "invalid",
                 addClasses: false,
-                appendTo: _this.find('.fix-list thead tr').first(),
-                // appendTo: _this,
+                // appendTo: _this.find('.fix-list thead tr').first(),
+                appendTo: _this,
                 cancel: settings.disabled,
                 containment: settings.container,//拖拽范围容器
-                // scroll: false,
-                scrollSensitivity: 80,
-                scrollSpeed: 30,
-                distance: 10,
+                scroll: false,
+                // scrollSensitivity: 80,
+                // scrollSpeed: 30,
+                distance: 10, //拖拽开始前必须移动的距离
                 helper: function () {
                     var ele = $(this).clone(),
                         w = $(this).width(),
@@ -74,18 +78,25 @@ if (!Array.prototype.indexOf) {
                     return ele;
                 },
                 // start: function( event, ui ) {
-                //     var cur = $(this), all = $drop;
-                //     settings.startDrag(cur, all);
                 // },
+                // 滚动条滚动 不触发 drag事件
                 drag: function (event, ui) {
-                    // ui.position helper相对父元素距离，ui.offset helper相对文本距离
-                    // 滚动条滚动 不触发 drag事件
-                    var w = _this.width(),
-                        in_w = _this.find('.table-box').outerWidth(),
-                        m_s = in_w - w;
-                    // 最大滚动距离
-                    if (_this.scrollLeft() >= m_s) _this.scrollLeft(m_s);
-                    // debugger; 
+                    // ui.position helper相对父元素距离，ui.offset helper相对文档距离
+                    var fixInner = _this.find('.fix-inner');
+                    if (fixInner[0] && hasScrolled(fixInner[0], 'horizontal')) {
+                        // 自定义滚动事件
+                        var srl = fixInner.scrollLeft(),
+                            c_w = _this.width();
+                        if (ui.position.left < settings.scroll_left) {
+                            fixInner.scrollLeft(srl - 25);
+                        } else if (ui.position.left > c_w - settings.scroll_right) {
+                            fixInner.scrollLeft(srl + 25);
+                        }
+                        // 最大滚动距离
+                        // var m_s = infixInner.find('.table-box').outerWidth() - fixInner.width();
+                        // if (fixInner.scrollLeft() > m_s) fixInner.scrollLeft(m_s);
+                    }
+
                 }
 
             });
@@ -189,14 +200,21 @@ if (!Array.prototype.indexOf) {
         });
 
         // 点击事件
-        // var clicker = null;
+        var clicker = null;
         cells.on("click", function (event) {
             var cur = $(this), all = cells;
 
-            // 避免双击触发 单击事件
-            // clearTimeout(clicker);
-            // clicker = setTimeout(function () {
-
+            // 避免双击 触发 单击事件
+            if(settings.isDblclick){
+                clearTimeout(clicker);
+                clicker = setTimeout(function () {
+                    clickFun();
+                }, 300);
+            }else{
+                clickFun();
+            }
+            
+            function clickFun() {
                 if (_this.slcting.isSelected) //已有被选
                 {
                     if (cur.is(_this.slcting.curCell)) //当前元素 是 被选元素
@@ -224,24 +242,25 @@ if (!Array.prototype.indexOf) {
                     _this.trigger("startDragging", [cur, all]);
                     _this.lastDone = false;
                 }
-
-            // }, 300);
+            }
 
         });
 
         // 双击 放入缓冲  // 会触发单击事件
-        // cells.on('dblclick', function () {
-        //     clearTimeout(clicker);
-        //     var cur = $(this);
-        //     if (_this.slcting.isSelected || !hasValue(cur)) return false;
-        //     cache.filter(':visible').each(function () {
-        //         if (!hasValue($(this))) {
-        //             var dropHtml = cur.html();
-        //             exchange(cur, $(this), dropHtml);
-        //             return false;
-        //         }
-        //     });
-        // });
+        if (settings.isDblclick) {
+            cells.on('dblclick', function () {
+                clearTimeout(clicker);
+                var cur = $(this);
+                if (_this.slcting.isSelected || !hasValue(cur) || cur.is(cache)) return false;
+                cache.filter(':visible').each(function () {
+                    if (!hasValue($(this))) {
+                        var dropHtml = cur.html();
+                        exchange(cur, $(this), dropHtml);
+                        return false;
+                    }
+                });
+            });
+        }
 
         // 是否完成上一个移动或交换
         this.lastDone = true;
@@ -447,7 +466,9 @@ if (!Array.prototype.indexOf) {
         cur_td.find('.reason, .edit').addClass('hidden');
         cur_td.append('<input type="text" value="' + cur_td.find('.reason').text() + '" maxlength="6"> <i class="icon-ok ok"></i> <i class="icon-remove delete"></i>');
         cur_td.find('input').click(function (e) {
-            e.stopPropagation();
+            e.stopPropagation(); //取消冒泡 触发td的点击事件
+        }).keyup(function(event){
+            if (event.keyCode == 13) $(this).siblings('.ok').click(); //回车键
         });
         cur_td.find('.ok, .delete').click(function (e) {
             e.stopPropagation();
@@ -466,10 +487,9 @@ if (!Array.prototype.indexOf) {
 // 打开modal
 selectModel();
 
-function selectModel(o) {
+function selectModel() {
 
     $("[data-modal]").off("click").on("click", function () {
-        
         var _this = $(this),
             title = _this.data('title'),
             modal = _this.data('modal'),
@@ -621,14 +641,23 @@ function deleteNewRow(t) {
 })($('.date-picker'));
 
 
+//判断是否存在滚动条 
+function hasScrolled(el, direction) {
+    if (direction === "vertical") {
+        return el.scrollHeight > el.clientHeight;
+    } else if (direction === "horizontal") {
+        return el.scrollWidth > el.clientWidth;
+    }
+}
+
+
 // 固定列
-$(".fix-table-box").scroll(function () {
-    var $this = $(this),
-        fr = $this.find(".fix-right"),
-        fl = $this.find(".fix-left");
-    fr.css('right', -$this.scrollLeft());
-    fl.css('left', $this.scrollLeft());
-});
-
-
+// $(".fix-table-box").scroll(function(){
+//     var $this = $(this),
+//         fr = $this.find(".fix-right"),
+//         fl = $this.find(".fix-left");
+//     // ie css渲染跟不上scroll速度
+//     fr.css('right', -$this.scrollLeft());
+//     fl.css('left', $this.scrollLeft());
+// });
 
