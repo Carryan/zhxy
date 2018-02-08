@@ -182,8 +182,8 @@
                                                             </select>
                                                         </td>
                                                         <td class="td-edit">
-                                                            <input type="hidden" name="" value="1-1,2-3">
-                                                            <span class="text">星期一第一节、星期二第三节</span>
+                                                            <input type="hidden" name="" value="1-3,2-4">
+                                                            <span class="text">星期一第三节、星期二第四节</span>
                                                             <span class="edit action-buttons">
                                                                 <a href="#" data-modal="#m-cus-select" data-title="设置罗老师无课时间">
                                                                     <i class="icon-pencil green"></i>
@@ -425,6 +425,21 @@
 
         $(table).find('tbody tr:last-child .chosen-select').chosen();
         selectModel();
+    });
+
+    // 选择表 添加 disabled
+    $('#m-cus-select').on('shown.bs.modal', function(){
+        var thisBtn = $(this).find('#submitSelect').data('btn');
+        var disabledCell = thisBtn.parents('.td-edit').siblings('.td-edit').first().children('input').val();
+        var cells = $('.cus-select tbody td');
+
+        cells.removeClass('disabled').filter(function(index){
+            if(disabledCell.indexOf(cells.eq(index).data('val')) != -1){
+                return true;
+            }else{
+                return false;
+            }
+        }).addClass('disabled');
     });
 
     </script>

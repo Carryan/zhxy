@@ -497,7 +497,9 @@ function selectModel() {
             rs = _this.data('reason'),
             $modal = $(modal);
 
-        $modal.find('#submitSelect').data('btn', _this); //绑定当前按钮给modal
+        //绑定 当前按钮 给modal
+        $modal.find('#submitSelect').data('btn', _this); 
+
         $modal.find('.modal-title').text(title);
 
         // 被选单元
