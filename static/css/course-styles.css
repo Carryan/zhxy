@@ -150,6 +150,7 @@ body.modal-open {
 .td-edit {
     position: relative;
     padding-right: 40px !important;
+    background-clip: content-box;
 }
 div.td-edit {
     display: inline-block;
