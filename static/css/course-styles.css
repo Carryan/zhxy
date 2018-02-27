@@ -188,7 +188,7 @@ table.cus-select tbody td {
     width: 126px;
 }
 .no-reason table.cus-select tbody td {
-    width: auto;
+    width: 98px;
 }
 table.cus-select td.selected {
     background-color: #ffa2a2;

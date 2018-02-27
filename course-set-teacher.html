@@ -432,14 +432,21 @@
         var thisBtn = $(this).find('#submitSelect').data('btn');
         var disabledCell = thisBtn.parents('.td-edit').siblings('.td-edit').first().children('input').val();
         var cells = $('.cus-select tbody td');
+        
+        var cell_text ;
+        if($(this).hasClass('cell-blue')){
+            cell_text = '无课';
+        }else{
+            cell_text = '已排课';
+        }
 
-        cells.removeClass('disabled').filter(function(index){
+        cells.removeClass('disabled').text('').filter(function(index){
             if(disabledCell.indexOf(cells.eq(index).data('val')) != -1){
                 return true;
             }else{
                 return false;
             }
-        }).addClass('disabled');
+        }).addClass('disabled').text(cell_text);
     });
 
     </script>
