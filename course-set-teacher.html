@@ -440,13 +440,22 @@
             cell_text = '已排课';
         }
 
-        cells.removeClass('disabled').text('').filter(function(index){
-            if(disabledCell.indexOf(cells.eq(index).data('val')) != -1){
+        // cells.removeClass('disabled').text('').filter(function(index){
+        //     if(disabledCell.indexOf(cells.eq(index).data('val')) != -1){
+        //         return true;
+        //     }else{
+        //         return false;
+        //     }
+        // }).addClass('disabled').text(cell_text);
+
+        var disCells = cells.filter(function (index) {
+            if (disabledCell.indexOf(cells.eq(index).data('val')) != -1) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        }).addClass('disabled').text(cell_text);
+        });
+        $('.cus-select').disableCells(disCells, cell_text);
     });
 
     </script>

@@ -417,6 +417,16 @@ $('form').on('keydown', function(){
 
     var select_table = obj.selectTable();
 
+    //禁止单元格选择
+    $.fn.disableCells = function(disCells,text){
+        this.find('td').removeClass('disabled').text('');
+        if (arguments.length>1){
+            this.find(disCells).addClass('disabled').text(text);
+        }else{
+            this.find(disCells).addClass('disabled');
+        }     
+    };
+
     // 确定选择
     $("#submitSelect").click(function () {
         var modal = $(this).parents(".modal"),
