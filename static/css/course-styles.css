@@ -13,8 +13,10 @@
 .margin-bottom-10 { margin-bottom: 10px; }
 .margin-bottom-20 { margin-bottom: 20px; }
 .margin-bottom-30 { margin-bottom: 30px; }
+.margin-bottom-50 { margin-bottom: 50px; }
 
 .margin-right-5 { margin-right: 5px!important; }
+.margin-right-10 { margin-right: 10px; }
 .margin-right-20 { margin-right: 20px; }
 .margin-right-30 { margin-right: 30px; }
 
@@ -23,6 +25,7 @@
 .font-18 { font-size: 18px; }
 
 .color-333 { color: #333; }
+.orange1 { color: #DD5A43; }
 
 .inline-block { display: inline-block!important;}
 
@@ -34,6 +37,10 @@
     bottom: 8px;
 }
 
+body {
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+}
 input {
     height: 30px;
 }
@@ -45,6 +52,18 @@ input {
 }
 i[class^="icon-"] {
     text-decoration: none;
+}
+.btn-sm>[class*="icon-"] {
+    margin-right: 9px;
+}
+.btn-sm {
+    padding: 4px 11px;
+}
+.btn-sm.btn-line {
+    padding: 2px 11px;
+}
+.btn-xs.btn-line {
+    padding: 3px 14px;
 }
 
 th, td {
@@ -74,6 +93,14 @@ body.modal-open {
 .modal-footer.text-center {
     text-align: center;
 }
+.modal-header {
+    padding: 8px 15px;
+    background: linear-gradient(to bottom, #ECECEC, #F7F7F7);
+}
+.modal-footer {
+    padding-top: 10px;
+    padding-bottom: 9px;
+}
 
 .cw-250 + .chosen-container {
     min-width: 250px;
@@ -84,7 +111,7 @@ body.modal-open {
 
 
 .head-tab a.active {
-    color: #428bca;
+    color: #34A8EA;
 }
 .checkbox-inline label {
     margin-top: -5px;
@@ -104,7 +131,7 @@ body.modal-open {
     text-decoration: none;
 }
 .head-tab a.active {
-    border-bottom: 2px solid #428bca;
+    border-bottom: 2px solid #34A8EA;
 }
 .head-tab h3 {
     margin-top: 0;
@@ -113,7 +140,7 @@ body.modal-open {
 
 .task-menu {
     margin-right: -35px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 .task-menu > div {
     margin-right: 35px;
@@ -177,7 +204,7 @@ table.cus-select {
     border-collapse: separate;
     border-spacing: 1px;
 }
-table.cus-select thead th, table.cus-table thead th {
+table.cus-select thead th {
     background-color: #333;
     color: #fff;
 }
@@ -245,8 +272,8 @@ table.cus-select + .tip {
 .cus-table-box {
     max-width: 100%;
     background-color: #f2f2f2;
-    /* overflow-x: auto; */
     position: relative;
+    border: 1px solid #B9B9B9;
 }
 .cus-table {
     min-width: 100%;
@@ -254,17 +281,31 @@ table.cus-select + .tip {
 .cus-table td, .cus-table th {
     min-width: 80px;
     padding: 5px;
-    background-color: #dfdfdf;
-    border: 1px solid #fff;
     white-space: nowrap;
     font-size: 14px;
+    border: 1px solid #dddddd;
 }
-.cus-table.table-striped > tbody > tr:nth-child(odd) > td, .cus-table.table-striped > tbody > tr:nth-child(odd) > th {
-    background-color: #e7e7e7;
+.cus-table td {
+    background-color: #F5F0EE;
+} 
+.cus-table th {
+    background-color: #D2D2D2;
+    color: #222222;
+}
+.cus-table  tbody tr:nth-child(odd) td {
+    background-color: #E9F0F4;
+    color: #41697D;
+}
+.cus-table  tbody tr:nth-child(even) td {
+    color: #775246;
 }
 .table-school td, .table-school th {
     min-width: auto;
     padding: 4px;
+}
+.cus-table thead tr:first-child th {
+    background: linear-gradient(to bottom,#EEEEEE,#F7F7F7);
+    /* border: 1px solid #b9b9b9; */
 }
 .table-school td {
     color: #333;
@@ -276,12 +317,11 @@ td .hideMsg {
 }
 .show-msg td .hideMsg {
     display: block;
-    /* animation: fadeIn .3s; */
 }
 
 .alert.table-alert {
     display: inline-block;
-    min-width: 40%;
+    min-width: 319px;
 }
 
 .dragTable td {
@@ -291,7 +331,6 @@ td .hideMsg {
 }
 .dragTable .val {
     min-width: 30px;
-    /* display: inline-block; */
 }
 .dragTable.show-msg .val {
     min-width: 50px;
@@ -299,7 +338,6 @@ td .hideMsg {
 }
 .dragTable.class-table .val {
     min-width: auto;
-    /* font-size: 14px; */
 }
 
 .fix-table-box {
@@ -338,9 +376,9 @@ td .hideMsg {
     left: 0;
 }
 
-.class-table {
+/* .class-table {
     padding: 0 8px 5px;
-}
+} */
 .fix-table-box.class-table {
     padding: 0;
 }
@@ -348,7 +386,7 @@ td .hideMsg {
     padding: 8px;
 }
 .class-table td {
-    color: blue;
+    /* color: blue; */
     height: 65px;
 }
 .class-table td .tip {
@@ -401,8 +439,14 @@ td.ui-draggable-dragging {
     display: none;
 }
 
-.dragTable .table-striped > tbody > tr td.cell-bug {
-    background-color: #fcc;
+.dragTable .cus-table td.cell-bug {
+    background-color: #EC6C6C;
+}
+
+.dragTable .cus-table td.cell-bug, .dragTable .cus-table td.cell-bug div,
+.dragTable td.cell-selected, .dragTable td.cell-selected div, .dragTable .ui-draggable-dragging, 
+.dragTable .ui-draggable-dragging div {
+    color: #fff;
 }
 
 .modal-select .modal-dialog {
@@ -413,11 +457,11 @@ td.ui-draggable-dragging {
 }
 
 .cus-outter-box {
-    background-color: #f2f2f2;
-    padding: 10px 5px;
+    /* background-color: #f2f2f2;
+    padding: 10px 5px; */
 }
 .table-title {
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     margin: 10px 0;
 }
@@ -454,4 +498,64 @@ td.ui-draggable-dragging {
     padding-left: 79px;
     overflow-x: auto;
     max-width: 100%;
+}
+
+
+.nav-tabs>li>a, .nav-tabs>li>a:focus {
+    color: #666;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    color: #34A8EA;
+}
+.table thead tr {
+    color: #222222;
+}
+#table-change-teacher thead th {
+    background-color: #E7F2FF;
+}
+#table-change-teacher + .alert, #table-change-teacher + .alert + .alert {
+    width: 643px;
+}
+.table-color-tip {
+    margin-top: 35px;
+}
+.table-color-tip:after {
+    clear: both;
+    display: table;
+    content: "";
+}
+.table-color-tip p {
+    float: left;
+}
+.table-color-tip div {
+    float: right;
+}
+.table-color-tip .tip-square:first-child {
+    background-color:#EC6C6C;
+}
+.table-color-tip .tip-square:first-child + .tip-square {
+    background-color:#FD9EFD;
+}
+.table-color-tip .tip-square:first-child + .tip-square + .tip-square {
+    background-color:#EFD753;
+}
+i[class^="icon-"].orange1 {
+    margin-right: 10px;
+    font-size: 18px;
+}
+.course-table-name {
+    margin-bottom: 30px;
+}
+.course-table-name > h4 {
+    text-align: center;
+    color: #222222;
+    margin-bottom: 20px;
+}
+.course-table-name > p {
+    color: #666666;
+    text-align: center;
+    font-size: 12px;
+}
+.course-table-name > p > span:not(:last-child) {
+    margin-right: 30px;
 }

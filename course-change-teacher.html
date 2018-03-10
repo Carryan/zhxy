@@ -101,14 +101,14 @@
                                     <h3>任课老师调整</h3>
                                 </div>
                                 <div class="pull-right">
-                                    <button class="btn btn-primary btn-sm" onclick="getTableValues()" data-toggle="modal" data-target="#m-tip">保存</button>
+                                    <button class="btn btn-primary btn-sm" onclick="getTableValues()" data-toggle="modal" data-target="#m-tip"><i class="icon-save"></i>保存</button>
                                 </div>
                             </div>
 
                             <div class="clearfix margin-bottom-10">
                                 <div class="pull-left">现请管理员在基础信息子系统中调整班级任课教师信息</div>
                                 <div class="pull-right">
-                                    <button class="btn btn-primary btn-xs table-add">添加</button>
+                                    <button class="btn btn-primary btn-xs table-add"><i class="icon-plus"></i> 添加</button>
                                     <button class="btn btn-primary btn-xs">开始调整</button>
                                 </div>
                             </div>
@@ -173,34 +173,36 @@
                                 </tbody>
                             </table>
 
-                            <div class="alert alert-success inline-block">
+                            <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert">
                                     <i class="icon-remove"></i>
                                 </button>
+                                <i class="icon-ok"></i> 
                                  提示： 恭喜您，调整完毕，没有发现冲突。
                             </div>
-                            <br>
-                            <div class="alert alert-warning inline-block">
+                            
+                            <div class="alert alert-danger">
                                 <button type="button" class="close" data-dismiss="alert">
                                     <i class="icon-remove"></i>
                                 </button>
+                                <i class="icon-remove"></i>
                                  提示： 很遗憾，发现冲突，请在下方的班级课表中手动调整。
                             </div>
 
                             
-                            <div class="clearfix">
-                                <p class="pull-left">有冲突的班级：</p>
-                                <div class="pull-right">
-                                    <span class="tip-square" style="background-color:#FFCCCC;"></span>冲突节次
-                                    <span class="tip-square" style="background-color:#FD9EFD;"></span>可调节次
-                                    <span class="tip-square" style="background-color:#EFD753;"></span>当前节次
+                            <div class="table-color-tip">
+                                <p>有冲突的班级：</p>
+                                <div>
+                                    <span class="tip-square"></span>冲突节次
+                                    <span class="tip-square"></span>可调节次
+                                    <span class="tip-square"></span>当前节次
                                 </div>
                             </div>
                             
-                            <div class="cus-outter-box margin-bottom-30">
+                            <div class="cus-outter-box margin-bottom-50">
                                 <p class="table-title">初一（1）班 的课表</p>
                                 <div id="table1" class="dragTable cus-table-box show-msg class-table">
-                                    <table id="cus-table" class="cus-table table-striped">
+                                    <table id="cus-table" class="cus-table ">
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -240,7 +242,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-1" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -271,7 +273,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-2" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -302,7 +304,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-3" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -333,7 +335,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-4" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -364,7 +366,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-5" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -395,7 +397,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-6" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -426,7 +428,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-7" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -445,7 +447,7 @@
                             <div class="cus-outter-box">
                                 <p class="table-title">初一（2）班 的课表</p>
                                 <div id="table2" class="dragTable cus-table-box show-msg class-table">
-                                    <table id="cus-table" class="cus-table table-striped">
+                                    <table id="cus-table" class="cus-table ">
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -485,7 +487,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-1" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -516,7 +518,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-2" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -547,7 +549,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-3" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -578,7 +580,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-4" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -609,7 +611,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-4" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -640,7 +642,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-6" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -671,7 +673,7 @@
                                                         <div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
-                                                <td class="cache">
+                                                <td data-key="cache-7" class="cache">
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
@@ -844,6 +846,7 @@
                 console.log("send ajax");
                 var curVal = dtable1.getValues(curCell),
                     allVals = dtable1.getValues(allCells);
+                    console.log(curVal, allVals);
                 $.ajax({
                     url: "static/data/course-accept.json",
                     type: "GET",

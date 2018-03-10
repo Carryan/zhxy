@@ -38,7 +38,7 @@ $('form').on('keydown', function(){
             container: this.selector,
             scroll_left: 100, //左侧滚动触发距离
             scroll_right: 90,
-            isDblclick: false //是否触发单击事件
+            isDblclick: false //是否触发双击事件
         };
 
         var settings = $.extend({}, defaults, options);
@@ -108,7 +108,7 @@ $('form').on('keydown', function(){
                 // activeClass: "acceptable"
             });
 
-            cache.droppable("enable"); //缓冲区长久可放置
+            // cache.droppable("enable"); //缓冲区长久可放置
 
         };
 
@@ -123,7 +123,7 @@ $('form').on('keydown', function(){
         }
 
         function exchange(from, to, html) {
-            if (from.is(cache)) {
+            if (from.is(cache)) { //被拖元素在缓冲区
                 if (to.is(cache)) {
                     to.html(from.html());
                     from.html(html);
@@ -137,7 +137,7 @@ $('form').on('keydown', function(){
                     }
                 }
             }
-            else {
+            else { //被拖元素不在缓冲区
                 if (hasValue(to)) {
                     to.html(from.html());
                     from.html(html);
@@ -164,7 +164,7 @@ $('form').on('keydown', function(){
 
         // 开始拖拽
         dragCells.on("dragstart", function (event, ui) {
-            var cur = $(this), all = $drop;
+            var cur = $(this), all = cells;
 
             if (!hasValue(cur)) return false;
 
@@ -222,7 +222,7 @@ $('form').on('keydown', function(){
                         selecting(false, "cell-selected");
                         _this.lastDone = false;
                     }
-                    else if (cur.hasClass('acceptable') || cur.is(settings.cache)) {
+                    else if (cur.hasClass('acceptable')) {
                         var dropHtml = cur.html();
                         exchange(_this.slcting.curCell, cur, dropHtml);
                         selecting(false, "cell-selected");
@@ -281,7 +281,7 @@ $('form').on('keydown', function(){
                     v = $(this).find(".val"),
                     val = v.hasClass('cell-muted') ? " " : v.data("val"); //是否为痕迹
                 if (key) {
-                    cels[key] = val;
+                    cels[key] = val || "";
                 }
             });
             return cels;
@@ -290,9 +290,10 @@ $('form').on('keydown', function(){
         // 设置 可放区 和 不可放原因
         this.render = function (enableKey, disableReason) {
             if (arguments.length == 2) {
-                notCache.each(function () {
+                cells.each(function () {
                     var k = $(this).data('key');
-                    if (enableKey.indexOf(k) != -1) {
+                    var isEmptyCache = $(this).is(cache) && !hasValue($(this)); //是否为空的缓冲区
+                    if (enableKey.indexOf(k) != -1 || isEmptyCache) {
                         $(this).droppable("enable");
                         $(this).addClass('acceptable');
                     } else {
@@ -300,8 +301,8 @@ $('form').on('keydown', function(){
                     }
                 });
             } else {
-                notCache.droppable("disable");
-                notCache.removeClass('acceptable').removeAttr('title'); //通过acceptable判断是否可移
+                cells.droppable("disable");
+                cells.removeClass('acceptable').removeAttr('title'); //通过acceptable判断是否可移
             }
         }
 

@@ -105,18 +105,19 @@
                                 <a href="#" class="btn btn-primary btn-sm disabled" data-toggle="modal" data-target="#m-confirm-make">生成本学期最终课表</a>
                             </div>
 
-                            <div class="table-alert alert alert-warning" style="display:none;">
+                            <div class="table-alert alert alert-danger" style="display:none;">
                                 <button type="button" class="close" data-dismiss="alert">
                                     <i class="icon-remove"></i>
                                 </button>
-                                <i class="icon-exclamation-sign text-warning"></i>
+                                <i class="icon-remove"></i>
+                                <!-- <i class="icon-exclamation-sign text-warning"></i> -->
                                 这里显示冲突信息！！！
                                 <br>
                             </div>
 
                             <div class="cus-table-wrapper">
                                 <div id="empty-table" class="fix-table-box cus-table-box show-school">
-                                    <table class="fix-list fix-left cus-table table-striped">
+                                    <table class="fix-list fix-left cus-table ">
                                         <thead>
                                             <tr>
                                                 <th>星期</th>
@@ -148,7 +149,7 @@
                                     </table>
                                     <div class="fix-inner clearfix">
                                         <div class="table-box">
-                                            <table class="cus-table table-striped">
+                                            <table class="cus-table ">
                                                 <thead>
                                                     <tr>
                                                         <!-- <th>星期</th> -->
@@ -242,7 +243,7 @@
                                 </div>
 
                                 <div class="fix-table-box cus-table-box show-msg show-school" style="display:none;">
-                                    <table class="fix-list fix-left cus-table table-striped">
+                                    <table class="fix-list fix-left cus-table ">
                                         <thead>
                                             <tr>
                                                 <th>星期</th>
@@ -274,7 +275,7 @@
                                     </table>
                                     <div class="fix-inner clearfix">
                                         <div class="table-box">
-                                            <table class="cus-table table-striped">
+                                            <table class="cus-table ">
                                                 <thead>
                                                     <tr>
                                                         <!-- <th>星期</th> -->
@@ -550,12 +551,12 @@
                     <h4 class="modal-title">一键排课</h4>
                 </div>
                 <div class="modal-body">
-                    <p class="text-center"><i class="icon-info-sign font-18 text-info margin-right-5"></i>是否开始自动排课？</p>
+                    <p class="text-center"><i class="icon-exclamation-sign orange1"></i>是否开始自动排课？</p>
                     <p class="text-muted text-center">所有的课表将重新自动编排，现有的课表数据将被新的排课结果覆盖。</p>
                 </div>
                 <div class="modal-footer text-center margin-top-0">
-                    <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" onclick="buildTableM()">确定</button>
-                    <button type="button" class="btn btn-xs" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="buildTableM()">确定</button>
+                    <button type="button" class="btn btn-sm" data-dismiss="modal">取消</button>
                 </div>
             </form>
         </div>
@@ -569,12 +570,12 @@
                     <h4 class="modal-title">生成本学期最终课表</h4>
                 </div>
                 <div class="modal-body">
-                    <p class="text-center"><i class="icon-info-sign font-18 text-info margin-right-5"></i>是否生成本学期最终课表？</p>
+                    <p class="text-center"><i class="icon-exclamation-sign orange1"></i>是否生成本学期最终课表？</p>
                     <p class="text-center text-muted">生成本学期最终课表后，会清除排课规则。</p>
                 </div>
                 <div class="modal-footer text-center margin-top-0">
-                    <a href="course-table-school.html" class="btn btn-primary btn-xs">确定</a>
-                    <button type="button" class="btn btn-xs" data-dismiss="modal">取消</button>
+                    <a href="course-table-school.html" class="btn btn-primary btn-sm">确定</a>
+                    <button type="button" class="btn btn-sm" data-dismiss="modal">取消</button>
                 </div>
             </form>
         </div>
