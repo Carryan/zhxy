@@ -106,7 +106,7 @@
                             </div>
 
                             <div class="clearfix margin-bottom-10">
-                                <div class="pull-left">现请管理员在基础信息子系统中调整班级任课教师信息</div>
+                                <div class="pull-left color-999 font-12">现请管理员在基础信息子系统中调整班级任课教师信息</div>
                                 <div class="pull-right">
                                     <button class="btn btn-primary btn-xs table-add"><i class="icon-plus"></i> 添加</button>
                                     <button class="btn btn-primary btn-xs">开始调整</button>
@@ -189,18 +189,17 @@
                                  提示： 很遗憾，发现冲突，请在下方的班级课表中手动调整。
                             </div>
 
-                            
-                            <div class="table-color-tip">
-                                <p>有冲突的班级：</p>
-                                <div>
-                                    <span class="tip-square"></span>冲突节次
-                                    <span class="tip-square"></span>可调节次
-                                    <span class="tip-square"></span>当前节次
-                                </div>
-                            </div>
+                            <p class="font-18">有冲突的班级：</p>
                             
                             <div class="cus-outter-box margin-bottom-50">
-                                <p class="table-title">初一（1）班 的课表</p>
+                                <div class="table-color-tip">
+                                    <p class="table-title">初一（1）班 的课表</p>
+                                    <div class="tips">
+                                        <span class="tip-square"></span>冲突节次
+                                        <span class="tip-square"></span>可调节次
+                                        <span class="tip-square"></span>当前节次
+                                    </div>
+                                </div>
                                 <div id="table1" class="dragTable cus-table-box show-msg class-table">
                                     <table id="cus-table" class="cus-table ">
                                         <thead>
@@ -339,6 +338,7 @@
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
+                                            <tr class="tr-separate"></tr>
                                             <tr>
                                                 <th>5</th>
                                                 <td data-key="1-5">
@@ -584,6 +584,7 @@
                                                     <div class="val"></div>
                                                 </td>
                                             </tr>
+                                            <tr class="tr-separate"></tr>
                                             <tr>
                                                 <th>5</th>
                                                 <td data-key="1-5">
@@ -726,7 +727,7 @@
                     </p>
                 </div>
                 <div class="modal-footer text-center margin-top-0">
-                    <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">确定</button>
                 </div>
             </form>
         </div>
