@@ -1,0 +1,41 @@
+body {
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+}
+
+body.modal-open {
+    margin-right: 0;
+}
+.modal {
+    overflow: hidden;
+    outline: none;
+}
+.modal-footer.text-center {
+    text-align: center;
+}
+
+
+.head-form {
+    margin-bottom: 30px
+}
+.head-form {
+    margin-right: -30px;
+}
+.head-form .form-group {
+    margin-right: 30px;
+}
+.head-form .form-group select {
+    width: 80px;
+    height: 28px;
+}
+
+.class-name {
+    font-size: 15px;
+}
+
+.banner-tabs .nav-tabs > li {
+    margin-right: 4px;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover {
+    color: #34A8EA;
+}
