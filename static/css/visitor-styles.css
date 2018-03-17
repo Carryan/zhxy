@@ -426,6 +426,7 @@ i[class^="icon-"] {
     margin-top: 15px;
     margin-bottom: 8px;
     padding: 12px 0;
+    border: 1px solid #dddddd;
 }
 .visitor-box .time-box .item b {
     font-weight: 400;

@@ -18,10 +18,7 @@ body.modal-open {
 .head-form {
     margin-bottom: 30px
 }
-.head-form {
-    margin-right: -30px;
-}
-.head-form .form-group {
+.head-form .form-group:not(:last-child) {
     margin-right: 30px;
 }
 .head-form .form-group select {
@@ -33,9 +30,63 @@ body.modal-open {
     font-size: 15px;
 }
 
+.banner-tabs {
+    margin-bottom: 20px;
+}
 .banner-tabs .nav-tabs > li {
     margin-right: 4px;
 }
+.nav-tabs>li>a, .nav-tabs>li>a:focus {
+    color: #666;
+}
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover {
     color: #34A8EA;
+}
+
+.cus-table {
+    min-width: 100%;
+}
+.cus-table th, .cus-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+.cus-table th {
+    background-color: #f0f0f0;
+    padding: 8px;
+}
+.cus-table thead {
+    /* border-bottom: 2px solid #b9b9b9; */
+}
+.cus-table thead th {
+    color: #222;
+    border: 1px solid #b9b9b9;
+    border-top: 0;
+    border-bottom-width: 2px;
+}
+.cus-table thead th:first-child {
+   border-left-color: transparent;
+}
+.cus-table thead th:last-child {
+    border-right-color: transparent;
+}
+.cus-table thead tr:first-child th {
+    background: linear-gradient(to bottom,#EEEEEE,#F7F7F7);
+}
+.cus-table tbody th, .cus-table tbody td {
+    border: 1px solid #dddddd;
+}
+.cus-table tbody td {
+    color: #454545;
+    padding: 3px;
+    height: 42px;
+}
+.cus-table tbody td .tip {
+    color: #666;
+    font-size: 12px;
+}
+.cus-table-box {
+    border: 1px solid #b9b9b9;
+}
+.cus-table tr.tr-separate, .cus-select tr.tr-separate {
+    height: 10px;
 }
