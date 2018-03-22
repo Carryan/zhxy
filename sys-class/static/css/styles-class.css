@@ -14,6 +14,17 @@ body.modal-open {
     text-align: center;
 }
 
+select, input, input.date-picker {
+    height: 28px;
+}
+.input-group-addon {
+    padding: 5px 8px;
+}
+
+.form-actions .btn + .btn {
+    margin-left: 10px;
+}
+
 
 .head-form {
     margin-bottom: 30px
@@ -23,7 +34,6 @@ body.modal-open {
 }
 .head-form .form-group select {
     width: 80px;
-    height: 28px;
 }
 
 .class-name {
@@ -31,7 +41,7 @@ body.modal-open {
 }
 
 .banner-tabs {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .banner-tabs .nav-tabs > li {
     margin-right: 4px;
@@ -43,19 +53,19 @@ body.modal-open {
     color: #34A8EA;
 }
 
-.cus-table {
-    min-width: 100%;
+.cus-table, .staff-table {
+    width: 100%;
 }
-.cus-table th, .cus-table td {
+table.staff-table {
+    table-layout: fixed;
+}
+.cus-table th, .cus-table td, .staff-table th, .staff-table td {
     text-align: center;
     vertical-align: middle;
 }
 .cus-table th {
     background-color: #f0f0f0;
     padding: 8px;
-}
-.cus-table thead {
-    /* border-bottom: 2px solid #b9b9b9; */
 }
 .cus-table thead th {
     color: #222;
@@ -69,16 +79,27 @@ body.modal-open {
 .cus-table thead th:last-child {
     border-right-color: transparent;
 }
-.cus-table thead tr:first-child th {
+.cus-table thead tr:first-child th, .staff-table thead tr:first-child th {
     background: linear-gradient(to bottom,#EEEEEE,#F7F7F7);
 }
-.cus-table tbody th, .cus-table tbody td {
+.cus-table tbody th, .cus-table tbody td, .staff-table td, .staff-table th {
     border: 1px solid #dddddd;
 }
 .cus-table tbody td {
     color: #454545;
     padding: 3px;
     height: 42px;
+}
+.staff-table th {
+    padding: 8px;
+}
+.staff-table td {
+    color: #666;
+    padding: 3px;
+    height: 42px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .cus-table tbody td .tip {
     color: #666;
@@ -89,4 +110,214 @@ body.modal-open {
 }
 .cus-table tr.tr-separate, .cus-select tr.tr-separate {
     height: 10px;
+}
+
+.condition-bar {
+    margin-bottom: 30px;
+    margin-top: -10px;
+}
+.condition-bar:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.condition-bar .condition {
+    float: left;
+}
+.condition-bar .others {
+    float: right;
+}
+.condition-bar .others .btn, .condition-bar .btn[type="submit"] {
+    padding: 2px 13px;
+}
+.condition-bar .others .btn + .btn {
+    margin-left: 5px;
+}
+.condition-bar .condition .form-group + .form-group {
+    margin-left: 25px;
+}
+.condition-bar .condition .form-group > input {
+    width: 150px;
+}
+.condition-bar .condition .btn[type="submit"] {
+    margin-left: 5px;
+}
+.condition-bar .input-group-box, td .input-group-box, label + .input-group-box {
+    display: inline-block;
+    vertical-align: middle;
+}
+.condition-bar .input-group-box .input-group {
+    width: 120px;
+}
+
+/* 座位表 */
+.seating-table {
+    width: 830px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+.seating-table table {
+    width: 100%;
+    text-align: center;
+}
+.seating-table table td {
+    font-size: 0;
+    padding-bottom: 10px;
+}
+.seating-table table td .cell {
+    display: inline-block;
+    font-size: 14px;
+    border: 1px solid #484848;
+    border-radius: 2px;
+}
+.seating-table table td .cell span {
+    display: table-cell;
+    vertical-align: middle;
+    width: 88px;
+    height: 60px;
+    padding: 5px;
+}
+
+/* 梯形讲台 */
+.seating-table .platform {
+    margin-top: 60px;
+    position: relative;
+}
+.seating-table .platform .t {
+    margin: 0 auto;
+    width: 556px;
+    height: 55px;
+    border-top: 2px solid #484848;
+    border-bottom: 2px solid #484848;
+    font-size: 18px;
+    color: #3e3e3e;
+    line-height: 55px;
+    text-align: center;
+    position: relative;
+}
+.seating-table .platform .t:before, .seating-table .platform .t:after {
+    content: "";
+    display: block;
+    height: 55px;
+    width: 55px;
+    border-bottom: 2px solid #484848;
+    position: absolute;
+    top: -2px;
+}
+.seating-table .platform .t:before {
+    border-left: 3px solid #484848;
+    transform: skew(-45deg);
+    left: -27px;
+}
+.seating-table .platform .t:after {
+    border-right: 3px solid #484848;
+    transform: skew(45deg);
+    right: -27px;
+}
+.seating-table .platform .door {
+    color: #484747;
+    font-size: 18px;
+    height: 30px;
+    line-height: 30px;
+    padding-right: 9px;
+    border-right: 2px solid #484848;
+    position: absolute;
+    right: 12px;
+    top: 0px;
+}
+
+.content-tab-title {
+    font-size: 16px;
+    color: #222;
+    border-left: 2px solid #34A8EA;
+    line-height: 20px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.committee > .row > .col-sm-6:first-child {
+    padding-right: 20px;
+}
+.committee > .row > .col-sm-6:last-child {
+    padding-left: 20px;
+}
+
+.committee .staff-table {
+    margin-bottom: 20px;
+}
+.committee .staff-table .action-buttons a + a {
+    margin-left: 15px;
+}
+
+.content-table-box .table-top {
+    margin-top: -30px;
+    margin-bottom: 10px;
+}
+.content-table-box .pagination-box {
+    text-align: right;
+}
+.content-table-box .pagination-box .pagination {
+    margin-top: 30px;
+}
+
+.staff-table td > input, .staff-table td > select, .staff-table td > .input-group-box {
+    width: 90%;
+}
+
+.content-inline-block {
+    display: inline-block;
+}
+.content-inline-block + .content-inline-block {
+    margin-left: 50px;
+}
+
+.head-title {
+    color: #454545;
+    font-size: 18px;
+    border-bottom: 1px solid #C5D0DC;
+    padding-bottom: 4px;
+}
+
+.center-form {
+    display: block;
+    margin: 0 auto;
+}
+
+.content-edit .center-form {
+    width: 512px;
+}
+.content-edit {
+    padding-top: 59px;
+}
+.content-edit .center-form .form-group {
+    margin-bottom: 20px;
+}
+.content-edit .center-form .form-group:last-of-type {
+    margin-bottom: 29px;
+}
+.content-edit .center-form .form-group > label {
+    width: 150px;
+    text-align: right;
+    margin-right: 5px;
+}
+.content-edit .center-form .form-group .width-lg {
+    width: 350px;
+}
+.content-edit .center-form .form-group .width-sm {
+    width: 150px;
+}
+.content-edit .center-form textarea {
+    resize: none;
+}
+.content-edit .center-form label + .ace-file-input {
+    display: inline-block;
+    vertical-align: top;
+    width: 350px;
+    margin-bottom: 0;
+}
+.content-edit .center-form .ace-file-input + .file-tips {
+    padding-left: 108px;
+}
+.content-edit .center-form + .form-actions {
+    background-color: #f9f9f9;
 }

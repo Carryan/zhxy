@@ -104,7 +104,7 @@
 
                                 <div class="form-group">
                                     <label>年份：</label>
-                                    <select>
+                                    <select name="">
                                         <option value="">2015</option>
                                         <option value="">2016</option>
                                         <option value="" selected>2017</option>
@@ -142,7 +142,110 @@
                                 </ul>
                             </div>
 
-                            <div class="content-tab">
+                            <div class="content-tab committee">
+                                
+                                <div class="content-tab-title">七年级102班班干部、课代表一览表</div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <table class="staff-table" id="tableCadres">
+                                            <colgroup>
+                                                <col style="width: 25%;">
+                                                <col style="width: 50%;">
+                                                <col style="width: 25%;">
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th>班干部</th>
+                                                    <th>姓名</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>班长</td>
+                                                    <td>张一山</td>
+                                                    <td>
+                                                        <span class="action-buttons">
+                                                            <a href="javascript:;">
+                                                                <i class="icon-pencil green"></i>
+                                                            </a>
+                                                            <a href="#">
+                                                                <i class="icon-trash red"></i>
+                                                            </a>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>副班长</td>
+                                                    <td>张一山</td>
+                                                    <td>
+                                                        <span class="action-buttons">
+                                                            <a href="javascript:;">
+                                                                <i class="icon-pencil green"></i>
+                                                            </a>
+                                                            <a href="#">
+                                                                <i class="icon-trash red"></i>
+                                                            </a>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button class="btn btn-primary btn-xs" id="addCadres">
+                                            <i class="icon-plus"> 添加</i>
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <table class="staff-table" id="tableRepresentative">
+                                            <colgroup>
+                                                <col style="width: 25%;">
+                                                <col style="width: 50%;">
+                                                <col style="width: 25%;">
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th>课代表</th>
+                                                    <th>姓名</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>数学</td>
+                                                    <td>张一山</td>
+                                                    <td>
+                                                        <span class="action-buttons">
+                                                            <a href="#">
+                                                                <i class="icon-pencil green"></i>
+                                                            </a>
+                                                            <a href="#">
+                                                                <i class="icon-trash red"></i>
+                                                            </a>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>语文</td>
+                                                    <td>张一山</td>
+                                                    <td>
+                                                        <span class="action-buttons">
+                                                            <a href="#">
+                                                                <i class="icon-pencil green"></i>
+                                                            </a>
+                                                            <a href="#">
+                                                                <i class="icon-trash red"></i>
+                                                            </a>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button class="btn btn-primary btn-xs" id="addRepresentative">
+                                            <i class="icon-plus"> 添加</i>
+                                        </button>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -165,6 +268,50 @@
     </div>
     <!-- /.main-container -->
 
+
+    <!-- 班干部 模板 -->
+    <script type="text/html" id="cadresTemplate">
+        <tr>
+            <td>
+                <input type="text" name="" value="{{cadreName}}" />
+            </td>
+            <td>
+                <input type="text" name="" value="{{studentName}}" />
+            </td>
+            <td>
+                <span class="action-buttons">
+                    <a href="${saveUrl}">
+                        <i class="icon-ok green"></i>
+                    </a>
+                    <a href="${removeUrl}" class="remove">
+                        <i class="icon-remove red"></i>
+                    </a>
+                </span>
+            </td>
+        </tr>
+    </script>
+
+    <!-- 课代表 模板 -->
+    <script type="text/html" id="repTemplate">
+        <tr>
+            <td>
+                <input type="text" name="" value="" />
+            </td>
+            <td>
+                <input type="text" name="" value="" />
+            </td>
+            <td>
+                <span class="action-buttons">
+                    <a href="{{saveUrl}}">
+                        <i class="icon-ok green"></i>
+                    </a>
+                    <a href="{{removeUrl}}" class="remove">
+                        <i class="icon-remove red"></i>
+                    </a>
+                </span>
+            </td>
+        </tr>
+    </script>
 
     <!-- basic scripts -->
 
@@ -215,6 +362,24 @@
     <script src="static/js/common-class.js"></script>
 
     <script>
+        var data = [{
+            'cadreName': '',
+            'studentName': '',
+            'saveUrl': '#',
+            'removeUrl': 'javascrip:;'
+        }];
+
+        var rowTemplate = document.getElementById('cadresTemplate').innerHTML;
+        
+        $("#addRepresentative").on('click', function (event) { 
+            var rowStr = attachTemplateToData(rowTemplate, data);
+            addRow('#tableRepresentative', rowStr);
+         });
+
+        $("#addCadres").on('click', function (event) {
+            var rowStr = attachTemplateToData(rowTemplate, data);
+            addRow('#tableCadres', rowStr);
+        });
 
     </script>
 

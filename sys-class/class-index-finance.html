@@ -18,7 +18,7 @@
 	<![endif]-->
 
     <!-- page specific plugin styles -->
-
+    <link rel="stylesheet" href="static/vendor/datepicker/bootstrap-datepicker.min.css">
 
     <!-- fonts -->
 
@@ -144,6 +144,138 @@
 
                             <div class="content-tab">
 
+                                <div class="condition-bar">
+                                    <div class="condition form-inline">
+                                        <div class="form-group">
+                                            <label>关键字：</label>
+                                            <input type="text" name="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>日期：</label>
+                                            <div class="input-group-box">
+                                                <div class="input-group">
+                                                    <input class="form-control date-picker" type="text" value="">
+                                                    <span class="input-group-addon">
+                                                        <i class="icon-calendar bigger-110"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            &nbsp;至&nbsp;
+                                            <div class="input-group-box">
+                                                <div class="input-group">
+                                                    <input class="form-control date-picker" type="text" value="">
+                                                    <span class="input-group-addon">
+                                                        <i class="icon-calendar bigger-110"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-sm">查询</button>
+                                    </div>
+                                </div>
+
+                                <div class="content-table-box">
+                                    <div class="text-right table-top">
+                                        <button class="btn btn-primary btn-xs">
+                                            <i class="icon-plus"></i> 添加
+                                        </button>
+                                    </div>
+
+                                    <table class="staff-table">
+                                        <colgroup>
+                                            <col style="width:6%;">
+                                            <col style="width:17%;">
+                                            <col style="width:8%;">
+                                            <col style="width:8%;">
+                                            <col style="width:25%;">
+                                            <col style="width:12%;">
+                                            <col style="width:12%;">
+                                            <col style="width:12%;">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>物品名称</th>
+                                                <th>数量</th>
+                                                <th>损坏人</th>
+                                                <th>损坏记录</th>
+                                                <th>损坏日期</th>
+                                                <th>记录人</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>桌子</td>
+                                                <td>1</td>
+                                                <td>张一山</td>
+                                                <td>这里是描述</td>
+                                                <td>2018-01-05</td>
+                                                <td>黄某某</td>
+                                                <td>
+                                                    <span class="action-buttons">
+                                                        <a href="javascript:;">
+                                                            <i class="icon-pencil green"></i>
+                                                        </a>
+                                                        <a href="#">
+                                                            <i class="icon-trash red"></i>
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                    <input type="text" name="" placeholder="请输入">
+                                                </td>
+                                                <td>
+                                                    <select name="">
+                                                        <option>请选择</option>
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                        <option value="">3</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="">
+                                                        <option>请选择</option>
+                                                        <option value="">张一山</option>
+                                                        <option value="">周某</option>
+                                                        <option value="">王某</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="" placeholder="请输入">
+                                                </td>
+                                                <td>
+                                                    <div class="input-group-box">
+                                                        <div class="input-group">
+                                                            <input class="form-control date-picker" type="text" value="">
+                                                            <span class="input-group-addon">
+                                                                <i class="icon-calendar bigger-110"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="" placeholder="请输入">
+                                                </td>
+                                                <td>
+                                                    <span class="action-buttons">
+                                                        <a href="javascript:;">
+                                                            <i class="icon-ok green"></i>
+                                                        </a>
+                                                        <a href="#">
+                                                            <i class="icon-remove red"></i>
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
 
 
@@ -199,7 +331,7 @@
     <script src="assets/js/typeahead-bs2.min.js"></script>
 
     <!-- page specific plugin scripts -->
-
+    <script src="static/vendor/datepicker/bootstrap-datepicker.min.js"></script>
 
     <!-- ace scripts -->
 

@@ -124,10 +124,10 @@
 
                             <div class="banner-tabs">
                                 <ul class="nav nav-tabs">
-                                    <li class="active">
+                                    <li>
                                         <a href="class-events.html">班会</a>
                                     </li>
-                                    <li>
+                                    <li class="active">
                                         <a href="class-events-activity.html">活动</a>
                                     </li>
                                     <li>
@@ -170,28 +170,32 @@
 
                                 <div class="content-table-box">
                                     <div class="text-right table-top">
-                                        <a class="btn btn-primary btn-xs" href="class-events-add.html">
-                                            <i class="icon-plus"></i> 添加班会
+                                        <a class="btn btn-primary btn-xs" href="class-events-activity-add.html">
+                                            <i class="icon-plus"></i> 添加活动
                                         </a>
                                     </div>
-                                
+
                                     <table class="staff-table">
                                         <!-- <colgroup>
                                             <col style="width:5%;">
+                                            <col style="width:13%;">
+                                            <col style="width:8%;">
+                                            <col style="width:8%;">
                                             <col style="width:14%;">
-                                            <col style="width:9%;">
-                                            <col style="width:24%;">
-                                            <col style="width:24%;">
-                                            <col style="width:12%;">
-                                            <col style="width:12%;">
+                                            <col style="width:14%;">
+                                            <col style="width:14%;">
+                                            <col style="width:14%;">
+                                            <col style="width:8%;">
                                         </colgroup> -->
                                         <thead>
                                             <tr>
                                                 <th>序号</th>
-                                                <th>物品名称</th>
+                                                <th>活动名称</th>
                                                 <th>日期</th>
-                                                <th>主要内容</th>
-                                                <th>班会记录</th>
+                                                <th>等级</th>
+                                                <th>活动内容</th>
+                                                <th>参与人员</th>
+                                                <th>表现优秀者</th>
                                                 <th>附件</th>
                                                 <th>操作</th>
                                             </tr>
@@ -199,10 +203,12 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>桌子</td>
+                                                <td>3.12植树节</td>
                                                 <td>2018-01-02</td>
-                                                <td>这是班会内容</td>
-                                                <td>这是班会记录</td>
+                                                <td>2</td>
+                                                <td>这是活动内容</td>
+                                                <td>全班同学</td>
+                                                <td>张一山、李荣浩</td>
                                                 <td></td>
                                                 <td>
                                                     <span class="action-buttons">
@@ -215,41 +221,6 @@
                                                     </span>
                                                 </td>
                                             </tr>
-                                            <!-- <tr>
-                                                <td>2</td>
-                                                <td>
-                                                    <input type="text" name="" placeholder="请输入">
-                                                </td>
-                                                <td>
-                                                    <div class="input-group-box">
-                                                        <div class="input-group">
-                                                            <input class="form-control date-picker" type="text" value="">
-                                                            <span class="input-group-addon">
-                                                                <i class="icon-calendar bigger-110"></i>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <input type="text" name="" placeholder="请输入">
-                                                </td>
-                                                <td>
-                                                    <input type="text" name="" placeholder="请输入">
-                                                </td>
-                                                <td>
-                                                    <input type="file" name="">
-                                                </td>
-                                                <td>
-                                                    <span class="action-buttons">
-                                                        <a href="javascript:;">
-                                                            <i class="icon-ok green"></i>
-                                                        </a>
-                                                        <a href="#">
-                                                            <i class="icon-remove red"></i>
-                                                        </a>
-                                                    </span>
-                                                </td>
-                                            </tr> -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -325,7 +296,7 @@
     <script src="static/js/common-class.js"></script>
 
     <script>
-        $(function ($) {});
+        $(function ($) { });
     </script>
 
 </body>

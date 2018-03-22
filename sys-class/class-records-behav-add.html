@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>金视野系统模板</title>
+    <meta name="keywords" content="金视野,教育,平台" />
+    <meta name="description" content="金视野开发部,模板,2017" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="static/vendor/datepicker/bootstrap-datepicker.min.css">
+
+    <!-- fonts -->
+
+    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" /> -->
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+	<![endif]-->
+
+    <!-- inline styles related to this page -->
+    <link rel="stylesheet" href="static/css/styles-class.css">
+
+    <!-- ace settings handler -->
+
+    <script src="assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+
+
+            <div class="main-content" style="margin-left: 0px;">
+
+                <!-- 面包屑导航 -->
+                <div class="breadcrumbs " id="breadcrumbs">
+                    <script type="text/javascript">
+                        try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                    </script>
+                    <!--位置-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home home-icon"></i>
+                            <a href="jsywebindex.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="class-index.html">班级管理</a>
+                        </li>
+                        <li class="active">班级记事</li>
+                    </ul>
+                    <ul class="breadcrumb pull-right navright">
+                        <li>
+                            <i class="icon-share-alt icon-color"></i>
+                            <a href="javascript:history.go(-1);">返回</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="page-content" style="padding-top: 20px;">
+
+                    <!-- /.page-header -->
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="head-title">添加学生行为</div>
+
+                            <div class="content-edit">
+
+                                <form action="class-records-behav.html" method="" enctype="multipart/form-data">
+
+                                    <div class="center-form">
+                                        <div class="form-group">
+                                            <label>姓名：</label>
+                                            <select name="" class="width-sm">
+                                                <option>请选择</option>
+                                                <option value="">张三</option>
+                                                <option value="">李四</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>学生行为类型：</label>
+                                            <select name="" class="width-sm">
+                                                <option>请选择</option>
+                                                <option value="">打架斗殴</option>
+                                                <option value="">装逼</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>年份：</label>
+                                            <select name="" class="width-sm">
+                                                <option value="">2018</option>
+                                                <option value="">2017</option>
+                                                <option value="">2016</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>学期：</label>
+                                            <select name="" class="width-sm">
+                                                <option value="">春季</option>
+                                                <option value="">秋季</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>学生行为发生时间：</label>
+                                            <div class="input-group-box width-sm">
+                                                <div class="input-group">
+                                                    <input class="form-control date-picker" type="text" value="">
+                                                    <span class="input-group-addon">
+                                                        <i class="icon-calendar bigger-110"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>学生行为内容：</label>
+                                            <textarea name="" rows="5" class="width-lg" placeholder="请输入"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>教师教育类型：</label>
+                                            <select name="" class="width-sm">
+                                                <option>请选择</option>
+                                                <option value="">批评教育</option>
+                                                <option value="">家访</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>老师谈话内容：</label>
+                                            <textarea name="" rows="5" class="width-lg" placeholder="请输入"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>上传附件：</label>
+                                            <input type="file" name="" id="addFileUpload" multiple />
+                                            <div class="file-tips">支持拓展名：rar、zip、doc、pdf、jpg...</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions text-center">
+                                        <button class="btn btn-primary btn-sm" type="submit">提交</button>
+                                        <button class="btn btn-sm" type="reset">重置</button>
+                                    </div>
+                                </form>
+
+                            </div>
+
+
+                            <!-- PAGE CONTENT ENDS -->
+
+                        </div>
+
+                    </div>
+
+                    <!-- /.col -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+            <!-- /.main-content -->
+
+            <!-- /#ace-settings-container -->
+        </div>
+        <!-- /.main-container-inner -->
+    </div>
+    <!-- /.main-container -->
+
+
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+
+    <!---->
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+
+<![endif]-->
+
+    <!--[if !IE]> -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <script src="static/vendor/datepicker/bootstrap-datepicker.min.js"></script>
+
+    <!-- ace scripts -->
+
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+
+    <!-- inline scripts related to this page -->
+    <!-- <div style="display: none">
+        <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+    </div> -->
+
+    <script src="static/js/common-class.js"></script>
+
+</body>
+
+</html>
