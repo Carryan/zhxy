@@ -553,7 +553,7 @@ function selectModel() {
         }
 
         //模态框位置
-        $modal.css("top", _this.offset().top - 600 > 0 ? _this.offset().top - 600 : 0);
+        // $modal.css("top", _this.offset().top - 600 > 0 ? _this.offset().top - 600 : 0);
         $modal.modal('show');
     });
 }

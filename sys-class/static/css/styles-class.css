@@ -3,6 +3,8 @@ body {
     font-size: 14px;
 }
 
+a { color: #34A8EA; }
+
 body.modal-open {
     margin-right: 0;
 }
@@ -10,8 +12,35 @@ body.modal-open {
     overflow: hidden;
     outline: none;
 }
+.modal-footer {
+    padding-top: 10px;
+    padding-bottom: 9px;
+    margin-top: 0;
+}
 .modal-footer.text-center {
     text-align: center;
+}
+.modal-header {
+    padding: 8px 15px;
+    background: linear-gradient(to bottom, #ECECEC, #F7F7F7);
+}
+.modal-title {
+    color: #669FC7;
+    font-size: 16px;
+}
+.modal-header .close {
+    font-size: 22px;
+}
+.modal .title-tip {
+    color: #222222;
+    font-size: 16px;
+}
+.modal .title-tip i {
+    font-size: 18px;
+    margin-right: 10px;
+}
+.modal .title-tip .danger {
+    color: #DD5A43;
 }
 
 select, input, input.date-picker {
@@ -24,6 +53,8 @@ select, input, input.date-picker {
 .form-actions .btn + .btn {
     margin-left: 10px;
 }
+
+.margin-top-30 { margin-top: 30px; }
 
 
 .head-form {
@@ -58,6 +89,9 @@ select, input, input.date-picker {
 }
 table.staff-table {
     table-layout: fixed;
+}
+.content-inline-block table.staff-table {
+    table-layout: unset;
 }
 .cus-table th, .cus-table td, .staff-table th, .staff-table td {
     text-align: center;
@@ -94,12 +128,16 @@ table.staff-table {
     padding: 8px;
 }
 .staff-table td {
+    font-size: 12px;
     color: #666;
     padding: 3px;
     height: 42px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.staff-table td .action-buttons {
+    font-size: 15px;
 }
 .cus-table tbody td .tip {
     color: #666;
@@ -114,6 +152,8 @@ table.staff-table {
 
 .condition-bar {
     margin-bottom: 30px;
+}
+.content-tab .condition-bar {
     margin-top: -10px;
 }
 .condition-bar:after {
@@ -226,13 +266,21 @@ table.staff-table {
     top: 0px;
 }
 
-.content-tab-title {
+.content-tab-title, .content-title {
     font-size: 16px;
     color: #222;
     border-left: 2px solid #34A8EA;
     line-height: 20px;
     padding-left: 10px;
+    position: relative;
+}
+.content-tab-title {
     margin-bottom: 20px;
+}
+.content-title .title-right {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .committee > .row > .col-sm-6:first-child {
@@ -245,19 +293,24 @@ table.staff-table {
 .committee .staff-table {
     margin-bottom: 20px;
 }
-.committee .staff-table .action-buttons a + a {
+.staff-table .action-buttons a + a {
     margin-left: 15px;
 }
 
 .content-table-box .table-top {
-    margin-top: -30px;
     margin-bottom: 10px;
+}
+.condition-bar + .content-table-box .table-top {
+    margin-top: -30px;
 }
 .content-table-box .pagination-box {
     text-align: right;
 }
 .content-table-box .pagination-box .pagination {
     margin-top: 30px;
+}
+.content .content-table-box .pagination-box .pagination {
+    margin-top: 10px;
 }
 
 .staff-table td > input, .staff-table td > select, .staff-table td > .input-group-box {
@@ -320,4 +373,100 @@ table.staff-table {
 }
 .content-edit .center-form + .form-actions {
     background-color: #f9f9f9;
+}
+
+.content {
+    padding-top: 20px;
+    border-top: 1px solid #C5D0DC;
+}
+
+.staff-table td.action a {
+    font-size: 12px;
+    text-decoration: none;
+}
+.staff-table td.action a + a {
+    margin-left: 25px;
+}
+
+.assm-detail-title {
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+.assm-detail-title .name-msg span {
+    margin-right: 10px;
+}
+.assm-detail-title .name-msg span:first-of-type {
+    color: #222222;
+    font-size: 16px;
+    margin-right: 6px;
+}
+.assm-detail-title .name-msg span:nth-of-type(2) ~ span {
+    font-size: 12px;
+    color: #999;
+}
+.assm-detail-title .result {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+.assm-detail-title .result span:first-child {
+    position: relative;
+    padding-right: 15px;
+    margin-right: 10px;
+}
+.assm-detail-title .result span:first-child:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 20px;
+    border-left: 1px solid #666;
+    right: 0px;
+    top: 50%;
+    margin-top: -10px;
+}
+
+.assm-content .content-title {
+    margin-bottom: 14px;    
+}
+.assm-content .content-title .title-right {
+    font-size: 14px;
+    color: #454545;
+}
+
+#m-msg-detail .table-captain {
+    margin-bottom: 5px;
+    margin-top: -5px;
+}
+#m-msg-detail .table-captain span {
+    margin-right: 15px;
+}
+
+.head-title + .content-table-box {
+    margin-top: 10px;
+}
+
+.border-left-blue {
+    position: relative;
+    padding-left: 10px;
+}
+.border-left-blue:before {
+    position: absolute;
+    content: "";
+    display: block;
+    border-left: 2px solid #34A8EA;
+    height: 20px;
+    left: 0;
+    top: 50%;
+    margin-top: -10px;
+}
+
+.standar-detail-title  .form-group {
+    margin-bottom: 0;
+    margin-top: 8px;
+}
+.standar-detail-title  .form-group input {
+    width: 350px;
+}
+.standar-detail .standar-detail-title {
+    margin-bottom: 50px;
 }

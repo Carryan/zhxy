@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>金视野系统模板</title>
+    <meta name="keywords" content="金视野,教育,平台" />
+    <meta name="description" content="金视野开发部,模板,2017" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+
+    <!-- page specific plugin styles -->
+
+
+    <!-- fonts -->
+
+    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" /> -->
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+	<![endif]-->
+
+    <!-- inline styles related to this page -->
+    <link rel="stylesheet" href="static/css/styles-class.css">
+
+    <!-- ace settings handler -->
+
+    <script src="assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+
+
+            <div class="main-content" style="margin-left: 0px;">
+
+                <!-- 面包屑导航 -->
+                <div class="breadcrumbs " id="breadcrumbs">
+                    <script type="text/javascript">
+                        try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                    </script>
+                    <!--位置-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home home-icon"></i>
+                            <a href="jsywebindex.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="class-index.html">班级管理</a>
+                        </li>
+                        <li class="active">学生量化考评</li>
+                    </ul>
+                    <ul class="breadcrumb pull-right navright">
+                        <li>
+                            <i class="icon-share-alt icon-color"></i>
+                            <a href="javascript:history.go(-1);">返回</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="page-content" style="padding-top: 20px;">
+
+                    <!-- /.page-header -->
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="assm-detail-title row">
+                                <div class="col-xs-4 name-msg">
+                                    <span>蔡文姬</span>
+                                    <span>的考评报告</span>
+                                    <span>102班</span>
+                                    <span>2018年</span>
+                                    <span>春季</span>
+                                </div>
+                                <div class="col-xs-4 result">
+                                    <span>不合格</span>
+                                    <span>30分</span>
+                                </div>
+                                <div class="col-xs-4 text-right">
+                                    <button class="btn btn-primary btn-sm">审核确认</button>
+                                </div>
+                            </div>
+
+                            <div class="content assm-content">
+
+                                <div class="content-title">考评统计
+                                    <span class="title-right">*量化指标标准名称</span>
+                                </div>
+
+                                <table class="staff-table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>类型</th>
+                                            <th>次数</th>
+                                            <th>加减分</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>迟到</td>
+                                            <td>4</td>
+                                            <td>-12</td>
+                                            <td class="action">
+                                                <a href="javascript:;" data-modal="#m-msg-detail">查看详情</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>旷课</td>
+                                            <td>4</td>
+                                            <td>-12</td>
+                                            <td class="action">
+                                                <a href="javascript:;">查看详情</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>早退</td>
+                                            <td>4</td>
+                                            <td>-12</td>
+                                            <td class="action">
+                                                <a href="javascript:;">查看详情</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>上课讲话</td>
+                                            <td>4</td>
+                                            <td>-12</td>
+                                            <td class="action">
+                                                <a href="javascript:;">查看详情</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                            <!-- PAGE CONTENT ENDS -->
+
+                        </div>
+
+                    </div>
+
+                    <!-- /.col -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+            <!-- /.main-content -->
+
+            <!-- /#ace-settings-container -->
+        </div>
+        <!-- /.main-container-inner -->
+    </div>
+    <!-- /.main-container -->
+
+
+    <div class="modal" id="m-msg-detail" tabindex="-1" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">蔡文姬的迟到详情</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="table-captain">
+                        <span>次数：4</span>
+                        <span>减分：12</span>
+                    </div>
+                    <table class="staff-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>时间</th>
+                                <th>说明</th>
+                                <th>记录人</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2018-01-09 14:20</td>
+                                <td></td>
+                                <td>黄老师</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>2018-01-09 14:20</td>
+                                <td></td>
+                                <td>黄老师</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>2018-01-09 14:20</td>
+                                <td></td>
+                                <td>黄老师</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>2018-01-09 14:20</td>
+                                <td></td>
+                                <td>黄老师</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer text-center">
+                    <a href="#" class="btn btn-primary btn-sm">确定</a>
+                    <button type="button" class="btn btn-sm" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+
+    <!---->
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+
+<![endif]-->
+
+    <!--[if !IE]> -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+
+
+    <!-- ace scripts -->
+
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+
+    <!-- inline scripts related to this page -->
+    <!-- <div style="display: none">
+        <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+    </div> -->
+
+    <script src="static/js/common-class.js"></script>
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>
