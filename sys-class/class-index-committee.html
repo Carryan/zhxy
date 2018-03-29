@@ -148,7 +148,7 @@
 
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <table class="staff-table" id="tableCadres">
+                                        <table class="staff-table table-hover table-edit" id="tableCadres">
                                             <colgroup>
                                                 <col style="width: 25%;">
                                                 <col style="width: 50%;">
@@ -167,10 +167,10 @@
                                                     <td>张一山</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="javascript:;">
+                                                            <a href="#" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
                                                             </a>
                                                         </span>
@@ -181,10 +181,10 @@
                                                     <td>张一山</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="javascript:;">
+                                                            <a href="javascript:;" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
                                                             </a>
                                                         </span>
@@ -197,7 +197,7 @@
                                         </button>
                                     </div>
                                     <div class="col-sm-6">
-                                        <table class="staff-table" id="tableRepresentative">
+                                        <table class="staff-table table-hover" id="tableRepresentative">
                                             <colgroup>
                                                 <col style="width: 25%;">
                                                 <col style="width: 50%;">
@@ -273,17 +273,17 @@
     <script type="text/html" id="cadresTemplate">
         <tr>
             <td>
-                <input type="text" name="" value="{{cadreName}}" />
+                <input type="text" name="cadreName" value="{{= cadreName}}" />
             </td>
             <td>
-                <input type="text" name="" value="{{studentName}}" />
+                <input type="text" name="studentName" value="{{= studentName}}" />
             </td>
             <td>
                 <span class="action-buttons">
-                    <a href="{{saveUrl}}">
+                    <a href="http://192.168.0.110:8001/savetabe" class="save">
                         <i class="icon-ok green"></i>
                     </a>
-                    <a href="{{removeUrl}}" class="remove">
+                    <a href="#" {{if isEdit}} class="return" {{else}} class="cancel" {{/if}}>
                         <i class="icon-remove red"></i>
                     </a>
                 </span>
@@ -291,22 +291,40 @@
         </tr>
     </script>
 
-    <!-- 课代表 模板 -->
+    <!-- 模板 -->
     <script type="text/html" id="repTemplate">
         <tr>
             <td>
-                <input type="text" name="" value="" />
+                <input type="text" name="subjectName" value="{{= subjectName}}" />
             </td>
             <td>
-                <input type="text" name="" value="" />
+                <input type="text" name="studentName" value="{{= studentName}}" />
             </td>
             <td>
                 <span class="action-buttons">
-                    <a href="{{saveUrl}}">
+                    <a href="http://192.168.0.110:8001/savetabe" class="save">
                         <i class="icon-ok green"></i>
                     </a>
-                    <a href="{{removeUrl}}" class="remove">
+                    <a href="#" {{if isEdit}} class="return" {{else}} class="cancel" {{/if}}>
                         <i class="icon-remove red"></i>
+                    </a>
+                </span>
+            </td>
+        </tr>
+    </script>
+
+    <!-- 成功保存 模板 -->
+    <script type="text/html" id="saveTemplate">
+        <tr>
+            <td>{{= text1}}</td>
+            <td>{{= text2}}</td>
+            <td>
+                <span class="action-buttons">
+                    <a href="javascript:;" class="edit">
+                        <i class="icon-pencil green"></i>
+                    </a>
+                    <a href="{{= deleteUrl}}" class="delete">
+                        <i class="icon-trash red"></i>
                     </a>
                 </span>
             </td>
@@ -359,27 +377,109 @@
         <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
     </div> -->
 
+    <!-- <script src="static/vendor/layer/layer.js"></script>
+    <script src="static/js/jquery.tmpl.min.js"></script> -->
     <script src="static/js/common-class.js"></script>
 
     <script>
-        var data = [{
-            'cadreName': '',
-            'studentName': '',
-            'saveUrl': '#',
-            'removeUrl': 'javascrip:;'
-        }];
 
-        var rowTemplate = document.getElementById('cadresTemplate').innerHTML;
-        
-        $("#addRepresentative").on('click', function (event) { 
-            var rowStr = attachTemplateToData(rowTemplate, data);
-            addRow('#tableRepresentative', rowStr);
-         });
-
-        $("#addCadres").on('click', function (event) {
-            var rowStr = attachTemplateToData(rowTemplate, data);
-            addRow('#tableCadres', rowStr);
+        // 添加班干部
+        $("#tableCadres").editTable({
+            addBtn: "#addCadres", //添加按钮
+            temp: "#cadresTemplate", //编辑模板
+            saveTemp: "#saveTemplate", //保存模板
+            // 编辑时执行的函数，thisTr当前行，texts当前行文本数组，editeCallback回调 进入编辑状态
+            editFun: function (thisTr, texts, editeCallback) {
+                var data = [{
+                    'cadreName': texts[0],
+                    'studentName': texts[1],
+                    'isEdit': 1
+                }];
+                var temp = $('#cadresTemplate').tmpl(data);
+                editeCallback(thisTr, temp); //thisTr:当前行; temp:编辑的模板HTML元素或jq对象
+            }
         });
+
+        // 添加课代表
+        $("#tableRepresentative").editTable({
+                addBtn: "#addRepresentative", //添加按钮
+                temp: "#repTemplate", //编辑模板
+                saveTemp: "#saveTemplate", //保存模板
+                editFun: function (thisTr, texts, editeCallback) {
+                    var data = [{
+                        'subjectName': texts[0],
+                        'studentName': texts[1],
+                        'isEdit': 1
+                    }];
+                    var temp = $('#repTemplate').tmpl(data);
+                    editeCallback(thisTr, temp);
+                }
+            });
+
+
+/***********************************************************/
+
+        // //添加
+        // $("#addCadres").on('click', function () {
+        //     var $tbody = $("#tableCadres").find('tbody') || $this,
+        //         temp = $('#cadresTemplate').tmpl();
+        //     $tbody.append(temp);
+
+        //     // 取消
+        //     temp.find('.cancel').on('click', function (event) {
+        //         event.preventDefault();
+        //         temp.remove();
+        //     });
+        // });
+
+
+        // // 保存
+        // $("#tableCadres").on('click', '.save', function (event) {
+        //     event.preventDefault();
+        //     var thisTr = $(this).parents('tr').first();
+
+        //     //拼模板
+        //     var values = getTrValues(thisTr);
+        //     var data = [{
+        //             'text1': values[0].value,
+        //             'text2': values[1].value
+        //         }];
+        //     var savedTemp = $('#saveTemplate').tmpl(data);
+
+        //     thisTr.replaceWith(savedTemp);
+        // });
+
+        
+        // //编辑
+        // $("#tableCadres").on('click', '.edit', function (event) {
+        //     event.preventDefault();
+        //     var thisTr = $(this).parents('tr').first();
+
+        //     //拼模板
+        //     var texts = getTrText(thisTr);
+        //     var data = [{
+        //         'cadreName': texts[0],
+        //         'studentName': texts[1],
+        //         'isEdit': 1
+        //     }];
+        //     var temp = $('#cadresTemplate').tmpl(data);
+
+        //     thisTr.replaceWith(temp);
+            
+        //     // 返回，取消编辑
+        //     temp.find('.return').on('click', function(){
+        //         event.preventDefault();
+        //         temp.replaceWith(thisTr);
+        //     });
+
+        // });
+
+        // // 删除
+        // $("#tableCadres").on('click', '.delete', function (event) {
+        //     event.preventDefault();
+        //     var thisTr = $(this).parents('tr').first();
+        //     thisTr.remove();
+        // });
 
     </script>
 

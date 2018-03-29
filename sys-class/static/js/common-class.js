@@ -1,33 +1,12 @@
-// 模板引擎，替换 {{ }} 中的内容
-attachTemplateToData = function (template, data) {
-    var i = 0,
-        len = data.length,
-        fragment = '';
-
-    // 遍历数据集合里的每一个项，做相应的替换
-    function replace(obj) {
-        var t, key, reg;
-        //遍历该数据项下所有的属性，将该属性作为key值来查找标签，然后替换
-        for (key in obj) {
-            reg = new RegExp('{{' + key + '}}', 'ig');
-            t = (t || template).replace(reg, obj[key]);
-        }
-        return t;
-    }
-
-    for (; i < len; i++) {
-        fragment += replace(data[i]);
-    }
-
-    return fragment; //绑定数据后的模板字符串
-};
-
 /*异步加载文件*/
 var classcodes = []; //已加载文件缓存列表,用于判断文件是否已加载过，若已加载则不再次加载
 window.Import = {
     /*加载一批文件，_files:文件路径数组,可包括js,css,less文件,succes:加载成功回调函数*/
     LoadFileList: function (_files, succes) {
         var FileArray = [];
+        if (!arguments[1]) {
+            var succes = function(){};
+        }
         if (typeof _files === "object") {
             FileArray = _files;
         } else {
@@ -100,31 +79,176 @@ window.Import = {
     }
 }
 
+//重新刷新页面，使用location.reload()有可能导致重新提交
+function reloadPage(win) {
+    win = win || window;
+    var location = win.location;
+    location.href = location.pathname + location.search;
+}
 
-// 表格添加行
-function addRow(table, rowStr) { 
-    var $table = (Object.prototype.toString.call(table) === "[object String]") ? $(table) : table, 
-        $tbody = $table.find('tbody') || $table,
-        $str = (Object.prototype.toString.call(table) === "[object String]") ? $(rowStr) : rowStr;
-    console.log($str);
-    $str.find('.remove').on('click', function (event) {
-        $str.remove();
-    });
-    $tbody.append($str);
+
+// 可编辑表格
+;(function (obj) { 
+    if (!obj.length) return;
+
+    $.fn.editTable = function(opts) {
+        var defaults = {
+            'addBtn': '.add-btn',
+            'saveBtn': '.save',
+            'editBtn': '.edit',
+            'cancelBtn': '.cancel',
+            'deleteBtn': '.delete',
+            'temp': '#template',
+            'saveTemp': '#saveTemplate',
+            'editFun': function (thisTr, texts, editeCallback) { }
+        }
+        var stg = $.extend({}, defaults, opts);
+
+        var $this = this;
+
+        function init() {
+            //添加
+            $(stg.addBtn).on('click', function(){
+                var $tbody = $this.find('tbody') || $this,
+                    temp = $(stg.temp).tmpl();
+                $tbody.append(temp);
+                // 取消添加
+                temp.find(stg.cancelBtn).on('click', function (event) {
+                    event.preventDefault();
+                    temp.remove();
+                });
+            });
+
+            //编辑
+            $this.on('click', stg.editBtn, function(event){
+                event.preventDefault();
+                var thisTr = $(this).parents('tr').first();
+                var texts = getTrText(thisTr);
+                stg.editFun(thisTr, texts, editeCallback);
+            });
+
+            // 保存
+            $this.on('click', stg.saveBtn, function (event) {
+                event.preventDefault();
+                var thisTr = $(this).parents('tr').first(),
+                    url = $(this).data('href') || $(this).prop('href'),
+                    reload = typeof $(this).attr('reload') != 'undefined',
+                    values = getTrValues(thisTr),
+                    loading;
+
+                if (thisTr.data('loading')) return false;
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: values,
+                    beforeSend: function(){
+                        thisTr.data('loading', true);
+                        loading = layer.msg('请稍后...', {icon: 16, shade: 0.01, time: 100 * 1000}); 
+                    },
+                    success: function(res){
+                        if (res.state == 'ok'){
+                            var temp = $(stg.saveTemp).tmpl(res.tempData);
+                            layer.msg(res.msg ? res.msg : '操作成功!', { icon: 1, time: 1000 });
+                            !reload && thisTr.data('loading', false) && thisTr.replaceWith(temp);
+                            reload && setTimeout(function () { 
+                                res.code && res.code.indexOf('CLOSE') != -1 && layer.closeAll();
+                                if (res.jump) {
+                                    window.location.href = res.jump;//返回带跳转地址
+                                } else {
+                                    if (res.code && res.code.indexOf('BACK') != -1) {
+                                        window.history.go(-1);//返回上一页
+                                    } else {
+                                        reloadPage();//刷新当前页
+                                    }
+                                }
+                             }, 1000);
+                        }else{
+                            layer.msg(res.msg, { icon: 2, anim: 6 });
+                            thisTr.data('loading', false);
+                        }
+                        layer.close(loading);
+                    }
+                });
+            });
+
+            // 删除
+            $this.on('click', stg.deleteBtn, function (event) {
+                event.preventDefault();
+                var thisTr = $(this).parents('tr').first(),
+                    url = $(this).data('href') || $(this).prop('href'),
+                    reload = typeof $(this).attr('reload') != 'undefined';
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(res){
+                        if (res.state == 'ok') {
+                            if (res.jump) {
+                                location.href = res.jump;
+                            } else {
+                                if (reload){
+                                    reloadPage(window);
+                                }else{
+                                    layer.msg(res.msg ? res.msg : '操作成功!', { icon: 1, time: 1000 });
+                                    thisTr.remove();
+                                }
+                            }
+                        }else{
+                            layer.msg(res.msg, { icon: 2, anim: 6 });
+                        }
+                    }
+                });
+            });
+            
+        }
+
+        //编辑回调
+        function editeCallback(thisTr, temp) {
+            thisTr.replaceWith(temp);
+            // 返回，取消编辑
+            temp.find('.return').on('click', function () {
+                event.preventDefault();
+                temp.replaceWith(thisTr);
+            });
+        }
+
+        // init();
+        Import.LoadFileList(['static/js/jquery.tmpl.min.js','static/vendor/layer/layer.js'], function(){
+            init();
+        });
+
+        return this;
+    }
+
+}($('.table-edit')));
+
+
+ // 获取行文本值
+ function getTrText(tr) {
+     var $tr = (Object.prototype.toString.call(tr) === "[object String]") ? $(tr) : tr;
+     var values = [];
+     $tr.find('td').not(':last-child').each(function () {
+         values.push($(this).text());
+     });
+     return values;
  }
 
- function editRow(row, rowStr) {
-     var $row = $(row);
-     $row.hide().after(rowStr);
+// 获取行表单值
+ function getTrValues(tr) {
+     var $tr = (Object.prototype.toString.call(tr) === "[object String]") ? $(tr) : tr;
+     var vs = $tr.find('[name]').serializeArray();
+     return vs;
  }
 
 
 // 日期选择
-(function (obj) {
+;(function (obj) {
     if (!obj.length) { return; }
 
+    //异步加载 日历插件
     var datepickerFile = ["static/vendor/datepicker/bootstrap-datepicker.min.css", "static/vendor/datepicker/bootstrap-datepicker.min.js"];
     Import.LoadFileList(datepickerFile, function () {
+
         $.fn.datepicker.dates['zh-CN'] = {
             days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
             daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
@@ -135,7 +259,6 @@ function addRow(table, rowStr) {
             suffix: [],
             meridiem: ["上午", "下午"]
         };
-
         var dp = obj.datepicker({
             autoclose: true,
             zIndexOffset: 9999,
@@ -172,7 +295,16 @@ $(function ($) {
         btn_change: null,
         no_icon: 'icon-cloud-upload',
         droppable: true,
-        thumbnail: 'small'
+        thumbnail: 'small',
+        before_change: function (files, dropped) {
+            console.log(files);
+            return true;
+        },
+        before_remove: function () {
+            return true;
+        }
+    }).on('change', function () {
+        // console.log($(this).data('ace_input_files'));
     });
 });
 

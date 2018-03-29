@@ -146,6 +146,7 @@ $('form').on('keydown', function(){
                     from.find('.val').addClass('cell-muted'); //添加痕迹
                 }
             }
+            _this.trigger("exchange", [from, to]); //定义放置事件
         }
 
         // 选择、取消选择元素
@@ -195,7 +196,7 @@ $('form').on('keydown', function(){
 
             exchange(dragObj, $(this), dropHtml);
 
-            _this.trigger("drop", $drop);
+            // _this.trigger("drop", [dragObj, $(this)]);
             _this.lastDone = true;
         });
 
@@ -222,9 +223,10 @@ $('form').on('keydown', function(){
                         selecting(false, "cell-selected");
                         _this.lastDone = false;
                     }
-                    else if (cur.hasClass('acceptable')) {
+                    else if (cur.hasClass('acceptable')) { //可接受元素
                         var dropHtml = cur.html();
                         exchange(_this.slcting.curCell, cur, dropHtml);
+                        // _this.trigger("drop", [_this.slcting.curCell, cur]); //定义放置事件
                         selecting(false, "cell-selected");
                         _this.lastDone = true;
                     }

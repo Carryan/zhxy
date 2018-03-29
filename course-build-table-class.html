@@ -527,6 +527,15 @@
         
     });
 
+    // 完成交换或移动
+    dtable.on("exchange", function(event, from, to){
+        var changeData = {
+            "from": from.data('key'),
+            "to": to.data('key')
+        }
+        console.log(changeData);
+    });
+
 
     // 获取最终值
     function getTableValues() {
