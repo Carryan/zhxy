@@ -18,6 +18,7 @@
 	<![endif]-->
 
     <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="assets/css/chosen.css" />
     <!-- <link rel="stylesheet" href="static/vendor/datepicker/bootstrap-datepicker.min.css"> -->
 
     <!-- fonts -->
@@ -230,16 +231,11 @@
                                                     <input type="text" name="" placeholder="请输入">
                                                 </td>
                                                 <td>
-                                                    <select name="">
-                                                        <option>请选择</option>
-                                                        <option value="">1</option>
-                                                        <option value="">2</option>
-                                                        <option value="">3</option>
-                                                    </select>
+                                                    <input type="text" name="" placeholder="请输入">
                                                 </td>
                                                 <td>
-                                                    <select name="">
-                                                        <option>请选择</option>
+                                                    <select name="" class="chosen-select" multiple data-placeholder="请选择">
+                                                        <option value=""></option>
                                                         <option value="">张一山</option>
                                                         <option value="">周某</option>
                                                         <option value="">王某</option>
@@ -332,6 +328,7 @@
 
     <!-- page specific plugin scripts -->
     <!-- <script src="static/vendor/datepicker/bootstrap-datepicker.min.js"></script> -->
+    <script src="assets/js/chosen.jquery.min.js"></script>
 
     <!-- ace scripts -->
 
@@ -348,6 +345,9 @@
 
     <script>
         $(function(){
+
+        // 多选
+        $(".chosen-select").chosen().parent().css('overflow','visible');
 
         });
     </script>

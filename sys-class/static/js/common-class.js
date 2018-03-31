@@ -144,7 +144,7 @@ function reloadPage(win) {
                     data: values,
                     beforeSend: function(){
                         thisTr.data('loading', true);
-                        loading = layer.msg('请稍后...', {icon: 16, shade: 0.01, time: 100 * 1000}); 
+                        loading = layer.msg('请稍后...', {icon: 16, shade: 0.01, time: 30 * 1000}); 
                     },
                     success: function(res){
                         if (res.state == 'ok'){
@@ -168,6 +168,9 @@ function reloadPage(win) {
                             thisTr.data('loading', false);
                         }
                         layer.close(loading);
+                    },
+                    error: function(){
+                        layer.msg("保存失败！", { icon: 2 });
                     }
                 });
             });
@@ -196,6 +199,9 @@ function reloadPage(win) {
                         }else{
                             layer.msg(res.msg, { icon: 2, anim: 6 });
                         }
+                    },
+                    error: function(){
+                        layer.msg("删除失败！", { icon: 2 });
                     }
                 });
             });
@@ -295,16 +301,7 @@ $(function ($) {
         btn_change: null,
         no_icon: 'icon-cloud-upload',
         droppable: true,
-        thumbnail: 'small',
-        before_change: function (files, dropped) {
-            console.log(files);
-            return true;
-        },
-        before_remove: function () {
-            return true;
-        }
-    }).on('change', function () {
-        // console.log($(this).data('ace_input_files'));
+        thumbnail: 'small'
     });
 });
 

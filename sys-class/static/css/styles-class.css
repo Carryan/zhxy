@@ -316,8 +316,11 @@ table.staff-table {
     margin-top: 10px;
 }
 
-.staff-table td > input, .staff-table td > select, .staff-table td > .input-group-box {
+.staff-table td > input, .staff-table td > select, .staff-table td > .input-group-boxs {
     width: 90%;
+}
+.staff-table td .chosen-container {
+    width: 90% !important;
 }
 
 .content-inline-block {
