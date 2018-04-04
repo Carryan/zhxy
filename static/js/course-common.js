@@ -112,7 +112,7 @@ $('form').on('keydown', function(){
 
         };
 
-        // 判断元素是否有值（有效）
+        // 判断元素是否有效（有val子元素，该子元素有data-val属性）
         function hasValue(obj) {
             var val = obj.find(settings.val);
             if (!val.is('[data-val]') || val.hasClass('cell-muted') || !val.data('val')) {

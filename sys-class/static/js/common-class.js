@@ -298,7 +298,7 @@ $(function ($) {
     $('#addFileUpload').ace_file_input({
         style: 'well',
         btn_choose: 'Drop files here or click to choose',
-        btn_change: null,
+        btn_change: "Change",
         no_icon: 'icon-cloud-upload',
         droppable: true,
         thumbnail: 'small'
