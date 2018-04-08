@@ -70,6 +70,12 @@ i[class^="icon-"] {
 .btn-xs.btn-line {
     padding: 3px 14px;
 }
+.btn-group>.btn-sm {
+    border-width: 4px;
+}
+.btn-group>.dropdown-menu {
+    min-width: 100%;
+}
 
 th, td {
     text-align: center;
@@ -516,13 +522,13 @@ td.ui-draggable-dragging {
     line-height: 1;
     font-size: 12px;
 }
-.table-color-tip .tip-square:first-child, .dragTable .cus-table td.cell-bug {
+.table-color-tip .tip-square.c1, .dragTable .cus-table td.cell-bug {
     background-color:#ffc7c7;
 }
-.table-color-tip .tip-square:first-child + .tip-square, .dragTable td.acceptable {
+.table-color-tip .tip-square.c2, .dragTable td.acceptable {
     background-color:#c7ffc7;
 }
-.table-color-tip .tip-square:first-child + .tip-square + .tip-square, .dragTable td.cell-selected, .ui-draggable-dragging {
+.table-color-tip .tip-square.c3, .dragTable td.cell-selected, .ui-draggable-dragging {
     background-color:#ffe97c;
 }
 i[class^="icon-"].orange1 {
