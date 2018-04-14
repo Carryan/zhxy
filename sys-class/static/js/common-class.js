@@ -305,6 +305,230 @@ $(function ($) {
     });
 });
 
+// plupload 文件上传
+(function (obj) {
+    if (!obj.length) return;
+
+    var flash_swf_url = 'static/vendor/plupload/Moxie.swf',
+        silverlight_xap_url = 'static/vendor/plupload/Moxie.xap';
+
+    Import.LoadFileList(['static/vendor/plupload/plupload.full.min.js', 'static/vendor/layer/layer.js'], function () {
+
+        obj.each(function (index, element) {
+            var $this = $(this),
+                url = $this.data('url') || $this.prop('url'),
+                remove_url = $this.data('removeurl') || $this.prop('removeurl') || "#",
+                max_file_size = $this.data('maxsize') || "200mb",
+                MAX_FILE_NUM = $this.data('maxnum') || 8, //最大可上传个数
+                $upload_btn = $('.start-upload'), //上传按钮
+                $preview = $(this).siblings('.preview'), //预览
+                $input = $(this).siblings('upload-input'),
+                $reset = $('.btn[type="reset"]'); //重置
+
+            var uploader = new plupload.Uploader({
+                browse_button: element,
+                drop_element: element,
+                url: url,
+                max_file_size: max_file_size,
+                // chunk_size: "100mb",
+                flash_swf_url: flash_swf_url,
+                silverlight_xap_url: silverlight_xap_url
+            });
+
+            uploader.init();
+
+            //当文件添加到上传队列
+            uploader.bind('FilesAdded', function (uploader, files) {
+                var items = $preview.find('.file-item').not('[data-state="err"]');
+                // 文件个数限制
+                if (files.length + items.length > MAX_FILE_NUM) {
+                    layer.msg("最多只能上传 " + MAX_FILE_NUM + " 个文件", { icon: 2 });
+                    files.forEach(function (cur, index, arr) {
+                        uploader.removeFile(cur);
+                    });
+                    return;
+                }
+                hideBoard();
+
+                for (var i = 0, len = files.length; i < len; i++) {
+                    var file_id = files[i].id;
+                    previewImage(files[i], function (li) {
+                        var $li = (Object.prototype.toString.call(li) === "[object String]") ? $(li) : li;
+                        $li.attr({
+                            "id": file_id,
+                            "data-state": "add"
+                        }).addClass("file-item");
+                        $preview.append(li);
+                    });
+                }
+                // 不存在上传按钮 则直接上传
+                if (!$upload_btn.length) uploader.start();
+            });
+
+            //如果存在上传按钮
+            if ($upload_btn.length) {
+                $upload_btn.on('click', function (event) {
+                    uploader.start();
+                });
+            }
+
+            // 开始上传
+            uploader.bind('UploadFile', function (uploader, file) {
+                $('#' + file.id).attr("data-state", "loading");
+            });
+            //当队列中的某一个文件上传完成后
+            uploader.bind('FileUploaded', function (uploader, file, data) {
+                // console.log(file);
+                var file_li = $('#' + file.id);
+                if (data.status === 200) {
+                    //data.response为返回的文本
+                    var res = (Object.prototype.toString.call(data.response) === "[object String]") ? JSON.parse(data.response) : data.response;
+                    if (res.state == "ok") {
+                        file_li.attr({
+                            "data-state": "loaded",
+                            "data-file": res.fileData
+                        });
+                        // 上传成功事件
+                        $this.trigger("uploaded");
+                    } else {
+                        layer.msg(file.name + " 上传失败！" + res.msg, { icon: 2 });
+                        file_li.attr("data-state", "err");
+                    }
+                } else {
+                    layer.msg(file.name + " 上传失败！", { icon: 2 });
+                    file_li.attr("data-state", "err");
+                }
+            });
+            // 删除文件
+            $preview.on('click', '.remove-file', function () {
+                event.preventDefault();
+                var cur_li = $(this).parents('.file-item').first(),
+                    state = cur_li.attr('data-state');
+                if (state == "loaded") {
+                    ajaxFileRemove(cur_li, remove_url, uploader);
+                } else {
+                    fileRemove(cur_li, uploader);
+                }
+            });
+            // 重置
+            $reset.on('click', function () {
+                $preview.find('.remove-file').click();
+            });
+            //上传进度
+            uploader.bind('UploadProgress', function (uploader, file) {
+                var percent = file.percent,
+                    item = $('#' + file.id);
+                progress(percent, item);
+            });
+
+        });
+
+        /******************* 可修改部分 ******************/
+
+        // 预览
+        function previewImage(file, callback) {
+            console.log(file.type);
+            var file_name = file.name;
+            var li = '<div>' +
+                '<div class="img-box">' +
+                '<a href="#" class="remove-file"><i class="icon-remove"></i></a>' +
+                '<div class="cover">' +
+                '<span class="progressBar">0%</span>' +
+                '<span class="errBar">!</span>' +
+                '</div>' +
+                '</div>' +
+                '<p>' + file_name + '</p>' +
+                '</div>';
+            var $li = $(li);
+            if ((/\.(jpe?g|png|gif|svg|ico|bmp|tiff?)$/i).test(file_name)) {
+                if ((/\/(jpe?g|png)$/i).test(file.type)) {
+                    var preloader = new mOxie.Image();
+                    preloader.onload = function () {
+                        preloader.downsize(100, 100);//先压缩一下要预览的图片
+                        var imgsrc = preloader.type == 'image/jpeg' ? preloader.getAsDataURL('image/jpeg', 80) : preloader.getAsDataURL(); //得到图片src,实质为一个base64编码的数据
+                        $li.find('.img-box').css('background-image', 'url(' + imgsrc + ')');
+                        callback($li);
+                        preloader.destroy();
+                        preloader = null;
+                    };
+                    preloader.load(file.getSource());
+                } else {
+                    var fr = new FileReader();
+                    fr.onload = function () {
+                        $li.find('.img-box').css('background-image', 'url(' + fr.result + ')');
+                        callback($li);
+                        fr = null;
+                    }
+                    fr.readAsDataURL(file.getNative());
+                }
+            } else {
+                var src = "static/images/icon/file-icon.png";
+                if ((/\.(mpe?g|flv|mov|avi|swf|mp4|mkv|webm|wmv|3gp)$/i).test(file_name)) { }
+                if ((/\.(mp3|ogg|wav|wma|amr|aac)$/i).test(file_name)) { }
+                if ((/\.docx?$/i).test(file_name)) src = "static/images/icon/doc.png";
+                if ((/\.pdf$/i).test(file_name)) src = "static/images/icon/pdf.png";
+                if ((/\.(zip|rar|arj)$/i).test(file_name)) src = "static/images/icon/zip.png";
+                $li.find('.img-box').css({
+                    'background-image': 'url(' + src + ')',
+                    'background-size': 'auto'
+                });
+                callback($li);
+            }
+        }
+
+        // 进度条
+        function progress(percent, item) {
+            item.find('.progressBar').text(percent + "%");
+        }
+
+        // 删除文件
+        function fileRemove(li, uploader) {
+            var file = uploader.getFile(li.attr('id'));
+            uploader.removeFile(file);
+            li.remove();
+            hideBoard("judge");
+            console.log(uploader.files);
+        }
+        function ajaxFileRemove(li, remove_url, uploader) {
+            $.ajax({
+                url: remove_url,
+                type: 'POST',
+                dataType: 'JSON',
+                data: { "fileData": li.data('file') },
+                success: function (res) {
+                    if (res.state == 'ok') {
+                        fileRemove(li, uploader);
+                    } else {
+                        layer.msg(res.msg || "删除失败！", { icon: 2, anim: 6 });
+                    }
+                    console.log(uploader.files);
+                },
+                error: function () {
+                    layer.msg("删除失败！", { icon: 2 });
+                }
+            });
+        }
+
+        // 隐藏面板
+        function hideBoard(type) {
+            if (type === "judge") {
+                var items = $(".plupload-box .preview").html();
+                if (!items) $(".plupload-box .file-label").removeClass('hide');
+            } else {
+                $(".plupload-box .file-label").addClass('hide');
+            }
+        }
+
+        // label 触发 选择
+        $(".plupload-box .file-label").on('click', function () {
+            obj.click();
+        });
+
+        obj.on('uploaded', function () { }); // 自定义的上传完成事件
+    });
+
+}($(".plupload")));
+
 
 // 表格复选框 全选
 $('table thead th input:checkbox').on('click', function () {

@@ -62,13 +62,10 @@ $('form').on('keydown', function(){
             dragCells.draggable({
                 revert: "invalid",
                 addClasses: false,
-                // appendTo: _this.find('.fix-list thead tr').first(),
                 appendTo: _this,
                 cancel: settings.disabled,
                 containment: settings.container,//拖拽范围容器
                 scroll: false,
-                // scrollSensitivity: 80,
-                // scrollSpeed: 30,
                 distance: 10, //拖拽开始前必须移动的距离
                 helper: function () {
                     var ele = $(this).clone(),
@@ -77,8 +74,6 @@ $('form').on('keydown', function(){
                     ele.find(settings.val).width(w).height(h);
                     return ele;
                 },
-                // start: function( event, ui ) {
-                // },
                 // 滚动条滚动 不触发 drag事件
                 drag: function (event, ui) {
                     // ui.position helper相对父元素距离，ui.offset helper相对文档距离
@@ -108,8 +103,6 @@ $('form').on('keydown', function(){
                 // activeClass: "acceptable"
             });
 
-            // cache.droppable("enable"); //缓冲区长久可放置
-
         };
 
         // 判断元素是否有效（有val子元素，该子元素有data-val属性）
@@ -138,28 +131,34 @@ $('form').on('keydown', function(){
                 }
             }
             else { //被拖元素不在缓冲区
-                if (hasValue(to)) {
-                    to.html(from.html());
-                    from.html(html);
-                } else {
-                    to.html(from.html());
-                    from.find('.val').addClass('cell-muted'); //添加痕迹
-                }
+                to.html(from.html());
+                from.html(html);
+                // if (hasValue(to)) {
+                //     to.html(from.html());
+                //     from.html(html);
+                // } else {
+                //     to.html(from.html());
+                //     from.find('.val').addClass('cell-muted'); //添加痕迹
+                // }
             }
             _this.trigger("exchange", [from, to]); //定义放置事件
         }
 
         // 选择、取消选择元素
         function selecting(isSlt, clas, curCell) {
+            // console.log(_this.lastDone);
             if (isSlt) { //选择
                 _this.slcting.isSelected = true;
                 _this.slcting.lastCell = _this.slcting.curCell;
                 _this.slcting.curCell = curCell;
                 curCell.addClass(clas);
-            } else { //取消选择
+            } else { //取消选择（选中后、不选）
                 _this.slcting.curCell.removeClass(clas);
                 _this.slcting.isSelected = false;
-                _this.render();
+                if (!_this.lastDone) { //取消移动
+                    _this.render();
+                    _this.trigger("cancelMove", $(this));
+                } 
             }
         }
 
@@ -169,6 +168,7 @@ $('form').on('keydown', function(){
 
             if (!hasValue(cur)) return false;
 
+            _this.lastDone = false;
             if (_this.slcting.isSelected) { //有被选元素时
                 if (cur.is(_this.slcting.curCell)) { //当前元素是被选元素时
                     cur.removeClass('cell-selected').addClass('cell-dragging');
@@ -180,13 +180,12 @@ $('form').on('keydown', function(){
                 selecting(true, "cell-dragging", cur);
                 _this.trigger("startDragging", [cur, all]);
             }
-            _this.lastDone = false;
+            
         });
 
         // 停止拖拽事件
         dragCells.on("dragstop", function (event, ui) {
             selecting(false, "cell-dragging");
-            _this.trigger("stop", $drop);
         });
 
         // 放置事件
@@ -196,7 +195,6 @@ $('form').on('keydown', function(){
 
             exchange(dragObj, $(this), dropHtml);
 
-            // _this.trigger("drop", [dragObj, $(this)]);
             _this.lastDone = true;
         });
 
@@ -220,15 +218,14 @@ $('form').on('keydown', function(){
                 {
                     if (cur.is(_this.slcting.curCell)) //当前元素 是 被选元素
                     {
-                        selecting(false, "cell-selected");
                         _this.lastDone = false;
+                        selecting(false, "cell-selected"); //取消移动
                     }
                     else if (cur.hasClass('acceptable')) { //可接受元素
-                        var dropHtml = cur.html();
-                        exchange(_this.slcting.curCell, cur, dropHtml);
-                        // _this.trigger("drop", [_this.slcting.curCell, cur]); //定义放置事件
-                        selecting(false, "cell-selected");
                         _this.lastDone = true;
+                        var dropHtml = cur.html();
+                        selecting(false, "cell-selected"); 
+                        exchange(_this.slcting.curCell, cur, dropHtml);
                     }
                     else {
                         alert_text.text(cur.attr('title'));
@@ -240,9 +237,9 @@ $('form').on('keydown', function(){
                 }
                 else {
                     if (!hasValue(cur)) return;
+                    _this.lastDone = false;
                     selecting(true, "cell-selected", cur);
                     _this.trigger("startDragging", [cur, all]);
-                    _this.lastDone = false;
                 }
             }
 
@@ -289,43 +286,40 @@ $('form').on('keydown', function(){
             return cels;
         };
 
-        // 设置 可放区 和 不可放原因
-        this.render = function (enableKey, disableReason) {
-            if (arguments.length == 2) {
-                cells.each(function () {
-                    var k = $(this).data('key');
-                    var isEmptyCache = $(this).is(cache) && !hasValue($(this)); //是否为空的缓冲区
-                    if (enableKey.indexOf(k) != -1 || isEmptyCache) {
-                        $(this).droppable("enable");
-                        $(this).addClass('acceptable');
-                    } else {
-                        $(this).attr("title", disableReason[k]);
-                    }
-                });
-            } else {
-                cells.droppable("disable");
-                cells.removeClass('acceptable').removeAttr('title'); //通过acceptable判断是否可移
-            }
-        }
+        // 渲染
+        this.render = function (param) {
+            var ps = $.extend({
+                        "enable": [],
+                        "bug": [],
+                        "title": {}
+                    }, param);
+            var enable = ps.enable,
+                bug = ps.bug,
+                title = ps.title;
 
-        // 激活放置
-        this.activeDrop = function (obj) {
-            obj.droppable("enable");
-        };
-        // 禁止放置
-        this.disableDrop = function (o) {
-            var obj = arguments[0] ? arguments[0] : notCache;
-            obj.droppable("disable");
-        };
-        // 禁止拖拽
-        this.disableDrag = function (o) {
-            var obj = arguments[0] ? arguments[0] : dragCells;
-            obj.draggable("disable");
-        }
-        // 允许拖拽
-        this.enableDrag = function (o) {
-            var obj = arguments[0] ? arguments[0] : dragCells;
-            obj.draggable("enable");
+            cells.each(function () {
+                var k = $(this).data('key');
+                // 是否可移动
+                if (enable.indexOf(k) != -1) {
+                    $(this).droppable("enable");
+                    $(this).addClass('acceptable');
+                } else {
+                    $(this).droppable("disable");
+                    $(this).removeClass('acceptable');
+                }
+                // 是否为 bug元素 
+                if (bug.indexOf(k) != -1) {
+                    $(this).addClass('cell-bug');
+                } else {
+                    $(this).removeClass('cell-bug');
+                }
+                // 是否添加标题
+                if (title.hasOwnProperty(k)) {
+                    $(this).attr('title', title[k]);
+                }else{
+                    $(this).removeAttr('title');
+                }
+            });
         }
 
         init();
@@ -665,7 +659,6 @@ function hasScrolled(el, direction) {
     }
 }
 
-
 // 固定列
 // $(".fix-table-box").scroll(function(){
 //     var $this = $(this),
@@ -676,3 +669,9 @@ function hasScrolled(el, direction) {
 //     fl.css('left', $this.scrollLeft());
 // });
 
+// 交换内容，from/to 为jQuery对象
+function exchangeHtml(from, to) {
+    var t = from.html();
+    from.html(to.html());
+    to.html(t);
+}

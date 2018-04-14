@@ -163,17 +163,28 @@
                                                 <option value="">李某</option>
                                             </select>
                                         </div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label>上传附件：</label>
                                             <input type="file" name="" id="addFileUpload" multiple />
                                             <div class="file-tips">支持拓展名：rar、zip、doc、pdf、jpg...</div>
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label>上传附件：</label>
+                                            <div class="ace-file-input ace-file-multiple plupload-box">
+                                                <label class="file-label" data-title="Drop files here or click to choose">
+                                                    <span class="file-name">
+                                                        <i class="icon-cloud-upload"></i>
+                                                    </span>
+                                                </label>
+                                                <div class="preview clearfix"></div>
+                                                <!-- data-url上传的URL，data-removeurl删除URL，maxsize最大上传文件大小 -->
+                                                <!-- 上传成功返回：state=ok, fileData文件信息; 上传失败返回：msg错误信息; 删除返回state=ok -->
+                                                <button type="button" class="plupload" data-url="http://192.168.0.110:8001/upload" data-removeurl="http://192.168.0.110:8001/remove"
+                                                    data-maxsize="" data-maxnum=""><i class="icon-plus"></i> 继续添加</button>
+                                                <input type="hidden" class="upload-input" name="" value="" onchange="">
+                                            </div>
+                                            <div class="file-tips">支持拓展名：rar、zip、doc、pdf、jpg...</div>
                                         </div>
-                                    </div>
-
-                                    <div>
-                                        <button type="button" class="ajax-upload">选择文件</button>
-                                        <!-- <button type="button" class="start-upload">开始上传</button> -->
-                                        <ul class="preview"></ul>
                                     </div>
 
                                     <div class="form-actions text-center">
@@ -254,87 +265,6 @@
     <!-- <script src="static/vendor/plupload/plupload.full.min.js"></script> -->
 
     <script>
-    
-
-    (function(obj){
-        if(!obj.length) return;
-
-        var flash_swf_url = 'static/vendor/plupload/Moxie.swf',
-            silverlight_xap_url = 'static/vendor/plupload/Moxie.xap';
-
-        Import.LoadFileList(['static/vendor/plupload/plupload.full.min.js', 'static/vendor/layer/layer.js'], function () {
-
-            obj.each(function(index, element){
-                var $this = $(this),
-                    url = 'http://192.168.0.110:8001/upload',
-                    max_file_size = '2mb',
-                    $upload_btn = $(this).siblings('.start-upload'),
-                    $preview = $(this).siblings('ul.preview'),
-                    remove_url = "";
-
-                var uploader = new plupload.Uploader({
-                    browse_button: element,
-                    url: url,
-                    max_file_size: max_file_size,
-                    flash_swf_url: flash_swf_url,
-                    silverlight_xap_url: silverlight_xap_url
-                });
-
-                uploader.init();
-                
-                //当文件添加到上传队列
-                uploader.bind('FilesAdded', function (uploader, files) {
-                    if(!$upload_btn.length){
-                        uploader.start();
-                    }
-                });
-                
-                //如果存在上传按钮
-                if($upload_btn.length) {
-                    $upload_btn.on('click', function(event){
-                        uploader.start();
-                    });
-                }
-
-                //当队列中的某一个文件上传完成后
-                uploader.bind('FileUploaded', function (uploader, file, data) {
-                    if (data.status === 200) {
-                        var res = (Object.prototype.toString.call(data.response) === "[object String]") ? JSON.parse(data.response) : data.response;
-                        var imgLi = '<li>'+
-                                        '<img src="'+ res.filePath+'"/>'+
-                                        '<a href="#" class="remove-file">删除</a>'+
-                                    '</li>';
-                        $preview.append(imgLi);
-                    }
-                });
-
-                // 删除文件
-                $preview.on('click', '.remove-file', function(){
-                    event.preventDefault();
-                    var cur_li = $(this).parents('li').first(),
-                        data = $(this).data();
-                    $.ajax({
-                        url: remove_url,
-                        type: 'GET',
-                        data: '',
-                        success: function (res) {
-                            if (res.state == 'ok') {
-                                cur_li.remove();
-                            } else {
-                                layer.msg(res.msg || "删除失败！", { icon: 2, anim: 6 });
-                            }
-                        },
-                        error: function () {
-                            layer.msg("删除失败！", { icon: 2 });
-                        }
-                    });
-                });
-
-            });
-
-        });
-
-    }($(".ajax-upload")));
 
     </script>
 </body>

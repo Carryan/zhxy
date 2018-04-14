@@ -4,6 +4,7 @@ body {
 }
 
 a { color: #34A8EA; }
+[hidden], .hide { display: none; }
 
 body.modal-open {
     margin-right: 0;
@@ -372,7 +373,7 @@ table.staff-table {
     display: inline-block;
     vertical-align: top;
     width: 350px;
-    margin-bottom: 0;
+    margin-bottom: 5px;
 }
 .content-edit .center-form .ace-file-input + .file-tips {
     padding-left: 158px;
@@ -477,4 +478,129 @@ table.staff-table {
 }
 .standar-detail .standar-detail-title {
     margin-bottom: 50px;
+}
+
+.plupload-box {
+    border: 1px dashed #aaa;
+    border-radius: 4px;
+    padding: 10px 15px 18px;
+    text-align: center;
+}
+.plupload-box.ace-file-input {
+    line-height: 1;
+}
+.plupload-box .file-label {
+    border: none;
+    margin: -10px -15px -18px -15px;
+}
+.plupload-box .file-label.hide {
+    display: none;
+}
+.plupload-box .plupload {
+    width: 150px;
+    height: 22px;
+    font-size: 12px;
+    color: #666;
+    background-color: #fff;
+    border: 1px solid #D7D7D7;
+    outline: none;
+}
+.plupload-box .file-label ~ .plupload {
+    display: none;
+}
+.plupload-box .file-label.hide ~ .plupload {
+    display: inline-block;
+}
+
+/******* 上传的文件 *******/
+.plupload-box .preview {
+    margin-right: -10px;
+}
+.plupload-box .preview .file-item {
+    width: 72px;
+    float: left;
+    margin-right: 10px;
+}
+.plupload-box .preview .file-item .img-box {
+    height: 72px;
+    position: relative;
+    border: 1px solid #D7D7D7;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.plupload-box .preview .file-item .img-box .remove-file {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.65);
+    color: #fff;
+    padding: 1px 2px;
+    display: none;
+    z-index: 99;
+}
+.plupload-box .preview .file-item .img-box:hover .remove-file {
+    display: inline-block;
+}
+.plupload-box .preview .file-item .img-box .cover {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    font-size: 12px;
+    background-color: rgba(244, 244, 244);
+}
+.plupload-box .preview .file-item[data-state="loading"] .img-box .cover, 
+.plupload-box .preview .file-item[data-state="err"] .img-box .cover {
+    display: block;
+}
+.plupload-box .preview .file-item[data-state="loading"] .img-box .cover:after {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+.plupload-box .preview .file-item .img-box .progressBar, .plupload-box .preview .file-item .img-box .errBar {
+    display: none;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255);
+    border: 1px solid #999;
+    color: #999;
+}
+.plupload-box .preview .file-item[data-state="loading"] .img-box .progressBar{
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    vertical-align: middle;
+    display: inline-block;
+}
+.plupload-box .preview .file-item[data-state="err"] .img-box .errBar {
+    display: inline-block;
+    position: relative;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bolder;
+}
+.plupload-box .preview .file-item .img-box .errBar:after {
+    content: "上传失败";
+    position: absolute;
+    display: inline-block;
+    bottom: -28px;
+    width: 4em;
+    left: 50%;
+    margin-left: -2em;
+    font-size: 12px;
+    font-weight: normal;
+}
+.plupload-box .preview .file-item > p {
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 2;
 }

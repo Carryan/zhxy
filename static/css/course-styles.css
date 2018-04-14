@@ -525,11 +525,14 @@ td.ui-draggable-dragging {
 .table-color-tip .tip-square.c1, .dragTable .cus-table td.cell-bug {
     background-color:#ffc7c7;
 }
+/* .dragTable .cus-table td.cell-bug[title] {
+    background-color: #ffffff;
+} */
 .table-color-tip .tip-square.c2, .dragTable td.acceptable {
-    background-color:#c7ffc7;
+    background-color:#c7ffc7!important;
 }
 .table-color-tip .tip-square.c3, .dragTable td.cell-selected, .ui-draggable-dragging {
-    background-color:#ffe97c;
+    background-color:#ffe97c!important;
 }
 i[class^="icon-"].orange1 {
     margin-right: 10px;
