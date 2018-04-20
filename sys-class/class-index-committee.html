@@ -18,11 +18,9 @@
 	<![endif]-->
 
     <!-- page specific plugin styles -->
-
+    <link rel="stylesheet" href="assets/css/chosen.css" />
 
     <!-- fonts -->
-
-    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" /> -->
 
     <!-- ace styles -->
 
@@ -216,10 +214,10 @@
                                                     <td>张一山</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="#">
+                                                            <a href="javascript:;" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
                                                             </a>
                                                         </span>
@@ -230,10 +228,10 @@
                                                     <td>张一山</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="#">
+                                                            <a href="javascript:;" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
                                                             </a>
                                                         </span>
@@ -276,7 +274,13 @@
                 <input type="text" name="cadreName" value="{{= cadreName}}" />
             </td>
             <td>
-                <input type="text" name="studentName" value="{{= studentName}}" />
+                <!-- <input type="text" name="studentName" value="{{= studentName}}" /> -->
+                <select name="" class="chosen-select" multiple data-placeholder="请选择">
+                    <option value=""></option>
+                    {{each students}}
+                    <option value="${$value.val}">${$value.name}</option>
+                    {{/each}}
+                </select>
             </td>
             <td>
                 <span class="action-buttons">
@@ -291,14 +295,19 @@
         </tr>
     </script>
 
-    <!-- 模板 -->
+    <!-- 课代表 模板 -->
     <script type="text/html" id="repTemplate">
         <tr>
             <td>
                 <input type="text" name="subjectName" value="{{= subjectName}}" />
             </td>
             <td>
-                <input type="text" name="studentName" value="{{= studentName}}" />
+                <select name="" class="chosen-select" multiple data-placeholder="请选择">
+                    <option value=""></option>
+                    {{each students}}
+                    <option value="${$value.val}">${$value.name}</option>
+                    {{/each}}
+                </select>
             </td>
             <td>
                 <span class="action-buttons">
@@ -364,122 +373,93 @@
     <script src="assets/js/typeahead-bs2.min.js"></script>
 
     <!-- page specific plugin scripts -->
-
+    <script src="assets/js/chosen.jquery.min.js"></script>
 
     <!-- ace scripts -->
 
     <script src="assets/js/ace-elements.min.js"></script>
     <script src="assets/js/ace.min.js"></script>
 
-
-    <!-- inline scripts related to this page -->
-    <!-- <div style="display: none">
-        <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
-    </div> -->
-
-    <!-- <script src="static/vendor/layer/layer.js"></script>
-    <script src="static/js/jquery.tmpl.min.js"></script> -->
     <script src="static/js/common-class.js"></script>
 
     <script>
+
+        var init_data = {
+            "cadreName": "",
+            "students": [
+                { "val": "v1", "name": "张一山" },
+                { "val": "v2", "name": "周某" },
+                { "val": "v3", "name": "王某" },
+                { "val": "v4", "name": "张三" },
+                { "val": "v5", "name": "李四" },
+                { "val": "v6", "name": "王五" },
+            ],
+            "isEdit": false
+        };
 
         // 添加班干部
         $("#tableCadres").editTable({
             addBtn: "#addCadres", //添加按钮
             temp: "#cadresTemplate", //编辑模板
             saveTemp: "#saveTemplate", //保存模板
-            // 编辑时执行的函数，thisTr当前行，texts当前行文本数组，editeCallback回调 进入编辑状态
-            editFun: function (thisTr, texts, editeCallback) {
-                var data = [{
-                    'cadreName': texts[0],
-                    'studentName': texts[1],
-                    'isEdit': 1
-                }];
-                var temp = $('#cadresTemplate').tmpl(data);
-                editeCallback(thisTr, temp); //thisTr:当前行; temp:编辑的模板HTML元素或jq对象
-            }
+            initData: init_data //初始数据
+        })
+        .on("addRow", function(e, curRow){
+            curRow.find(".chosen-select").chosen().parent().css('overflow', 'visible');
+        })
+        .on("editRow", function(e, thisTr, texts, editeCallback){ // thisTr当前行，texts当前行文本数组，editeCallback回调 进入编辑状态
+            // 编辑状态的数据
+            var data = init_data;
+            data["cadreName"] = texts[0]; 
+            data["isEdit"] = true;
+            var temp = $('#cadresTemplate').tmpl(data);
+            // 为选择框赋值
+            temp.find("select option").each(function(){
+                if($(this).text()==texts[1]) $(this).attr("selected", true);
+            }); 
+            temp.find(".chosen-select").chosen().parent().css('overflow', 'visible');
+            //thisTr:当前行; temp:编辑的模板HTML元素或jq对象
+            editeCallback(thisTr, temp); 
         });
+
+
+        var init_data2 = {
+                "subjectName": "",
+                "students": [
+                    { "val": "v1", "name": "张一山" },
+                    { "val": "v2", "name": "周某" },
+                    { "val": "v3", "name": "王某" },
+                    { "val": "v4", "name": "张三" },
+                    { "val": "v5", "name": "李四" },
+                    { "val": "v6", "name": "王五" },
+                ],
+                "isEdit": false
+            };
 
         // 添加课代表
         $("#tableRepresentative").editTable({
                 addBtn: "#addRepresentative", //添加按钮
                 temp: "#repTemplate", //编辑模板
                 saveTemp: "#saveTemplate", //保存模板
-                editFun: function (thisTr, texts, editeCallback) {
-                    var data = [{
-                        'subjectName': texts[0],
-                        'studentName': texts[1],
-                        'isEdit': 1
-                    }];
-                    var temp = $('#repTemplate').tmpl(data);
-                    editeCallback(thisTr, temp);
-                }
+                initData: init_data2
+        })
+        .on("addRow", function (e, curRow) {
+            curRow.find(".chosen-select").chosen().parent().css('overflow', 'visible');
+        })
+        .on("editRow", function (e, thisTr, texts, editeCallback) { // thisTr当前行，texts当前行文本数组，editeCallback回调 进入编辑状态
+            // 编辑状态的数据
+            var data = init_data2;
+            data["subjectName"] = texts[0];
+            data["isEdit"] = true;
+            var temp = $('#repTemplate').tmpl(data);
+            // 为选择框赋值
+            temp.find("select option").each(function () {
+                if ($(this).text() == texts[1]) $(this).attr("selected", true);
             });
-
-
-/***********************************************************/
-
-        // //添加
-        // $("#addCadres").on('click', function () {
-        //     var $tbody = $("#tableCadres").find('tbody') || $this,
-        //         temp = $('#cadresTemplate').tmpl();
-        //     $tbody.append(temp);
-
-        //     // 取消
-        //     temp.find('.cancel').on('click', function (event) {
-        //         event.preventDefault();
-        //         temp.remove();
-        //     });
-        // });
-
-
-        // // 保存
-        // $("#tableCadres").on('click', '.save', function (event) {
-        //     event.preventDefault();
-        //     var thisTr = $(this).parents('tr').first();
-
-        //     //拼模板
-        //     var values = getTrValues(thisTr);
-        //     var data = [{
-        //             'text1': values[0].value,
-        //             'text2': values[1].value
-        //         }];
-        //     var savedTemp = $('#saveTemplate').tmpl(data);
-
-        //     thisTr.replaceWith(savedTemp);
-        // });
-
-        
-        // //编辑
-        // $("#tableCadres").on('click', '.edit', function (event) {
-        //     event.preventDefault();
-        //     var thisTr = $(this).parents('tr').first();
-
-        //     //拼模板
-        //     var texts = getTrText(thisTr);
-        //     var data = [{
-        //         'cadreName': texts[0],
-        //         'studentName': texts[1],
-        //         'isEdit': 1
-        //     }];
-        //     var temp = $('#cadresTemplate').tmpl(data);
-
-        //     thisTr.replaceWith(temp);
-            
-        //     // 返回，取消编辑
-        //     temp.find('.return').on('click', function(){
-        //         event.preventDefault();
-        //         temp.replaceWith(thisTr);
-        //     });
-
-        // });
-
-        // // 删除
-        // $("#tableCadres").on('click', '.delete', function (event) {
-        //     event.preventDefault();
-        //     var thisTr = $(this).parents('tr').first();
-        //     thisTr.remove();
-        // });
+            temp.find(".chosen-select").chosen().parent().css('overflow', 'visible');
+            //thisTr:当前行; temp:编辑的模板HTML元素或jq对象
+            editeCallback(thisTr, temp);
+        });
 
     </script>
 

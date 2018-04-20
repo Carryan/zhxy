@@ -131,17 +131,19 @@ $('form').on('keydown', function(){
                 }
             }
             else { //被拖元素不在缓冲区
-                to.html(from.html());
-                from.html(html);
-                // if (hasValue(to)) {
-                //     to.html(from.html());
-                //     from.html(html);
-                // } else {
-                //     to.html(from.html());
-                //     from.find('.val').addClass('cell-muted'); //添加痕迹
-                // }
+                // to.html(from.html());
+                // from.html(html);
+                if (hasValue(to)) {
+                    to.html(from.html());
+                    from.html(html);
+                } else {
+                    to.html(from.html());
+                    from.find('.val').addClass('cell-muted'); //添加痕迹
+                }
             }
+            _this.render();
             _this.trigger("exchange", [from, to]); //定义放置事件
+            _this.lastDone = true;
         }
 
         // 选择、取消选择元素
@@ -155,7 +157,7 @@ $('form').on('keydown', function(){
             } else { //取消选择（选中后、不选）
                 _this.slcting.curCell.removeClass(clas);
                 _this.slcting.isSelected = false;
-                if (!_this.lastDone) { //取消移动
+                if (!_this.lastDone) { //取消移动时
                     _this.render();
                     _this.trigger("cancelMove", $(this));
                 } 
@@ -168,7 +170,7 @@ $('form').on('keydown', function(){
 
             if (!hasValue(cur)) return false;
 
-            _this.lastDone = false;
+            if (!_this.isDrop) _this.lastDone = false;
             if (_this.slcting.isSelected) { //有被选元素时
                 if (cur.is(_this.slcting.curCell)) { //当前元素是被选元素时
                     cur.removeClass('cell-selected').addClass('cell-dragging');
@@ -180,11 +182,12 @@ $('form').on('keydown', function(){
                 selecting(true, "cell-dragging", cur);
                 _this.trigger("startDragging", [cur, all]);
             }
-            
+            _this.isDrop = false;
         });
 
         // 停止拖拽事件
         dragCells.on("dragstop", function (event, ui) {
+            _this.isDrop ? _this.isDrop = true : _this.isDrop = false;
             selecting(false, "cell-dragging");
         });
 
@@ -194,15 +197,14 @@ $('form').on('keydown', function(){
                 dropHtml = $(this).html();
 
             exchange(dragObj, $(this), dropHtml);
-
-            _this.lastDone = true;
+            _this.isDrop = true;
         });
 
         // 点击事件
         var clicker = null;
         cells.on("click", function (event) {
             var cur = $(this), all = cells;
-
+            
             // 避免双击 触发 单击事件
             if(settings.isDblclick){
                 clearTimeout(clicker);
@@ -222,7 +224,6 @@ $('form').on('keydown', function(){
                         selecting(false, "cell-selected"); //取消移动
                     }
                     else if (cur.hasClass('acceptable')) { //可接受元素
-                        _this.lastDone = true;
                         var dropHtml = cur.html();
                         selecting(false, "cell-selected"); 
                         exchange(_this.slcting.curCell, cur, dropHtml);
@@ -237,7 +238,6 @@ $('form').on('keydown', function(){
                 }
                 else {
                     if (!hasValue(cur)) return;
-                    _this.lastDone = false;
                     selecting(true, "cell-selected", cur);
                     _this.trigger("startDragging", [cur, all]);
                 }
@@ -263,6 +263,9 @@ $('form').on('keydown', function(){
 
         // 是否完成上一个移动或交换
         this.lastDone = true;
+
+        // 是否已经放置
+        this.isDrop = true;
 
         // 是否有元素被选
         this.slcting = {

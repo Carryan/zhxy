@@ -843,11 +843,12 @@
         dtable1.on("startDragging", function (event, curCell, allCells) {
             // curCell被拖拽元素，allCells所有元素
             //完成上一个移动或交换
-            if (dtable1.lastDone || !dtable1.slcting.curCell.is(dtable1.slcting.lastCell)) {
+            // console.log(dtable1.lastDone);
+            if (dtable1.lastDone) {
                 console.log("send ajax");
                 var curVal = dtable1.getValues(curCell),
                     allVals = dtable1.getValues(allCells);
-                    console.log(curVal);
+                    // console.log(curVal);
                 $.ajax({
                     url: "static/data/course-accept.json",
                     type: "GET",
@@ -886,15 +887,17 @@
 
         dtable1.on('cancelMove', function(){
             console.log("取消移动");
+            dtable1.render(bug_cell);
         });
 
-         var dtable2 = $("#table2").dragTableCell();
+
+        var dtable2 = $("#table2").dragTableCell();
 
         var lastData = {};
         dtable2.on("startDragging", function (event, curCell, allCells) {
             // curCell被拖拽元素，allCells所有元素
             //完成上一个移动或交换
-            if (dtable2.lastDone || !dtable2.slcting.curCell.is(dtable2.slcting.lastCell)) {
+            if (dtable2.lastDone) {
                 console.log("send ajax");
                 var curVal = dtable2.getValues(curCell),
                     allVals = dtable2.getValues(allCells);
@@ -904,8 +907,8 @@
                     data: { cur: curVal, all: allVals },
                     success: function (result) {
                         lastData = result;
-                        var ek = result.enableKey, dr = result.disableReason;
-                        dtable2.render(ek, dr);
+                        // var ek = result.enableKey, dr = result.disableReason;
+                        dtable2.render(result);
                     },
                     error: function (xhr, status, error) {
                         console.log(xhr, status, error);
@@ -913,19 +916,20 @@
                 });
             } else { //未完成上一个移动或交换
                 console.log("no ajax");
-                var ek = lastData.enableKey, dr = lastData.disableReason;
-                dtable2.render(ek, dr);
+                dtable2.render(lastData);
             }
-
         });
 
-        // 获取最终值
-        function getTableValues() {
-            // var values = {};
-            // values['table1'] = dtable1.getValues();
-            // values['table2'] = dtable2.getValues();
-            // console.log(values);
-        }
+        dtable2.render(bug_cell);
+
+        dtable2.on('exchange', function (event, from, to) {
+            dtable2.render(bug_cell);
+        });
+
+        dtable2.on('cancelMove', function () {
+            console.log("取消移动");
+            dtable2.render(bug_cell);
+        });
 
     </script>
 

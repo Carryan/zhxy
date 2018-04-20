@@ -100,6 +100,7 @@ function reloadPage(win) {
             'deleteBtn': '.delete',
             'temp': '#template',
             'saveTemp': '#saveTemplate',
+            'initData': {},
             'editFun': function (thisTr, texts, editeCallback) { }
         }
         var stg = $.extend({}, defaults, opts);
@@ -110,13 +111,14 @@ function reloadPage(win) {
             //添加
             $(stg.addBtn).on('click', function(){
                 var $tbody = $this.find('tbody') || $this,
-                    temp = $(stg.temp).tmpl();
+                    temp = $(stg.temp).tmpl(stg.initData);
                 $tbody.append(temp);
                 // 取消添加
                 temp.find(stg.cancelBtn).on('click', function (event) {
                     event.preventDefault();
                     temp.remove();
                 });
+                $this.trigger("addRow", [temp]);
             });
 
             //编辑
@@ -124,7 +126,8 @@ function reloadPage(win) {
                 event.preventDefault();
                 var thisTr = $(this).parents('tr').first();
                 var texts = getTrText(thisTr);
-                stg.editFun(thisTr, texts, editeCallback);
+                // stg.editFun(thisTr, texts, editeCallback);
+                $this.trigger("editRow", [thisTr, texts, editeCallback]);
             });
 
             // 保存
@@ -208,7 +211,7 @@ function reloadPage(win) {
             
         }
 
-        //编辑回调
+        //编辑 回调
         function editeCallback(thisTr, temp) {
             thisTr.replaceWith(temp);
             // 返回，取消编辑
@@ -218,7 +221,6 @@ function reloadPage(win) {
             });
         }
 
-        // init();
         Import.LoadFileList(['static/js/jquery.tmpl.min.js','static/vendor/layer/layer.js'], function(){
             init();
         });
@@ -546,3 +548,7 @@ $('[data-modal]').on('click', function(){
     var $modal = $($(this).attr('data-modal'));
     $modal.modal('show');
 });
+
+
+// 多选
+$(".staff-table .chosen-select").chosen().parent().css('overflow', 'visible');

@@ -463,7 +463,7 @@
         dtable.on("startDragging", function (event, curCell, allCells) {
             // curCell被拖拽元素，allCells所有元素
             //完成上一个移动或交换
-            if (dtable.lastDone || !dtable.slcting.curCell.is(dtable.slcting.lastCell)) {
+            if (dtable.lastDone) {
                 console.log("send ajax");
                 var curVal = dtable.getValues(curCell),
                     allVals = dtable.getValues(allCells);
@@ -473,8 +473,8 @@
                     data: { cur: curVal, all: allVals },
                     success: function (result) {
                         lastData = result;
-                        var ek = result.enableKey, dr = result.disableReason;
-                        dtable.render(ek, dr);
+                        // var ek = result.enableKey, dr = result.disableReason;
+                        dtable.render(result);
                     },
                     error: function (xhr, status, error) {
                         console.log(xhr, status, error);
@@ -482,17 +482,18 @@
                 });
             } else { //未完成上一个移动或交换
                 console.log("no ajax");
-                var ek = lastData.enableKey, dr = lastData.disableReason;
-                dtable.render(ek, dr);
+                dtable.render(lastData);
             }
 
         });
 
+        
+
 
         // 获取最终值
         function getTableValues() {
-            var values = dtable.getValues();
-            console.log(values);
+            // var values = dtable.getValues();
+            // console.log(values);
         }
 
     </script>
