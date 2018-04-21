@@ -69,9 +69,11 @@ $('form').on('keydown', function(){
                 distance: 10, //拖拽开始前必须移动的距离
                 helper: function () {
                     var ele = $(this).clone(),
+                        v = ele.find(settings.val),
                         w = $(this).width(),
                         h = $(this).height();
-                    ele.find(settings.val).width(w).height(h);
+                    v.css({"width":w, "height": h});
+                    ele.html(v);
                     return ele;
                 },
                 // 滚动条滚动 不触发 drag事件
@@ -87,9 +89,6 @@ $('form').on('keydown', function(){
                         } else if (ui.position.left > c_w - settings.scroll_right) {
                             fixInner.scrollLeft(srl + 25);
                         }
-                        // 最大滚动距离
-                        // var m_s = infixInner.find('.table-box').outerWidth() - fixInner.width();
-                        // if (fixInner.scrollLeft() > m_s) fixInner.scrollLeft(m_s);
                     }
 
                 }
@@ -115,32 +114,35 @@ $('form').on('keydown', function(){
             }
         }
 
-        function exchange(from, to, html) {
-            if (from.is(cache)) { //被拖元素在缓冲区
-                if (to.is(cache)) {
-                    to.html(from.html());
-                    from.html(html);
-                } else {
-                    if (hasValue(to)) {
-                        to.html(from.html());
-                        from.html(html);
-                    } else {
-                        to.html(from.html());
-                        from.html('<div class="val"></div>');
-                    }
-                }
-            }
-            else { //被拖元素不在缓冲区
-                // to.html(from.html());
-                // from.html(html);
-                if (hasValue(to)) {
-                    to.html(from.html());
-                    from.html(html);
-                } else {
-                    to.html(from.html());
-                    from.find('.val').addClass('cell-muted'); //添加痕迹
-                }
-            }
+        function exchange(from, to) {
+            // var html = to.html();
+            // if (from.is(cache)) { //被拖元素在缓冲区
+            //     if (to.is(cache)) { //缓冲区内移动
+            //         to.html(from.html());
+            //         from.html(html);
+            //     } else { //缓冲区外移
+            //         if (hasValue(to)) {
+            //             to.html(from.html());
+            //             from.html(html);
+            //         } else {
+            //             to.html(from.html());
+            //             from.html('<div class="val"></div>');
+            //         }
+            //     }
+            // }
+            // else { //被拖元素不在缓冲区
+            //     if (hasValue(to)) {
+            //         to.html(from.html());
+            //         from.html(html);
+            //     } else {
+            //         to.html(from.html());
+            //         from.find('.val').addClass('cell-muted'); //添加痕迹
+            //     }
+            // }
+            var v = to.find(settings.val);
+            to.find('.val').replaceWith(from.find(settings.val));
+            from.prepend(v);
+
             _this.render();
             _this.trigger("exchange", [from, to]); //定义放置事件
             _this.lastDone = true;
@@ -193,10 +195,9 @@ $('form').on('keydown', function(){
 
         // 放置事件
         $drop.on("drop", function (event, ui) {
-            var dragObj = ui.draggable,
-                dropHtml = $(this).html();
+            var dragObj = ui.draggable;
 
-            exchange(dragObj, $(this), dropHtml);
+            exchange(dragObj, $(this));
             _this.isDrop = true;
         });
 
@@ -224,9 +225,8 @@ $('form').on('keydown', function(){
                         selecting(false, "cell-selected"); //取消移动
                     }
                     else if (cur.hasClass('acceptable')) { //可接受元素
-                        var dropHtml = cur.html();
                         selecting(false, "cell-selected"); 
-                        exchange(_this.slcting.curCell, cur, dropHtml);
+                        exchange(_this.slcting.curCell, cur);
                     }
                     else {
                         alert_text.text(cur.attr('title'));
@@ -253,8 +253,7 @@ $('form').on('keydown', function(){
                 if (_this.slcting.isSelected || !hasValue(cur) || cur.is(cache)) return false;
                 cache.filter(':visible').each(function () {
                     if (!hasValue($(this))) {
-                        var dropHtml = cur.html();
-                        exchange(cur, $(this), dropHtml);
+                        exchange(cur, $(this));
                         return false;
                     }
                 });
@@ -289,7 +288,7 @@ $('form').on('keydown', function(){
             return cels;
         };
 
-        // 渲染
+        // 渲染, 参数：enable, bug, title
         this.render = function (param) {
             var ps = $.extend({
                         "enable": [],

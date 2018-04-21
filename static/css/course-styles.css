@@ -342,6 +342,7 @@ td .hideMsg {
     cursor: pointer;
     user-select: none;
     transition: background .2s;
+    position: relative;
 }
 .dragTable .val {
     min-width: 30px;
@@ -352,6 +353,13 @@ td .hideMsg {
 }
 .dragTable.class-table .val {
     min-width: auto;
+}
+.dragTable .origin {
+    position: absolute;
+    color: #bdbdbd;
+    font-weight: normal;
+    top: 0;
+    left: 0;
 }
 
 .fix-table-box {
@@ -373,6 +381,7 @@ td .hideMsg {
     top: 0;
     right: 0;
     min-width: 80px;
+    z-index: 99;
 }
 .fix-table-box.class-table .fix-list {
     min-width: 120px;
@@ -380,9 +389,6 @@ td .hideMsg {
 .fix-table-box.table-school .fix-right thead tr th{
    height: 70px;
 }
-/* .fix-table-box.table-school.show-msg .fix-right tbody tr:last-child td {
-    display: none;
-} */
 .fix-table-box .fix-right {
     right: 0;
 }
@@ -423,6 +429,7 @@ td .hideMsg {
 }
 td.ui-draggable-dragging {
     height: auto;
+    z-index: 999;
 }
 
 .cus-table-box .table-alert {
@@ -435,12 +442,6 @@ td.ui-draggable-dragging {
     margin-left: -240px;
     display: none;
 }
-
-/* .dragTable .cus-table td.cell-bug, .dragTable .cus-table td.cell-bug div,
-.dragTable td.cell-selected, .dragTable td.cell-selected div, .dragTable .ui-draggable-dragging, 
-.dragTable .ui-draggable-dragging div {
-    color: #fff;
-} */
 
 .modal-select .modal-dialog {
     width: 740px;
