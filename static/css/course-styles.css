@@ -240,7 +240,7 @@ table.cus-select td.selected {
 .cell-blue table.cus-select td.selected {
     background-color: #6fb3e0;
 }
-table td.disabled {
+table.cus-select td.disabled {
     background-color: #ccc !important;
     cursor: not-allowed;
 }
@@ -354,12 +354,30 @@ td .hideMsg {
 .dragTable.class-table .val {
     min-width: auto;
 }
+
 .dragTable .origin {
     position: absolute;
     color: #bdbdbd;
     font-weight: normal;
     top: 0;
     left: 0;
+    height: 100%;
+    width: 1em;
+    overflow: hidden;
+}
+.dragTable .origin .tip {
+    width: 1em;
+    overflow: hidden;
+}
+.dragTable .val:empty + .origin {
+    padding: 8px;
+    width: 100%;
+}
+.dragTable .val:empty + .origin .tip {
+    width: 100%;
+}
+.dragTable .cell-dragging .origin {
+    display: none;
 }
 
 .fix-table-box {
@@ -421,7 +439,7 @@ td .hideMsg {
     }
 }
 
-.dragTable td .cell-muted, .dragTable td .cell-muted div, .dragTable td.cell-dragging div {
+.dragTable td.cell-dragging div, .dragTable .val:empty + .origin {
     color: #bdbdbd !important;
     text-decoration: underline;
     font-style: italic;

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>金视野系统模板</title>
+    <meta name="keywords" content="金视野,教育,平台" />
+    <meta name="description" content="金视野开发部,模板,2017" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+
+    <!-- page specific plugin styles -->
+
+
+    <!-- fonts -->
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+	<![endif]-->
+
+    <!-- inline styles related to this page -->
+    <link rel="stylesheet" href="static/css/styles-support.css">
+
+    <!-- ace settings handler -->
+    <!-- <script src="assets/js/ace-extra.min.js"></script> -->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+
+            <div class="main-content" style="margin-left: 0px;">
+
+                <!-- 面包屑导航 -->
+                <div class="breadcrumbs " id="breadcrumbs">
+                    <script type="text/javascript">
+                        try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                    </script>
+                    <!--位置-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home home-icon"></i>
+                            <a href="jsywebindex.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="class-index.html">班级管理</a>
+                        </li>
+                        <li class="active">基本信息</li>
+                    </ul>
+                    <ul class="breadcrumb pull-right navright">
+                        <li>
+                            <i class="icon-share-alt icon-color"></i>
+                            <a href="javascript:history.go(-1);">返回</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="page-content" style="padding-top: 20px;">
+
+                    <!-- /.page-header -->
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="banner-tabs">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="support-index.html">标准教材目录管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="support-index-subject.html">学科知识点目录管理</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div id="spContent" class="content-tab">
+                                <div class="contentA">
+                                    <div class="sp-item clearfix" v-for="item in items" v-cloak>
+                                        <div class="name">{{ item.name }}:</div>
+                                        <ul class="item-options clearfix" v-if="item.isEdit">
+                                            <li v-for="(op, index) in item.editSelect.selected" class="edit">
+                                                <span>{{ op.val }}
+                                                    <a href="javascript:;" v-on:click="optionRemove(index, item.editSelect.selected)">
+                                                        <i class="icon-remove red"></i>
+                                                    </a>
+                                                </span>
+                                            </li>
+                                            <li v-for="i in item.editSelect.selecting">
+                                                <select v-model="i.id" v-on:change="selectChange()">
+                                                    <option value="0">请选择</option>
+                                                    <option v-for="o in selectOptions(i.id, item)" v-bind:value="o.id">{{ o.val }}</option>
+                                                </select>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;" class="add-option" v-on:click="addSelect(item)">添加</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="item-options clearfix" v-else>
+                                            <li v-for="op in item.options" v-if="op.isSelected" v-bind:class="{active: op.id==item.activeId}">
+                                                <a href="javascript:;" v-on:click="optionActive(op.id, item)">{{ op.val }}</a>
+                                            </li>
+                                        </ul>
+                                        <div class="action-buttons" v-if="item.isEdit">
+                                            <a href="#" class="ok" v-on:click="editSave(item)">
+                                                <i class="icon-ok green"></i>
+                                            </a>
+                                            <a href="#" class="remove" v-on:click="editCancel(item)">
+                                                <i class="icon-remove red"></i>
+                                            </a>
+                                        </div>
+                                        <div class="action-buttons" v-else>
+                                            <a href="#" class="edit" v-on:click="itemEdit(item)">
+                                                <i class="icon-pencil green"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="contentB">
+                                            <div class="content-header clearfix">
+                                                <div class="pull-left">{{ details.title }}</div>
+                                                <div class="pull-right">
+                                                    <a href="javascript:;">
+                                                        <i class="icon-plus"></i>
+                                                    </a>
+                                                    <a class="btn btn-primary" href="javascript:;">另存为</a>
+                                                    <a href="javascript:;">
+                                                        <i class="icon-trash red"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="contentC"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- PAGE CONTENT ENDS -->
+
+                        </div>
+
+                    </div>
+
+                    <!-- /.col -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+            <!-- /.main-content -->
+
+            <!-- /#ace-settings-container -->
+        </div>
+        <!-- /.main-container-inner -->
+    </div>
+    <!-- /.main-container -->
+
+
+    <!-- basic scripts -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+
+
+    <!-- ace scripts -->
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+
+    <!-- inline scripts related to this page -->
+    <script src="static/js/vue.min.js"></script>
+    <script src="static/js/common-support.js"></script>
+
+    <script>
+    $(function() {
+
+        var items = [
+            {
+                "name": "学段",
+                "options": [
+                    { "id": 1, "val": "小学", "isSelected": true },
+                    { "id": 2, "val": "初中", "isSelected": true },
+                    { "id": 3, "val": "高中", "isSelected": false },
+                ],
+                "activeId": 1,
+                "isEdit": false
+            },
+            {
+                "name": "科目",
+                "options": [
+                    { "id": 1, "val": "语文", "isSelected": true },
+                    { "id": 2, "val": "数学", "isSelected": true },
+                    { "id": 3, "val": "英语", "isSelected": false },
+                    { "id": 4, "val": "物理", "isSelected": false },
+                    { "id": 5, "val": "化学", "isSelected": false },
+                    { "id": 6, "val": "历史", "isSelected": false },
+                    { "id": 7, "val": "地理", "isSelected": false }
+                ],
+                "activeId": 1,
+                "isEdit": false,
+            },
+            {
+                "name": "教版",
+                "options": [
+                    { "id": 1, "val": "人教版", "isSelected": true },
+                    { "id": 2, "val": "编部版", "isSelected": true },
+                    { "id": 3, "val": "鲁教版", "isSelected": false },
+                    { "id": 4, "val": "沪教版", "isSelected": false },
+                    { "id": 5, "val": "其他版", "isSelected": false }
+                ],
+                "activeId": 1,
+                "isEdit": false,
+            },
+            {
+                "name": "年级",
+                "options": [
+                    { "id": 1, "val": "七年级", "isSelected": true },
+                    { "id": 2, "val": "八年级", "isSelected": true },
+                    { "id": 3, "val": "九年级", "isSelected": false },
+                    { "id": 4, "val": "高一", "isSelected": false },
+                    { "id": 5, "val": "高二", "isSelected": false }
+                ],
+                "activeId": 1,
+                "isEdit": false,
+            }
+        ];
+
+        var details = {
+            "title": "初中语文人教版七年级",
+
+        };
+
+        // spItem 为 #spContent 的vue对象
+
+        spItem.items = items;
+        spItem.details = details;
+
+        // 保存选项时
+        spItem.$on("optionSave", function(data, callback) {
+            $.ajax({
+                url: "static/data/response1.json",
+                type: "GET",
+                dataType: "json",
+                data: data,
+                success: function(res){
+                    if(res.state==="ok"){
+                        callback();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+
+    });
+    </script>
+
+</body>
+
+</html>

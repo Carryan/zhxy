@@ -1,0 +1,126 @@
+body {
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+}
+
+a { 
+    color: #34A8EA;
+ }
+ a:hover {
+    text-decoration: none;
+ }
+[hidden], .hide { 
+    display: none;
+}
+[v-cloak] {
+  display: none;
+}
+
+body.modal-open {
+    margin-right: 0;
+}
+
+.banner-tabs {
+    margin-bottom: 20px;
+}
+.nav-tabs > li {
+    margin-right: 4px;
+}
+.nav-tabs>li>a, .nav-tabs>li>a:focus {
+    color: #666;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover {
+    color: #34A8EA;
+}
+
+.contentA, .contentB, .contentC {
+    border: 1px solid #ddd;
+}
+.content-tab .contentA {
+    padding: 10px 10px 0;
+    margin-bottom: 20px;
+}
+.sp-item {
+    position: relative;
+}
+.sp-item + .sp-item {
+    margin-top: 10px;
+}
+.sp-item .name {
+    color: #454545;
+    float: left;
+    width: 35px;
+}
+.sp-item .item-options {
+    float: left;
+    margin: 0;
+    width: calc(100% - 36px);
+    padding-right: 50px;
+}
+.sp-item .item-options li {
+    list-style: none;
+    float: left;
+    padding: 0 10px 10px;
+}
+.sp-item .item-options li > a, .sp-item .item-options li.edit > span {
+    text-decoration: none;
+    color: #666;
+    border-radius: 2px;
+    display: inline-block;
+    line-height: 1;
+}
+.sp-item .item-options li.active > a {
+     padding: 4px 12px;
+    background-color: #34A8EA;
+    color: #fff;
+}
+.sp-item .item-options li.edit > span {
+    padding: 3px 12px;
+    border: 1px solid #999;
+    position: relative;
+    display: inline-block;
+}
+.sp-item .item-options li.edit > span a {
+    position: absolute;
+    top: -8px;
+    right: -6px;
+}
+.sp-item .item-options li > select {
+    color: #666;
+    height: 22px;
+    padding: 0px 7px;
+    border-radius: 2px;
+    border: 1px solid #999;
+}
+.sp-item .item-options li .add-option {
+    font-size: 12px;
+    color: #34A8EA;
+    border: 1px solid #34A8EA;
+    padding: 2px 7px;
+    border-radius: 2px;
+}
+.sp-item .action-buttons {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    margin-top: -20px;
+    width: 50px;
+    text-align: center;
+}
+
+.content-header {
+    padding: 5px 15px 5px 12px;
+    border-bottom: 1px solid #ddd;
+}
+.content-header .pull-right a {
+    margin-left: 15px;
+}
+.content-header .pull-right a i {
+    font-size: 16px;
+}
+.content-header .pull-right a.btn {
+    border: 0;
+    font-size: 12px;
+    padding: 2px 11px;
+    border-radius: 2px;
+}

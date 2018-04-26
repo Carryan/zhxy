@@ -551,4 +551,11 @@ $('[data-modal]').on('click', function(){
 
 
 // 多选
-$(".staff-table .chosen-select").chosen().parent().css('overflow', 'visible');
+(function (obj) {
+    if(!obj.length) return;
+
+    Import.LoadFileList(['assets/css/chosen.css', 'assets/js/chosen.jquery.min.js'], function(){
+        obj.chosen().parent().css('overflow', 'visible');
+    });
+
+})($(".staff-table .chosen-select"));
