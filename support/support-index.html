@@ -93,7 +93,7 @@
                                         <a href="support-index.html">标准教材目录管理</a>
                                     </li>
                                     <li>
-                                        <a href="support-index-subject.html">学科知识点目录管理</a>
+                                        <a href="#">学科知识点目录管理</a>
                                     </li>
                                 </ul>
                             </div>
@@ -145,21 +145,54 @@
                                     <div class="col-sm-6">
                                         <div class="contentB">
                                             <div class="content-header clearfix">
-                                                <div class="pull-left">{{ details.title }}</div>
+                                                <div class="pull-left" v-cloak>{{ details.title }}</div>
                                                 <div class="pull-right">
-                                                    <a href="javascript:;">
+                                                    <a href="javascript:;" @click="addContent">
                                                         <i class="icon-plus"></i>
                                                     </a>
-                                                    <a class="btn btn-primary" href="javascript:;">另存为</a>
-                                                    <a href="javascript:;">
+                                                    <a class="btn btn-primary" href="javascript:;" 
+                                                        @click="saveAs()"
+                                                    >另存为</a>
+                                                    <a href="javascript:;" @click="delContent(details.treeData, -1)">
                                                         <i class="icon-trash red"></i>
                                                     </a>
                                                 </div>
                                             </div>
+                                            <div class="content-body">
+                                                <ul class="detail-tree">
+                                                    <tree-item v-for="(item, index) in details.treeData" 
+                                                    :model="item" 
+                                                    :index="index" 
+                                                    :parent="details.treeData"
+                                                    :moveurl="details.moveUrl"
+                                                    :treedata="details.treeData"
+                                                    @delete="delContent"
+                                                    @add="addContent"
+                                                    @edit="editContent"
+                                                    ></tree-item>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="contentC"></div>
+                                        <div class="contentC" v-if="detailContent.isShow" v-cloak>
+                                            <div class="content-header">
+                                                 {{ detailContent.title }}
+                                            </div>
+                                            <div class="content-body">
+                                                <div class="form-item" v-for="item in detailContent.input">
+                                                    <label>{{ item.name }}: </label>
+                                                    <select v-if="item.select" v-model="item.value">
+                                                        <option v-for="op in item.select" :value="op.val">{{ op.name }}</option>
+                                                    </select>
+                                                    <input type="text" v-else :value="item.value">
+                                                </div>
+                                                <div class="form-item">
+                                                    <button class="btn btn-primary btn-sm">确定</button>
+                                                    <button class="btn btn-sm" @click="detailContent.isShow=false">取消</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -182,6 +215,48 @@
         <!-- /.main-container-inner -->
     </div>
     <!-- /.main-container -->
+
+    <!-- 树形菜单模板 -->
+    <script type="text/x-template" id="tree-item-template">
+      <li>
+        <div class="item clearfix">
+            <div @click="toggle" class="pull-left">
+                <span v-if="isFolder" class="folder-icon">{{ open ? '-' : '+' }}</span>
+                <i v-if="isFolder" class="icon-folder-open"></i>
+                {{ model.name }}
+            </div>
+            <div class="pull-right">
+                <a href="javascript:;" @click="orderChange(parent, index, index-1)">
+                    <i class="icon-long-arrow-up"><i/>
+                </a>
+                <a href="javascript:;" @click="orderChange(parent, index, index+1)">
+                    <i class="icon-long-arrow-down"><i/>
+                </a>
+                <a href="javascript:;" @click="addItem(model.id)">
+                    <i class="icon-plus"><i/>
+                </a>
+                <a href="javascript:;" @click="editItem()">
+                    <i class="icon-pencil"><i/>
+                </a>
+                <a href="javascript:;" @click="deleteItem(parent, index)">
+                    <i class="icon-trash"><i/>
+                </a>
+            </div>
+        </div>
+        <ul v-show="open" v-if="isFolder" class="children">
+            <tree-item v-for="(m, i) in model.children" 
+            :model="m" 
+            :index="i" 
+            :parent="model.children"
+            :treedata="treedata"
+            :moveurl="moveurl"
+            @delete="spItem.delContent"
+            @add="spItem.addContent"
+            @edit="spItem.editContent"
+            ></tree-item>
+        </ul>
+      </li>
+    </script>
 
 
     <!-- basic scripts -->
@@ -217,6 +292,7 @@
     <script>
     $(function() {
 
+        // 目录菜单
         var items = [
             {
                 "name": "学段",
@@ -267,16 +343,91 @@
                 "isEdit": false,
             }
         ];
-
+        
+        // 树形菜单
         var details = {
             "title": "初中语文人教版七年级",
-
+            "moveUrl": "static/data/response1.json",
+            "treeData": [
+                {
+                    "id": 1,
+                    "name": "上册",
+                    "children": [
+                        {
+                            "id": 3,
+                            "name": "第一单元"
+                        },
+                        {
+                            "id": 4,
+                            "name": "第二单元"
+                        },
+                        {
+                            "id": 5,
+                            "name": "第三单元"
+                        },
+                        {
+                            "id": 6,
+                            "name": "第四单元",
+                            "children": [
+                                { "id": 10, "name": "第一课" },
+                                { "id": 11, "name": "第二课" },
+                                { "id": 12, "name": "第三课" }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "name": "下册",
+                    "children": [
+                        {
+                            "id": 7,
+                            "name": "第一单元"
+                        },
+                        {
+                            "id": 8,
+                            "name": "第二单元"
+                        },
+                        {
+                            "id": 9,
+                            "name": "第三单元"
+                        }
+                    ]
+                }
+            ]
         };
 
-        // spItem 为 #spContent 的vue对象
+        // 添加框
+        var detailAdd = {
+            "isShow": true,
+            "title": "添加",
+            "input": [
+                {
+                    "name": "目录名称",
+                    "value": ""
+                },
+                {
+                    "name": "上级目录",
+                    "value": "2",
+                    "select": [
+                        { "name": "上册", "val": "1" },
+                        { "name": "下册", "val": "2" }
+                    ]
+                }
+            ]
+        }
 
+
+        // spItem 为 #spContent 的vue对象, items/details/detailContent 为所需的数据
         spItem.items = items;
         spItem.details = details;
+        spItem.detailContent = { "isShow": false };
+
+        // 激活选项
+        spItem.$on("optionActive", function (active) {
+            console.log(active);
+            spItem.details = details;
+        });
 
         // 保存选项时
         spItem.$on("optionSave", function(data, callback) {
@@ -294,6 +445,38 @@
                     console.log(error);
                 }
             });
+        });
+        
+        // 添加内容
+        // spItem.$on("addContent", function () {
+        //     detailAdd.title = "添加";
+        //     spItem.detailContent = detailAdd;
+        // });
+
+        // 删除内容
+        spItem.$on("delContent", function(parent, index){
+            if(index < 0){
+                parent.splice(0, parent.length);
+            }else{
+                parent.splice(index, 1);
+            }
+        });
+        
+        // 另存为
+        spItem.$on("saveAs", function(){
+            detailAdd.title = "另存为";
+            spItem.detailContent = detailAdd;
+        });
+
+        // 修改、编辑
+        spItem.$on("editContent", function(){
+            detailAdd.title = "修改";
+            spItem.detailContent = detailAdd;
+        });
+
+        // 提交
+        spItem.$on("submitContent", function(){
+
         });
 
     });
