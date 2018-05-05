@@ -18,6 +18,15 @@ a {
 [v-cloak] {
   display: none;
 }
+.btn-sm i[class^="icon-"] {
+    margin-right: 6px;
+}
+ul {
+    margin: 0;
+}
+label [type="checkbox"] {
+    display: none;
+}
 
 body.modal-open {
     margin-right: 0;
@@ -35,6 +44,10 @@ body.modal-open {
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover {
     color: #34A8EA;
 }
+.banner-tabs + .actions {
+    margin-top: -5px;
+    margin-bottom: 6px;
+}
 
 .contentA, .contentB, .contentC {
     border: 1px solid #ddd;
@@ -49,6 +62,7 @@ body.modal-open {
 
 .content-body {
     padding: 10px 15px 10px 7px;
+    overflow: hidden;
 }
 
 .sp-item {
@@ -74,6 +88,7 @@ body.modal-open {
     padding: 0 10px 10px;
 }
 .sp-item .item-options li > a, .sp-item .item-options li.edit > span {
+    padding: 4px 11px;
     text-decoration: none;
     color: #666;
     border-radius: 2px;
@@ -81,7 +96,6 @@ body.modal-open {
     line-height: 1;
 }
 .sp-item .item-options li.active > a {
-     padding: 4px 12px;
     background-color: #34A8EA;
     color: #fff;
 }
@@ -124,6 +138,10 @@ body.modal-open {
     border-bottom: 1px solid #ddd;
     height: 38px;
 }
+.no-action .content-header, .relation .content-header {
+    height: 45px;
+    line-height: 30px;
+}
 .content-header .pull-right a {
     margin-left: 15px;
 }
@@ -137,17 +155,32 @@ body.modal-open {
     padding: 2px 11px;
     border-radius: 2px;
 }
-
-.detail-tree {
-    margin: 0;
+.relation .content-header .pull-right .btn {
+    padding: 2px 8px;
+    display: block;
 }
+
 .detail-tree li {
     list-style: none;
     position: relative;
     user-select: none;
 }
+.detail-tree li.active > .item, .detail-tree li .item:hover {
+    background: #D9EDF7;
+    /* margin-left: -300px;
+    padding-left: 300px; */
+    margin-right: -15px;
+    padding-right: 15px;
+}
+.detail-tree li.selectable > .item:hover {
+    cursor: pointer;
+}
 .detail-tree > li + li, .detail-tree .children li {
-    margin-top: 12px;
+    margin-top: 6px;
+}
+.detail-tree .item {
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 .detail-tree .item .folder-icon {
     border: 1px solid #323232;
@@ -156,7 +189,12 @@ body.modal-open {
     height: 13px;
     text-align: center;
     line-height: 10px;
-    margin-right: 5px;
+    margin-right: 7px;
+    cursor: pointer;
+
+}
+.detail-tree .item .pull-right {
+    margin-top: -1px;
 }
 .detail-tree .item .pull-right a {
     font-size: 12px;
@@ -167,6 +205,11 @@ body.modal-open {
     height: 17px;
     line-height: 15px;
     text-align: center;
+    margin-left: 5px;
+}
+.detail-tree .item .pull-right .tip {
+    font-size: 12px;
+    color: #999;
 }
 .detail-tree .children li {
     margin-left: 25px;
@@ -180,6 +223,7 @@ body.modal-open {
     background: 0 0;
     border: none;
     border-left: 1px dashed #666;
+    z-index: 9;
 }
 .detail-tree li:after {
     position: absolute;
@@ -189,30 +233,43 @@ body.modal-open {
     border-top: 1px dashed #666;
 }
 .detail-tree > li:before {
-    top: 18px;
-    left: 5px;
-    bottom: -17px;
+    top: 22px;
+    left: 6px;
+    bottom: -14px;
 }
 .detail-tree > li:last-child:before {
     display: none;
 }
 .detail-tree > li:after {
-    top: 11px;
+    top: 14px;
     left: 14px;
     width: 7px;
 }
 .detail-tree .children li:before {
-    top: -10px;
-    left: -16px;
+    top: -12px;
+    left: -20px;
     bottom: -2px;
 }
 .detail-tree .children li:last-child:before {
-    height: 20px;
+    height: 26px;
 }
 .detail-tree .children li:after {
-    top: 10px;
+    top: 14px;
+    left: -19px;
+    width: 14px;
+}
+.relation .detail-tree .children li {
+    margin-left: 5px;
+}
+.relation .detail-tree .children li:before {
+    left: -17px;
+}
+.relation .detail-tree .children li:after {
     left: -16px;
-    width: 12px;
+    width: 14px;
+}
+.relation .detail-tree > li:not(:last-child) > .children > li:before {
+    display: none;
 }
 
 .contentC .content-body {
@@ -239,4 +296,34 @@ body.modal-open {
 }
 .contentC .form-item .btn + .btn {
     margin-left: 30px;
+}
+.contentC.relation .content-body {
+    padding: 0 50px 30px;
+    margin-bottom: 0;
+}
+
+.contentC.relation .content-body > .name {
+    padding: 20px 20px 15px;
+    text-align: center;
+    font-weight: bold;
+}
+.relation .detail-tree li .item:hover {
+    background-color: transparent;
+}
+.relation .detail-tree li label {
+    margin-bottom: 0;
+    margin-right: 5px;
+}
+.relation .detail-tree li label, .relation .detail-tree li label .lbl, .relation .detail-tree li label .lbl {
+    line-height: 14px;
+}
+
+.contentB .knowledge {
+    text-align: right;
+    color: #666;
+}
+.contentB .knowledge select {
+    color: #999;
+    height: 28px;
+    width: 80px;
 }

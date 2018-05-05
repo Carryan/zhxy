@@ -638,15 +638,27 @@ function deleteNewRow(t) {
         suffix: [],
         meridiem: ["上午", "下午"]
     };
-
     var dp = obj.datepicker({
         autoclose: true,
         zIndexOffset: 9999,
         format: "yyyy-mm-dd",
         language: "zh-CN",
         todayHighlight: true
-    }).next().on("click", function () {
+    });
+    dp.next().on("click", function () {
         $(this).prev().focus();
+    });
+    //时间段限制
+    $('.input-daterange').each(function () {
+        var datep = $(this).find(obj);
+        datep.on('changeDate', function (e) {
+            var chosenDate = e.date;
+            if (datep.index($(this))) {
+                datep.eq(0).datepicker('setEndDate', chosenDate);
+            } else {
+                datep.eq(1).datepicker('setStartDate', chosenDate);
+            }
+        });
     });
 
 })($('.date-picker'));
@@ -661,19 +673,16 @@ function hasScrolled(el, direction) {
     }
 }
 
-// 固定列
-// $(".fix-table-box").scroll(function(){
-//     var $this = $(this),
-//         fr = $this.find(".fix-right"),
-//         fl = $this.find(".fix-left");
-//     // ie css渲染跟不上scroll速度
-//     fr.css('right', -$this.scrollLeft());
-//     fl.css('left', $this.scrollLeft());
-// });
-
 // 交换内容，from/to 为jQuery对象
 function exchangeHtml(from, to) {
     var t = from.html();
     from.html(to.html());
     to.html(t);
+}
+
+// 获取元素距离顶部距离，通过递归检查是否存在父元素
+function getTop(e) {
+    var offset = e.offsetTop;
+    if (e.offsetParent != null) offset += getTop(e.offsetParent);
+    return offset;
 }

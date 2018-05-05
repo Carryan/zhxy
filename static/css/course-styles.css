@@ -55,6 +55,11 @@ input {
     position: relative;
     padding-left: 12px;
 }
+.form-group .input-group-box {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 i[class^="icon-"] {
     text-decoration: none;
 }

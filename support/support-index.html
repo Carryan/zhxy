@@ -93,27 +93,30 @@
                                         <a href="support-index.html">标准教材目录管理</a>
                                     </li>
                                     <li>
-                                        <a href="#">学科知识点目录管理</a>
+                                        <a href="support-index.html" onclick="getData(event, this)">学科知识点目录管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="support-relation.html">教材目录知识点关联</a>
                                     </li>
                                 </ul>
                             </div>
 
                             <div id="spContent" class="content-tab">
-                                <div class="contentA">
-                                    <div class="sp-item clearfix" v-for="item in items" v-cloak>
+                                <div class="contentA" v-cloak>
+                                    <div class="sp-item clearfix" v-for="item in items">
                                         <div class="name">{{ item.name }}:</div>
                                         <ul class="item-options clearfix" v-if="item.isEdit">
                                             <li v-for="(op, index) in item.editSelect.selected" class="edit">
-                                                <span>{{ op.val }}
+                                                <span>{{ op.name }}
                                                     <a href="javascript:;" v-on:click="optionRemove(index, item.editSelect.selected)">
                                                         <i class="icon-remove red"></i>
                                                     </a>
                                                 </span>
                                             </li>
                                             <li v-for="i in item.editSelect.selecting">
-                                                <select v-model="i.id" v-on:change="selectChange()">
+                                                <select v-model="i.id">
                                                     <option value="0">请选择</option>
-                                                    <option v-for="o in selectOptions(i.id, item)" v-bind:value="o.id">{{ o.val }}</option>
+                                                    <option v-for="o in selectOptions(i.id, item)" v-bind:value="o.id">{{ o.name }}</option>
                                                 </select>
                                             </li>
                                             <li>
@@ -122,7 +125,7 @@
                                         </ul>
                                         <ul class="item-options clearfix" v-else>
                                             <li v-for="op in item.options" v-if="op.isSelected" v-bind:class="{active: op.id==item.activeId}">
-                                                <a href="javascript:;" v-on:click="optionActive(op.id, item)">{{ op.val }}</a>
+                                                <a href="javascript:;" v-on:click="optionActive(op.id, item)">{{ op.name }}</a>
                                             </li>
                                         </ul>
                                         <div class="action-buttons" v-if="item.isEdit">
@@ -143,9 +146,9 @@
 
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <div class="contentB">
+                                        <div class="contentB" v-cloak>
                                             <div class="content-header clearfix">
-                                                <div class="pull-left" v-cloak>{{ details.title }}</div>
+                                                <div class="pull-left" >{{ details.title }}</div>
                                                 <div class="pull-right">
                                                     <a href="javascript:;" @click="addContent">
                                                         <i class="icon-plus"></i>
@@ -153,7 +156,7 @@
                                                     <a class="btn btn-primary" href="javascript:;" 
                                                         @click="saveAs()"
                                                     >另存为</a>
-                                                    <a href="javascript:;" @click="delContent(details.treeData, -1)">
+                                                    <a href="javascript:;" @click="delContent(0)">
                                                         <i class="icon-trash red"></i>
                                                     </a>
                                                 </div>
@@ -162,10 +165,9 @@
                                                 <ul class="detail-tree">
                                                     <tree-item v-for="(item, index) in details.treeData" 
                                                     :model="item" 
-                                                    :index="index" 
-                                                    :parent="details.treeData"
-                                                    :moveurl="details.moveUrl"
-                                                    :treedata="details.treeData"
+                                                    :index="index"
+                                                    :active-id="details.activeId"
+                                                    :has-action="!spItem.details.noAction"
                                                     @delete="delContent"
                                                     @add="addContent"
                                                     @edit="editContent"
@@ -188,8 +190,10 @@
                                                     <input type="text" v-else :value="item.value">
                                                 </div>
                                                 <div class="form-item">
-                                                    <button class="btn btn-primary btn-sm">确定</button>
-                                                    <button class="btn btn-sm" @click="detailContent.isShow=false">取消</button>
+                                                    <button class="btn btn-primary btn-sm" @click="submitContent">
+                                                        {{ detailContent.title=="另存为"? "保存":"确定" }}
+                                                    </button>
+                                                    <button class="btn btn-sm" @click="cancelContent">取消</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,48 +219,6 @@
         <!-- /.main-container-inner -->
     </div>
     <!-- /.main-container -->
-
-    <!-- 树形菜单模板 -->
-    <script type="text/x-template" id="tree-item-template">
-      <li>
-        <div class="item clearfix">
-            <div @click="toggle" class="pull-left">
-                <span v-if="isFolder" class="folder-icon">{{ open ? '-' : '+' }}</span>
-                <i v-if="isFolder" class="icon-folder-open"></i>
-                {{ model.name }}
-            </div>
-            <div class="pull-right">
-                <a href="javascript:;" @click="orderChange(parent, index, index-1)">
-                    <i class="icon-long-arrow-up"><i/>
-                </a>
-                <a href="javascript:;" @click="orderChange(parent, index, index+1)">
-                    <i class="icon-long-arrow-down"><i/>
-                </a>
-                <a href="javascript:;" @click="addItem(model.id)">
-                    <i class="icon-plus"><i/>
-                </a>
-                <a href="javascript:;" @click="editItem()">
-                    <i class="icon-pencil"><i/>
-                </a>
-                <a href="javascript:;" @click="deleteItem(parent, index)">
-                    <i class="icon-trash"><i/>
-                </a>
-            </div>
-        </div>
-        <ul v-show="open" v-if="isFolder" class="children">
-            <tree-item v-for="(m, i) in model.children" 
-            :model="m" 
-            :index="i" 
-            :parent="model.children"
-            :treedata="treedata"
-            :moveurl="moveurl"
-            @delete="spItem.delContent"
-            @add="spItem.addContent"
-            @edit="spItem.editContent"
-            ></tree-item>
-        </ul>
-      </li>
-    </script>
 
 
     <!-- basic scripts -->
@@ -290,6 +252,15 @@
     <script src="static/js/common-support.js"></script>
 
     <script>
+    // 切换数据
+    function getData(event, t) {
+        event.preventDefault();
+        $.get("static/data/data2.json", function (data) {
+            $.extend(spItem, data);
+            $(t).parent().addClass('active').siblings().removeClass('active');
+        });
+    }
+
     $(function() {
 
         // 目录菜单
@@ -297,9 +268,9 @@
             {
                 "name": "学段",
                 "options": [
-                    { "id": 1, "val": "小学", "isSelected": true },
-                    { "id": 2, "val": "初中", "isSelected": true },
-                    { "id": 3, "val": "高中", "isSelected": false },
+                    { "id": 1, "name": "小学", "isSelected": true },
+                    { "id": 2, "name": "初中", "isSelected": true },
+                    { "id": 3, "name": "高中", "isSelected": false }
                 ],
                 "activeId": 1,
                 "isEdit": false
@@ -307,13 +278,13 @@
             {
                 "name": "科目",
                 "options": [
-                    { "id": 1, "val": "语文", "isSelected": true },
-                    { "id": 2, "val": "数学", "isSelected": true },
-                    { "id": 3, "val": "英语", "isSelected": false },
-                    { "id": 4, "val": "物理", "isSelected": false },
-                    { "id": 5, "val": "化学", "isSelected": false },
-                    { "id": 6, "val": "历史", "isSelected": false },
-                    { "id": 7, "val": "地理", "isSelected": false }
+                    { "id": 1, "name": "语文", "isSelected": true },
+                    { "id": 2, "name": "数学", "isSelected": true },
+                    { "id": 3, "name": "英语", "isSelected": false },
+                    { "id": 4, "name": "物理", "isSelected": false },
+                    { "id": 5, "name": "化学", "isSelected": false },
+                    { "id": 6, "name": "历史", "isSelected": false },
+                    { "id": 7, "name": "地理", "isSelected": false }
                 ],
                 "activeId": 1,
                 "isEdit": false,
@@ -321,11 +292,11 @@
             {
                 "name": "教版",
                 "options": [
-                    { "id": 1, "val": "人教版", "isSelected": true },
-                    { "id": 2, "val": "编部版", "isSelected": true },
-                    { "id": 3, "val": "鲁教版", "isSelected": false },
-                    { "id": 4, "val": "沪教版", "isSelected": false },
-                    { "id": 5, "val": "其他版", "isSelected": false }
+                    { "id": 1, "name": "人教版", "isSelected": true },
+                    { "id": 2, "name": "编部版", "isSelected": true },
+                    { "id": 3, "name": "鲁教版", "isSelected": false },
+                    { "id": 4, "name": "沪教版", "isSelected": false },
+                    { "id": 5, "name": "其他版", "isSelected": false }
                 ],
                 "activeId": 1,
                 "isEdit": false,
@@ -333,11 +304,11 @@
             {
                 "name": "年级",
                 "options": [
-                    { "id": 1, "val": "七年级", "isSelected": true },
-                    { "id": 2, "val": "八年级", "isSelected": true },
-                    { "id": 3, "val": "九年级", "isSelected": false },
-                    { "id": 4, "val": "高一", "isSelected": false },
-                    { "id": 5, "val": "高二", "isSelected": false }
+                    { "id": 1, "name": "七年级", "isSelected": true },
+                    { "id": 2, "name": "八年级", "isSelected": true },
+                    { "id": 3, "name": "九年级", "isSelected": false },
+                    { "id": 4, "name": "高一", "isSelected": false },
+                    { "id": 5, "name": "高二", "isSelected": false }
                 ],
                 "activeId": 1,
                 "isEdit": false,
@@ -347,11 +318,13 @@
         // 树形菜单
         var details = {
             "title": "初中语文人教版七年级",
-            "moveUrl": "static/data/response1.json",
+            "moveUrl": "static/data/response1.json", //移动序号
+            "activeId": 0,
             "treeData": [
                 {
                     "id": 1,
                     "name": "上册",
+                    "open": true, //是否打开折叠，没有此属性时默认为false
                     "children": [
                         {
                             "id": 3,
@@ -447,36 +420,22 @@
             });
         });
         
-        // 添加内容
-        // spItem.$on("addContent", function () {
-        //     detailAdd.title = "添加";
-        //     spItem.detailContent = detailAdd;
-        // });
-
         // 删除内容
-        spItem.$on("delContent", function(parent, index){
-            if(index < 0){
-                parent.splice(0, parent.length);
-            }else{
+        spItem.$on("delContent", function(id){
+            if(id){
+                var node = getNode(spItem.details.treeData, id),
+                    parent = node.parentNode?node.parentNode.children : spItem.details.treeData,
+                    index = parent.indexOf(node.node);
                 parent.splice(index, 1);
+            }else{
+                spItem.details.treeData = [];
+                // spItem.details.treeData.splice(0, spItem.details.treeData);
             }
         });
-        
-        // 另存为
-        spItem.$on("saveAs", function(){
-            detailAdd.title = "另存为";
-            spItem.detailContent = detailAdd;
-        });
 
-        // 修改、编辑
-        spItem.$on("editContent", function(){
-            detailAdd.title = "修改";
-            spItem.detailContent = detailAdd;
-        });
-
-        // 提交
+        // 提交内容
         spItem.$on("submitContent", function(){
-
+            console.log(spItem.detailContent);
         });
 
     });

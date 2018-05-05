@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>金视野系统模板</title>
+    <meta name="keywords" content="金视野,教育,平台" />
+    <meta name="description" content="金视野开发部,模板,2017" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
+
+    <!-- page specific plugin styles -->
+
+
+    <!-- fonts -->
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+	<![endif]-->
+
+    <!-- inline styles related to this page -->
+    <link rel="stylesheet" href="static/css/styles-support.css">
+
+    <!-- ace settings handler -->
+    <!-- <script src="assets/js/ace-extra.min.js"></script> -->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="main-container-inner">
+
+            <div class="main-content" style="margin-left: 0px;">
+
+                <!-- 面包屑导航 -->
+                <div class="breadcrumbs " id="breadcrumbs">
+                    <script type="text/javascript">
+                        try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                    </script>
+                    <!--位置-->
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home home-icon"></i>
+                            <a href="jsywebindex.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="class-index.html">班级管理</a>
+                        </li>
+                        <li class="active">基本信息</li>
+                    </ul>
+                    <ul class="breadcrumb pull-right navright">
+                        <li>
+                            <i class="icon-share-alt icon-color"></i>
+                            <a href="javascript:history.go(-1);">返回</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="page-content" style="padding-top: 20px;">
+
+                    <!-- /.page-header -->
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="banner-tabs">
+                                <ul class="nav nav-tabs">
+                                    <li>
+                                        <a href="support-index.html">标准教材目录管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="support-index.html?#">学科知识点目录管理</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="support-relation.html">教材目录知识点关联</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div id="spContent" class="content-tab">
+                                <div class="contentA" v-cloak>
+                                    <div class="sp-item clearfix" v-for="item in items">
+                                        <div class="name">{{ item.name }}:</div>
+                                        <ul class="item-options clearfix">
+                                            <li v-for="op in item.options" v-if="op.isSelected!==false" v-bind:class="{active: op.id==item.activeId}">
+                                                <a href="javascript:;" v-on:click="optionActive(op.id, item)">{{ op.name }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="contentB" v-cloak :class="{'no-action': details.noAction}">
+                                            <div class="content-header clearfix">
+                                                <div class="pull-left">{{ details.title }}</div>
+                                            </div>
+                                            <div class="content-body">
+                                                <div class="knowledge" v-if="details.knowledge">
+                                                    知识点：
+                                                    <select v-model="details.knowledge.selected">
+                                                        <option value="0">全部</option>
+                                                        <option v-for="k in details.knowledge.options" :value="k.val">{{ k.name }}</option>
+                                                    </select>
+                                                </div>
+                                                <ul class="detail-tree">
+                                                    <tree-item v-for="(item, index) in details.treeData" :model="item" :index="index" :active-id="details.activeId"
+                                                    :has-action="!spItem.details.noAction"></tree-item>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="contentC relation" v-if="details.activeId > 0" v-cloak>
+                                            <div class="content-header clearfix">
+                                                <div class="pull-left">{{ relation.title }}</div>
+                                                <div class="pull-right">
+                                                    <button class="btn btn-primary btn-sm">保存</button>
+                                                </div>
+                                            </div>
+                                            <div class="content-body">
+                                                <div class="name">已选择：{{ relation.nodeName }}</div>
+                                                <div class="relation-items">
+                                                    <ul class="detail-tree">
+                                                        <tree-item v-for="(item, index) in relation.treeData" :model="item" :index="index" :active-id="-1" :has-action="false"></tree-item>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- PAGE CONTENT ENDS -->
+
+                        </div>
+
+                    </div>
+
+                    <!-- /.col -->
+                </div>
+                <!-- /.page-content -->
+            </div>
+            <!-- /.main-content -->
+
+            <!-- /#ace-settings-container -->
+        </div>
+        <!-- /.main-container-inner -->
+    </div>
+    <!-- /.main-container -->
+
+
+    <!-- basic scripts -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+
+
+    <!-- ace scripts -->
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+
+    <!-- inline scripts related to this page -->
+    <script src="static/js/vue.min.js"></script>
+    <script src="static/js/common-support.js"></script>
+
+    <script>
+        $(function () {
+
+            // 获取数据
+            $.get("static/data/data3.json", function(data, status, xhr){
+                $.extend(spItem, data);
+            });
+
+            
+
+        });
+    </script>
+
+</body>
+
+</html>
