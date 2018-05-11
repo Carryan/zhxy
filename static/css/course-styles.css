@@ -40,11 +40,22 @@
     bottom: 8px;
 }
 
+.display-table { display: table!important; }
+.display-cell { display: table-cell!important; }
+
+.unselectable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
 body {
     font-family: 'Microsoft YaHei';
     font-size: 14px;
 }
-input {
+input, .input-group input {
     height: 30px;
 }
 .pane table {
@@ -305,6 +316,12 @@ table.cus-select + .tip {
     white-space: nowrap;
     font-size: 14px;
     border: 1px solid #dddddd;
+    outline: 1px solid\9 #dddddd;
+}
+@-moz-document url-prefix(){
+    .cus-table td, .cus-table th {
+        outline: 1px solid #dddddd;
+    }
 }
 .cus-table td, .dragTable .ui-draggable-dragging {
     color: #454545;
@@ -326,7 +343,7 @@ table.cus-select + .tip {
 .cus-table thead tr:first-child th, .cus-select thead th {
     background: linear-gradient(to bottom,#EEEEEE,#F7F7F7);
 }
-.class-table td .tip, td .hideMsg {
+td .tip, td .hideMsg {
     color: #999;
     font-size: 12px;
     font-weight: normal;
@@ -349,6 +366,9 @@ td .hideMsg {
     transition: background .2s;
     position: relative;
 }
+.dragTable.table-school td {
+    padding: 4px 16px;
+}
 .dragTable .val {
     min-width: 30px;
 }
@@ -358,31 +378,70 @@ td .hideMsg {
 }
 .dragTable.class-table .val {
     min-width: auto;
+    display: inline-block;
+    width: 60%;
 }
 
+/* 原课程 */
 .dragTable .origin {
     position: absolute;
     color: #bdbdbd;
     font-weight: normal;
-    top: 0;
-    left: 0;
-    height: 100%;
     width: 1em;
     overflow: hidden;
+    text-align: center;
+    left: 20%;
+    margin-left: -1em;
+    top: 50%;
+    transform: translateY(-50%);
+    height: auto;
+    margin-top: -1px;
+    display: none;
+}
+.show-msg .origin {
+    height: 42px;
+    margin-top: 0;
+}
+.table-school .origin {
+    left: 0;
+    margin-left: 3px;
+    font-size: 12px;
+    height: auto;
 }
 .dragTable .origin .tip {
+    display: none;
     width: 1em;
     overflow: hidden;
+    color: #bdbdbd;
 }
-.dragTable .val:empty + .origin {
-    padding: 8px;
-    width: 100%;
+.show-msg .origin .tip {
+    display: block;
 }
 .dragTable .val:empty + .origin .tip {
     width: 100%;
 }
-.dragTable .cell-dragging .origin {
-    display: none;
+.dragTable .val:empty + .origin {
+    width: 100%;
+    margin-left: 0;
+    left: 0;
+}
+.show-msg .val:empty + .origin .display-cell {
+    height: 42px;
+}
+
+
+.dragTable td.cell-dragging .val, .dragTable .val:empty + .origin {
+    color: #bdbdbd !important;
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: normal;
+}
+.dragTable td.cell-dragging .val > div {
+    color: #bdbdbd;
+}
+td.ui-draggable-dragging {
+    height: auto;
+    z-index: 999;
 }
 
 .fix-table-box {
@@ -433,26 +492,6 @@ td .hideMsg {
 }
 .class-table.show-msg td .tip, .class-table .show-msg td .tip  {
     display: block;
-    animation: fadeIn .3s;
-}
-@keyframes fadeIn {
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-}
-
-.dragTable td.cell-dragging div, .dragTable .val:empty + .origin {
-    color: #bdbdbd !important;
-    text-decoration: underline;
-    font-style: italic;
-    font-weight: normal;
-}
-td.ui-draggable-dragging {
-    height: auto;
-    z-index: 999;
 }
 
 .cus-table-box .table-alert {
@@ -605,4 +644,28 @@ i[class^="icon-"].orange1 {
 }
 .modal-header .close {
     font-size: 22px;
+}
+
+.fix-table-box .scroll-bar {
+    position: absolute;
+    width: 100%;
+    height: 19px;
+    background-color: #f1f1f1;
+    border: 1px solid #dddddd;
+    z-index: 99;
+    bottom: 0;
+}
+.scroll-bar .scroll-div {
+    position: absolute;
+    width: 100px;
+    height: 14px;
+    left: 0;
+    top: 2px;
+    background-color: #c1c1c1;
+}
+.scroll-bar .scroll-div:hover {
+    background-color: #a8a8a8;
+}
+.scroll-bar .scroll-div.held {
+    background-color: #787878;
 }

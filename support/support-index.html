@@ -89,11 +89,11 @@
 
                             <div class="banner-tabs">
                                 <ul class="nav nav-tabs">
-                                    <li class="active">
+                                    <li>
                                         <a href="support-index.html">标准教材目录管理</a>
                                     </li>
                                     <li>
-                                        <a href="support-index.html" onclick="getData(event, this)">学科知识点目录管理</a>
+                                        <a href="support-index.html?data=data2">学科知识点目录管理</a>
                                     </li>
                                     <li>
                                         <a href="support-relation.html">教材目录知识点关联</a>
@@ -104,7 +104,7 @@
                             <div id="spContent" class="content-tab">
                                 <div class="contentA" v-cloak>
                                     <div class="sp-item clearfix" v-for="item in items">
-                                        <div class="name">{{ item.name }}:</div>
+                                        <div class="title">{{ item.title }}:</div>
                                         <ul class="item-options clearfix" v-if="item.isEdit">
                                             <li v-for="(op, index) in item.editSelect.selected" class="edit">
                                                 <span>{{ op.name }}
@@ -129,15 +129,15 @@
                                             </li>
                                         </ul>
                                         <div class="action-buttons" v-if="item.isEdit">
-                                            <a href="#" class="ok" v-on:click="editSave(item)">
+                                            <a href="javascript:;" class="ok" v-on:click="editSave(item)">
                                                 <i class="icon-ok green"></i>
                                             </a>
-                                            <a href="#" class="remove" v-on:click="editCancel(item)">
+                                            <a href="javascript:;" class="remove" v-on:click="editCancel(item)">
                                                 <i class="icon-remove red"></i>
                                             </a>
                                         </div>
                                         <div class="action-buttons" v-else>
-                                            <a href="#" class="edit" v-on:click="itemEdit(item)">
+                                            <a href="javascript:;" class="edit" v-on:click="itemEdit(item)">
                                                 <i class="icon-pencil green"></i>
                                             </a>
                                         </div>
@@ -182,16 +182,17 @@
                                                  {{ detailContent.title }}
                                             </div>
                                             <div class="content-body">
+                                                <p class="msg" v-if="detailContent.msg">{{ detailContent.msg }}</p>
                                                 <div class="form-item" v-for="item in detailContent.input">
-                                                    <label>{{ item.name }}: </label>
+                                                    <label>{{ item.title }}: </label>
                                                     <select v-if="item.select" v-model="item.value">
                                                         <option v-for="op in item.select" :value="op.val">{{ op.name }}</option>
                                                     </select>
-                                                    <input type="text" v-else :value="item.value">
+                                                    <input v-else type="text" :value="item.value">
                                                 </div>
                                                 <div class="form-item">
                                                     <button class="btn btn-primary btn-sm" @click="submitContent">
-                                                        {{ detailContent.title=="另存为"? "保存":"确定" }}
+                                                        {{ detailContent.title=="删除"? "确定":"保存" }}
                                                     </button>
                                                     <button class="btn btn-sm" @click="cancelContent">取消</button>
                                                 </div>
@@ -252,21 +253,38 @@
     <script src="static/js/common-support.js"></script>
 
     <script>
-    // 切换数据
-    function getData(event, t) {
-        event.preventDefault();
-        $.get("static/data/data2.json", function (data) {
-            $.extend(spItem, data);
-            $(t).parent().addClass('active').siblings().removeClass('active');
-        });
-    }
-
     $(function() {
+
+        // 模拟 切换数据、跳转菜单
+        var url = location.search;
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+        }
+        if (theRequest.data) {
+            $.get("static/data/" + theRequest.data + ".json", function (data) {
+                $.extend(spItem, data);
+            });
+        }
+        var href = location.href.split('/').pop();
+        $(".banner-tabs ul li a").each(function () {
+            if ($(this).attr('href') == href) {
+                $(this).parent().addClass("active");
+            } else {
+                $(this).parent().removeClass("active");
+            }
+        });
+
 
         // 目录菜单
         var items = [
             {
-                "name": "学段",
+                "title": "学段",
+                "name": "xd",
                 "options": [
                     { "id": 1, "name": "小学", "isSelected": true },
                     { "id": 2, "name": "初中", "isSelected": true },
@@ -276,7 +294,8 @@
                 "isEdit": false
             },
             {
-                "name": "科目",
+                "title": "科目",
+                "name": "km",
                 "options": [
                     { "id": 1, "name": "语文", "isSelected": true },
                     { "id": 2, "name": "数学", "isSelected": true },
@@ -290,7 +309,8 @@
                 "isEdit": false,
             },
             {
-                "name": "教版",
+                "title": "教版",
+                "name": "jb",
                 "options": [
                     { "id": 1, "name": "人教版", "isSelected": true },
                     { "id": 2, "name": "编部版", "isSelected": true },
@@ -302,7 +322,8 @@
                 "isEdit": false,
             },
             {
-                "name": "年级",
+                "title": "年级",
+                "name": "nj",
                 "options": [
                     { "id": 1, "name": "七年级", "isSelected": true },
                     { "id": 2, "name": "八年级", "isSelected": true },
@@ -370,17 +391,19 @@
             ]
         };
 
-        // 添加框
+        // 对话框
         var detailAdd = {
-            "isShow": true,
+            "isShow": false,
             "title": "添加",
+            "action": "",
+            "msg": "",
             "input": [
                 {
-                    "name": "目录名称",
+                    "title": "目录名称",
                     "value": ""
                 },
                 {
-                    "name": "上级目录",
+                    "title": "上级目录",
                     "value": "2",
                     "select": [
                         { "name": "上册", "val": "1" },
@@ -391,7 +414,7 @@
         }
 
 
-        // spItem 为 #spContent 的vue对象, items/details/detailContent 为所需的数据
+        // spItem 为vue对象, items/details/detailContent 为所需的数据
         spItem.items = items;
         spItem.details = details;
         spItem.detailContent = { "isShow": false };
@@ -399,11 +422,12 @@
         // 激活选项
         spItem.$on("optionActive", function (active) {
             console.log(active);
-            spItem.details = details;
+            // spItem.details = details;
         });
 
         // 保存选项时
         spItem.$on("optionSave", function(data, callback) {
+            console.log(data);
             $.ajax({
                 url: "static/data/response1.json",
                 type: "GET",
@@ -420,22 +444,27 @@
             });
         });
         
-        // 删除内容
-        spItem.$on("delContent", function(id){
-            if(id){
-                var node = getNode(spItem.details.treeData, id),
-                    parent = node.parentNode?node.parentNode.children : spItem.details.treeData,
-                    index = parent.indexOf(node.node);
-                parent.splice(index, 1);
-            }else{
-                spItem.details.treeData = [];
-                // spItem.details.treeData.splice(0, spItem.details.treeData);
-            }
-        });
 
         // 提交内容
         spItem.$on("submitContent", function(){
-            console.log(spItem.detailContent);
+            var data = {};
+            data["action"] = spItem.detailContent.action;
+            data["data"] = [];
+            if(spItem.detailContent.action!="delete"){
+                spItem.detailContent.input.forEach(function(v){
+                    data.data.push({
+                        "name": v.name,
+                        "value": v.value
+                    });
+                });
+            } 
+            data.data.push({
+                "name": "nodeId",
+                "value": spItem.details.activeId
+            });
+
+            console.log(data);
+            spItem.detailContent.isShow = false;
         });
 
     });

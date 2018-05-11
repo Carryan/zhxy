@@ -17,7 +17,7 @@
 	<![endif]-->
 
     <!-- page specific plugin styles -->
-    
+    <link rel="stylesheet" href="static/vendor/datepicker/bootstrap-datepicker.min.css">
 
     <!-- fonts -->
 
@@ -115,12 +115,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label>年份：</label>
-                                        <select name="" class="width-101">
-                                            <option value="">请选择</option>
-                                            <option value="">2016</option>
-                                            <option value="">2017</option>
-                                            <option value="">2018</option>
-                                        </select>
+                                        <div class="input-group-box">
+                                            <div class="input-group width-101">
+                                                <input class="form-control date-picker" data-date-format="yyyy" 
+                                                data-date-start-view="years" data-date-min-view-mode="years" type="text" value="">
+                                                <span class="input-group-addon">
+                                                    <i class="icon-calendar bigger-110"></i>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label>学期：</label>
@@ -587,7 +590,7 @@
     <script src="assets/js/typeahead-bs2.min.js"></script>
 
     <!-- page specific plugin scripts -->
-    
+    <script src="static/vendor/datepicker/bootstrap-datepicker.min.js"></script>
 
     <!-- ace scripts -->
 

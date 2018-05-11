@@ -1,7 +1,8 @@
 {
     "items": [
         {
-            "name": "学段",
+            "title": "学段",
+            "name": "xd",
             "options": [
                 {
                     "id": 1,
@@ -20,7 +21,8 @@
             "isEdit": false
         },
         {
-            "name": "科目",
+            "title": "科目",
+            "name": "km",
             "options": [
                 {
                     "id": 1,
@@ -55,7 +57,8 @@
             "isEdit": false
         },
         {
-            "name": "教版",
+            "title": "教版",
+            "name": "jb",
             "options": [
                 {
                     "id": 1,
@@ -82,7 +85,8 @@
             "isEdit": false
         },
         {
-            "name": "年级",
+            "title": "年级",
+            "name": "nj",
             "options": [
                 {
                     "id": 1,

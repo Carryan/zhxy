@@ -72,7 +72,7 @@ $('form').on('keydown', function(){
                         v = ele.find(settings.val),
                         w = $(this).width(),
                         h = $(this).height();
-                    v.css({"width":w, "height": h});
+                    v.css({"min-width":w, "min-height": h});
                     ele.html(v);
                     return ele;
                 },
@@ -97,9 +97,7 @@ $('form').on('keydown', function(){
 
             $drop.droppable({
                 addClasses: false,
-                disabled: true,
-                // greedy: true,
-                // activeClass: "acceptable"
+                disabled: true
             });
 
         };
@@ -189,7 +187,8 @@ $('form').on('keydown', function(){
 
         // 停止拖拽事件
         dragCells.on("dragstop", function (event, ui) {
-            _this.isDrop ? _this.isDrop = true : _this.isDrop = false;
+            // _this.isDrop ? _this.isDrop = true : _this.isDrop = false;
+            _this.isDrop ? _this.lastDone = true : _this.lastDone = false;
             selecting(false, "cell-dragging");
         });
 
@@ -595,7 +594,7 @@ function selectModel() {
     if (!obj.length) return;
 
     obj.find('select').change(function () {
-        var cm = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八'],
+        var cm = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十'],
             i = 0;
         obj.find('select').each(function () {
             var list = '', j = 0;
@@ -638,15 +637,18 @@ function deleteNewRow(t) {
         suffix: [],
         meridiem: ["上午", "下午"]
     };
-    var dp = obj.datepicker({
-        autoclose: true,
-        zIndexOffset: 9999,
-        format: "yyyy-mm-dd",
-        language: "zh-CN",
-        todayHighlight: true
-    });
-    dp.next().on("click", function () {
-        $(this).prev().focus();
+    obj.each(function(){
+        var $this = $(this);
+        var dp = $this.datepicker({
+            autoclose: true,
+            zIndexOffset: 9999,
+            format: $this.attr("data-date-format") || "yyyy-mm-dd",
+            language: "zh-CN",
+            todayHighlight: true
+        });
+        dp.next().on("click", function () {
+            $(this).prev().focus();
+        });
     });
     //时间段限制
     $('.input-daterange').each(function () {
@@ -685,4 +687,122 @@ function getTop(e) {
     var offset = e.offsetTop;
     if (e.offsetParent != null) offset += getTop(e.offsetParent);
     return offset;
+}
+function getLeft(e) {
+    var offset = e.offsetLeft;
+    if (e.offsetParent != null) offset += getLeft(e.offsetParent);
+    return offset;
+}
+
+// 滚动条
+(function(obj){
+    obj.each(function(){
+        if($(this).is(":visible")) tableScrollBar($(this));
+    });
+})($(".fix-table-box .scroll-bar"));
+
+function tableScrollBar(obj) {
+    var box = obj.parents(".fix-table-box").first();
+    var inner = obj.siblings(".fix-inner");
+
+    var window_height = $(window.parent).height(),
+        table_top = getTop(box[0]),
+        iframe = window.parent.document.getElementById('iframe0'),
+        iframe_top = iframe ? getTop(iframe) : 0,
+        max_h = inner.height();
+
+    document.body.style.minHeight = iframe_top + table_top + max_h + 50 + "px";
+
+    // 滚动条位置
+    $(window.parent).on("scroll", function(){
+        setPosition();
+    });
+    function setPosition(){
+        var scroll_top = $(window.parent).scrollTop(),
+            box_h = window_height - iframe_top - table_top + scroll_top;
+        if(box_h>70 && box_h<max_h) {
+            box.height(box_h-2);
+        }else{
+            box.height(max_h);
+        }
+    }
+    setPosition();
+
+    var scroll = obj.find(".scroll-div");
+    var bar_w = obj.width(); //滚动条长
+    var sd_w = inner[0].offsetWidth/inner[0].scrollWidth*bar_w; //滚动块宽
+    scroll.width(sd_w);
+
+    var max_l = bar_w - sd_w; // 最大left
+    var max_scroll = inner[0].scrollWidth - inner[0].offsetWidth; //最大滚动距离
+    if(max_scroll<=0) {
+        obj.addClass("hidden");
+    }
+    
+    // 拖拽
+    scroll.on("mousedown", function(event){
+        var _this = this,
+            e = event || window.event,
+            _scrollLeft = this.offsetLeft,
+            left = e.clientX;
+
+        document.body.classList.add("unselectable");
+        _this.classList.add("held");
+
+        document.onmousemove = scrollGo;  
+
+        document.onmouseup = function(event) {  
+            this.onmousemove = null;
+            document.body.classList.remove("unselectable");
+            _this.classList.remove("held");
+
+        }
+
+        function scrollGo(event) { 
+            var e = event || window.event;  
+            var _left = e.clientX;  
+            var _l = _left - left + _scrollLeft;
+            if (_l > max_l)  _l = max_l; 
+            if (_l <= 0) _l = 0; 
+            inner.scrollLeft(_l/max_l*max_scroll);
+        }
+    });
+
+    // 点击滚动
+    obj.on("click", function(event){
+        var e = event || window.event,  
+            t = e.target || e.srcElement;
+        if (t != scroll[0]) {
+            var _this = this,
+                _scrollLeft = scroll[0].offsetLeft;
+            var left = getLeft(_this);  
+            var _left = (e.clientX - left)>_scrollLeft ? e.clientX - left - sd_w : e.clientX - left; 
+            if (_left <= 0) _left = 0;
+            if (_left >= max_l) _left = max_l;
+
+            inner.scrollLeft(_left/max_l*max_scroll);
+        }
+    });
+
+    // 内部滚动
+    inner.on("scroll", function(){
+        var s_left = $(this).scrollLeft();
+        scroll.css({"left": s_left/max_scroll*max_l});
+    });
+
+    // 窗口变化
+    $(window.parent).on("resize", function(){
+        window_height = $(this).height();
+        bar_w = obj.width();
+        sd_w = inner[0].offsetWidth/inner[0].scrollWidth*bar_w;
+        scroll.width(sd_w);
+        max_l = bar_w - sd_w;
+        max_scroll = inner[0].scrollWidth - inner[0].offsetWidth;
+        if(max_scroll>0) {
+            obj.removeClass("hidden");
+        }else{
+            obj.addClass("hidden");
+        }
+    });
+
 }

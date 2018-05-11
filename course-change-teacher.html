@@ -220,20 +220,32 @@
                                                     <div class="val" data-val="{s:'语',t:'李白'}">数学
                                                         <div class="tip">李晓光</div>
                                                     </div>
+                                                    <div class="origin">
+                                                        数学<div class="tip">李晓光</div>
+                                                    </div>
                                                 </td>
                                                 <td data-key="2-1">
                                                     <div class="val" data-val="{s:'语',t:'1'}">数学
                                                         <div class="tip">李晓光</div>
+                                                    </div>
+                                                    <div class="origin">
+                                                        数学<div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
                                                 <td data-key="3-1">
                                                     <div class="val" data-val="{s:'语',t:'2'}">数学
                                                         <div class="tip">李晓光</div>
                                                     </div>
+                                                    <div class="origin">
+                                                        数学<div class="tip">李晓光</div>
+                                                    </div>
                                                 </td>
                                                 <td data-key="4-1">
                                                     <div class="val" data-val="{s:'语',t:'3'}">数学
                                                         <div class="tip">李晓光</div>
+                                                    </div>
+                                                    <div class="origin">
+                                                        数学<div class="tip">李晓光</div>
                                                     </div>
                                                 </td>
                                                 <td data-key="5-1">
@@ -883,6 +895,8 @@
         dtable1.on('exchange', function (event, from, to) {
             console.log('exchange');
             dtable1.render(bug_cell);
+            from.find(".origin").show();
+            to.find(".origin").show();
         });
 
         dtable1.on('cancelMove', function(){

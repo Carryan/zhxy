@@ -93,7 +93,7 @@
                                         <a href="support-index.html">标准教材目录管理</a>
                                     </li>
                                     <li>
-                                        <a href="support-index.html?#">学科知识点目录管理</a>
+                                        <a href="support-index.html?data=data2">学科知识点目录管理</a>
                                     </li>
                                     <li class="active">
                                         <a href="support-relation.html">教材目录知识点关联</a>
@@ -104,7 +104,7 @@
                             <div id="spContent" class="content-tab">
                                 <div class="contentA" v-cloak>
                                     <div class="sp-item clearfix" v-for="item in items">
-                                        <div class="name">{{ item.name }}:</div>
+                                        <div class="title">{{ item.title }}:</div>
                                         <ul class="item-options clearfix">
                                             <li v-for="op in item.options" v-if="op.isSelected!==false" v-bind:class="{active: op.id==item.activeId}">
                                                 <a href="javascript:;" v-on:click="optionActive(op.id, item)">{{ op.name }}</a>
@@ -139,7 +139,7 @@
                                             <div class="content-header clearfix">
                                                 <div class="pull-left">{{ relation.title }}</div>
                                                 <div class="pull-right">
-                                                    <button class="btn btn-primary btn-sm">保存</button>
+                                                    <button class="btn btn-primary btn-sm" @click="saveRelation">保存</button>
                                                 </div>
                                             </div>
                                             <div class="content-body">
@@ -213,7 +213,21 @@
                 $.extend(spItem, data);
             });
 
-            
+            // 激活选项
+            spItem.$on("optionActive", function (active) {
+                console.log(active);
+                // spItem.details = details;
+            });
+
+            // 左侧选择节点
+            spItem.$on("selectNode", function(nodeId){
+                console.log(nodeId);
+            });
+
+            // 保存关联
+            spItem.$on("saveRelation", function(data){
+                console.log(data);
+            });
 
         });
     </script>

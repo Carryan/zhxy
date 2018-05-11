@@ -1,33 +1,33 @@
 
 var treeItemTemplate = '<li :class="{active: model.id===activeId, selectable: model.selectable}">'+
-                            '<div class="item clearfix" v-on:click.stop="selectNode(model.id)">'+
-                                '<div @click="toggle" class="pull-left">'+
+                            '<div class="item" v-on:click.stop="selectNode(model.id, model.selectable)">'+
+                                '<div @click="toggle" class="left">'+
                                     '<span v-if="isFolder" class="folder-icon">{{ model.open? "-" : "+" }}</span>'+
                                     '<i v-if="isFolder" class="icon-folder-open"></i>'+
                                     '<label v-if="model.checkbox">'+
                                         '<input type="checkbox" class="ace" :value="model.id" v-model="father.relation.selectedIds">'+
-                                        '<span class="lbl"></span>'+
+                                        '<span class="lbl">{{ model.name }}</span>'+
                                     '</label>'+
-                                    '{{ model.name }}'+
+                                    '{{ model.checkbox ? "" : model.name }}'+
                                 '</div>'+
-                                '<div class="pull-right" v-if="hasAction">'+
-                                    '<a href="javascript:;" @click="orderChange(model.id, index, index-1)">'+
+                                '<div class="right" v-if="hasAction">'+
+                                    '<a href="javascript:;" @click.stop="orderChange(model.id, index, index-1)">'+
                                         '<i class="icon-long-arrow-up"></i>'+
                                     '</a>'+
-                                    '<a href="javascript:;" @click="orderChange(model.id, index, index+1)">'+
+                                    '<a href="javascript:;" @click.stop="orderChange(model.id, index, index+1)">'+
                                         '<i class="icon-long-arrow-down"></i>'+
                                     '</a>'+
-                                    '<a href="javascript:;" @click="addItem(model.id)">'+
+                                    '<a href="javascript:;" @click.stop="addItem(model.id)">'+
                                         '<i class="icon-plus"></i>'+
                                     '</a>'+
-                                    '<a href="javascript:;" @click="editItem(model.id)">'+
+                                    '<a href="javascript:;" @click.stop="editItem(model.id)">'+
                                         '<i class="icon-pencil"></i>'+
                                     '</a>'+
-                                    '<a href="javascript:;" @click="deleteItem(model.id)">'+
+                                    '<a href="javascript:;" @click.stop="deleteItem(model.id)">'+
                                         '<i class="icon-trash"></i>'+
                                     '</a>'+
                                 '</div>'+
-                                '<div class="pull-right" v-else>'+
+                                '<div class="right" v-else>'+
                                     '<span class="tip" v-if="model.tip">{{ model.tip }}</span>'+
                                 '</div>'+
                             '</div>'+
@@ -101,12 +101,13 @@ var treeItem = {
         editItem: function (nodeId) {
             this.$emit("edit", nodeId);
         },
-        selectNode: function (nodeId) {
+        selectNode: function (nodeId, selectable) {
             if (this.activeId==-1) return;
-            var node = getNode(this.father.details.treeData, nodeId);
-            if(node.node.selectable) {
+            if(selectable) {
+                var node = getNode(this.father.details.treeData, nodeId);
                 this.father.details.activeId = node.node ? nodeId : 0;
                 if (this.father.details.noAction) this.father.relation.nodeName = node.node.name;
+                this.father.selectNode(nodeId);
             }
         }
 
@@ -118,7 +119,7 @@ var spItem = new Vue({
     data: {
         "items": [],
         "details": {},
-        "detailContent": {},
+        "detailContent": { "isShow": false},
         "relation": {}
     },
     components: {
@@ -130,7 +131,7 @@ var spItem = new Vue({
             item.activeId = id;
             var active = [];
             this.items.forEach(function(v){
-                active.push(v.activeId);
+                active[v.name] = v.activeId;
             });
             this.$emit("optionActive", active);
         },
@@ -143,7 +144,7 @@ var spItem = new Vue({
             // 保存的数据
             var data = [];
             data['name'] = item.name;
-            data['selectedIds'] = getIdsArr(item.editSelect.selected).concat(getIdsArr(item.editSelect.selecting), 0);
+            data['selectedIds'] = getIdsArr(item.editSelect.selected).concat(getIdsArr(item.editSelect.selecting, 0));
             // 保存选项 事件
             this.$emit('optionSave', data, function(){
                 item.editSelect.selecting = [];
@@ -194,57 +195,75 @@ var spItem = new Vue({
         },
         // 删除
         delContent: function (id) {
-            this.$emit("delContent", id);
+            var _this = this, msg = "";
+            _this.details.activeId = id || 0;
+            if(id) {
+                
+                msg = "您确定要删除" + getPN(id) + "吗？";
+            }else{
+                msg = "您确定要删除" + _this.details.title + "目录吗？";
+            }
+            
+            function getPN(id){
+                var node = getNode(_this.details.treeData, id),
+                    name = node.node.name,
+                    p = node.parentNode;
+                if(p) name = getPN(node.parentNode.id) + name;
+                return name;
+            }
+
+            this.detailContent = {
+                "isShow": true,
+                "title": "删除",
+                "action": "delete",
+                "msg": msg
+            }
+            // 删除
+            // if (id) {
+            //     var node = getNode(spItem.details.treeData, id),
+            //         parent = node.parentNode ? node.parentNode.children : spItem.details.treeData,
+            //         index = parent.indexOf(node.node);
+            //     parent.splice(index, 1);
+            // } else {
+            //     spItem.details.treeData = [];
+            // }
         },
         // 添加
         addContent: function (nodeId) {
             // this.$emit("addContent");
             var node = getNode(this.details.treeData, nodeId);
             this.details.activeId = node.node ? nodeId : 0;
+
             var select = [], up = [];
             if (node.parentNode){
                 up = node.parentNode.children;
             }else if(node.node){
                 up = this.details.treeData;
             }
-
             if(up){
                 up.forEach(function (v) {
-                    select.push({
-                        "name": v.name,
-                        "val": v.id
-                    });
+                    select.push({ "name": v.name, "val": v.id });
                 });
             }
 
-            if(select[0]){
-                this.detailContent = {
-                    "isShow": true,
-                    "title": "添加",
-                    "input": [
-                        {
-                            "name": "目录名称",
-                            "value": ""
-                        },
-                        {
-                            "name": "上级目录",
-                            "value": node.node.id,
-                            "select": select
-                        }
-                    ]
-                }
-            }else{
-                this.detailContent = {
-                    "isShow": true,
-                    "title": "添加",
-                    "input": [
-                        {
-                            "name": "目录名称",
-                            "value": ""
-                        }
-                    ]
-                }
+            var input = [];
+            input.push({ "title": "目录名称", "value": "", "name": "name"});
+            if (select[0]) { //存在上级目录时
+                input.push({
+                    "title": "上级目录",
+                    "value": node.node.id,
+                    "select": select,
+                    "name": "upperId"
+                });
             }
+
+            this.detailContent = {
+                "isShow": true,
+                "title": "添加",
+                "action": "add",
+                "input": input
+            }
+
         },
         // 另存为
         saveAs: function() {
@@ -262,6 +281,7 @@ var spItem = new Vue({
                     }
                 });
                 input.push({
+                    "title": v.title,
                     "name": v.name,
                     "value": v.activeId,
                     "select": select
@@ -270,6 +290,7 @@ var spItem = new Vue({
             this.detailContent = {
                 "isShow": true,
                 "title": "另存为",
+                "action": "save_as",
                 "input": input
             }
         },
@@ -278,49 +299,39 @@ var spItem = new Vue({
             // this.$emit("editContent");
             var node = getNode(this.details.treeData, nodeId);
             this.details.activeId = node.node ? nodeId : 0;
+
             var select = [], up = [];
             if (node.parentNode) {
                 p = getNode(this.details.treeData, node.parentNode.id).parentNode;
                 up = p ? p.children : this.details.treeData;
             }
-
             if (up) {
                 up.forEach(function (v) {
-                    select.push({
-                        "name": v.name,
-                        "val": v.id
-                    });
+                    select.push({ "name": v.name, "val": v.id });
                 });
             }
 
-            if (select[0]) {
-                this.detailContent = {
-                    "isShow": true,
-                    "title": "修改",
-                    "input": [
-                        {
-                            "name": "目录名称",
-                            "value": node.node.name
-                        },
-                        {
-                            "name": "上级目录",
-                            "value": node.parentNode.id,
-                            "select": select
-                        }
-                    ]
-                }
-            } else {
-                this.detailContent = {
-                    "isShow": true,
-                    "title": "修改",
-                    "input": [
-                        {
-                            "name": "目录名称",
-                            "value": node.node.name
-                        }
-                    ]
-                }
+            var input = [];
+            input.push({ "title": "目录名称", "value": node.node.name, "name": "name" });
+            if (select[0]) { //存在上级目录时
+                input.push({
+                    "title": "上级目录",
+                    "name": "upperId",
+                    "value": node.parentNode.id,
+                    "select": select
+                });
             }
+
+            this.detailContent = {
+                "isShow": true,
+                "title": "修改",
+                "action": "edit",
+                "input": input
+            }
+        },
+        // 选择节点
+        selectNode: function (nodeId){
+            this.$emit("selectNode", nodeId);
         },
         // 提交
         submitContent: function() {
@@ -330,6 +341,13 @@ var spItem = new Vue({
         cancelContent: function () {
             this.detailContent.isShow = false;
             this.details.activeId = 0;
+        },
+        // 保存关系
+        saveRelation: function() {
+            var data = {};
+            data["nodeId"] = this.details.activeId;
+            data["selectedIds"] = this.relation.selectedIds;
+            this.$emit("saveRelation", data);
         }
         
     }
@@ -408,24 +426,3 @@ function getNode(json, nodeId) {
     };
 }
 
-// 获取树结构某属性，返回数组
-function getTreeAttr(tree, attr) {
-    var arr = [];
-    function readNodes(tree, attr) {
-        for (var i = 0; i < tree.length; i++) {
-            var obj = tree[i];
-            if (!obj || !obj[attr]) {
-                continue;
-            } else {
-                arr.push(obj[attr]);
-                if (obj.children && obj.open) {
-                    readNodes(obj.children, attr);
-                } else {
-                    continue;
-                }
-            }
-        }
-    }
-    tree && readNodes(tree, attr);
-    return arr;
-}

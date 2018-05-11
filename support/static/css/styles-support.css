@@ -56,8 +56,8 @@ body.modal-open {
     padding: 10px 10px 0;
     margin-bottom: 20px;
 }
-.contentB {
-    min-height: 298px;
+.contentB, .contentC.relation {
+    min-height: 398px;
 }
 
 .content-body {
@@ -71,7 +71,7 @@ body.modal-open {
 .sp-item + .sp-item {
     margin-top: 10px;
 }
-.sp-item .name {
+.sp-item .title {
     color: #454545;
     float: left;
     width: 35px;
@@ -166,13 +166,17 @@ body.modal-open {
     user-select: none;
 }
 .detail-tree li.active > .item, .detail-tree li .item:hover {
-    background: #D9EDF7;
+    background-color: #D9EDF7;
     /* margin-left: -300px;
     padding-left: 300px; */
-    margin-right: -15px;
-    padding-right: 15px;
+    /* margin-right: -15px;
+    padding-right: 15px; */
 }
-.detail-tree li.selectable > .item:hover {
+.no-action .detail-tree li .item:hover {
+    background-color: transparent;
+}
+.no-action .detail-tree li.selectable > .item:hover {
+    background-color: #D9EDF7;
     cursor: pointer;
 }
 .detail-tree > li + li, .detail-tree .children li {
@@ -181,6 +185,9 @@ body.modal-open {
 .detail-tree .item {
     padding-top: 3px;
     padding-bottom: 3px;
+    position: relative;
+    margin-right: -15px;
+    padding-right: 15px;
 }
 .detail-tree .item .folder-icon {
     border: 1px solid #323232;
@@ -193,21 +200,30 @@ body.modal-open {
     cursor: pointer;
 
 }
-.detail-tree .item .pull-right {
-    margin-top: -1px;
+.detail-tree .item .left {
+    width: calc(100% - 120px);
+    word-wrap: break-word;
 }
-.detail-tree .item .pull-right a {
+.detail-tree .item .right {
+    width: 120px;
+    text-align: right;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: -12px;
+}
+.detail-tree .item .right a {
     font-size: 12px;
     color: #999;
     display: inline-block;
     border: 1px solid #999;
     width: 17px;
     height: 17px;
-    line-height: 15px;
+    line-height: 14px;
     text-align: center;
     margin-left: 5px;
 }
-.detail-tree .item .pull-right .tip {
+.detail-tree .item .right .tip {
     font-size: 12px;
     color: #999;
 }
@@ -276,6 +292,10 @@ body.modal-open {
     padding: 30px 20px 20px;
     margin-bottom: -20px;
 }
+.contentC .content-body .msg {
+    margin-bottom: 25px;
+    text-align: center;
+}
 .contentC .form-item {
     margin-bottom: 20px;
 }
@@ -312,10 +332,13 @@ body.modal-open {
 }
 .relation .detail-tree li label {
     margin-bottom: 0;
-    margin-right: 5px;
 }
-.relation .detail-tree li label, .relation .detail-tree li label .lbl, .relation .detail-tree li label .lbl {
+.relation .detail-tree li label, .relation .detail-tree li label .lbl, .relation .detail-tree li label .lbl::before {
     line-height: 14px;
+}
+.relation .detail-tree li label .lbl::before {
+    margin-right: 5px;
+    vertical-align: bottom;
 }
 
 .contentB .knowledge {
