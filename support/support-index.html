@@ -17,7 +17,7 @@
 	<![endif]-->
 
     <!-- page specific plugin styles -->
-
+    
 
     <!-- fonts -->
 
@@ -41,6 +41,9 @@
 		<script src="assets/js/html5shiv.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+
+    <script src="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@0.0.28/dist/vue-treeselect.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@0.0.28/dist/vue-treeselect.min.css">
 
 </head>
 
@@ -146,11 +149,11 @@
 
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <div class="contentB" v-cloak>
+                                        <div class="contentB" v-cloak v-if="details.treeData">
                                             <div class="content-header clearfix">
                                                 <div class="pull-left" >{{ details.title }}</div>
                                                 <div class="pull-right">
-                                                    <a href="javascript:;" @click="addContent">
+                                                    <a href="javascript:;" @click="addContent(0)">
                                                         <i class="icon-plus"></i>
                                                     </a>
                                                     <a class="btn btn-primary" href="javascript:;" 
@@ -182,13 +185,19 @@
                                                  {{ detailContent.title }}
                                             </div>
                                             <div class="content-body">
-                                                <p class="msg" v-if="detailContent.msg">{{ detailContent.msg }}</p>
-                                                <div class="form-item" v-for="item in detailContent.input">
+                                                <p class="msg" v-if="detailContent.action=='delete'">{{ detailContent.msg }}</p>
+                                                <div class="form-item" v-else v-for="item in detailContent.input">
                                                     <label>{{ item.title }}: </label>
-                                                    <select v-if="item.select" v-model="item.value">
+                                                    <input v-if="item.type=='text'" type="text" v-model="item.value" :value="item.value">
+                                                    <select v-if="item.type=='select'" v-model="item.value">
                                                         <option v-for="op in item.select" :value="op.val">{{ op.name }}</option>
                                                     </select>
-                                                    <input v-else type="text" :value="item.value">
+                                                    <treeselect v-if="item.type=='treeselect'" v-model="item.value" 
+                                                        :options="item.treeselect" 
+                                                        :required="true"
+                                                        :default-expand-level="1"
+                                                        :no-children-text="'没有下级目录'" 
+                                                        :clearable="false"/>
                                                 </div>
                                                 <div class="form-item">
                                                     <button class="btn btn-primary btn-sm" @click="submitContent">
@@ -250,6 +259,7 @@
 
     <!-- inline scripts related to this page -->
     <script src="static/js/vue.min.js"></script>
+    <script src="static/vendor/layer/layer.js"></script>
     <script src="static/js/common-support.js"></script>
 
     <script>
@@ -349,7 +359,8 @@
                     "children": [
                         {
                             "id": 3,
-                            "name": "第一单元"
+                            "name": "第一单元",
+                            "children":[]
                         },
                         {
                             "id": 4,
@@ -391,28 +402,6 @@
             ]
         };
 
-        // 对话框
-        var detailAdd = {
-            "isShow": false,
-            "title": "添加",
-            "action": "",
-            "msg": "",
-            "input": [
-                {
-                    "title": "目录名称",
-                    "value": ""
-                },
-                {
-                    "title": "上级目录",
-                    "value": "2",
-                    "select": [
-                        { "name": "上册", "val": "1" },
-                        { "name": "下册", "val": "2" }
-                    ]
-                }
-            ]
-        }
-
 
         // spItem 为vue对象, items/details/detailContent 为所需的数据
         spItem.items = items;
@@ -447,24 +436,62 @@
 
         // 提交内容
         spItem.$on("submitContent", function(){
-            var data = {};
-            data["action"] = spItem.detailContent.action;
-            data["data"] = [];
-            if(spItem.detailContent.action!="delete"){
-                spItem.detailContent.input.forEach(function(v){
-                    data.data.push({
-                        "name": v.name,
-                        "value": v.value
-                    });
-                });
-            } 
-            data.data.push({
-                "name": "nodeId",
-                "value": spItem.details.activeId
+            var data = {node:{}, book:{}};
+            // var data = {};
+            // data.action = spItem.detailContent.action;
+            // data.node = {};
+
+            data.book = {}
+            spItem.items.forEach(function(v){
+                data.book[v.name] = v.activeId;
             });
 
-            console.log(data);
-            spItem.detailContent.isShow = false;
+            if(spItem.detailContent.action==="saveAs"){
+                data["new_book"] = {};
+                spItem.detailContent.input.forEach(function(v){
+                    data.new_book[v.name] = v.value;
+                });
+            }else{
+                data.node.id = spItem.detailContent.action=="add" ? null : spItem.details.activeId;
+                spItem.detailContent.input.forEach(function(v){
+                    data.node[v.name] = v.value;
+                });
+            }
+
+            $.ajax({
+                url: "static/data/response1.json",
+                type: "GET",
+                dataType: "json",
+                contentType : "application/json",
+                data: JSON.stringify(data),
+                success: function(res){
+                    if(res.state=="ok"){
+                        var node = data.node;
+                        if(spItem.detailContent.action=="delete"){
+                            deleteNode(spItem.details.treeData, node.id);
+                        }
+                        if(spItem.detailContent.action=="add"||spItem.detailContent.action=="edit"){
+                            updateNode(spItem.details.treeData, node);
+                        }
+                        if(spItem.detailContent.action=="saveAs"){
+                            var title = "";
+                            spItem.items.forEach(function(v){
+                                v.activeId = data.new_book[v.name];
+                                v.options.forEach(function(vl){
+                                    if(vl.id==v.activeId) title += vl.name;
+                                });
+                            });
+                            spItem.details.title = title;
+                        }
+
+                        layer.msg(res.msg ? res.msg : '操作成功!', { icon: 1, time: 1000 });
+                        spItem.detailContent.isShow = false;
+                    }else{
+                        layer.msg(res.msg ? res.msg : '操作失败!', { icon: 2, anim: 6 });
+                    }
+                }
+            });
+
         });
 
     });

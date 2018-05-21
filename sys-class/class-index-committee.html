@@ -18,7 +18,7 @@
 	<![endif]-->
 
     <!-- page specific plugin styles -->
-    <link rel="stylesheet" href="assets/css/chosen.css" />
+    <!-- <link rel="stylesheet" href="assets/css/chosen.css" /> -->
 
     <!-- fonts -->
 
@@ -122,18 +122,18 @@
 
                             <div class="banner-tabs">
                                 <ul class="nav nav-tabs">
-                                    <li>
+                                    <!-- <li>
                                         <a href="class-index.html">课程表</a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="class-index-seating.html">座位表</a>
                                     </li>
                                     <li class="active">
                                         <a href="class-index-committee.html">班委表</a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="class-index-finance.html">班级财务</a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="class-index-standard.html">量化指标设置</a>
                                     </li>
@@ -160,6 +160,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <tr class="empty-notice"><td colspan="3">没有记录</td></tr>
                                                 <tr>
                                                     <td>班长</td>
                                                     <td>张一山</td>
@@ -209,6 +210,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <tr class="empty-notice"><td colspan="3">没有记录</td></tr>
                                                 <tr>
                                                     <td>数学</td>
                                                     <td>张一山</td>
@@ -274,11 +276,10 @@
                 <input type="text" name="cadreName" value="{{= cadreName}}" />
             </td>
             <td>
-                <!-- <input type="text" name="studentName" value="{{= studentName}}" /> -->
-                <select name="" class="chosen-select" multiple data-placeholder="请选择">
+                <select name="students" class="chosen-selecter" multiple data-placeholder="请选择" verify-require="请选择学生">
                     <option value=""></option>
                     {{each students}}
-                    <option value="${$value.val}">${$value.name}</option>
+                    <option value="${$value.val}" {{if $value.isSelected}} selected {{/if}}>${$value.name}</option>
                     {{/each}}
                 </select>
             </td>
@@ -302,10 +303,10 @@
                 <input type="text" name="subjectName" value="{{= subjectName}}" />
             </td>
             <td>
-                <select name="" class="chosen-select" multiple data-placeholder="请选择">
+                <select name="students" class="chosen-selecter" multiple data-placeholder="请选择" verify-require="请选择学生">
                     <option value=""></option>
                     {{each students}}
-                    <option value="${$value.val}">${$value.name}</option>
+                    <option value="${$value.val}" {{if $value.isSelected}} selected {{/if}}>${$value.name}</option>
                     {{/each}}
                 </select>
             </td>
@@ -316,24 +317,6 @@
                     </a>
                     <a href="#" {{if isEdit}} class="return" {{else}} class="cancel" {{/if}}>
                         <i class="icon-remove red"></i>
-                    </a>
-                </span>
-            </td>
-        </tr>
-    </script>
-
-    <!-- 成功保存 模板 -->
-    <script type="text/html" id="saveTemplate">
-        <tr>
-            <td>{{= text1}}</td>
-            <td>{{= text2}}</td>
-            <td>
-                <span class="action-buttons">
-                    <a href="javascript:;" class="edit">
-                        <i class="icon-pencil green"></i>
-                    </a>
-                    <a href="{{= deleteUrl}}" class="delete">
-                        <i class="icon-trash red"></i>
                     </a>
                 </span>
             </td>
@@ -373,7 +356,7 @@
     <script src="assets/js/typeahead-bs2.min.js"></script>
 
     <!-- page specific plugin scripts -->
-    <script src="assets/js/chosen.jquery.min.js"></script>
+    <!-- <script src="assets/js/chosen.jquery.min.js"></script> -->
 
     <!-- ace scripts -->
 
@@ -398,26 +381,32 @@
         };
 
         // 添加班干部
+        // 保存返回 { "state": "ok", "msg": "保存成功！", "tempData": {"deleteUrl": "static/data/ajax-btn.json","td": []} }
+        // 删除返回 { "state": "ok", "msg": "操作成功！" }
         $("#tableCadres").editTable({
             addBtn: "#addCadres", //添加按钮
-            temp: "#cadresTemplate", //编辑模板
-            saveTemp: "#saveTemplate", //保存模板
-            initData: init_data //初始数据
+            temp: "#cadresTemplate", //编辑 模板
+            initData: init_data //初始数据，添加时的模板数据
         })
         .on("addRow", function(e, curRow){
-            curRow.find(".chosen-select").chosen().parent().css('overflow', 'visible');
+            setChosen(curRow.find(".chosen-selecter")); //选择框使用chosen.js
         })
         .on("editRow", function(e, thisTr, texts, editeCallback){ // thisTr当前行，texts当前行文本数组，editeCallback回调 进入编辑状态
             // 编辑状态的数据
-            var data = init_data;
+            var data = {};
+            data["students"] = [];
             data["cadreName"] = texts[0]; 
             data["isEdit"] = true;
-            var temp = $('#cadresTemplate').tmpl(data);
             // 为选择框赋值
-            temp.find("select option").each(function(){
-                if($(this).text()==texts[1]) $(this).attr("selected", true);
-            }); 
-            temp.find(".chosen-select").chosen().parent().css('overflow', 'visible');
+            init_data.students.forEach(function(v){
+                data.students.push({
+                    "val": v.val,
+                    "name": v.name,
+                    "isSelected": v.name==texts[1]
+                });
+            });
+            var temp = $('#cadresTemplate').tmpl(data);
+            setChosen(temp.find(".chosen-selecter"));
             //thisTr:当前行; temp:编辑的模板HTML元素或jq对象
             editeCallback(thisTr, temp); 
         });
@@ -440,23 +429,27 @@
         $("#tableRepresentative").editTable({
                 addBtn: "#addRepresentative", //添加按钮
                 temp: "#repTemplate", //编辑模板
-                saveTemp: "#saveTemplate", //保存模板
                 initData: init_data2
         })
         .on("addRow", function (e, curRow) {
-            curRow.find(".chosen-select").chosen().parent().css('overflow', 'visible');
+            setChosen(curRow.find(".chosen-selecter"));
         })
         .on("editRow", function (e, thisTr, texts, editeCallback) { // thisTr当前行，texts当前行文本数组，editeCallback回调 进入编辑状态
             // 编辑状态的数据
-            var data = init_data2;
+            var data = {};
+            data["students"] = init_data.students;
             data["subjectName"] = texts[0];
             data["isEdit"] = true;
-            var temp = $('#repTemplate').tmpl(data);
             // 为选择框赋值
-            temp.find("select option").each(function () {
-                if ($(this).text() == texts[1]) $(this).attr("selected", true);
+            init_data.students.forEach(function(v){
+                data.students.push({
+                    "val": v.val,
+                    "name": v.name,
+                    "isSelected": v.name==texts[1]
+                });
             });
-            temp.find(".chosen-select").chosen().parent().css('overflow', 'visible');
+            var temp = $('#repTemplate').tmpl(data);
+            setChosen(temp.find(".chosen-selecter"));
             //thisTr:当前行; temp:编辑的模板HTML元素或jq对象
             editeCallback(thisTr, temp);
         });

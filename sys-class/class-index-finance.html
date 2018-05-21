@@ -123,7 +123,8 @@
 
                             </div>
 
-                            <div class="banner-tabs">
+                            <div class="hr hr-double hr-dotted hr18"></div>
+                            <!-- <div class="banner-tabs">
                                 <ul class="nav nav-tabs">
                                     <li>
                                         <a href="class-index.html">课程表</a>
@@ -141,7 +142,7 @@
                                         <a href="class-index-standard.html">量化指标设置</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
 
                             <div class="content-tab">
 
@@ -175,14 +176,14 @@
                                     </div>
                                 </div>
 
-                                <div class="content-table-box">
+                                <div class="content-table-box" id="tableFinance">
                                     <div class="text-right table-top">
-                                        <button class="btn btn-primary btn-xs">
+                                        <button id="addCadres" class="btn btn-primary btn-xs">
                                             <i class="icon-plus"></i> 添加
                                         </button>
                                     </div>
 
-                                    <table class="staff-table table-hover">
+                                    <table class="staff-table table-hover table-edit">
                                         <colgroup>
                                             <col style="width:6%;">
                                             <col style="width:17%;">
@@ -206,6 +207,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <tr class="empty-notice"><td colspan="8">没有记录</td></tr>
                                             <tr>
                                                 <td>1</td>
                                                 <td>桌子</td>
@@ -216,52 +218,11 @@
                                                 <td>黄某某</td>
                                                 <td>
                                                     <span class="action-buttons">
-                                                        <a href="javascript:;">
+                                                        <a href="#" class="edit">
                                                             <i class="icon-pencil green"></i>
                                                         </a>
-                                                        <a href="#">
+                                                        <a href="static/data/ajax-btn.json" class="delete">
                                                             <i class="icon-trash red"></i>
-                                                        </a>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                    <input type="text" name="" placeholder="请输入" maxlength="30">
-                                                </td>
-                                                <td>
-                                                    <input type="text" name="" placeholder="请输入">
-                                                </td>
-                                                <td>
-                                                    <select name="" class="chosen-select" multiple data-placeholder="请选择">
-                                                        <option value=""></option>
-                                                        <option value="">张一山</option>
-                                                        <option value="">周某</option>
-                                                        <option value="">王某</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <textarea name="" rows="1" placeholder="请输入" maxlength="200"></textarea>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group-box">
-                                                        <div class="input-group">
-                                                            <input class="form-control date-picker" type="text" value="">
-                                                            <span class="input-group-addon">
-                                                                <i class="icon-calendar bigger-110"></i>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>黄某某</td>
-                                                <td>
-                                                    <span class="action-buttons">
-                                                        <a href="javascript:;">
-                                                            <i class="icon-ok green"></i>
-                                                        </a>
-                                                        <a href="#">
-                                                            <i class="icon-remove red"></i>
                                                         </a>
                                                     </span>
                                                 </td>
@@ -291,6 +252,51 @@
     </div>
     <!-- /.main-container -->
 
+    <!-- 表格行模板 -->
+    <script type="text/html" id="editTemplate">
+        <tr>
+            <td>{{= num}}</td>
+            <td>
+                <input type="text" name="goodsName" value="{{= goodsName}}" placeholder="请输入" maxlength="30" 
+                verify-require="请输入物品名称">
+            </td>
+            <td>
+                <input type="text" name="number" value="{{= number}}" placeholder="请输入" verify-number="请输入输入正确数量">
+            </td>
+            <td>
+                <select name="students" class="chosen-selecter" multiple data-placeholder="请选择" 
+                verify-require="请选择物品损坏人">
+                    {{each students}}
+                    <option value="${$value.val}" {{if $value.isSelected}} selected {{/if}}>${$value.name}</option>
+                    {{/each}}
+                </select>
+            </td>
+            <td>
+                <textarea name="record" rows="1" placeholder="请输入" maxlength="200">{{= record}}</textarea>
+            </td>
+            <td>
+                <div class="input-group-box">
+                    <div class="input-group">
+                        <input class="form-control date-picker" type="text" name="date" value="{{= date}}">
+                        <span class="input-group-addon">
+                            <i class="icon-calendar bigger-110"></i>
+                        </span>
+                    </div>
+                </div>
+            </td>
+            <td>{{= recorder}}<input type="hidden" name="recorder" value="{{= recorder}}"></td>
+            <td>
+                <span class="action-buttons">
+                    <a href="http://192.168.0.110:8001/savetabe" class="save">
+                        <i class="icon-ok green"></i>
+                    </a>
+                    <a href="#" {{if isEdit}} class="return" {{else}} class="cancel" {{/if}}>
+                        <i class="icon-remove red"></i>
+                    </a>
+                </span>
+            </td>
+        </tr>
+    </script>
 
     <!-- basic scripts -->
 
@@ -342,9 +348,65 @@
     <script src="static/js/common-class.js"></script>
 
     <script>
-        $(function(){
+        var init_data = {
+            num: "",
+            goodsName: "",
+            number: "",
+            students: [
+                { "val": "v1", "name": "张一山" },
+                { "val": "v2", "name": "周某" },
+                { "val": "v3", "name": "王某" },
+                { "val": "v4", "name": "张三" },
+                { "val": "v5", "name": "李四" },
+                { "val": "v6", "name": "王五" },
+                { "val": "v7", "name": "王6" },
+                { "val": "v8", "name": "王7" },
+                { "val": "v9", "name": "王8" }
+            ],
+            record: "",
+            date: "",
+            recorder: "黄某某",
+            isEdit: false
+        }
 
-        });
+        // 添加 表格行
+        $("#tableFinance").editTable({
+            addBtn: "#addCadres", //添加按钮
+            temp: "#editTemplate", //编辑 模板
+            initData: init_data, //初始数据，添加时的模板数据
+            isOrder: true
+        })
+        .on("addRow", function(e, curRow){
+            setChosen(curRow.find(".chosen-selecter")); //使用chosen
+            setDatePicker(curRow.find(".date-picker")); //使用日历
+        })
+        .on("editRow", function(e, thisTr, texts, editeCallback){ // thisTr当前行，texts当前行文本数组，editeCallback回调 进入编辑状态
+            // 编辑状态的数据
+            var data = {};
+            data["num"] = texts[0];
+            data["goodsName"] = texts[1]; 
+            data["number"] = texts[2];
+            data["students"] = [];
+            data["record"] = texts[4];
+            data["date"] = texts[5];
+            data["recorder"] = texts[6];
+            data["isEdit"] = true;
+            // 为选择框赋值
+            init_data.students.forEach(function(v){
+                data.students.push({
+                    "val": v.val,
+                    "name": v.name,
+                    "isSelected": v.name==texts[3]
+                });
+            });
+            
+            var temp = $('#editTemplate').tmpl(data);
+            setChosen(temp.find(".chosen-selecter")); //使用chosen
+            setDatePicker(temp.find(".date-picker")); //使用日历
+            
+            editeCallback(thisTr, temp); //thisTr:当前行; temp:编辑的模板HTML元素或jq对象
+        });;
+
     </script>
 
 </body>

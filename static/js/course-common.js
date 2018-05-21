@@ -37,12 +37,13 @@ $('form').on('keydown', function(){
             disabled: ".disabled", //无效元素 
             container: this.selector,
             scroll_left: 100, //左侧滚动触发距离
-            scroll_right: 90,
+            scroll_right: 10,
             isDblclick: false //是否触发双击事件
         };
 
         var settings = $.extend({}, defaults, options);
         var _this = this;
+        var helper_w;
 
         var cells = _this.find(settings.cell).not(settings.disabled); //有效元素
         var dragCells = cells; // 可拖拽元素
@@ -76,6 +77,9 @@ $('form').on('keydown', function(){
                     ele.html(v);
                     return ele;
                 },
+                start: function( event, ui ) {
+                    helper_w = ui.helper.outerWidth();
+                },
                 // 滚动条滚动 不触发 drag事件
                 drag: function (event, ui) {
                     // ui.position helper相对父元素距离，ui.offset helper相对文档距离
@@ -86,7 +90,7 @@ $('form').on('keydown', function(){
                             c_w = _this.width();
                         if (ui.position.left < settings.scroll_left) {
                             fixInner.scrollLeft(srl - 25);
-                        } else if (ui.position.left > c_w - settings.scroll_right) {
+                        } else if (ui.position.left > c_w - settings.scroll_right-helper_w) {
                             fixInner.scrollLeft(srl + 25);
                         }
                     }

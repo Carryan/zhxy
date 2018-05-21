@@ -55,8 +55,8 @@ var treeItem = {
     },
     computed: {
         isFolder: function () {
-            return this.model.children &&
-                this.model.children.length
+            return (this.model.children &&
+                this.model.children.length) || this.father.details.treeData.indexOf(this.model)!=-1
         }
     },
     methods: {
@@ -68,22 +68,35 @@ var treeItem = {
             }
         },
         orderChange: function (id, index, tindex) {
-            this.$emit("move", id);
+            // this.$emit("move", id);
             var node = getNode(this.father.details.treeData, id),
                 arr = node.parentNode ? node.parentNode.children : this.father.details.treeData;
             if (tindex < 0 || tindex >= arr.length) return;
             var url = this.father.details.moveUrl;
             var data = {
-                "from": index,
-                "to": tindex
-            }
+                node1: {
+                    id: arr[index].id,
+                    sequence: arr[tindex].sequence || tindex 
+                },
+                node2: {
+                    id: arr[tindex].id,
+                    sequence: arr[index].sequence || index
+                }
+            };
             $.ajax({
                 url: url,
                 type: "GET",
                 dataType: "json",
-                data: data,
+                contentType : "application/json",
+                data: {
+                    node1: JSON.stringify(data.node1),
+                    node2: JSON.stringify(data.node2),
+                },
                 success: function (res) {
                     if (res.state === "ok") {
+                        var s = arr[tindex].sequence;
+                        arr[tindex].sequence = arr[index].sequence;
+                        arr[index].sequence = s;
                         arrOrderMove(arr, index, tindex);
                     }
                 },
@@ -114,6 +127,11 @@ var treeItem = {
     }
 }
 
+
+if("undefined" != typeof VueTreeselect) {
+    Vue.component('treeselect', VueTreeselect.Treeselect);
+}
+
 var spItem = new Vue({
     el: "#spContent",
     data: {
@@ -129,7 +147,7 @@ var spItem = new Vue({
         // 激活选项
         optionActive: function(id, item) {
             item.activeId = id;
-            var active = [];
+            var active = {};
             this.items.forEach(function(v){
                 active[v.name] = v.activeId;
             });
@@ -142,7 +160,7 @@ var spItem = new Vue({
         // 保存选项
         editSave: function (item) {
             // 保存的数据
-            var data = [];
+            var data = {};
             data['name'] = item.name;
             data['selectedIds'] = getIdsArr(item.editSelect.selected).concat(getIdsArr(item.editSelect.selecting, 0));
             // 保存选项 事件
@@ -196,19 +214,25 @@ var spItem = new Vue({
         // 删除
         delContent: function (id) {
             var _this = this, msg = "";
+            var node = getNode(_this.details.treeData, id);
             _this.details.activeId = id || 0;
             if(id) {
-                
-                msg = "您确定要删除" + getPN(id) + "吗？";
+                msg = "您确定要删除" + getPN(node) + "吗？";
             }else{
                 msg = "您确定要删除" + _this.details.title + "目录吗？";
             }
             
-            function getPN(id){
-                var node = getNode(_this.details.treeData, id),
-                    name = node.node.name,
+            var input = [];
+            input.push({
+                "name": "name", "value": node.node?node.node.name:""
+            },{
+                "name": "pid", "value": node.parentNode?node.parentNode.id:""
+            });
+            
+            function getPN(node){
+                var name = node.node?node.node.name:"",
                     p = node.parentNode;
-                if(p) name = getPN(node.parentNode.id) + name;
+                if(p) name = getPN(p) + name;
                 return name;
             }
 
@@ -216,46 +240,25 @@ var spItem = new Vue({
                 "isShow": true,
                 "title": "删除",
                 "action": "delete",
-                "msg": msg
+                "msg": msg,
+                "input": input
             }
-            // 删除
-            // if (id) {
-            //     var node = getNode(spItem.details.treeData, id),
-            //         parent = node.parentNode ? node.parentNode.children : spItem.details.treeData,
-            //         index = parent.indexOf(node.node);
-            //     parent.splice(index, 1);
-            // } else {
-            //     spItem.details.treeData = [];
-            // }
         },
         // 添加
         addContent: function (nodeId) {
             // this.$emit("addContent");
-            var node = getNode(this.details.treeData, nodeId);
-            this.details.activeId = node.node ? nodeId : 0;
-
-            var select = [], up = [];
-            if (node.parentNode){
-                up = node.parentNode.children;
-            }else if(node.node){
-                up = this.details.treeData;
-            }
-            if(up){
-                up.forEach(function (v) {
-                    select.push({ "name": v.name, "val": v.id });
-                });
-            }
+            this.details.activeId = nodeId;
 
             var input = [];
-            input.push({ "title": "目录名称", "value": "", "name": "name"});
-            if (select[0]) { //存在上级目录时
-                input.push({
-                    "title": "上级目录",
-                    "value": node.node.id,
-                    "select": select,
-                    "name": "upperId"
-                });
-            }
+            input.push({ "title": "目录名称", "type": "text", "value": "", "name": "name"});
+            var select = getTreeselect(this.details.treeData);
+            input.push({
+                "title": "上级目录",
+                "type": "treeselect",
+                "value": nodeId,
+                "treeselect": [{"id":0, "label": this.details.title, "children": select}],
+                "name": "pid"
+            });
 
             this.detailContent = {
                 "isShow": true,
@@ -282,6 +285,7 @@ var spItem = new Vue({
                 });
                 input.push({
                     "title": v.title,
+                    "type": "select",
                     "name": v.name,
                     "value": v.activeId,
                     "select": select
@@ -290,7 +294,7 @@ var spItem = new Vue({
             this.detailContent = {
                 "isShow": true,
                 "title": "另存为",
-                "action": "save_as",
+                "action": "saveAs",
                 "input": input
             }
         },
@@ -300,27 +304,16 @@ var spItem = new Vue({
             var node = getNode(this.details.treeData, nodeId);
             this.details.activeId = node.node ? nodeId : 0;
 
-            var select = [], up = [];
-            if (node.parentNode) {
-                p = getNode(this.details.treeData, node.parentNode.id).parentNode;
-                up = p ? p.children : this.details.treeData;
-            }
-            if (up) {
-                up.forEach(function (v) {
-                    select.push({ "name": v.name, "val": v.id });
-                });
-            }
-
             var input = [];
-            input.push({ "title": "目录名称", "value": node.node.name, "name": "name" });
-            if (select[0]) { //存在上级目录时
-                input.push({
-                    "title": "上级目录",
-                    "name": "upperId",
-                    "value": node.parentNode.id,
-                    "select": select
-                });
-            }
+            input.push({ "title": "目录名称", "type": "text", "value": node.node.name, "name": "name"});
+            var select = getTreeselect(this.details.treeData, nodeId);
+            input.push({
+                "title": "上级目录",
+                "type": "treeselect",
+                "value": node.parentNode?node.parentNode.id:0,
+                "treeselect": [{"id":0, "label": this.details.title, "children": select}],
+                "name": "pid"
+            });
 
             this.detailContent = {
                 "isShow": true,
@@ -426,3 +419,59 @@ function getNode(json, nodeId) {
     };
 }
 
+function getTreeselect(tree, notId) {
+    var new_tree = [];
+    for (var i = 0; i < tree.length; i++) {
+        if(arguments[1] && tree[i].id==notId) continue;
+        var node = {};
+        node.id = tree[i].id;
+        node.label = tree[i].name;
+        if(tree[i].children) {
+            node.children = getTreeselect(tree[i].children, notId);
+        }
+        new_tree.push(node);
+    }
+    return new_tree;
+}
+
+// 删除节点
+function deleteNode(tree, id) {
+    if (id) {
+        var node = getNode(tree, id),
+            parents = node.parentNode ? node.parentNode.children : tree,
+            index = parents.indexOf(node.node);
+        parents.splice(index, 1);
+    } else {
+        tree.splice(0, tree.length);
+    }
+}
+
+// update节点
+function updateNode(tree, node) {
+    var fnode = getNode(tree, node.id);
+    if(fnode.node){
+        var pid = fnode.parentNode?fnode.parentNode.id:0;
+        if(pid==node.pid){
+            fnode.node.name = node.name;
+        }else{
+            var p = getNode(tree, node.pid);
+            deleteNode(tree, fnode.node.id);
+            if(p.node){
+                p.node.children? p.node.children.push(fnode.node): Vue.set(p.node, 'children', fnode.node);
+            }else{
+                tree.push(fnode.node);
+            }
+        }
+    }else{
+        var n = {
+            "name": node.name,
+            "id": node.id
+        };
+        var p = getNode(tree, node.pid);
+        if(p.node){
+            p.node.children? p.node.children.push(n): Vue.set(p.node, 'children', [n]); 
+        }else{
+            tree.push(n);
+        }
+    }
+}

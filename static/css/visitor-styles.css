@@ -1,5 +1,6 @@
 
 .margin-right-70 { margin-right: 70px; }
+.margin-right-40 { margin-right: 40px; }
 .margin-right-25 { margin-right: 25px; }
 .margin-right-10 { margin-right: 10px; }
 .margin-right-5 { margin-right: 5px !important; }
@@ -18,7 +19,7 @@
 
 .width-73 { width: 73px; }
 .width-101 { width: 101px; }
-.width-150 { width: 150px; }
+.width-150 { width: 150px !important; }
 .width-180 { width: 180px; }
 .width-240 { width: 240px; }
 .min-width-120 { min-width: 120px !important; }
@@ -54,46 +55,24 @@ textarea {
 }
 
 .btn-vsys, .btn-vsys-border {
-    /* border-radius: 4px; */
     padding: 2px 11px;
 }
-.btn-vsys {
-    /* border: none; */
-    /* background: dodgerblue !important; */
-}
+
 .btn-vsys-border {
     border: 1px solid dodgerblue;
     color: dodgerblue;
     background-color: #fff;
 }
 .btn-bg {
-    /* background: dodgerblue !important; */
-    /* border: 0; */
-    /* border-radius: 2px !important; */
-    /* padding: 5px 10px !important; */
     padding: 2px 11px;
 }
 .btn-modal {
-    /* font-size: 16px; */
     text-align: center;
     padding: 0px;
     vertical-align: middle;
-    /* line-height: 40px; */
     margin: 0px;
-    /* height: 42px;
-    width: 86px; */
-    /* border: none; */
-    /* padding: 7px 16px; */
     padding: 2px 11px;
-    /* border-radius: 2px; */
-    /* background-color: #34A8EA !important; */
 }
-/* .btn-modal[data-dismiss="modal"] {
-    background-color: #A6A6A6 !important;
-}
-.btn-modal[data-dismiss="modal"]:hover {
-    background-color: #8b9aa3!important;
-} */
 .modal-footer .btn-modal + .btn-modal {
     margin-left: 10px;
 }
@@ -176,16 +155,6 @@ i[class^="icon-"] {
     content: "\e631";
     background-image: none;
 }
-/* .icon-img-ID:before {
-     width: 19px;
-    height: 16px;
-    background-position: 0px -70px;
-} */
-/* .icon-img-scan:before {
-    width: 15px;
-    height: 16px;
-    background-position: 0px -23px;
-} */
 
 .select-input {
     position: relative;
@@ -240,7 +209,7 @@ i[class^="icon-"] {
     margin-bottom: 15px;
 }
 .register-form label.text-right {
-    width: 5em;
+    width: 7em;
     margin-right: 10px;
 }
 .register-form label.text-right + div {
@@ -261,9 +230,9 @@ i[class^="icon-"] {
     object-fit: cover;
 }
 .register-container .pic-box {
-    width: 185px;
+    width: 183px;
     margin-bottom: 20px;
-    margin-right: 49px;
+    margin-right: 25px;
 }
 .register-container .pic-box img {
     width: 100%;
@@ -292,10 +261,10 @@ i[class^="icon-"] {
     border: none;
 }
 .register-container .form-inline .form-group:not(:last-child) {
-    margin-right: 43px;
+    margin-right: 35px;
 }
 .register-container .select-input {
-    width: 148px;
+    width: 142px;
 }
 
 #m-print-receipt .modal-body {

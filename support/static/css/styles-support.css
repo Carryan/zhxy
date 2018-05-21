@@ -291,6 +291,7 @@ body.modal-open {
 .contentC .content-body {
     padding: 30px 20px 20px;
     margin-bottom: -20px;
+    overflow: visible;
 }
 .contentC .content-body .msg {
     margin-bottom: 25px;
@@ -299,13 +300,13 @@ body.modal-open {
 .contentC .form-item {
     margin-bottom: 20px;
 }
-.contentC .form-item label {
+.contentC .form-item > label {
     width: 40%;
     text-align: right;
     margin-right: 6px;
 }
-.contentC .form-item input, .contentC .form-item select {
-    width: 150px;
+.contentC .form-item input, .contentC .form-item select, .form-item .vue-treeselect {
+    width: 185px;
 }
 .contentC .form-item:last-child {
     padding-top: 10px;
@@ -349,4 +350,22 @@ body.modal-open {
     color: #999;
     height: 28px;
     width: 80px;
+}
+
+.form-item .vue-treeselect {
+    display: inline-block;
+    vertical-align: middle;
+}
+.form-item .vue-treeselect input[type="text"] {
+    border: none;
+    padding: 0;
+    height: 28px;
+    line-height: 26px;
+}
+.form-item .vue-treeselect .vue-treeselect__control, .form-item .vue-treeselect .vue-treeselect__menu {
+    border-radius: 0;
+}
+.form-item .vue-treeselect .vue-treeselect__control {
+    height: 28px;
+    line-height: 28px;
 }

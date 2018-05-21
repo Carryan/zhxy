@@ -290,6 +290,7 @@
                                         var height = Math.max(wHeight, bHeight, dHeight);
                                         iframe.height = height;
                                         // console.log(height);
+                                        // iframe.contentWindow.postMessage("post",'*');
                                     } catch (ex) { }
                                 }
                                 window.setInterval("reinitIframe()", 1000);

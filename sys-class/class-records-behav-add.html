@@ -104,10 +104,18 @@
                                     <div class="center-form">
                                         <div class="form-group">
                                             <label>姓名：</label>
-                                            <select name="" class="width-sm">
-                                                <option>请选择</option>
-                                                <option value="">张三</option>
-                                                <option value="">李四</option>
+                                            <select name="" class="chosen-selecter width-sm" data-placeholder="请选择">
+                                                <option value=""></option>
+                                                <option value="">张一山</option>
+                                                <option value="">周某</option>
+                                                <option value="">王某</option>
+                                                <option value="">张3</option>
+                                                <option value="">周4</option>
+                                                <option value="">王5</option>
+                                                <option value="">张6</option>
+                                                <option value="">周7</option>
+                                                <option value="">王8</option>
+                                                <option value="">完颜洪烈</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -149,6 +157,17 @@
                                             <textarea name="" rows="5" class="width-lg" placeholder="请输入"></textarea>
                                         </div>
                                         <div class="form-group">
+                                            <label>教师谈话时间：</label>
+                                            <div class="input-group-box width-sm">
+                                                <div class="input-group">
+                                                    <input class="form-control date-picker" type="text" value="">
+                                                    <span class="input-group-addon">
+                                                        <i class="icon-calendar bigger-110"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label>教师教育类型：</label>
                                             <select name="" class="width-sm">
                                                 <option>请选择</option>
@@ -162,7 +181,20 @@
                                         </div>
                                         <div class="form-group">
                                             <label>上传附件：</label>
-                                            <input type="file" name="" id="addFileUpload" multiple />
+                                            <!-- <input type="file" name="" id="addFileUpload" multiple /> -->
+                                            <div class="ace-file-input ace-file-multiple plupload-box">
+                                                <label class="file-label" data-title="Drop files here or click to choose">
+                                                    <span class="file-name">
+                                                        <i class="icon-cloud-upload"></i>
+                                                    </span>
+                                                </label>
+                                                <div class="preview clearfix"></div>
+                                                <!-- data-url上传的URL，data-removeurl删除URL，maxsize最大上传文件大小 -->
+                                                <!-- 上传成功返回：state=ok, fileData文件信息; 上传失败返回：msg错误信息; 删除返回state=ok -->
+                                                <button type="button" class="plupload" data-url="http://192.168.0.110:8001/upload" data-removeurl="http://192.168.0.110:8001/remove"
+                                                    data-maxsize="" data-maxnum=""><i class="icon-plus"></i> 继续添加</button>
+                                                <input type="hidden" class="upload-input" name="" value="" onchange="">
+                                            </div>
                                             <div class="file-tips">支持拓展名：rar、zip、doc、pdf、jpg...</div>
                                         </div>
                                     </div>

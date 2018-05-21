@@ -114,7 +114,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="content-tab-title">考勤*行为</div>
-                                        <table class="staff-table">
+                                        <table class="staff-table table-hover table-edit" id="table1">
                                             <colgroup>
                                                 <col style="width: 12%;">
                                                 <col style="width: 22%;">
@@ -132,6 +132,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <tr class="empty-notice"><td colspan="5">没有记录</td></tr>
                                                 <tr>
                                                     <td>1</td>
                                                     <td>考勤</td>
@@ -139,10 +140,10 @@
                                                     <td>-3</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="javascript:;">
+                                                            <a href="#" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
                                                             </a>
                                                         </span>
@@ -155,10 +156,10 @@
                                                     <td>-5</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="javascript:;">
+                                                            <a href="#" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
                                                             </a>
                                                         </span>
@@ -171,10 +172,10 @@
                                                     <td>-5</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="javascript:;">
+                                                            <a href="#" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
                                                             </a>
                                                         </span>
@@ -187,56 +188,25 @@
                                                     <td>-5</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="javascript:;">
+                                                            <a href="#" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
-                                                            </a>
-                                                        </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>
-                                                        <select name="">
-                                                            <option value="">考勤</option>
-                                                            <option value="">行为</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select name="">
-                                                            <option value="">迟到</option>
-                                                            <option value="">早退</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select name="">
-                                                            <option value="">-5</option>
-                                                            <option value="">-3</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <span class="action-buttons">
-                                                            <a href="javascript:;">
-                                                                <i class="icon-ok green"></i>
-                                                            </a>
-                                                            <a href="#">
-                                                                <i class="icon-remove red"></i>
                                                             </a>
                                                         </span>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <button class="btn btn-primary btn-xs">
+                                        <button class="btn btn-primary btn-xs" id="addTable1">
                                             <i class="icon-plus"> 添加</i>
                                         </button>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="content-tab-title">考评等级</div>
-                                        <table class="staff-table">
+                                        <table class="staff-table table-hover table-edit" id="table2">
                                             <colgroup>
                                                 <col style="width: 12%;">
                                                 <col style="width: 33%;">
@@ -258,10 +228,10 @@
                                                     <td>95-99</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="javascript:;">
+                                                            <a href="#" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
                                                             </a>
                                                         </span>
@@ -273,10 +243,10 @@
                                                     <td>80-94</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="javascript:;">
+                                                            <a href="#" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
                                                             </a>
                                                         </span>
@@ -288,10 +258,10 @@
                                                     <td>60-79</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="javascript:;">
+                                                            <a href="#" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
                                                             </a>
                                                         </span>
@@ -303,10 +273,10 @@
                                                     <td>0-60</td>
                                                     <td>
                                                         <span class="action-buttons">
-                                                            <a href="javascript:;">
+                                                            <a href="#" class="edit">
                                                                 <i class="icon-pencil green"></i>
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="static/data/ajax-btn.json" class="delete">
                                                                 <i class="icon-trash red"></i>
                                                             </a>
                                                         </span>
@@ -314,7 +284,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <button class="btn btn-primary btn-xs">
+                                        <button class="btn btn-primary btn-xs" id="addTable2">
                                             <i class="icon-plus"> 添加</i>
                                         </button>
                                     </div>
@@ -341,6 +311,65 @@
     </div>
     <!-- /.main-container -->
 
+    <script type="text/html" id="template1">
+        <tr>
+            <td>{{= num}}</td>
+            <td>
+                <select name="cate">
+                    {{each cate}}
+                    <option value="${$value.val}" {{if $value.isSelected}} selected {{/if}}>${$value.name}</option>
+                    {{/each}}
+                </select>
+            </td>
+            <td>
+                <select name="kind">
+                    {{each kind}}
+                    <option value="${$value.val}" {{if $value.isSelected}} selected {{/if}}>${$value.name}</option>
+                    {{/each}}
+                </select>
+            </td>
+            <td>
+                <select name="score">
+                    {{each score}}
+                    <option value="${$value.val}" {{if $value.isSelected}} selected {{/if}}>${$value.name}</option>
+                    {{/each}}
+                </select>
+            </td>
+            <td>
+                <span class="action-buttons">
+                    <a href="http://192.168.0.110:8001/savetabe" class="save">
+                        <i class="icon-ok green"></i>
+                    </a>
+                    <a href="#" {{if isEdit}} class="return" {{else}} class="cancel" {{/if}}>
+                        <i class="icon-remove red"></i>
+                    </a>
+                </span>
+            </td>
+        </tr>
+    </script>
+
+    <script type="text/html" id="template2">
+        <tr>
+            <td>{{= num}}</td>
+            <td>
+                <input name="grade" value="{{= grade}}">
+            </td>
+            <td class="range">
+                <input name="score1" value="{{= score1}}" verify-number="请输入正确评分"> - 
+                <input name="score2" value="{{= score2}}" verify-number="请输入正确评分">
+            </td>
+            <td>
+                <span class="action-buttons">
+                    <a href="http://192.168.0.110:8001/savetabe" class="save">
+                        <i class="icon-ok green"></i>
+                    </a>
+                    <a href="#" {{if isEdit}} class="return" {{else}} class="cancel" {{/if}}>
+                        <i class="icon-remove red"></i>
+                    </a>
+                </span>
+            </td>
+        </tr>
+    </script>
 
     <!-- basic scripts -->
 
@@ -390,6 +419,96 @@
 
     <script src="static/js/common-class.js"></script>
 
+    <script>
+    var init_data = {
+        num: "",
+        cate: [
+            {"val": "v1", "name": "考勤"},
+            {"val": "v2", "name": "行为"}
+        ],
+        kind: [
+            {"val": "v1", "name": "迟到"},
+            {"val": "v2", "name": "早退"},
+            {"val": "v1", "name": "旷课"}
+        ],
+        score: [
+            {"val": "v1", "name": "-1"},
+            {"val": "v2", "name": "-3"},
+            {"val": "v1", "name": "-5"}
+        ],
+        "isEdit": false
+    }
+
+    $("#table1").editTable({
+        addBtn: "#addTable1", //添加按钮
+        temp: "#template1", //编辑 模板
+        initData: init_data, //初始数据，添加时的模板数据
+        isOrder: true
+    })
+    .on("editRow", function(e, thisTr, texts, editeCallback){ // thisTr当前行，texts当前行文本数组，editeCallback回调 进入编辑状态
+        // 编辑状态的数据
+        var data = {};
+        data["num"] = texts[0];
+        data["cate"] = [];
+        data["kind"] = [];
+        data["score"] = [];
+        data["isEdit"] = true;
+        // 为选择框赋值
+        init_data.cate.forEach(function(v){
+            data.cate.push({
+                "val": v.val,
+                "name": v.name,
+                "isSelected": v.name==texts[1]
+            });
+        });
+        init_data.kind.forEach(function(v){
+            data.kind.push({
+                "val": v.val,
+                "name": v.name,
+                "isSelected": v.name==texts[2]
+            });
+        });
+        init_data.score.forEach(function(v){
+            data.score.push({
+                "val": v.val,
+                "name": v.name,
+                "isSelected": v.name==texts[3]
+            });
+        });
+        var temp = $('#template1').tmpl(data);
+        //thisTr:当前行; temp:编辑的模板HTML元素或jq对象
+        editeCallback(thisTr, temp); 
+    });
+
+
+    var init_data2 = {
+        num: "",
+        grade: "",
+        score1: "",
+        score2: "",
+        isEdit: false
+    }
+    $("#table2").editTable({
+        addBtn: "#addTable2", //添加按钮
+        temp: "#template2", //编辑 模板
+        initData: init_data2, //初始数据，添加时的模板数据
+        isOrder: true
+    })
+    .on("editRow", function(e, thisTr, texts, editeCallback){ // thisTr当前行，texts当前行文本数组，editeCallback回调 进入编辑状态
+        // 编辑状态的数据
+        var data = {};
+        data["num"] = texts[0];
+        data["grade"] = texts[1];
+        data["score1"] = texts[2].split("-").shift();
+        data["score2"] = texts[2].split("-").pop();
+        data["isEdit"] = true;
+        
+        var temp = $('#template2').tmpl(data);
+        //thisTr:当前行; temp:编辑的模板HTML元素或jq对象
+        editeCallback(thisTr, temp); 
+    });
+
+    </script>
 </body>
 
 </html>

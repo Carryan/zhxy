@@ -143,10 +143,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>颁奖部门：</label>
-                                            <select name="" class="width-sm">
-                                                <option>请选择</option>
-                                                <option value="">教育局</option>
-                                            </select>
+                                            <input type="text" name="" value="">
                                         </div>
                                         <div class="form-group">
                                             <label>获奖人员：</label>
@@ -157,7 +154,19 @@
                                         </div>
                                         <div class="form-group">
                                             <label>上传附件：</label>
-                                            <input type="file" name="" id="addFileUpload" multiple />
+                                            <div class="ace-file-input ace-file-multiple plupload-box">
+                                                <label class="file-label" data-title="Drop files here or click to choose">
+                                                    <span class="file-name">
+                                                        <i class="icon-cloud-upload"></i>
+                                                    </span>
+                                                </label>
+                                                <div class="preview clearfix"></div>
+                                                <!-- data-url上传的URL，data-removeurl删除URL，maxsize最大上传文件大小 -->
+                                                <!-- 上传成功返回：state=ok, fileData文件信息; 上传失败返回：msg错误信息; 删除返回state=ok -->
+                                                <button type="button" class="plupload" data-url="http://192.168.0.110:8001/upload" data-removeurl="http://192.168.0.110:8001/remove"
+                                                    data-maxsize="" data-maxnum=""><i class="icon-plus"></i> 继续添加</button>
+                                                <input type="hidden" class="upload-input" name="" value="" onchange="">
+                                            </div>
                                             <div class="file-tips">支持拓展名：rar、zip、doc、pdf、jpg...</div>
                                         </div>
                                     </div>

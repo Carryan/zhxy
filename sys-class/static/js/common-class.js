@@ -91,6 +91,24 @@ function reloadPage(win) {
 ;(function (obj) { 
     if (!obj.length) return;
 
+    var saveTemp = '<script type="text/html" id="saveTemplate">'+
+                        '<tr>'+
+                            '{{each td}}'+
+                            '<td>${$value}</td>'+
+                            '{{/each}}'+
+                            '<td>'+
+                                '<span class="action-buttons">'+
+                                    '<a href="javascript:;" class="edit">'+
+                                        '<i class="icon-pencil green"></i>'+
+                                    '</a>'+
+                                    '<a href="{{= deleteUrl}}" class="delete">'+
+                                        '<i class="icon-trash red"></i>'+
+                                    '</a>'+
+                                '</span>'+
+                            '</td>'+
+                        '</tr>'+
+                    '</script>';
+
     $.fn.editTable = function(opts) {
         var defaults = {
             'addBtn': '.add-btn',
@@ -98,8 +116,8 @@ function reloadPage(win) {
             'editBtn': '.edit',
             'cancelBtn': '.cancel',
             'deleteBtn': '.delete',
+            'isOrder': false, //是否有序号
             'temp': '#template',
-            'saveTemp': '#saveTemplate',
             'initData': {},
             'editFun': function (thisTr, texts, editeCallback) { }
         }
@@ -110,13 +128,15 @@ function reloadPage(win) {
         function init() {
             //添加
             $(stg.addBtn).on('click', function(){
-                var $tbody = $this.find('tbody') || $this,
+                var $tbody = $this.find('tbody').first() || $this,
                     temp = $(stg.temp).tmpl(stg.initData);
                 $tbody.append(temp);
+                if(stg.isOrder) orderNum();
                 // 取消添加
                 temp.find(stg.cancelBtn).on('click', function (event) {
                     event.preventDefault();
                     temp.remove();
+                    if(stg.isOrder) orderNum();
                 });
                 $this.trigger("addRow", [temp]);
             });
@@ -126,7 +146,6 @@ function reloadPage(win) {
                 event.preventDefault();
                 var thisTr = $(this).parents('tr').first();
                 var texts = getTrText(thisTr);
-                // stg.editFun(thisTr, texts, editeCallback);
                 $this.trigger("editRow", [thisTr, texts, editeCallback]);
             });
 
@@ -136,10 +155,10 @@ function reloadPage(win) {
                 var thisTr = $(this).parents('tr').first(),
                     url = $(this).data('href') || $(this).prop('href'),
                     reload = typeof $(this).attr('reload') != 'undefined',
-                    values = getTrValues(thisTr),
+                    values = verify_msg(thisTr.find("[name]")), // 获取值，并验证
                     loading;
 
-                if (thisTr.data('loading')) return false;
+                if (thisTr.data('loading') || !values) return false;
 
                 $.ajax({
                     url: url,
@@ -151,9 +170,11 @@ function reloadPage(win) {
                     },
                     success: function(res){
                         if (res.state == 'ok'){
-                            var temp = $(stg.saveTemp).tmpl(res.tempData);
+                            var temp = $(saveTemp).tmpl(res.tempData); //替换模板
+                            if(stg.isOrder) temp.prepend("<td></td>");
                             layer.msg(res.msg ? res.msg : '操作成功!', { icon: 1, time: 1000 });
                             !reload && thisTr.data('loading', false) && thisTr.replaceWith(temp);
+                            if(stg.isOrder) orderNum(); //排序
                             reload && setTimeout(function () { 
                                 res.code && res.code.indexOf('CLOSE') != -1 && layer.closeAll();
                                 if (res.jump) {
@@ -197,6 +218,7 @@ function reloadPage(win) {
                                 }else{
                                     layer.msg(res.msg ? res.msg : '操作成功!', { icon: 1, time: 1000 });
                                     thisTr.remove();
+                                    if(stg.isOrder) orderNum();
                                 }
                             }
                         }else{
@@ -221,6 +243,15 @@ function reloadPage(win) {
             });
         }
 
+        // 序号
+        function orderNum() {
+            var $tbody = $this.find('tbody').first() || $this;
+            var num_td = $tbody.find("td:first-child").not(".empty-notice > td");
+            num_td.each(function(index, element){
+                $(element).text(index+1);
+            });
+        }
+
         Import.LoadFileList(['static/js/jquery.tmpl.min.js','static/vendor/layer/layer.js'], function(){
             init();
         });
@@ -241,22 +272,18 @@ function reloadPage(win) {
      return values;
  }
 
-// 获取行表单值
- function getTrValues(tr) {
-     var $tr = (Object.prototype.toString.call(tr) === "[object String]") ? $(tr) : tr;
-     var vs = $tr.find('[name]').serializeArray();
-     return vs;
- }
-
 
 // 日期选择
 ;(function (obj) {
-    if (!obj.length) { return; }
+    if (!obj.length) return;
 
-    //异步加载 日历插件
+    setDatePicker(obj);
+
+})($('.date-picker'));
+
+function setDatePicker(obj) {
     var datepickerFile = ["static/vendor/datepicker/bootstrap-datepicker.min.css", "static/vendor/datepicker/bootstrap-datepicker.min.js"];
     Import.LoadFileList(datepickerFile, function () {
-
         $.fn.datepicker.dates['zh-CN'] = {
             days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
             daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
@@ -267,15 +294,18 @@ function reloadPage(win) {
             suffix: [],
             meridiem: ["上午", "下午"]
         };
-        var dp = obj.datepicker({
-            autoclose: true,
-            zIndexOffset: 9999,
-            format: "yyyy-mm-dd",
-            language: "zh-CN",
-            todayHighlight: true
-        });
-        dp.next().on("click", function () {
-            $(this).prev().focus();
+        obj.each(function(){
+            var $this = $(this);
+            var dp = $this.datepicker({
+                autoclose: true,
+                zIndexOffset: 9999,
+                format: $this.attr("data-date-format") || "yyyy-mm-dd",
+                language: "zh-CN",
+                todayHighlight: true
+            });
+            dp.next().on("click", function () {
+                $(this).prev().focus();
+            });
         });
         //时间段限制
         $('.input-daterange').each(function(){
@@ -291,8 +321,7 @@ function reloadPage(win) {
         });
 
     });
-
-})($('.date-picker'));
+}
 
 
 // 文件上传
@@ -553,9 +582,84 @@ $('[data-modal]').on('click', function(){
 // 多选
 (function (obj) {
     if(!obj.length) return;
+    
+    obj.each(function(){
+        setChosen($(this));
+    });
+})($(".chosen-selecter"));
 
+function setChosen(obj) {
+    obj.addClass("hidden");
     Import.LoadFileList(['assets/css/chosen.css', 'assets/js/chosen.jquery.min.js'], function(){
-        obj.chosen().parent().css('overflow', 'visible');
+        obj.removeClass("hidden");
+        var chosen = obj.chosen({
+                no_results_text: "未找到相关项",
+                disable_search_threshold: 8, 
+                search_contains: true //模糊搜索
+            });
+        if(obj.parent().is('td')) {
+            chosen.parent().css('overflow', 'visible');
+        }
+    });
+}
+
+
+// 字数统计
+(function (obj) {
+    if(!obj.length) return;
+
+    obj.each(function () {
+        var _this = $(this),
+            input  = _this.prev();
+
+        _this.find(".max").text(input.attr("maxlength"));
+
+        input.on("keyup", function(event){
+            var text = input.val();
+            _this.find(".cur").text(text.length);
+        });
     });
 
-})($(".staff-table .chosen-select"));
+})($(".input-nums"));
+
+
+// 表单验证 并 获值
+function verify_msg(objs) {
+    var msg = "";
+    var values = {};
+    objs.each(function(){
+        var _this = $(this);
+        var value = _this.val();
+        if(value == null) value = "";
+        if(_this.is('[type="text"], textarea')) {
+            value = value.trim();
+        }
+        
+        // console.log(value);
+        if(_this.attr("verify-require")){
+            if(!/\S+/.test(value)){
+                msg = _this.attr("verify-require");
+                return false;
+            }
+        }
+
+        if(_this.attr("verify-number")){
+            if(!/^[0-9]+$/.test(value)) {
+                msg = _this.attr("verify-number");
+                return false;
+            }
+        }
+        
+        values[_this.attr("name")] = value;
+    });
+
+    if(msg){
+        Import.LoadFileList(['static/vendor/layer/layer.js'], function(){
+            layer.msg(msg, { icon: 2, anim: 6, time: 3*1000 });
+        });
+        return false;
+    }else{
+        return values;   
+    }
+}
+

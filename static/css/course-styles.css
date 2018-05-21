@@ -367,7 +367,7 @@ td .hideMsg {
     position: relative;
 }
 .dragTable.table-school td {
-    padding: 4px 16px;
+    padding: 4px 23px;
 }
 .dragTable .val {
     min-width: 30px;
@@ -404,7 +404,7 @@ td .hideMsg {
 }
 .table-school .origin {
     left: 0;
-    margin-left: 3px;
+    margin-left: 7px;
     font-size: 12px;
     height: auto;
 }
