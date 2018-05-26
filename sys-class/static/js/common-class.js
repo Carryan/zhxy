@@ -272,6 +272,17 @@ function reloadPage(win) {
      return values;
  }
 
+// 省略的文本显示标题
+(function(obj){
+    if (!obj.length) return;
+
+    obj.on("mouseover", "td", function(event){
+        if(this.offsetWidth < this.scrollWidth) {
+            $(this).attr("title",$(this).text());
+        }
+    });
+})($(".staff-table"));
+
 
 // 日期选择
 ;(function (obj) {
@@ -325,16 +336,16 @@ function setDatePicker(obj) {
 
 
 // 文件上传
-$(function ($) {
-    $('#addFileUpload').ace_file_input({
-        style: 'well',
-        btn_choose: 'Drop files here or click to choose',
-        btn_change: "Change",
-        no_icon: 'icon-cloud-upload',
-        droppable: true,
-        thumbnail: 'small'
-    });
-});
+// $(function ($) {
+//     $('#addFileUpload').ace_file_input({
+//         style: 'well',
+//         btn_choose: 'Drop files here or click to choose',
+//         btn_change: "Change",
+//         no_icon: 'icon-cloud-upload',
+//         droppable: true,
+//         thumbnail: 'small'
+//     });
+// });
 
 // plupload 文件上传
 (function (obj) {
@@ -663,3 +674,51 @@ function verify_msg(objs) {
     }
 }
 
+
+//分页
+(function(obj){
+	if( !obj[0] ) return;
+    obj.each(function(index,element){
+        var elem = $(element);
+        var urlParas = elem.attr('urlparas'),
+            url = location.href.split('?')[0]+'?p=&'+urlParas,
+            cur = Number(elem.attr('p')), 			//当前页码
+            total = Number(elem.attr('t')), 			//总页码
+            view = Number( total > 5 ? 5 : total ),	//每次展示的页码数
+            min = 1,									//当前展示的最小页码
+            max = total,								//当前展示的最大页码
+            half  = Math.ceil(view/2),
+            str = '';
+
+        if( total > view ){
+            if( cur <= half ){
+                min = 1;
+                max =  min + view-1;
+            }else if( cur > half && cur < total - half + 1  ){
+                min = cur - half + 1;
+                max = cur + half-1;
+            }else{
+                min = total - (view - 1);
+                max = total;
+            }
+        }
+        
+        // str += '<span class="total">共 '+total+' 页</span>';
+        str += cur == 1 ? '<span class="first">首页</span>' : '<a href="'+url.replace(/(\?p=\d*)(&?)/,"$1"+1+"$2")+'" class="first">首页</a>' ;
+        str += cur == 1 ? '<span class="prev">上一页</span>' :  '<a href="'+url.replace(/(\?p=\d*)(&?)/,"$1"+(cur-1)+"$2")+'" class="prev">上一页</a>';
+        str += cur > half && total > view ? '<span>...</span>' : '';
+        for(var i = 0; i < view; i++){
+            
+            if( cur == min + i )
+                str += '<span class="cur">'+(min+i)+'</span>'
+            else
+                str += '<a href="'+url.replace(/(\?p=\d*)(&?)/,"$1"+(min+i)+"$2")+'">'+(min+i)+'</a>';
+            
+        }
+        str += cur < total - half + 1 && total > view ? '<span>...</span>' : '';
+        str += cur == total ? '<span class="next">下一页</span>' : '<a href="'+url.replace(/(\?p=\d*)(&?)/,"$1"+(cur+1)+"$2")+'" class="next">下一页</a>';
+        str += cur == total ? '<span class="last">末页</span>' : '<a href="'+url.replace(/(\?p=\d*)(&?)/,"$1"+total+"$2")+'" class="last">末页</a>';
+        
+        elem.prepend( str );
+    });
+})( $('.pageBox') );

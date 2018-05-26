@@ -35,7 +35,7 @@ body.modal-open {
 .banner-tabs {
     margin-bottom: 20px;
 }
-.nav-tabs > li {
+/* .nav-tabs > li {
     margin-right: 4px;
 }
 .nav-tabs>li>a, .nav-tabs>li>a:focus {
@@ -43,7 +43,7 @@ body.modal-open {
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover {
     color: #34A8EA;
-}
+} */
 .banner-tabs + .actions {
     margin-top: -5px;
     margin-bottom: 6px;
@@ -368,4 +368,18 @@ body.modal-open {
 .form-item .vue-treeselect .vue-treeselect__control {
     height: 28px;
     line-height: 28px;
+}
+
+.breadcrumbs {
+    background-color: #fff;
+    min-height: 32px;
+    line-height: 30px;
+}
+.breadcrumb_border {
+    border-left: 2px solid #63bbff;
+    margin-left: 0px;
+    padding-left: 12px;
+}
+.breadcrumb > li + li:before {
+    content: "";
 }

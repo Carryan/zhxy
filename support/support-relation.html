@@ -61,15 +61,9 @@
                         try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
                     </script>
                     <!--位置-->
-                    <ul class="breadcrumb">
-                        <li>
-                            <i class="icon-home home-icon"></i>
-                            <a href="jsywebindex.html">首页</a>
-                        </li>
-                        <li>
-                            <a href="class-index.html">班级管理</a>
-                        </li>
-                        <li class="active">基本信息</li>
+                    <ul class="breadcrumb breadcrumb_border">
+                        <li>首页</li>
+                        <li class="active">标准教材目录管理</li>
                     </ul>
                     <ul class="breadcrumb pull-right navright">
                         <li>
@@ -115,16 +109,17 @@
 
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <div class="contentB" v-cloak :class="{'no-action': details.noAction}">
+                                        <div class="contentB" v-if="details.treeData" :class="{'no-action': details.noAction}" v-cloak>
                                             <div class="content-header clearfix">
                                                 <div class="pull-left">{{ details.title }}</div>
                                             </div>
                                             <div class="content-body">
-                                                <div class="knowledge" v-if="details.knowledge">
+                                                <div class="knowledge">
                                                     知识点：
-                                                    <select v-model="details.knowledge.selected">
+                                                    <select v-model="details.condition" @change="condition">
                                                         <option value="0">全部</option>
-                                                        <option v-for="k in details.knowledge.options" :value="k.val">{{ k.name }}</option>
+                                                        <option value="1">有</option>
+                                                        <option value="2">无</option>
                                                     </select>
                                                 </div>
                                                 <ul class="detail-tree">
@@ -135,7 +130,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="contentC relation" v-if="details.activeId > 0" v-cloak>
+                                        <div class="contentC relation" v-if="relation.treeData" v-cloak>
                                             <div class="content-header clearfix">
                                                 <div class="pull-left">{{ relation.title }}</div>
                                                 <div class="pull-right">
@@ -143,7 +138,7 @@
                                                 </div>
                                             </div>
                                             <div class="content-body">
-                                                <div class="name">已选择：{{ relation.nodeName }}</div>
+                                                <div class="name">{{ relation.nodeName?"已选择："+relation.nodeName:"" }}</div>
                                                 <div class="relation-items">
                                                     <ul class="detail-tree">
                                                         <tree-item v-for="(item, index) in relation.treeData" :model="item" :index="index" :active-id="-1" :has-action="false"></tree-item>
@@ -203,6 +198,7 @@
 
     <!-- inline scripts related to this page -->
     <script src="static/js/vue.min.js"></script>
+    <script src="static/vendor/layer/layer.js"></script>
     <script src="static/js/common-support.js"></script>
 
     <script>
@@ -210,23 +206,99 @@
 
             // 获取数据
             $.get("static/data/data3.json", function(data, status, xhr){
-                $.extend(spItem, data);
+                spItem.items = data.items;
             });
+
 
             // 激活选项
             spItem.$on("optionActive", function (active) {
-                console.log(active);
-                // spItem.details = details;
+                $.ajax({
+                    url: "static/data/data3.json",
+                    type: "GET",
+                    dataType: "json",
+                    data: active,
+                    success: function(res){
+                        spItem.details = res.details;
+                        spItem.relation = res.relation;
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                });
             });
 
             // 左侧选择节点
             spItem.$on("selectNode", function(nodeId){
-                console.log(nodeId);
+                $.ajax({
+                    url: "static/data/response1.json",
+                    type: "GET",
+                    dataType: "json",
+                    data: {id: nodeId},
+                    success: function(res){
+                        if(res.state=="ok"){
+                            var selectedIds = [3, 3101, 3102]; //返回的 已关联id
+                            spItem.relation.selectedIds = selectedIds;
+                            readTree(spItem.relation.treeData, function(node){
+                                if(node.children) {
+                                    for(var i=0;i<node.children.length;i++){
+                                        if(selectedIds.indexOf(node.children[i].id)>-1){
+                                            node.open=true;
+                                            break;
+                                        }
+                                        if(i>=node.children.length-1) {
+                                            node.open=false;
+                                        } 
+                                    }
+                                }
+                            });
+                        }else{
+                            layer.msg(res.msg ? res.msg : '操作失败!', { icon: 2, anim: 6 });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                });
             });
 
             // 保存关联
             spItem.$on("saveRelation", function(data){
-                console.log(data);
+                // console.log(data);
+                if(!spItem.details.activeId){
+                    layer.msg('请选择教材目录!', { icon: 2, time: 1500 });
+                }else{
+                    $.ajax({
+                        url: "static/data/response1.json",
+                        type: "GET",
+                        dataType: "json",
+                        data: JSON.stringify(data),
+                        success: function(res){
+                            if(res.state=="ok"){
+                                var node = getNode(spItem.details.treeData, data.nodeId);
+                                node.node.knowledge = data.selectedIds.length;
+                                var p = node.parentNode;
+                                while(p) {
+                                    var t = 0;
+                                    p.children.forEach(function(v){
+                                        t += v.knowledge?v.knowledge:0;
+                                    });
+                                    if(p.hasOwnProperty("knowledge")) {
+                                        p.knowledge=t;
+                                        p = getNode(spItem.details.treeData, p.id).parentNode;
+                                    }else{
+                                        p = false;
+                                    }
+                                }
+                                layer.msg(res.msg ? res.msg : '保存成功!', { icon: 1, time: 1000 });
+                            }else{
+                                layer.msg(res.msg ? res.msg : '操作失败!', { icon: 2, anim: 6 });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                }
             });
 
         });

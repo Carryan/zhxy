@@ -5,6 +5,9 @@ body {
 
 a { color: #34A8EA; }
 [hidden], .hide { display: none; }
+a:hover {
+    text-decoration: none;
+}
 
 body.modal-open {
     margin-right: 0;
@@ -350,14 +353,24 @@ table.staff-table {
 .condition-bar + .content-table-box .table-top {
     margin-top: -30px;
 }
-.content-table-box .pagination-box {
-    text-align: right;
+.content-table-box .pageBox {
+    margin-top: 35px;
 }
-.content-table-box .pagination-box .pagination {
-    margin-top: 30px;
+
+.pageBox a, .pageBox > span {
+    padding: 6px 12px;
+    border: 1px solid #e0e8eb;
+    margin-right: -1px;
+    color: #2283c5;
 }
-.content .content-table-box .pagination-box .pagination {
-    margin-top: 10px;
+.pageBox .cur {
+    background-color: #6faed9;
+    border-color: #6faed9;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+}
+.pageBox a:hover {
+    background-color: #eaeff2;
 }
 
 .staff-table td > input, .staff-table td > select, .staff-table td > textarea, .staff-table td > .input-group-boxs {

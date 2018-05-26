@@ -17,7 +17,7 @@
                     "name": "高中"
                 }
             ],
-            "activeId": 1,
+            "activeId": null,
             "isEdit": false
         },
         {
@@ -53,7 +53,7 @@
                     "name": "地理"
                 }
             ],
-            "activeId": 1,
+            "activeId": null,
             "isEdit": false
         },
         {
@@ -81,7 +81,7 @@
                     "name": "其他版"
                 }
             ],
-            "activeId": 1,
+            "activeId": null,
             "isEdit": false
         },
         {
@@ -109,7 +109,7 @@
                     "name": "高二"
                 }
             ],
-            "activeId": 1,
+            "activeId": null,
             "isEdit": false
         }
     ],
@@ -117,39 +117,30 @@
         "title": "初中语文人教版七年级",
         "activeId": 0,
         "noAction": true,
-        "knowledge": {
-            "selected": 0,
-            "options": [
-                {
-                    "name": "有",
-                    "val": 11
-                },
-                {
-                    "name": "无",
-                    "val": 22
-                }
-            ]
-        },
+        "condition": 0,
         "treeData": [
             {
                 "id": 1,
                 "name": "上册",
                 "open": true,
+                "knowledge": 3,
                 "children": [
                     {
                         "id": 3,
                         "name": "第一单元",
+                        "knowledge": 3,
+                        "selectable": true,
                         "children": [
                             {
                                 "id": 10,
                                 "name": "第一课",
-                                "tip": "1个知识点",
+                                "knowledge": 3,
                                 "selectable": true
                             },
                             {
                                 "id": 11,
                                 "name": "第二课",
-                                "tip": "1个知识点",
+                                "knowledge": 0,
                                 "selectable": true
                             }
                         ]
@@ -161,13 +152,13 @@
                             {
                                 "id": 12,
                                 "name": "第一课",
-                                "tip": "1个知识点",
+                                "knowledge": 3,
                                 "selectable": true
                             },
                             {
                                 "id": 13,
                                 "name": "第二课",
-                                "tip": "1个知识点",
+                                "knowledge": 3,
                                 "selectable": true
                             }
                         ]
@@ -179,13 +170,13 @@
                             {
                                 "id": 14,
                                 "name": "第一课",
-                                "tip": "1个知识点",
+                                "knowledge": 3,
                                 "selectable": true
                             },
                             {
                                 "id": 15,
                                 "name": "第二课",
-                                "tip": "1个知识点",
+                                "knowledge": 3,
                                 "selectable": true
                             }
                         ]
@@ -197,19 +188,19 @@
                             {
                                 "id": 16,
                                 "name": "第一课",
-                                "tip": "1个知识点",
+                                "knowledge": 3,
                                 "selectable": true
                             },
                             {
                                 "id": 17,
                                 "name": "第二课",
-                                "tip": "1个知识点",
+                                "knowledge": 3,
                                 "selectable": true
                             },
                             {
                                 "id": 18,
                                 "name": "第三课",
-                                "tip": "1个知识点",
+                                "knowledge": 0,
                                 "selectable": true
                             }
                         ]
@@ -223,19 +214,19 @@
                     {
                         "id": 7,
                         "name": "第一单元",
-                        "tip": "1个知识点",
+                        "knowledge": 0,
                         "selectable": true
                     },
                     {
                         "id": 8,
                         "name": "第二单元",
-                        "tip": "1个知识点",
+                        "knowledge": 0,
                         "selectable": true
                     },
                     {
                         "id": 9,
                         "name": "第三单元",
-                        "tip": "1个知识点",
+                        "knowledge": 0,
                         "selectable": true
                     }
                 ]
@@ -250,12 +241,13 @@
             {
                 "id": 1,
                 "name": "函数的概念",
-                "open": true,
+                "open": false,
                 "children": [
                     {
                         "id": 3,
                         "name": "1.1 集合",
-                        "checkbox": true
+                        "checkbox": true,
+                        "children": []
                     },
                     {
                         "id": 4,
@@ -272,7 +264,7 @@
             {
                 "id": 2,
                 "name": "三角函数的概念",
-                "open": true,
+                "open": false,
                 "children": [
                     {
                         "id": 6,

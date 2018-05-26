@@ -1,8 +1,8 @@
 
-var treeItemTemplate = '<li :class="{active: model.id===activeId, selectable: model.selectable}">'+
+var treeItemTemplate = '<li v-if="!model.isHide" :class="{active: model.id===activeId, selectable: model.selectable}">'+
                             '<div class="item" v-on:click.stop="selectNode(model.id, model.selectable)">'+
-                                '<div @click="toggle" class="left">'+
-                                    '<span v-if="isFolder" class="folder-icon">{{ model.open? "-" : "+" }}</span>'+
+                                '<div class="left">'+
+                                    '<span v-if="isFolder" @click.stop="toggle" class="folder-icon">{{ open? "-" : "+" }}</span>'+
                                     '<i v-if="isFolder" class="icon-folder-open"></i>'+
                                     '<label v-if="model.checkbox">'+
                                         '<input type="checkbox" class="ace" :value="model.id" v-model="father.relation.selectedIds">'+
@@ -28,10 +28,10 @@ var treeItemTemplate = '<li :class="{active: model.id===activeId, selectable: mo
                                     '</a>'+
                                 '</div>'+
                                 '<div class="right" v-else>'+
-                                    '<span class="tip" v-if="model.tip">{{ model.tip }}</span>'+
+                                    '<span class="tip" v-if="model.knowledge>=0">{{ model.knowledge }}个知识点</span>'+
                                 '</div>'+
                             '</div>'+
-                            '<ul v-show="model.open" v-if="isFolder" class="children">'+
+                            '<ul v-show="open" v-if="isFolder" class="children">'+
                                 '<tree-item v-for="(m, i) in model.children" :model="m" :index="i" :active-id="activeId" :has-action="hasAction" '+
                                 '@delete="father.delContent" @add="father.addContent" @edit="father.editContent"></tree-item>'+
                             '</ul>'+
@@ -49,7 +49,6 @@ var treeItem = {
     },
     data: function() {
         return {
-            // open: this.model.open || false,
             father: spItem
         }
     },
@@ -57,13 +56,18 @@ var treeItem = {
         isFolder: function () {
             return (this.model.children &&
                 this.model.children.length) || this.father.details.treeData.indexOf(this.model)!=-1
+        },
+        open: function() {
+            if(!this.model.hasOwnProperty("open")) {
+                this.father.$set(this.model, "open", false);
+            }
+            return this.model.open;
         }
     },
     methods: {
         toggle: function () {
+            
             if (this.isFolder) {
-                // this.open = !this.open
-                if (!this.model.hasOwnProperty("open")) this.father.$set(this.model, "open", false);
                 this.model.open = !this.model.open;
             }
         },
@@ -340,9 +344,36 @@ var spItem = new Vue({
             var data = {};
             data["nodeId"] = this.details.activeId;
             data["selectedIds"] = this.relation.selectedIds;
+            data["book"] = {};
+            this.items.forEach(function(v){
+                data.book[v.name] = v.activeId;
+            });
             this.$emit("saveRelation", data);
+        },
+        // 筛选条件
+        condition: function() {
+            var _this = this;
+            readTree(this.details.treeData, function(node){
+                if(!node.hasOwnProperty('isHide')){
+                    Vue.set(node, "isHide", false);
+                }
+                if(_this.details.condition==1){
+                    node.isHide = node.knowledge<1;
+                }else if(_this.details.condition==2){
+                    node.isHide = node.knowledge>0;
+                }else{
+                    node.isHide = false;
+                }
+                // 如果已选节点被隐藏
+                if(node.isHide && node.id==_this.details.activeId){
+                    _this.details.activeId = 0;
+                    _this.relation.selectedIds=[];
+                    readTree(_this.relation.treeData, function(node){
+                        node.open = false; 
+                    });
+                }
+            });
         }
-        
     }
 });
 
@@ -434,6 +465,16 @@ function getTreeselect(tree, notId) {
     return new_tree;
 }
 
+function readTree(tree, callback) {
+    for (var i = 0; i < tree.length; i++) {
+        callback(tree[i]);
+        if(tree[i].children) {
+            readTree(tree[i].children, callback);
+        }
+    }
+}
+
+
 // 删除节点
 function deleteNode(tree, id) {
     if (id) {
@@ -457,7 +498,7 @@ function updateNode(tree, node) {
             var p = getNode(tree, node.pid);
             deleteNode(tree, fnode.node.id);
             if(p.node){
-                p.node.children? p.node.children.push(fnode.node): Vue.set(p.node, 'children', fnode.node);
+                p.node.children? p.node.children.push(fnode.node): Vue.set(p.node, 'children', [fnode.node]);
             }else{
                 tree.push(fnode.node);
             }
