@@ -383,3 +383,10 @@ body.modal-open {
 .breadcrumb > li + li:before {
     content: "";
 }
+
+.buttons {
+    margin-top: -16px;
+}
+.buttons .btn {
+    text-decoration: none;
+}
