@@ -259,6 +259,7 @@ i[class^="icon-"] {
 .register-container .tab-content {
     padding-top: 35px;
     border: none;
+    min-height: 320px;
 }
 .register-container .form-inline .form-group:not(:last-child) {
     margin-right: 35px;
@@ -293,6 +294,7 @@ i[class^="icon-"] {
 }
 .receipt-box .content-box p {
     margin-bottom: 0;
+    word-break: break-all;
 }
 .receipt-box .content-box p strong {
     display: inline-block;
