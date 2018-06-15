@@ -32,18 +32,16 @@ body.modal-open {
     margin-right: 0;
 }
 
+input[type=radio].ace+.lbl::before {
+    line-height: 17px;
+    padding-right: 0px;
+    margin-right: 5px;
+}
+
 .banner-tabs {
     margin-bottom: 20px;
 }
-/* .nav-tabs > li {
-    margin-right: 4px;
-}
-.nav-tabs>li>a, .nav-tabs>li>a:focus {
-    color: #666;
-}
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover {
-    color: #34A8EA;
-} */
+
 .banner-tabs + .actions {
     margin-top: -5px;
     margin-bottom: 6px;
@@ -307,6 +305,15 @@ body.modal-open {
 }
 .contentC .form-item input, .contentC .form-item select, .form-item .vue-treeselect {
     width: 185px;
+}
+.contentC .form-item .radio-group {
+    text-align: center;
+}
+.contentC .form-item .radio-group label+label {
+    margin-left: 30px;
+}
+.contentC .form-item .radio-group label input {
+    display: none;
 }
 .contentC .form-item:last-child {
     padding-top: 10px;

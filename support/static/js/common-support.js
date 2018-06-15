@@ -263,6 +263,16 @@ var spItem = new Vue({
                 "treeselect": [{"id":0, "label": this.details.title, "children": select}],
                 "name": "pid"
             });
+            input.push({
+                "type": "radio", 
+                "value": this.details.bookCategoryId==1?3:0, 
+                "name": "level_type",
+                "select": [
+                    {"name": "全册", "val": 1},
+                    {"name": "单元", "val": 2},
+                    {"name": "节/课", "val": 3}
+                ]
+            });
 
             this.detailContent = {
                 "isShow": true,
@@ -270,7 +280,6 @@ var spItem = new Vue({
                 "action": "add",
                 "input": input
             }
-
         },
         // 另存为
         saveAs: function() {
@@ -318,7 +327,17 @@ var spItem = new Vue({
                 "treeselect": [{"id":0, "label": this.details.title, "children": select}],
                 "name": "pid"
             });
-
+            input.push({
+                "type": "radio", 
+                "value": node.node?node.node.level_type:3, 
+                "name": "level_type",
+                "select": [
+                    {"name": "全册", "val": 1},
+                    {"name": "单元", "val": 2},
+                    {"name": "节/课", "val": 3}
+                ]
+            });
+            
             this.detailContent = {
                 "isShow": true,
                 "title": "修改",
@@ -494,6 +513,7 @@ function updateNode(tree, node) {
         var pid = fnode.parentNode?fnode.parentNode.id:0;
         if(pid==node.pid){
             fnode.node.name = node.name;
+            fnode.node.level_type = node.level_type;
         }else{
             var p = getNode(tree, node.pid);
             deleteNode(tree, fnode.node.id);
@@ -506,7 +526,8 @@ function updateNode(tree, node) {
     }else{
         var n = {
             "name": node.name,
-            "id": node.id
+            "id": node.id,
+            "level_type": node.level_type
         };
         var p = getNode(tree, node.pid);
         if(p.node){

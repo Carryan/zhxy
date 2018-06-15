@@ -185,11 +185,17 @@
                                             <div class="content-body">
                                                 <p class="msg" v-if="detailContent.action=='delete'">{{ detailContent.msg }}</p>
                                                 <div class="form-item" v-else v-for="item in detailContent.input">
-                                                    <label>{{ item.title }}: </label>
+                                                    <label v-if="item.type!=='radio'">{{ item.title }}: </label>
                                                     <input v-if="item.type=='text'" type="text" v-model="item.value" :value="item.value">
                                                     <select v-if="item.type=='select'" v-model="item.value">
                                                         <option v-for="op in item.select" :value="op.val">{{ op.name }}</option>
                                                     </select>
+                                                    <div class="radio-group" v-if="item.type=='radio'">
+                                                        <label v-for="op in item.select">
+                                                            <input name="level_type" type="radio" class="ace" v-model="item.value" :value="op.val">
+                                                            <span class="lbl">{{op.name}}</span>
+                                                        </label>
+                                                    </div>
                                                     <treeselect v-if="item.type=='treeselect'" v-model="item.value" 
                                                         :options="item.treeselect" 
                                                         :required="true"
@@ -349,6 +355,7 @@
             "title": "初中语文人教版七年级",
             "moveUrl": "static/data/response1.json", //移动序号
             "activeId": 0,
+            "bookCategoryId": 1,
             "treeData": [
                 {
                     "id": 1,
